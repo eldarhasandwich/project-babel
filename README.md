@@ -1,3 +1,17 @@
+# Project Babel
+
+View the lastest development build at: https://eldarhasandwich.github.io/project-babel/
+
+Clone and run source with:
+```
+git clone git@github.com:eldarhasandwich/project-babel.git
+cd project-babel
+npm install
+npm run
+```
+
+------
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
