@@ -1,0 +1,18 @@
+.Selected-clip-view {
+    
+}
+
+.Selected-clip-view-row p {
+    display: inline-block;
+}
+
+#person-name {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+#custom-text {
+    color: green;
+    margin-left: 20px;
+    margin-right: 20px;
+}

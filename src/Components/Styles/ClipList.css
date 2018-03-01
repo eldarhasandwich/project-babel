@@ -1,0 +1,14 @@
+.Clip-list {
+    border: grey;
+    border-style: solid;
+    border-width: 1px;
+
+    padding: 12px;
+
+    margin: auto;
+    margin-top: 10px;
+    height: 350px;
+    width: 850px;
+
+    overflow: auto;
+}

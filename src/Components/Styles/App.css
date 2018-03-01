@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+.App button {
+  margin: 2px;
+}
+
+.Interface-buttons button {
+  background-color: lightblue;
+  border: none;
+  color: #222;
+  padding: 30px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px; 
+  margin: 4px 2px;
+
+  border-radius: 10px;
+}
+
+.Interface-buttons button:disabled {
+  background-color: lightcoral;
+  cursor: default;
+  color: #555;
+}

@@ -1,0 +1,40 @@
+.List-item {
+    background-color: white;
+
+    border: grey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+    
+    width: auto;
+    margin-bottom: 2px;
+}
+
+.Selection-indicator {
+    background-color: navy;
+    border-radius: 4px;
+
+    width: 20px;
+    height: 96px;
+}
+
+#item-name {
+    display: inline-block;
+    margin-right: 20px;
+
+    font-size: 20px;
+}
+
+#item-id {
+    display: inline-block;
+
+    font-size: 15px;
+}
+
+#left-indicator {
+    float: left;
+}
+
+#right-indicator {
+    float: right;
+}
