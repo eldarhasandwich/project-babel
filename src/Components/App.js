@@ -37,10 +37,16 @@ class App extends Component {
 
         this.saveToLocalStorage = this
             .saveToLocalStorage
-            .bind(this)
+            .bind(this);
         this.loadFromLocalStorage = this
             .loadFromLocalStorage
-            .bind(this)
+            .bind(this);
+        this.loadFromFireBase = this
+            .loadFromFireBase
+            .bind(this);
+        this.saveToFireBase = this
+            .saveToFireBase
+            .bind(this);
 
         this.incrementIndex = this
             .incrementIndex
@@ -58,14 +64,25 @@ class App extends Component {
     }
 
     loadFromLocalStorage() {
-        var newState = Data.Read_From_Store("Project-Babel-Store");
+        var newState = Data.Read_From_Store();
         this.setState(newState);
-        alert("Data Loaded From File!")
+        alert("Data Loaded From File!");
     }
 
     saveToLocalStorage() {
-        Data.Write_To_Store(this.state, "Project-Babel-Store");
-        alert("Data Saved To File!")
+        Data.Write_To_Store(this.state);
+        alert("Data Saved To File!");
+    }
+
+    loadFromFireBase() {
+        var newState = Data.Read_From_FireBase();
+        this.setState(newState);
+        alert("Data Read From Server!");
+    }
+
+    saveToFireBase() {
+        Data.Write_To_FireBase(this.state);
+        alert("Data Saved To Server!");
     }
 
     addNewClip(object) {
@@ -141,6 +158,12 @@ class App extends Component {
                 </button>
                 <button onClick={this.saveToLocalStorage}>
                     Save To File
+                </button>
+                <button onClick={this.loadFromFireBase}>
+                    Load From Firebase
+                </button>
+                <button onClick={this.saveToFireBase}>
+                    Save To Firebase
                 </button>
 
                 <ClipList

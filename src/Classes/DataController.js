@@ -1,6 +1,11 @@
 import Fire from './Fire'
 
 class DataController {
+    constructor () {
+        this.localSource = "Project-Babel-Store";
+        this.fireBaseSrc = Fire.database().ref('testDir')
+        this.tempNewState;
+    }
 
     String_To_Object = (string) => {
         var newObject = JSON.parse(string);
@@ -30,21 +35,31 @@ class DataController {
         return newString;
     }
 
-    Read_From_Store = (source) => {
-        return this.String_To_Object(localStorage[source])
+    Read_From_Store = () => {
+        return this.String_To_Object(localStorage[this.localSource])
     }
 
-    Write_To_Store = (object, source) => {
-        localStorage[source] = this.Object_To_String(object)
+    Write_To_Store = (object) => {
+        localStorage[this.localSource] = this.Object_To_String(object)
         //console.log(firebase);
     }
 
-    Read_From_FireBase = () => {}
+    Read_From_FireBase = () => {
+        this.fireBaseSrc.on("value", function(snapshot){
+            console.log(snapshot.val().json)
+            Data.tempNewState = Data.String_To_Object(snapshot.val().json)
+        })
+        //console.log(this.tempNewState) 
 
-    Write_To_FireBase = (object) => {}
+        //RETURN THE VAL OF SNAPSHOT HERE
+    }
+
+    Write_To_FireBase = (object) => {
+        var newString = this.Object_To_String(object)
+        this.fireBaseSrc.set({json: newString})
+    }
 
 }
-console.log(Fire)
 
 var Data = new DataController();
 export default Data;
