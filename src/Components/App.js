@@ -59,7 +59,7 @@ class App extends Component {
     }
 
     loadFromLocalStorage() {
-        console.log("loadin'")
+        console.log("loadin'");
         var newState = Data.Read_From_JSON("Project-Babel-Store");
         this.setState(newState);
         alert("Data Loaded From File!")

@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  margin: auto;
+  
 }
 
 .App button {
@@ -10,12 +12,14 @@
   background-color: lightblue;
   border: none;
   color: #222;
-  padding: 30px 50px;
+  padding: 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px; 
   margin: 4px 2px;
+  width: 30%;
+  max-width: 200px;
 
   border-radius: 10px;
 }
