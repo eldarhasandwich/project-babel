@@ -1,11 +1,4 @@
-// import firebase from "https://www.gstatic.com/firebasejs/4.10.1/firebase.js"
-// // Initialize Firebase var config = { apiKey:
-// "AIzaSyCnSbKLiHhiH7_yLQwuaqUJQwDGItoILlk", authDomain:
-// "project-babel-datastore.firebaseapp.com", databaseURL:
-// "https://project-babel-datastore.firebaseio.com", projectId:
-// "project-babel-datastore", storageBucket:
-// "project-babel-datastore.appspot.com", messagingSenderId: "970549376509" };
-// firebase.initializeApp(config);
+import Fire from './Fire'
 
 class DataController {
 
@@ -43,6 +36,7 @@ class DataController {
 
     Write_To_Store = (object, source) => {
         localStorage[source] = this.Object_To_String(object)
+        //console.log(firebase);
     }
 
     Read_From_FireBase = () => {}
@@ -50,7 +44,7 @@ class DataController {
     Write_To_FireBase = (object) => {}
 
 }
+console.log(Fire)
 
 var Data = new DataController();
-
 export default Data;

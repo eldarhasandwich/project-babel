@@ -10,7 +10,6 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             selectedClipIndex: 0,
             audioClipArray: [
