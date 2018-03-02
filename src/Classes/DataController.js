@@ -44,11 +44,12 @@ class DataController {
         //console.log(firebase);
     }
 
-    Read_From_FireBase = () => {
-        this.fireBaseSrc.on("value", function(snapshot){
-            console.log(snapshot.val().json)
-            Data.tempNewState = Data.String_To_Object(snapshot.val().json)
-        })
+    Read_From_FireBase = (SetStateFunc) => {
+        this.fireBaseSrc.once("value", function(snapshot){
+            var newState = Data.String_To_Object(snapshot.val().json)
+            console.log(newState)
+            SetStateFunc(newState)
+        }) 
         //console.log(this.tempNewState) 
 
         //RETURN THE VAL OF SNAPSHOT HERE

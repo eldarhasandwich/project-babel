@@ -48,6 +48,10 @@ class App extends Component {
             .saveToFireBase
             .bind(this);
 
+        this.ThisSetState = this
+            .ThisSetState
+            .bind(this);
+
         this.incrementIndex = this
             .incrementIndex
             .bind(this);
@@ -74,9 +78,12 @@ class App extends Component {
         alert("Data Saved To File!");
     }
 
-    loadFromFireBase() {
-        var newState = Data.Read_From_FireBase();
+    ThisSetState(newState) {
         this.setState(newState);
+    }
+
+    loadFromFireBase() {
+        var newState = Data.Read_From_FireBase(this.ThisSetState);
         alert("Data Read From Server!");
     }
 
