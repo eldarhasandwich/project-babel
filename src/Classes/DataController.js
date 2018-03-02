@@ -1,4 +1,18 @@
 
+// import firebase from "https://www.gstatic.com/firebasejs/4.10.1/firebase.js"
+
+
+// // Initialize Firebase
+// var config = {
+// apiKey: "AIzaSyCnSbKLiHhiH7_yLQwuaqUJQwDGItoILlk",
+// authDomain: "project-babel-datastore.firebaseapp.com",
+// databaseURL: "https://project-babel-datastore.firebaseio.com",
+// projectId: "project-babel-datastore",
+// storageBucket: "project-babel-datastore.appspot.com",
+// messagingSenderId: "970549376509"
+// };
+// firebase.initializeApp(config);
+
 class DataController {
 
     Read_From_JSON = (source) => {
