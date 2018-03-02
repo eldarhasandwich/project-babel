@@ -59,15 +59,13 @@ class App extends Component {
     }
 
     loadFromLocalStorage() {
-        console.log("loadin'");
-        var newState = Data.Read_From_JSON("Project-Babel-Store");
+        var newState = Data.Read_From_Store("Project-Babel-Store");
         this.setState(newState);
         alert("Data Loaded From File!")
     }
 
     saveToLocalStorage() {
-        console.log("savin'")
-        Data.Write_To_JSON(this.state, "Project-Babel-Store");
+        Data.Write_To_Store(this.state, "Project-Babel-Store");
         alert("Data Saved To File!")
     }
 
@@ -118,12 +116,18 @@ class App extends Component {
     }
 
     playSelectedAudio() {
-        var audio = this
-            .getSelectedClip()
-            .audioSrc;
-        if (audio == null) {
+        if (this.getSelectedClip() == null) {
+            console.log("Selected Clip does not exist?");
             return;
         }
+        var audio = this
+        .getSelectedClip()
+        .audioSrc;
+        if (audio == null) {
+            console.log("Audio does not exist?");
+            return;
+        }
+        //console.log(audio.src)
         audio.play();
     }
 
