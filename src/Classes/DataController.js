@@ -5,7 +5,6 @@ class DataController {
         this.localSource = "Project-Babel-Store";
         this.fireBaseSrc = Fire.database().ref('testDir')
         this.fireBaseAudioStore = Fire.storage().ref('testAudio')
-        this.tempNewState;
     }
 
     String_To_Object = (string) => {

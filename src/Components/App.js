@@ -83,7 +83,7 @@ class App extends Component {
     }
 
     loadFromFireBase() {
-        var newState = Data.Read_From_FireBase(this.ThisSetState);
+        Data.Read_From_FireBase(this.ThisSetState);
         alert("Data Read From Server!");
     }
 

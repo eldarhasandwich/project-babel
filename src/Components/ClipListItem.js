@@ -2,12 +2,6 @@ import React, {Component} from 'react';
 import './Styles/ClipListItem.css';
 
 class ClipListItem extends Component {
-
-  constructor(props) {
-    super(props);
-    this.key = props.key
-  }
-
   styles = {
     selected: {backgroundColor: "lightblue"},
     notSelected: {}
