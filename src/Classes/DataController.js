@@ -4,6 +4,7 @@ class DataController {
     constructor () {
         this.localSource = "Project-Babel-Store";
         this.fireBaseSrc = Fire.database().ref('testDir')
+        this.fireBaseAudioStore = Fire.storage().ref('testAudio')
         this.tempNewState;
     }
 
@@ -12,7 +13,9 @@ class DataController {
         newObject
             .audioClipArray
             .forEach(e => {
-                e.audioSrc = new Audio(e.audioSrc)
+                this.fireBaseAudioStore.child(e.id + ".wav").getDownloadURL().then(function(url){
+                    e.audioSrc = new Audio(url)
+                })
             });
         return newObject;
     }
@@ -41,18 +44,13 @@ class DataController {
 
     Write_To_Store = (object) => {
         localStorage[this.localSource] = this.Object_To_String(object)
-        //console.log(firebase);
     }
 
     Read_From_FireBase = (SetStateFunc) => {
         this.fireBaseSrc.once("value", function(snapshot){
             var newState = Data.String_To_Object(snapshot.val().json)
-            console.log(newState)
             SetStateFunc(newState)
         }) 
-        //console.log(this.tempNewState) 
-
-        //RETURN THE VAL OF SNAPSHOT HERE
     }
 
     Write_To_FireBase = (object) => {

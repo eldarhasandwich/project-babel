@@ -13,25 +13,25 @@ class App extends Component {
         this.state = {
             selectedClipIndex: 0,
             audioClipArray: [
-                {
-                    audioSrc: new Audio("https://freewavesamples.com/files/E-Mu-Proteus-FX-Wacky-Snare.wav"),
-                    id: "00000001",
-                    name: "Mr Snare",
-                    textA: "Bachelor of Arts",
-                    textB: "N/A"
-                }, {
-                    audioSrc: new Audio("https://freewavesamples.com/files/Alesis-Fusion-Acoustic-Bass-C2.wav"),
-                    id: "00000002",
-                    name: "Miss Acoustic",
-                    textA: "Bachelor of Engineering",
-                    textB: "N/A"
-                }, {
-                    audioSrc: new Audio("https://freewavesamples.com/files/Alesis-Fusion-Bass-C3.wav"),
-                    id: "00000003",
-                    name: "Mrs Bass",
-                    textA: "Bachelor of Medicine",
-                    textB: "N/A"
-                }
+                // {
+                //     audioSrc: new Audio(""),
+                //     id: "00000001",
+                //     name: "Mr Snare",
+                //     textA: "Bachelor of Arts",
+                //     textB: "N/A"
+                // }, {
+                //     audioSrc: new Audio(""),
+                //     id: "00000002",
+                //     name: "Miss Acoustic",
+                //     textA: "Bachelor of Engineering",
+                //     textB: "N/A"
+                // }, {
+                //     audioSrc: new Audio(""),
+                //     id: "00000003",
+                //     name: "Mrs Bass",
+                //     textA: "Bachelor of Medicine",
+                //     textB: "N/A"
+                // }
             ]
         };
 
