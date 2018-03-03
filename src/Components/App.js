@@ -146,7 +146,7 @@ class App extends Component {
         var audio = this
         .getSelectedClip()
         .audioSrc;
-        if (audio == null) {
+        if (audio.src == null) {
             console.log("Audio does not exist?");
             return;
         }
