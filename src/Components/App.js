@@ -160,16 +160,21 @@ class App extends Component {
 
                 <AppHeader/>
 
-                <button onClick={this.loadFromLocalStorage}>
+                <button 
+                    onClick={this.loadFromLocalStorage}>
                     Load From File
                 </button>
-                <button onClick={this.saveToLocalStorage}>
+                <button 
+                    onClick={this.saveToLocalStorage}>
                     Save To File
                 </button>
-                <button onClick={this.loadFromFireBase}>
+                <button 
+                    onClick={this.loadFromFireBase}>
                     Load From Firebase
                 </button>
-                <button onClick={this.saveToFireBase}>
+                <button 
+                    //onClick={this.saveToFireBase}
+                    disabled = {true}>
                     Save To Firebase
                 </button>
 
