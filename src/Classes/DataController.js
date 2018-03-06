@@ -1,10 +1,14 @@
 import Fire from './Fire'
 
 class DataController {
-    constructor () {
+    constructor() {
         this.localSource = "Project-Babel-Store";
-        this.fireBaseSrc = Fire.database().ref('testDir')
-        this.fireBaseAudioStore = Fire.storage().ref('testAudio')
+        this.fireBaseSrc = Fire
+            .database()
+            .ref('testDir')
+        this.fireBaseAudioStore = Fire
+            .storage()
+            .ref('testAudio')
     }
 
     String_To_Object = (string) => {
@@ -12,9 +16,13 @@ class DataController {
         newObject
             .audioClipArray
             .forEach(e => {
-                this.fireBaseAudioStore.child(e.id + ".wav").getDownloadURL().then(function(url){
-                    e.audioSrc = new Audio(url)
-                })
+                this
+                    .fireBaseAudioStore
+                    .child(e.id + ".wav")
+                    .getDownloadURL()
+                    .then(function (url) {
+                        e.audioSrc = new Audio(url)
+                    })
             });
         return newObject;
     }
@@ -37,6 +45,53 @@ class DataController {
         return newString;
     }
 
+    State_Obj_To_FireBase_Obj = (stateObject) => {
+        var firebaseObject = {
+            audioClips: {}
+        }
+        firebaseObject.selectedClipIndex = stateObject.selectedClipIndex;
+        for (var i = 0; i < stateObject.audioClipArray.length; i++) {
+            firebaseObject.audioClips[stateObject.audioClipArray[i].id] = {
+                name: stateObject.audioClipArray[i].name,
+                textA: stateObject.audioClipArray[i].textA,
+                textB: stateObject.audioClipArray[i].textB
+            }
+        }
+        console.log(firebaseObject)
+        return firebaseObject
+    }
+
+    FireBase_Obj_To_State_Obj = (firebaseObject) => {
+        var stateObject = {}
+        stateObject.selectedClipIndex = firebaseObject.selectedClipIndex
+        stateObject.audioClipArray = []
+        var objKeys = Object.keys(firebaseObject.audioClips)
+        for (var i = 0; i < objKeys.length; i++) {
+            var audioClip = {
+                id: objKeys[i],
+                name: firebaseObject.audioClips[objKeys[i]].name,
+                textA: firebaseObject.audioClips[objKeys[i]].textA,
+                textB: firebaseObject.audioClips[objKeys[i]].textB
+            }
+            stateObject
+                .audioClipArray
+                .push(audioClip)
+        }
+
+        stateObject.audioClipArray.forEach(e => {
+            this
+            .fireBaseAudioStore
+            .child(e.id + ".wav")
+            .getDownloadURL()
+            .then(function (url) {
+                e.audioSrc = new Audio(url)
+            })
+        })
+
+        console.log(stateObject)
+        return stateObject;
+    }
+
     Read_From_Store = () => {
         return this.String_To_Object(localStorage[this.localSource])
     }
@@ -46,15 +101,19 @@ class DataController {
     }
 
     Read_From_FireBase = (SetStateFunc) => {
-        this.fireBaseSrc.once("value", function(snapshot){
-            var newState = Data.String_To_Object(snapshot.val().json)
-            SetStateFunc(newState)
-        }) 
+        this
+            .fireBaseSrc
+            .once("value", function (snapshot) {
+                var newState = Data.FireBase_Obj_To_State_Obj(snapshot.val())
+                SetStateFunc(newState)
+            })
     }
 
     Write_To_FireBase = (object) => {
-        var newString = this.Object_To_String(object)
-        this.fireBaseSrc.set({json: newString})
+        var firebaseObject = this.State_Obj_To_FireBase_Obj(object)
+        this
+            .fireBaseSrc
+            .set(firebaseObject)
     }
 
 }

@@ -88,7 +88,7 @@ class App extends Component {
     }
 
     saveToFireBase() {
-        Data.Write_To_FireBase(this.state);
+        Data.Write_To_FireBase(this.state)
         alert("Data Saved To Server!");
     }
 
@@ -146,11 +146,11 @@ class App extends Component {
         var audio = this
         .getSelectedClip()
         .audioSrc;
+        //console.log(audio.networkState)
         if (audio.src == null) {
-            console.log("Audio does not exist?");
+            console.log("Audio does not exist / Is not loaded?");
             return;
         }
-        //console.log(audio.src)
         audio.play();
     }
 
@@ -173,8 +173,7 @@ class App extends Component {
                     Load From Firebase
                 </button>
                 <button 
-                    //onClick={this.saveToFireBase}
-                    disabled = {true}>
+                    onClick={this.saveToFireBase}>
                     Save To Firebase
                 </button>
 
