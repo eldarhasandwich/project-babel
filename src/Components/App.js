@@ -181,10 +181,6 @@ class App extends Component {
                                 getSelectedClip={this.getSelectedClip}
                                 boolCanDecrement={this.boolCanDecrement}
                                 boolCanIncrement={this.boolCanIncrement}
-                                loadFromLocalStorage={this.loadFromLocalStorage}
-                                saveToLocalStorage={this.saveToLocalStorage}
-                                loadFromFireBase={this.loadFromFireBase}
-                                saveToFireBase={this.saveToFireBase}
                                 incrementIndex={this.incrementIndex}
                                 decrementIndex={this.decrementIndex}
                                 playSelectedAudio={this.playSelectedAudio}/>
@@ -194,6 +190,7 @@ class App extends Component {
                             path="/admin" 
                             render={(props) => (
                                 <AdminView {...props}
+                                state={this.state}
                                 loadFromLocalStorage={this.loadFromLocalStorage}
                                 saveToLocalStorage={this.saveToLocalStorage}
                                 loadFromFireBase={this.loadFromFireBase}

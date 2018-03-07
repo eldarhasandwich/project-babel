@@ -1,0 +1,18 @@
+.List-item-small {
+    background-color: white;
+
+    border: grey;
+    border-style: solid;
+    border-width: 1px;
+    
+    width: auto;
+    margin-bottom: 2px;
+}
+
+.List-item-small p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 8px;
+    text-align: left;
+}
+

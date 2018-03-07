@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Styles/EmceeView.css';
 
-import SaveLoadButtons from "./SaveLoadButtons";
 import ClipList from "./ClipList";
 import SelectedClipInterface from "./SelectedClipInterface";
 
@@ -10,13 +9,6 @@ class EmceeView extends Component {
     render () {
         return (
             <div>
-                <SaveLoadButtons
-                    loadFromLocalStorage={this.props.loadFromLocalStorage}
-                    saveToLocalStorage={this.props.saveToLocalStorage}
-                    loadFromFireBase={this.props.loadFromFireBase}
-                    saveToFireBase={this.props.saveToFireBase}
-                />
-
                 <ClipList
                     cliparray={this.props.state.audioClipArray}
                     selectedIndex={this.props.state.selectedClipIndex}/>
