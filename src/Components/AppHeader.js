@@ -7,9 +7,6 @@ const AppHeader = props => (
         <header className="App-header">
             <h1 className="App-title">Project Babel v0.1.0</h1>
         </header>
-        <p className="App-description">
-            App Description Here.
-        </p>
     </div>
 );
 

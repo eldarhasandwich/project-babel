@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Link} from "react-router-dom"
+
 import './Styles/App.css';
 import Data from "../Classes/DataController"
 
@@ -160,19 +162,47 @@ class App extends Component {
 
                 <AppHeader/>
 
-                <EmceeView 
-                    state={this.state}
-                    getSelectedClip={this.getSelectedClip}
-                    boolCanDecrement={this.boolCanDecrement}
-                    boolCanIncrement={this.boolCanIncrement}
-                    loadFromLocalStorage={this.loadFromLocalStorage}
-                    saveToLocalStorage={this.saveToLocalStorage}
-                    loadFromFireBase={this.loadFromFireBase}
-                    saveToFireBase={this.saveToFireBase}
-                    incrementIndex={this.incrementIndex}
-                    decrementIndex={this.decrementIndex}
-                    playSelectedAudio={this.playSelectedAudio}
-                />
+                <Router>
+                    <div>
+                        <ul>
+                            <li>
+                                <Link to="/">Emcee View</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin">Admin View</Link>
+                            </li>
+                        </ul>
+
+                        <Route 
+                            exact path="/" 
+                            render={(props) => (
+                                <EmceeView {...props}
+                                state={this.state}
+                                getSelectedClip={this.getSelectedClip}
+                                boolCanDecrement={this.boolCanDecrement}
+                                boolCanIncrement={this.boolCanIncrement}
+                                loadFromLocalStorage={this.loadFromLocalStorage}
+                                saveToLocalStorage={this.saveToLocalStorage}
+                                loadFromFireBase={this.loadFromFireBase}
+                                saveToFireBase={this.saveToFireBase}
+                                incrementIndex={this.incrementIndex}
+                                decrementIndex={this.decrementIndex}
+                                playSelectedAudio={this.playSelectedAudio}/>
+                            )}
+                        />
+                        <Route 
+                            path="/admin" 
+                            render={(props) => (
+                                <AdminView {...props}
+                                loadFromLocalStorage={this.loadFromLocalStorage}
+                                saveToLocalStorage={this.saveToLocalStorage}
+                                loadFromFireBase={this.loadFromFireBase}
+                                saveToFireBase={this.saveToFireBase}/>
+                            )}
+                        />
+                    </div>
+                </Router>
+
 
             </div>
         );

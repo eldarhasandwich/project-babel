@@ -7,7 +7,7 @@ class AdminView extends Component {
         return (
 
             <div>
-
+                <p>admin view!</p>
             </div>
 
         );
