@@ -94,8 +94,6 @@ class DataController {
             })
         })
 
-        
-
         console.log(stateObject)
         return stateObject;
     }

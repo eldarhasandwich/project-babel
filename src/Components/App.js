@@ -3,8 +3,8 @@ import './Styles/App.css';
 import Data from "../Classes/DataController"
 
 import AppHeader from "./AppHeader";
-import ClipList from "./ClipList";
-import SelectedClipInterface from "./SelectedClipInterface";
+import EmceeView from "./EmceeView";
+import AdminView from "./AdminView";
 
 class App extends Component {
 
@@ -160,57 +160,19 @@ class App extends Component {
 
                 <AppHeader/>
 
-                <button 
-                    onClick={this.loadFromLocalStorage}>
-                    Load From File
-                </button>
-                <button 
-                    onClick={this.saveToLocalStorage}>
-                    Save To File
-                </button>
-                <button 
-                    onClick={this.loadFromFireBase}>
-                    Load From Firebase
-                </button>
-                <button 
-                    onClick={this.saveToFireBase}>
-                    Save To Firebase
-                </button>
-
-                <ClipList
-                    cliparray={this.state.audioClipArray}
-                    selectedIndex={this.state.selectedClipIndex}/>
-
-                <SelectedClipInterface value={this.getSelectedClip()}/>
-
-                <div className="Interface-buttons">
-
-                    <button
-                        id="back-btn"
-                        onClick={this.decrementIndex}
-                        disabled={!this.boolCanDecrement()}>
-                        Back
-                    </button>
-
-                    <button 
-                        id="play-btn" 
-                        onClick={this.playSelectedAudio}
-                        disabled={
-                            (this.getSelectedClip())
-                                ? !this.getSelectedClip().canPlay
-                                : true
-                        }>
-                        Play
-                    </button>
-
-                    <button
-                        id="next-btn"
-                        onClick={this.incrementIndex}
-                        disabled={!this.boolCanIncrement()}>
-                        Next
-                    </button>
-
-                </div>
+                <EmceeView 
+                    state={this.state}
+                    getSelectedClip={this.getSelectedClip}
+                    boolCanDecrement={this.boolCanDecrement}
+                    boolCanIncrement={this.boolCanIncrement}
+                    loadFromLocalStorage={this.loadFromLocalStorage}
+                    saveToLocalStorage={this.saveToLocalStorage}
+                    loadFromFireBase={this.loadFromFireBase}
+                    saveToFireBase={this.saveToFireBase}
+                    incrementIndex={this.incrementIndex}
+                    decrementIndex={this.decrementIndex}
+                    playSelectedAudio={this.playSelectedAudio}
+                />
 
             </div>
         );
