@@ -15,6 +15,7 @@ class App extends Component {
             audioClipArray: [
                 // {
                 //     audioSrc: new Audio(""),
+                //     canPlay: false,
                 //     id: "00000001",
                 //     name: "Mr Snare",
                 //     textA: "Bachelor of Arts",
@@ -146,8 +147,7 @@ class App extends Component {
         var audio = this
         .getSelectedClip()
         .audioSrc;
-        //console.log(audio.networkState)
-        if (audio.src == null) {
+        if (audio == null) {
             console.log("Audio does not exist / Is not loaded?");
             return;
         }
@@ -192,7 +192,14 @@ class App extends Component {
                         Back
                     </button>
 
-                    <button id="play-btn" onClick={this.playSelectedAudio}>
+                    <button 
+                        id="play-btn" 
+                        onClick={this.playSelectedAudio}
+                        disabled={
+                            (this.getSelectedClip())
+                                ? !this.getSelectedClip().canPlay
+                                : true
+                        }>
                         Play
                     </button>
 

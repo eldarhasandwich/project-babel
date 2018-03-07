@@ -16,6 +16,7 @@ class ClipListItem extends Component {
             : this.styles.notSelected
         }>
 
+        <p>{ (this.props.value.values.canPlay) ? "Done" : "Downloading" }</p>
         <p id="item-name">{this.props.value.values.name}</p>
         <p id="item-id">{this.props.value.values.id}</p>
 

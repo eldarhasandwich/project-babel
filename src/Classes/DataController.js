@@ -71,7 +71,8 @@ class DataController {
                 id: objKeys[i],
                 name: firebaseObject.audioClips[objKeys[i]].name,
                 textA: firebaseObject.audioClips[objKeys[i]].textA,
-                textB: firebaseObject.audioClips[objKeys[i]].textB
+                textB: firebaseObject.audioClips[objKeys[i]].textB,
+                canPlay: false
             }
             stateObject
                 .audioClipArray
@@ -85,8 +86,15 @@ class DataController {
             .getDownloadURL()
             .then(function (url) {
                 e.audioSrc = new Audio(url)
+                e.audioSrc.oncanplaythrough = function() {
+                    console.log("loaded media")
+                    e.canPlay = true;
+
+                }
             })
         })
+
+        
 
         console.log(stateObject)
         return stateObject;

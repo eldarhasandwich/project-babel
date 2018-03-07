@@ -18,23 +18,17 @@
     height: 96px;
 }
 
-#item-name {
+.List-item p {
     display: inline-block;
+}
+
+#item-name {
+    margin-left: 20px;
     margin-right: 20px;
 
     font-size: 20px;
 }
 
 #item-id {
-    display: inline-block;
-
     font-size: 15px;
-}
-
-#left-indicator {
-    float: left;
-}
-
-#right-indicator {
-    float: right;
 }
