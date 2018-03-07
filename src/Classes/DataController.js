@@ -61,7 +61,7 @@ class DataController {
         return firebaseObject
     }
 
-    FireBase_Obj_To_State_Obj = (firebaseObject) => {
+    FireBase_Obj_To_State_Obj = (firebaseObject, SetStateFunc) => {
         var stateObject = {}
         stateObject.selectedClipIndex = firebaseObject.selectedClipIndex
         stateObject.audioClipArray = []
@@ -87,9 +87,9 @@ class DataController {
             .then(function (url) {
                 e.audioSrc = new Audio(url)
                 e.audioSrc.oncanplaythrough = function() {
-                    console.log("loaded media")
+                    //console.log("loaded media")
                     e.canPlay = true;
-
+                    SetStateFunc(prevState => prevState)
                 }
             })
         })
@@ -112,7 +112,7 @@ class DataController {
         this
             .fireBaseSrc
             .once("value", function (snapshot) {
-                var newState = Data.FireBase_Obj_To_State_Obj(snapshot.val())
+                var newState = Data.FireBase_Obj_To_State_Obj(snapshot.val(), SetStateFunc)
                 SetStateFunc(newState)
             })
     }
