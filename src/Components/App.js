@@ -165,12 +165,12 @@ class App extends Component {
                 <Router>
                     <div>
                         <ul>
-                            <li>
+                            <p>
                                 <Link to="/">Emcee View</Link>
-                            </li>
-                            <li>
+                            </p>
+                            <p>
                                 <Link to="/admin">Admin View</Link>
-                            </li>
+                            </p>
                         </ul>
 
                         <Route 
