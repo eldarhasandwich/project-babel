@@ -12,6 +12,7 @@ const ClipListSmall = props => (
                     <ClipListItemSmall
                         key={index} 
                         value={{values: item}}
+                        position={index}
                     />
             )
         }

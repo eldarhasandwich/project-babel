@@ -9,10 +9,16 @@ class ClipListItemSmall extends Component {
       <div className="List-item-small">
 
         <p>{
+            this.props.position + 1
+            + ". " +
             this.props.value.values.name 
             + " ("
             + this.props.value.values.id + ")"
         }</p>
+
+        <button>
+          Select
+        </button>
 
       </div>
     );

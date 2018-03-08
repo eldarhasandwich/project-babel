@@ -1,0 +1,82 @@
+{
+    "testDir": {
+        "audioClips": {
+            "N01": {
+                "name": "Andrew Buttigieg",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N03": {
+                "name": "Siksha Sivaramakrishnan",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N04": {
+                "name": "Mayank Adlakha",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N05": {
+                "name": "Asama Qureshi",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N06": {
+                "name": "Ingrid Vignot",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N07": {
+                "name": "Alexander Marinelli",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N08": {
+                "name": "Oliver Wykes",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N10": {
+                "name": "Chak Min Hui Debbie",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N13": {
+                "name": "Shnwei Lee",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N14": {
+                "name": "Katherine Sercombe",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N16": {
+                "name": "Sylvian Hughes",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N17": {
+                "name": "Rachel Ambrose",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N18": {
+                "name": "Maria Angelice Arteaga Jaime",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N19": {
+                "name": "May Ou",
+                "textA": "N/A",
+                "textB": "N/A"
+            },
+            "N21": {
+                "name": "Bryce James Gardner",
+                "textA": "N/A",
+                "textB": "N/A"
+            }
+        },
+        "selectedClipIndex": 0
+    }
+}

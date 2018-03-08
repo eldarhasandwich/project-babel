@@ -18,7 +18,7 @@ class DataController {
             .forEach(e => {
                 this
                     .fireBaseAudioStore
-                    .child(e.id + ".wav")
+                    .child(e.id + ".mp3")
                     .getDownloadURL()
                     .then(function (url) {
                         e.audioSrc = new Audio(url)
@@ -82,7 +82,7 @@ class DataController {
         stateObject.audioClipArray.forEach(e => {
             this
             .fireBaseAudioStore
-            .child(e.id + ".wav")
+            .child(e.id + ".mp3")
             .getDownloadURL()
             .then(function (url) {
                 e.audioSrc = new Audio(url)

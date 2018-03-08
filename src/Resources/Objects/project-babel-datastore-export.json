@@ -1,0 +1,22 @@
+{
+  "testDir" : {
+    "audioClips" : {
+      "00000001" : {
+        "name" : "Mr Snare",
+        "textA" : "N/A",
+        "textB" : "N/A"
+      },
+      "00000002" : {
+        "name" : "Miss Acoustic",
+        "textA" : "Bachelor of Engineering",
+        "textB" : "N/A"
+      },
+      "00000003" : {
+        "name" : "Mrs Bass",
+        "textA" : "Bachelor of Medicine",
+        "textB" : "N/A"
+      }
+    },
+    "selectedClipIndex" : 0
+  }
+}

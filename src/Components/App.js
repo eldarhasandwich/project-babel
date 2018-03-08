@@ -64,6 +64,9 @@ class App extends Component {
         this.getSelectedClip = this
             .getSelectedClip
             .bind(this);
+        this.setSelectedIndex = this
+            .setSelectedIndex
+            .bind(this);
         this.playSelectedAudio = this
             .playSelectedAudio
             .bind(this);
@@ -141,6 +144,12 @@ class App extends Component {
         }));
     }
 
+    setSelectedIndex (newIndex) {
+        this.setState(prevState => ({
+            selectedClipIndex: newIndex
+        }))
+    }
+
     playSelectedAudio() {
         if (this.getSelectedClip() == null) {
             console.log("Selected Clip does not exist?");
@@ -194,7 +203,8 @@ class App extends Component {
                                 loadFromLocalStorage={this.loadFromLocalStorage}
                                 saveToLocalStorage={this.saveToLocalStorage}
                                 loadFromFireBase={this.loadFromFireBase}
-                                saveToFireBase={this.saveToFireBase}/>
+                                saveToFireBase={this.saveToFireBase}
+                                setSelectedIndex={this.setSelectedIndex}/>
                             )}
                         />
                     </div>
