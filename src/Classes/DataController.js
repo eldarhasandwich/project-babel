@@ -3,12 +3,13 @@ import Fire from './Fire'
 class DataController {
     constructor() {
         this.localSource = "Project-Babel-Store";
-        this.fireBaseSrc = Fire
-            .database()
-            .ref('testDir')
-        this.fireBaseAudioStore = Fire
-            .storage()
-            .ref('testAudio')
+
+        this.databaseDir = "testDir";
+        this.storageDir = "testAudio";
+    }
+
+    Set_This_DatabaseDir = (newDir) => {
+        this.databaseDir = newDir.target.value;
     }
 
     String_To_Object = (string) => {
@@ -16,8 +17,9 @@ class DataController {
         newObject
             .audioClipArray
             .forEach(e => {
-                this
-                    .fireBaseAudioStore
+                Fire
+                    .storage()
+                    .ref(this.storageDir)
                     .child(e.id + ".mp3")
                     .getDownloadURL()
                     .then(function (url) {
@@ -79,20 +81,23 @@ class DataController {
                 .push(audioClip)
         }
 
-        stateObject.audioClipArray.forEach(e => {
-            this
-            .fireBaseAudioStore
-            .child(e.id + ".mp3")
-            .getDownloadURL()
-            .then(function (url) {
-                e.audioSrc = new Audio(url)
-                e.audioSrc.oncanplaythrough = function() {
-                    //console.log("loaded media")
-                    e.canPlay = true;
-                    SetStateFunc(prevState => prevState)
-                }
+        stateObject
+            .audioClipArray
+            .forEach(e => {
+                Fire
+                    .storage()
+                    .ref(this.storageDir)
+                    .child(e.id + ".mp3")
+                    .getDownloadURL()
+                    .then(function (url) {
+                        e.audioSrc = new Audio(url)
+                        e.audioSrc.oncanplaythrough = function () {
+                            //console.log("loaded media")
+                            e.canPlay = true;
+                            SetStateFunc(prevState => prevState)
+                        }
+                    })
             })
-        })
 
         console.log(stateObject)
         return stateObject;
@@ -107,9 +112,15 @@ class DataController {
     }
 
     Read_From_FireBase = (SetStateFunc) => {
-        this
-            .fireBaseSrc
+        Fire
+            .database()
+            .ref(this.databaseDir)
             .once("value", function (snapshot) {
+                if (snapshot.val() === null) {
+                    alert("List key " + snapshot.key + " does not exist!");
+                    return;
+                }
+
                 var newState = Data.FireBase_Obj_To_State_Obj(snapshot.val(), SetStateFunc)
                 SetStateFunc(newState)
             })
@@ -117,8 +128,9 @@ class DataController {
 
     Write_To_FireBase = (object) => {
         var firebaseObject = this.State_Obj_To_FireBase_Obj(object)
-        this
-            .fireBaseSrc
+        Fire
+            .database()
+            .ref(this.databaseDir)
             .set(firebaseObject)
     }
 

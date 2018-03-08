@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-//import './Styles/EmceeView.css';
+import './Styles/AdminView.css';
 
+import Data from "../Classes/DataController"
 import SaveLoadButtons from "./SaveLoadButtons"
 import ClipListSmall from './ClipListSmall';
 
@@ -8,7 +9,14 @@ class AdminView extends Component {
 
     render () {
         return (
-            <div>
+            <div className="Admin-view">
+                
+                <p>List Key:</p>
+                <input
+                    id="admin-view-list-key"
+                    onChange={Data.Set_This_DatabaseDir}
+                />
+
                 <SaveLoadButtons
                     loadFromLocalStorage={this.props.loadFromLocalStorage}
                     saveToLocalStorage={this.props.saveToLocalStorage}

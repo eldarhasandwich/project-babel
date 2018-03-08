@@ -16,7 +16,7 @@ class ClipListItemSmall extends Component {
             + this.props.value.values.id + ")"
         }</p>
 
-        <button>
+        <button disabled>
           Select
         </button>
 

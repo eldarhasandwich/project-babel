@@ -6,11 +6,13 @@ class SaveLoadButtons extends Component {
         return (
             <div>
                 <button 
-                    onClick={this.props.loadFromLocalStorage}>
+                    onClick={this.props.loadFromLocalStorage}
+                    disabled>
                     Load From File
                 </button>
                 <button 
-                    onClick={this.props.saveToLocalStorage}>
+                    onClick={this.props.saveToLocalStorage}
+                    disabled>
                     Save To File
                 </button>
                 <button 
@@ -18,7 +20,8 @@ class SaveLoadButtons extends Component {
                     Load From Firebase
                 </button>
                 <button 
-                    onClick={this.props.saveToFireBase}>
+                    onClick={this.props.saveToFireBase}
+                    disabled>
                     Save To Firebase
                 </button>
             </div>

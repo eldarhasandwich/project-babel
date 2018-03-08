@@ -173,14 +173,12 @@ class App extends Component {
 
                 <Router>
                     <div>
-                        <ul>
-                            <p>
-                                <Link to="/">Emcee View</Link>
-                            </p>
-                            <p>
-                                <Link to="/admin">Admin View</Link>
-                            </p>
-                        </ul>
+                        <p>
+                            <Link to="/">Emcee View</Link>
+                        </p>
+                        <p>
+                            <Link to="/admin">Admin View</Link>
+                        </p>
 
                         <Route 
                             exact path="/" 
