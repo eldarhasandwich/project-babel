@@ -51,7 +51,7 @@ class DataController {
         var firebaseObject = {
             audioClips: {}
         }
-        firebaseObject.selectedClipIndex = stateObject.selectedClipIndex;
+        //firebaseObject.selectedClipIndex = stateObject.selectedClipIndex;
         for (var i = 0; i < stateObject.audioClipArray.length; i++) {
             firebaseObject.audioClips[stateObject.audioClipArray[i].id] = {
                 name: stateObject.audioClipArray[i].name,
@@ -65,7 +65,7 @@ class DataController {
 
     FireBase_Obj_To_State_Obj = (firebaseObject, SetStateFunc) => {
         var stateObject = {}
-        stateObject.selectedClipIndex = firebaseObject.selectedClipIndex
+        stateObject.selectedClipIndex = 0;
         stateObject.audioClipArray = []
         var objKeys = Object.keys(firebaseObject.audioClips)
         for (var i = 0; i < objKeys.length; i++) {
