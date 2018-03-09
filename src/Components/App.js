@@ -90,12 +90,12 @@ class App extends Component {
 
     loadFromFireBase() {
         Data.Read_From_FireBase(this.ThisSetState);
-        alert("Data Read From Server!");
+        //alert("Data Read From Server!");
     }
 
     saveToFireBase() {
         Data.Write_To_FireBase(this.state)
-        alert("Data Saved To Server!");
+        //alert("Data Saved To Server!");
     }
 
     addNewClip(object) {
@@ -145,8 +145,9 @@ class App extends Component {
     }
 
     setSelectedIndex (newIndex) {
+        // console.log(newIndex.target.value)
         this.setState(prevState => ({
-            selectedClipIndex: newIndex
+           selectedClipIndex: newIndex
         }))
     }
 
@@ -177,7 +178,7 @@ class App extends Component {
                             <Link to="/">Emcee View</Link>
                         </p>
                         <p>
-                            <Link to="/admin">Admin View</Link>
+                            <Link to="admin">Admin View</Link>
                         </p>
 
                         <Route 

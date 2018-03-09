@@ -8,8 +8,8 @@ class DataController {
         this.storageDir = "testAudio";
     }
 
-    Set_This_DatabaseDir = (newDir) => {
-        this.databaseDir = newDir.target.value;
+    Set_This_DatabaseDir = (changeEvent) => {
+        this.databaseDir = changeEvent.target.value;
     }
 
     String_To_Object = (string) => {
@@ -59,7 +59,7 @@ class DataController {
                 textB: stateObject.audioClipArray[i].textB
             }
         }
-        console.log(firebaseObject)
+        //console.log(firebaseObject)
         return firebaseObject
     }
 
@@ -123,6 +123,7 @@ class DataController {
 
                 var newState = Data.FireBase_Obj_To_State_Obj(snapshot.val(), SetStateFunc)
                 SetStateFunc(newState)
+                alert("Data loaded from Server!")
             })
     }
 
@@ -132,6 +133,7 @@ class DataController {
             .database()
             .ref(this.databaseDir)
             .set(firebaseObject)
+        alert("Data saved to Server!")
     }
 
 }

@@ -26,6 +26,7 @@ class AdminView extends Component {
 
                 <ClipListSmall
                     cliparray={this.props.state.audioClipArray}
+                    selectedIndex={this.props.state.selectedClipIndex}
                     setSelectedIndex={this.props.setSelectedIndex}
                 />
             </div>
