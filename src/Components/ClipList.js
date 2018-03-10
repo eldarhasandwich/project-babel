@@ -12,7 +12,6 @@ const ClipList = props => (
                     <ClipListItem 
                         key={index} 
                         value={{values: item, index: index}}
-                        selectedIndex={props.selectedIndex}
                     />
             )
         }

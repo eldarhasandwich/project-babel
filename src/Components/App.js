@@ -7,6 +7,7 @@ import Data from "../Classes/DataController"
 import AppHeader from "./AppHeader";
 import EmceeView from "./EmceeView";
 import AdminView from "./AdminView";
+import AttendeeView from "./AttendeeView";
 
 class App extends Component {
 
@@ -180,6 +181,9 @@ class App extends Component {
                         <p>
                             <Link to="admin">Admin View</Link>
                         </p>
+                        <p>
+                            <Link to="attendee">Attendee View</Link>
+                        </p>
 
                         <Route 
                             exact path="/" 
@@ -204,6 +208,14 @@ class App extends Component {
                                 loadFromFireBase={this.loadFromFireBase}
                                 saveToFireBase={this.saveToFireBase}
                                 setSelectedIndex={this.setSelectedIndex}/>
+                            )}
+                        />
+                        <Route
+                            path="/attendee"
+                            render={(props) => (
+                                <AttendeeView {...props}
+                                state={this.state}
+                                />
                             )}
                         />
                     </div>

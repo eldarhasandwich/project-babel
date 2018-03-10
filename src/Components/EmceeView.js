@@ -10,8 +10,7 @@ class EmceeView extends Component {
         return (
             <div>
                 <ClipList
-                    cliparray={this.props.state.audioClipArray}
-                    selectedIndex={this.props.state.selectedClipIndex}/>
+                    cliparray={this.props.state.audioClipArray}/>
 
                 <SelectedClipInterface 
                     value={this.props.getSelectedClip()}
