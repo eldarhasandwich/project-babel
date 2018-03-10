@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
+import {connect} from 'react-redux'
+import {Audio} from 'redux-audio-fixed'
+
 
 import './Styles/App.css';
 import Data from "../Classes/DataController"
@@ -8,6 +11,8 @@ import AppHeader from "./AppHeader";
 import EmceeView from "./EmceeView";
 import AdminView from "./AdminView";
 import AttendeeView from "./AttendeeView";
+import * as AttendeeActions from '../Actions/attendees';
+import { actions as audioActions } from 'redux-audio-fixed'
 
 class App extends Component {
 
@@ -74,6 +79,21 @@ class App extends Component {
 
     }
 
+    getAudioComponents () {
+        return Object.keys(this.props.attendees.attendees).map(attendeeID => {
+            let attendee = this.props.attendees.attendees[attendeeID]
+            console.log('audio src:', attendee.audioSrc)
+            return <Audio
+                src={attendee.audioSrc}
+                autoPlay={false}
+                controls={false}
+                command='none'
+                preload={true}  
+                uniqueId={`audio-${attendeeID}`}
+            />
+        })
+    }
+
     loadFromLocalStorage() {
         var newState = Data.Read_From_Store();
         this.setState(newState);
@@ -91,6 +111,7 @@ class App extends Component {
 
     loadFromFireBase() {
         Data.Read_From_FireBase(this.ThisSetState);
+        this.props.loadAttendees(Data.databaseDir);
         //alert("Data Read From Server!");
     }
 
@@ -164,7 +185,26 @@ class App extends Component {
             console.log("Audio does not exist / Is not loaded?");
             return;
         }
-        audio.play();
+
+        // document.querySelectorAll('')
+
+        console.log('audio-N' + this.getPlayerFromIndex(this.props.state.selectedClipIndex))
+
+        this.props.playAudio(`audio-N${this.getPlayerFromIndex(this.props.state.selectedClipIndex)}`)
+    }
+
+    getPlayerFromIndex (index) {
+        let s = ''
+
+        index = index + 1
+
+        if (index < 10) {
+            s += '0' + index
+        } else {
+            s += index
+        }
+
+        return s
     }
 
     render() {
@@ -172,6 +212,8 @@ class App extends Component {
             <div className="App">
 
                 <AppHeader/>
+
+                {this.getAudioComponents()}
 
                 <Router>
                     <div>
@@ -207,7 +249,8 @@ class App extends Component {
                                 saveToLocalStorage={this.saveToLocalStorage}
                                 loadFromFireBase={this.loadFromFireBase}
                                 saveToFireBase={this.saveToFireBase}
-                                setSelectedIndex={this.setSelectedIndex}/>
+                                setSelectedIndex={this.setSelectedIndex}>
+                                </AdminView>
                             )}
                         />
                         <Route
@@ -227,4 +270,21 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        attendees: state.attendees,
+        state: state.state
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loadAttendees: (listKey) => dispatch(AttendeeActions.loadAttendees(listKey)),
+        playAudio: (audioId) => dispatch(audioActions.audioPlay(audioId))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)

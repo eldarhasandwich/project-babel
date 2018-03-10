@@ -13,6 +13,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
+    "redux-audio": "^1.0.0",
+    "redux-audio-fixed": "^1.0.7",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"

@@ -29,6 +29,8 @@ class AdminView extends Component {
                     selectedIndex={this.props.state.selectedClipIndex}
                     setSelectedIndex={this.props.setSelectedIndex}
                 />
+
+                {this.props.children}
             </div>
         );
     }
