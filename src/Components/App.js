@@ -61,7 +61,8 @@ class App extends Component {
                     controls={false}
                     command='none'
                     preload={true}
-                    uniqueId={`audio-${attendeeID}`}/>
+                    uniqueId={`audio-${attendeeID}`}
+                    onLoadedData={() => this.props.loadedAudio(attendeeID)}/>
             })
     }
 
@@ -206,6 +207,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loadAttendees: (listKey) => dispatch(AttendeeActions.loadAttendees(listKey)),
+        loadedAudio: (attendeeID) => dispatch(AttendeeActions.loadedAudio(attendeeID)),
         playAudio: (audioId) => dispatch(audioActions.audioPlay(audioId))
     }
 }
