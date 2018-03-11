@@ -5,7 +5,7 @@ import './Styles/AppHeader.css';
 const AppHeader = props => (
     <div>
         <header className="App-header">
-            <h1 className="App-title">Project Babel v0.1.1</h1>
+            <h1 className="App-title">Project Babel v0.2.0</h1>
         </header>
     </div>
 );

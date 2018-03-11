@@ -7,7 +7,7 @@ export function addAttendee (id, name, audioSrc, orderPos, textA, textB, listKey
     return (dispatch, getState) => {
         Fire
             .storage()
-            .ref(listKey)
+            .ref("testAudio")
             .child(id + ".mp3")
             .getDownloadURL()
             .then(function (url){

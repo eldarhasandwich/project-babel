@@ -17,6 +17,18 @@ class EmceeView extends Component {
         return (this.props.state.selectedClipIndex > 0)
     }
 
+    canPlayAudio() {
+        let attendees = this.props.attendees.attendees;
+        let selected = Object
+            .keys(attendees)
+            .find(x => attendees[x].orderPos === this.props.state.selectedClipIndex)
+        let selectedAttendee = attendees[selected]
+        if (selectedAttendee === undefined) {
+            return false
+        }
+        return selectedAttendee.audioLoaded
+    }
+
     incrementIndex() {
         console.log('current:', this.props.state.selectedClipIndex)
         this
@@ -50,7 +62,10 @@ class EmceeView extends Component {
                         Back
                     </button>
 
-                    <button id="play-btn" onClick={this.props.playSelectedAudio}>
+                    <button 
+                        id="play-btn" 
+                        onClick={this.props.playSelectedAudio}
+                        disabled={!this.canPlayAudio.call(this)}>
                         Play
                     </button>
 

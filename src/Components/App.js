@@ -50,7 +50,7 @@ class App extends Component {
 
     }
 
-    getAudioComponents() {
+    generateAudioComponents() {
         return Object
             .keys(this.props.attendees.attendees)
             .map(attendeeID => {
@@ -157,7 +157,7 @@ class App extends Component {
         return (
             <div className="App">
 
-                <AppHeader/> {this.getAudioComponents()}
+                <AppHeader/> {this.generateAudioComponents()}
 
                 <Router>
                     <div>
@@ -167,17 +167,15 @@ class App extends Component {
                         <p>
                             <Link to="admin">Admin View</Link>
                         </p>
-                        <p>
-                            <Link to="attendee">Attendee View</Link>
-                        </p>
 
                         <Route
                             exact
                             path="/"
-                            render={(props) => (<EmceeView
-                            {...props}
-                            state={this.state}
-                            playSelectedAudio={this.playSelectedAudio}/>)}/>
+                            render={(props) => (
+                            <EmceeView
+                                {...props}
+                                state={this.state}
+                                playSelectedAudio={this.playSelectedAudio}/>)}/>
                         <Route
                             path="/admin"
                             render={(props) => (
@@ -189,9 +187,6 @@ class App extends Component {
                                 loadFromFireBase={this.loadFromFireBase}
                                 saveToFireBase={this.saveToFireBase}></AdminView>
                         )}/>
-                        <Route
-                            path="/attendee"
-                            render={(props) => (<AttendeeView {...props} state={this.state}/>)}/>
                     </div>
                 </Router>
 
