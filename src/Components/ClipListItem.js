@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import './Styles/ClipListItem.css';
 
 import * as stateActions from "../Actions/state"
-import ClipList from './ClipList';
+//import ClipList from './ClipList';
 
 class ClipListItem extends Component {
     styles = {
@@ -17,15 +17,15 @@ class ClipListItem extends Component {
         return (
             <div
                 className="List-item"
-                style={(this.props.value.index === this.props.state.selectedClipIndex)
+                style={(this.props.index === this.props.state.selectedClipIndex)
                 ? this.styles.selected
                 : this.styles.notSelected}>
 
-                <p>{(this.props.value.values.canPlay)
+                <p>{(this.props.attendee.audioLoaded)
                         ? "Loaded"
                         : "Downloading"}</p>
-                <p id="item-name">{this.props.value.values.name}</p>
-                <p id="item-id">{this.props.value.values.id}</p>
+                <p id="item-name">{this.props.attendee.name}</p>
+                <p id="item-id">{this.props.attendee.id}</p>
 
             </div>
         );

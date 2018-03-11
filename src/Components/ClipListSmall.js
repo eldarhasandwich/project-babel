@@ -1,24 +1,32 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Styles/ClipListSmall.css';
-
+import {connect} from 'react-redux'
 import ClipListItemSmall from "./ClipListItemSmall";
 
-const ClipListSmall = props => (
-    <div className="Clip-list-small">
+class ClipListSmall extends Component {
+    render() {
+        return (
+            <div className="Clip-list-small">
 
-        {
-            props.cliparray.map(
-                (item, index) => 
-                    <ClipListItemSmall
-                        key={index} 
-                        value={{values: item, index: index}}
-                        selectedIndex={props.selectedIndex}
-                        setSelectedIndex={props.setSelectedIndex}
-                    />
-            )
-        }
+                {Object
+                    .keys(this.props.attendees.attendees)
+                    .map((item, index) => <ClipListItemSmall
+                        key={index}
+                        attendee={this.props.attendees.attendees[item]}
+                        index={index}/>)
+}
 
-    </div>
-);
+            </div>
+        )
+    }
+}
 
-export default ClipListSmall;
+const mapStateToProps = state => {
+    return {attendees: state.attendees}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClipListSmall)

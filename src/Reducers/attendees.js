@@ -4,8 +4,8 @@ const defaultState = {
 
 const defaultAttendeeState = {
     audioSrc: null,
-    loading: false,
-    loaded: false,
+    audioLoading: false,
+    audioLoaded: false,
     id: "",
     name: "",
     textA: "",
@@ -34,7 +34,7 @@ const attendees = (state = defaultState, action) => {
                     ...state.attendees,
                     [action.id]: {
                         ...state.attendees[action.id],
-                        loading: true,
+                        audioLoading: true,
                     }
                 }
             }
@@ -47,8 +47,8 @@ const attendees = (state = defaultState, action) => {
                     ...state.attendees,
                     [action.id]: {
                         ...state.attendees[action.id],
-                        loading: false,
-                        loaded: true
+                        audioLoading: false,
+                        audioLoaded: true
                     }
                 }
             }

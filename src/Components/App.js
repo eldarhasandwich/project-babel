@@ -18,31 +18,6 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            selectedClipIndex: 0,
-            audioClipArray: [
-                // {
-                //     audioSrc: new Audio(""),
-                //     canPlay: false,
-                //     id: "00000001",
-                //     name: "Mr Snare",
-                //     textA: "Bachelor of Arts",
-                //     textB: "N/A"
-                // }, {
-                //     audioSrc: new Audio(""),
-                //     id: "00000002",
-                //     name: "Miss Acoustic",
-                //     textA: "Bachelor of Engineering",
-                //     textB: "N/A"
-                // }, {
-                //     audioSrc: new Audio(""),
-                //     id: "00000003",
-                //     name: "Mrs Bass",
-                //     textA: "Bachelor of Medicine",
-                //     textB: "N/A"
-                // }
-            ]
-        };
 
         this.saveToLocalStorage = this
             .saveToLocalStorage
@@ -67,9 +42,6 @@ class App extends Component {
         this.decrementIndex = this
             .decrementIndex
             .bind(this);
-        this.getSelectedClip = this
-            .getSelectedClip
-            .bind(this);
         this.setSelectedIndex = this
             .setSelectedIndex
             .bind(this);
@@ -82,7 +54,6 @@ class App extends Component {
     getAudioComponents () {
         return Object.keys(this.props.attendees.attendees).map(attendeeID => {
             let attendee = this.props.attendees.attendees[attendeeID]
-            console.log('audio src:', attendee.audioSrc)
             return <Audio
                 src={attendee.audioSrc}
                 autoPlay={false}
@@ -110,7 +81,7 @@ class App extends Component {
     }
 
     loadFromFireBase() {
-        Data.Read_From_FireBase(this.ThisSetState);
+        //Data.Read_From_FireBase(this.ThisSetState);
         this.props.loadAttendees(Data.databaseDir);
         //alert("Data Read From Server!");
     }
@@ -130,12 +101,8 @@ class App extends Component {
         }))
     }
 
-    getSelectedClip() {
-        return this.state.audioClipArray[this.state.selectedClipIndex] || null
-    }
-
     boolCanDecrement() {
-        if (this.state.selectedClipIndex < 1) {
+        if (this.props.state.selectedClipIndex < 1) {
             return false;
         }
         return true;
@@ -151,7 +118,8 @@ class App extends Component {
     }
 
     boolCanIncrement() {
-        if (this.state.selectedClipIndex > this.state.audioClipArray.length - 2) {
+        if (this.props.state.selectedClipIndex 
+            > Object.keys(this.props.attendees.attendees).length - 2) {
             return false;
         }
         return true;
@@ -174,38 +142,25 @@ class App extends Component {
     }
 
     playSelectedAudio() {
-        if (this.getSelectedClip() == null) {
-            console.log("Selected Clip does not exist?");
-            return;
-        }
-        var audio = this
-        .getSelectedClip()
-        .audioSrc;
-        if (audio == null) {
-            console.log("Audio does not exist / Is not loaded?");
-            return;
-        }
+        let attendeeKeys = Object.keys(this.props.attendees.attendees)
+        let selectedAttendee = this.props.attendees.attendees[attendeeKeys[this.props.state.selectedClipIndex]]
 
-        // document.querySelectorAll('')
-
-        console.log('audio-N' + this.getPlayerFromIndex(this.props.state.selectedClipIndex))
-
-        this.props.playAudio(`audio-N${this.getPlayerFromIndex(this.props.state.selectedClipIndex)}`)
+        this.props.playAudio(`audio-${selectedAttendee.id}`)
     }
 
-    getPlayerFromIndex (index) {
-        let s = ''
+    // getPlayerFromIndex (index) {
+    //     let s = ''
 
-        index = index + 1
+    //     index = index + 1
 
-        if (index < 10) {
-            s += '0' + index
-        } else {
-            s += index
-        }
+    //     if (index < 10) {
+    //         s += '0' + index
+    //     } else {
+    //         s += index
+    //     }
 
-        return s
-    }
+    //     return s
+    // }
 
     render() {
         return (
@@ -232,11 +187,6 @@ class App extends Component {
                             render={(props) => (
                                 <EmceeView {...props}
                                 state={this.state}
-                                getSelectedClip={this.getSelectedClip}
-                                boolCanDecrement={this.boolCanDecrement}
-                                boolCanIncrement={this.boolCanIncrement}
-                                incrementIndex={this.incrementIndex}
-                                decrementIndex={this.decrementIndex}
                                 playSelectedAudio={this.playSelectedAudio}/>
                             )}
                         />
@@ -248,8 +198,7 @@ class App extends Component {
                                 loadFromLocalStorage={this.loadFromLocalStorage}
                                 saveToLocalStorage={this.saveToLocalStorage}
                                 loadFromFireBase={this.loadFromFireBase}
-                                saveToFireBase={this.saveToFireBase}
-                                setSelectedIndex={this.setSelectedIndex}>
+                                saveToFireBase={this.saveToFireBase}>
                                 </AdminView>
                             )}
                         />

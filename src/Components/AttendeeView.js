@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 //import './Styles/AttendeeView.css';
 
 import Data from "../Classes/DataController"
-import SaveLoadButtons from "./SaveLoadButtons"
-import ClipListSmall from './ClipListSmall';
+//import SaveLoadButtons from "./SaveLoadButtons"
+//import ClipListSmall from './ClipListSmall';
 
 class AttendeeView extends Component {
 

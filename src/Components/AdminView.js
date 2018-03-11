@@ -24,11 +24,7 @@ class AdminView extends Component {
                     saveToFireBase={this.props.saveToFireBase}
                 />
 
-                <ClipListSmall
-                    cliparray={this.props.state.audioClipArray}
-                    selectedIndex={this.props.state.selectedClipIndex}
-                    setSelectedIndex={this.props.setSelectedIndex}
-                />
+                <ClipListSmall/>
 
                 {this.props.children}
             </div>

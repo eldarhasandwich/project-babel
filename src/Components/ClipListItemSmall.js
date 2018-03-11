@@ -24,18 +24,18 @@ class ClipListItemSmall extends Component {
         //console.log(this.props.value.index)
         this
             .props
-            .setSelectedClipIndex(this.props.value.index)
+            .setSelectedClipIndex(this.props.index)
     }
 
     render() {
         return (
             <div
                 className="List-item-small"
-                style={(this.props.value.index === this.props.state.selectedClipIndex)
+                style={(this.props.index === this.props.state.selectedClipIndex)
                 ? this.styles.selected
                 : this.styles.notSelected}>
 
-                <p>{this.props.value.index + 1 + ". " + this.props.value.values.name + " (" + this.props.value.values.id + ")"
+                <p>{this.props.index + 1 + ". " + this.props.attendee.name + " (" + this.props.attendee.id + ")"
 }</p>
 
                 <button onClick={this.setSelectedIndexAsSelf}>

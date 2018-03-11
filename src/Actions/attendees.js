@@ -1,4 +1,4 @@
-import Data from '../Classes/DataController'
+//import Data from '../Classes/DataController'
 import Fire from '../Classes/Fire'
 
 import { actions as audioActions } from 'redux-audio-fixed'
