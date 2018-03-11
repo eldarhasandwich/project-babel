@@ -5,8 +5,9 @@ import './Styles/SelectedClipInterface.css';
 class SelectedClipInterface extends Component {
 
     getSelectedAttendee () {
-        let attendeeKeys = Object.keys(this.props.attendees.attendees)
-        return this.props.attendees.attendees[attendeeKeys[this.props.state.selectedClipIndex]]
+        let attendees = this.props.attendees.attendees;
+        let selected = Object.keys(attendees).find(x => attendees[x].orderPos === this.props.state.selectedClipIndex)
+        return attendees[selected]
     }
 
     getSelectedAttendeeName () {

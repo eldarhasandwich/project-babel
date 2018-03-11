@@ -33,7 +33,9 @@ class EmceeView extends Component {
     render() {
         return (
             <div>
-                <ClipList/>
+                <ClipList
+                    size={"small"}
+                />
 
                 <SelectedClipInterface/>
 

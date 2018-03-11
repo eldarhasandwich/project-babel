@@ -5,11 +5,13 @@ import ClipListItem from "./ClipListItem";
 
 class ClipList extends Component {
 
-    getSortedAttendees () {
+    getSortedAttendees() {
         let attendees = this.props.attendees.attendees
         let attendeeKeys = Object.keys(attendees)
-        attendeeKeys.sort((a,b) =>
-            attendees[a] -= attendees[b])
+        
+        attendeeKeys.sort((a, b) => {return attendees[a].orderPos - attendees[b].orderPos})
+
+
         return attendeeKeys;
     }
 
@@ -17,12 +19,11 @@ class ClipList extends Component {
         return (
             <div className="Clip-list">
 
-                {Object
-                    .keys(this.props.attendees.attendees)
+                {this.getSortedAttendees.call(this)
                     .map((item, index) => <ClipListItem
                         key={index}
                         attendee={this.props.attendees.attendees[item]}
-                        index={index}/>)
+                        itemDisplaySize={this.props.size}/>)
 }
 
             </div>

@@ -1,5 +1,7 @@
 const defaultState = {
-    selectedClipIndex: 0
+    selectedClipIndex: 0,
+    fireBaseDataDirectory: "testDir",
+    fireBaseStoreageDirectory: "testDir"
 }
 
 const state = (state = defaultState, action) => {

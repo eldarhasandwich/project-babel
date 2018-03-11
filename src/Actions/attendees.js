@@ -3,7 +3,7 @@ import Fire from '../Classes/Fire'
 
 import { actions as audioActions } from 'redux-audio-fixed'
 
-export function addAttendee (id, name, audioSrc, textA, textB, listKey) {
+export function addAttendee (id, name, audioSrc, orderPos, textA, textB, listKey) {
     return (dispatch, getState) => {
         Fire
             .storage()
@@ -14,6 +14,7 @@ export function addAttendee (id, name, audioSrc, textA, textB, listKey) {
                 dispatch( {
                     type: "ADD_ATTENDEE",
                     audioSrc: url,
+                    orderPos,
                     id,
                     name,
                     textA,
@@ -43,6 +44,7 @@ export function loadAttendees (listKey) {
                     objKeys[i],
                     snapshot.val().audioClips[objKeys[i]].name,
                     null,
+                    snapshot.val().audioClips[objKeys[i]].orderPos,
                     snapshot.val().audioClips[objKeys[i]].textA,
                     snapshot.val().audioClips[objKeys[i]].textB,
                     listKey

@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
 
-
 import './Styles/App.css';
 import Data from "../Classes/DataController"
 
@@ -12,7 +11,7 @@ import EmceeView from "./EmceeView";
 import AdminView from "./AdminView";
 import AttendeeView from "./AttendeeView";
 import * as AttendeeActions from '../Actions/attendees';
-import { actions as audioActions } from 'redux-audio-fixed'
+import {actions as audioActions} from 'redux-audio-fixed'
 
 class App extends Component {
 
@@ -51,18 +50,19 @@ class App extends Component {
 
     }
 
-    getAudioComponents () {
-        return Object.keys(this.props.attendees.attendees).map(attendeeID => {
-            let attendee = this.props.attendees.attendees[attendeeID]
-            return <Audio
-                src={attendee.audioSrc}
-                autoPlay={false}
-                controls={false}
-                command='none'
-                preload={true}  
-                uniqueId={`audio-${attendeeID}`}
-            />
-        })
+    getAudioComponents() {
+        return Object
+            .keys(this.props.attendees.attendees)
+            .map(attendeeID => {
+                let attendee = this.props.attendees.attendees[attendeeID]
+                return <Audio
+                    src={attendee.audioSrc}
+                    autoPlay={false}
+                    controls={false}
+                    command='none'
+                    preload={true}
+                    uniqueId={`audio-${attendeeID}`}/>
+            })
     }
 
     loadFromLocalStorage() {
@@ -82,7 +82,9 @@ class App extends Component {
 
     loadFromFireBase() {
         //Data.Read_From_FireBase(this.ThisSetState);
-        this.props.loadAttendees(Data.databaseDir);
+        this
+            .props
+            .loadAttendees(Data.databaseDir);
         //alert("Data Read From Server!");
     }
 
@@ -118,8 +120,7 @@ class App extends Component {
     }
 
     boolCanIncrement() {
-        if (this.props.state.selectedClipIndex 
-            > Object.keys(this.props.attendees.attendees).length - 2) {
+        if (this.props.state.selectedClipIndex > Object.keys(this.props.attendees.attendees).length - 2) {
             return false;
         }
         return true;
@@ -134,41 +135,28 @@ class App extends Component {
         }));
     }
 
-    setSelectedIndex (newIndex) {
+    setSelectedIndex(newIndex) {
         // console.log(newIndex.target.value)
-        this.setState(prevState => ({
-           selectedClipIndex: newIndex
-        }))
+        this.setState(prevState => ({selectedClipIndex: newIndex}))
     }
 
     playSelectedAudio() {
-        let attendeeKeys = Object.keys(this.props.attendees.attendees)
-        let selectedAttendee = this.props.attendees.attendees[attendeeKeys[this.props.state.selectedClipIndex]]
+        let attendees = this.props.attendees.attendees;
+        let selected = Object
+            .keys(attendees)
+            .find(x => attendees[x].orderPos === this.props.state.selectedClipIndex)
+        let selectedAttendee = attendees[selected]
 
-        this.props.playAudio(`audio-${selectedAttendee.id}`)
+        this
+            .props
+            .playAudio(`audio-${selectedAttendee.id}`)
     }
-
-    // getPlayerFromIndex (index) {
-    //     let s = ''
-
-    //     index = index + 1
-
-    //     if (index < 10) {
-    //         s += '0' + index
-    //     } else {
-    //         s += index
-    //     }
-
-    //     return s
-    // }
 
     render() {
         return (
             <div className="App">
 
-                <AppHeader/>
-
-                {this.getAudioComponents()}
+                <AppHeader/> {this.getAudioComponents()}
 
                 <Router>
                     <div>
@@ -182,37 +170,29 @@ class App extends Component {
                             <Link to="attendee">Attendee View</Link>
                         </p>
 
-                        <Route 
-                            exact path="/" 
+                        <Route
+                            exact
+                            path="/"
+                            render={(props) => (<EmceeView
+                            {...props}
+                            state={this.state}
+                            playSelectedAudio={this.playSelectedAudio}/>)}/>
+                        <Route
+                            path="/admin"
                             render={(props) => (
-                                <EmceeView {...props}
-                                state={this.state}
-                                playSelectedAudio={this.playSelectedAudio}/>
-                            )}
-                        />
-                        <Route 
-                            path="/admin" 
-                            render={(props) => (
-                                <AdminView {...props}
+                            <AdminView
+                                {...props}
                                 state={this.state}
                                 loadFromLocalStorage={this.loadFromLocalStorage}
                                 saveToLocalStorage={this.saveToLocalStorage}
                                 loadFromFireBase={this.loadFromFireBase}
-                                saveToFireBase={this.saveToFireBase}>
-                                </AdminView>
-                            )}
-                        />
+                                saveToFireBase={this.saveToFireBase}></AdminView>
+                        )}/>
                         <Route
                             path="/attendee"
-                            render={(props) => (
-                                <AttendeeView {...props}
-                                state={this.state}
-                                />
-                            )}
-                        />
+                            render={(props) => (<AttendeeView {...props} state={this.state}/>)}/>
                     </div>
                 </Router>
-
 
             </div>
         );
@@ -220,10 +200,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        attendees: state.attendees,
-        state: state.state
-    }
+    return {attendees: state.attendees, state: state.state}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -233,7 +210,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -3,7 +3,8 @@ import './Styles/AdminView.css';
 
 import Data from "../Classes/DataController"
 import SaveLoadButtons from "./SaveLoadButtons"
-import ClipListSmall from './ClipListSmall';
+// import ClipListSmall from './ClipListSmall';
+import ClipList from './ClipList';
 
 class AdminView extends Component {
 
@@ -24,7 +25,9 @@ class AdminView extends Component {
                     saveToFireBase={this.props.saveToFireBase}
                 />
 
-                <ClipListSmall/>
+                <ClipList
+                    itemDisplaySize={"large"}
+                />
 
                 {this.props.children}
             </div>

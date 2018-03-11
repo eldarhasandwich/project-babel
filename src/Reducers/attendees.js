@@ -6,6 +6,7 @@ const defaultAttendeeState = {
     audioSrc: null,
     audioLoading: false,
     audioLoaded: false,
+    orderPos: 0,
     id: "",
     name: "",
     textA: "",
