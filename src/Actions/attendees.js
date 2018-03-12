@@ -32,6 +32,14 @@ export function loadedAudio (attendeeID) {
     }
 }
 
+export function swapAttendeeOrderPosition (attendeeA_ID, attendeeB_ID) {
+    return {
+        type: "SWAP_ORDER_POSITION",
+        id_A: attendeeA_ID,
+        id_B: attendeeB_ID
+    }
+}
+
 export function loadAttendees (listKey) {
     return (dispatch, getState) => {
         Fire.database().ref(listKey).once("value",function(snapshot) {

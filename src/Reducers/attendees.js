@@ -55,6 +55,21 @@ const attendees = (state = defaultState, action) => {
             }
         }
 
+        case 'SWAP_ORDER_POSITION': {
+            return {
+                ...state,
+                attendees:{
+                    ...state.attendees,
+                    [action.id_A]: {
+                        orderPos: state.attendees[action.id_B]
+                    },
+                    [action.id_B]: {
+                        orderPos: state.attendees[action.id_A]
+                    }
+                }
+            }
+        }
+
         default:
             {
                 return state

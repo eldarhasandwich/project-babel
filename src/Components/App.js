@@ -24,9 +24,6 @@ class App extends Component {
         this.loadFromLocalStorage = this
             .loadFromLocalStorage
             .bind(this);
-        this.loadFromFireBase = this
-            .loadFromFireBase
-            .bind(this);
         this.saveToFireBase = this
             .saveToFireBase
             .bind(this);
@@ -35,15 +32,6 @@ class App extends Component {
             .ThisSetState
             .bind(this);
 
-        this.incrementIndex = this
-            .incrementIndex
-            .bind(this);
-        this.decrementIndex = this
-            .decrementIndex
-            .bind(this);
-        this.setSelectedIndex = this
-            .setSelectedIndex
-            .bind(this);
         this.playSelectedAudio = this
             .playSelectedAudio
             .bind(this);
@@ -81,64 +69,9 @@ class App extends Component {
         this.setState(newState);
     }
 
-    loadFromFireBase() {
-        //Data.Read_From_FireBase(this.ThisSetState);
-        this
-            .props
-            .loadAttendees(Data.databaseDir);
-        //alert("Data Read From Server!");
-    }
-
     saveToFireBase() {
         Data.Write_To_FireBase(this.state)
         //alert("Data Saved To Server!");
-    }
-
-    addNewClip(object) {
-        // TODO: clipObjectVerification
-        this.setState(prevState => ({
-            audioClipArray: [
-                ...prevState.audioClipArray,
-                object
-            ]
-        }))
-    }
-
-    boolCanDecrement() {
-        if (this.props.state.selectedClipIndex < 1) {
-            return false;
-        }
-        return true;
-    }
-
-    decrementIndex() {
-        if (!this.boolCanDecrement()) {
-            return;
-        }
-        this.setState(prevState => ({
-            selectedClipIndex: prevState.selectedClipIndex - 1
-        }));
-    }
-
-    boolCanIncrement() {
-        if (this.props.state.selectedClipIndex > Object.keys(this.props.attendees.attendees).length - 2) {
-            return false;
-        }
-        return true;
-    }
-
-    incrementIndex() {
-        if (!this.boolCanIncrement()) {
-            return;
-        }
-        this.setState(prevState => ({
-            selectedClipIndex: prevState.selectedClipIndex + 1
-        }));
-    }
-
-    setSelectedIndex(newIndex) {
-        // console.log(newIndex.target.value)
-        this.setState(prevState => ({selectedClipIndex: newIndex}))
     }
 
     playSelectedAudio() {

@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import Data from "../Classes/DataController";
+
+import * as AttendeeActions from '../Actions/attendees';
 
 class SaveLoadButtons extends Component {
+
+    loadFromFireBase() {
+        this.props.loadAttendees(Data.databaseDir)
+    }
 
     render () {
         return (
@@ -16,7 +25,7 @@ class SaveLoadButtons extends Component {
                     Save To File
                 </button>
                 <button 
-                    onClick={this.props.loadFromFireBase}>
+                    onClick={this.loadFromFireBase.bind(this)}>
                     Load From Firebase
                 </button>
                 <button 
@@ -29,4 +38,14 @@ class SaveLoadButtons extends Component {
     }
 }
 
-export default SaveLoadButtons;
+const mapStateToProps = state => {
+    return {attendees: state.attendees, state: state.state}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loadAttendees: (listKey) => dispatch(AttendeeActions.loadAttendees(listKey))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SaveLoadButtons)
