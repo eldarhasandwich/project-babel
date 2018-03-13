@@ -35,19 +35,17 @@ class ClipListItem extends Component {
     }
 
     switchPositionWithLowerIndex() {
-        let thisAttendee = this.props.attendee.id;
         let targetIndex = this.props.attendee.orderPos - 1;
-
-        let attendees = this.props.attendees.attendees
-        let attendeeKeys = Object.keys(attendees)
-        let targetKey = attendeeKeys.find(x => attendees[x].orderPos === targetIndex)
-
-        this.props.swapAttendeeOrderPosition(thisAttendee, targetKey)
+        this.switchThisIndexWithIndex(targetIndex);
     }
 
     switchPositionWithHigherIndex() {
-        let thisAttendee = this.props.attendee.id;
         let targetIndex = this.props.attendee.orderPos + 1;
+        this.switchThisIndexWithIndex(targetIndex);
+    }
+
+    switchThisIndexWithIndex(targetIndex) {
+        let thisAttendee = this.props.attendee.id;
 
         let attendees = this.props.attendees.attendees
         let attendeeKeys = Object.keys(attendees)
