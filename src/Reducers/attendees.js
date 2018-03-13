@@ -61,10 +61,12 @@ const attendees = (state = defaultState, action) => {
                 attendees:{
                     ...state.attendees,
                     [action.id_A]: {
-                        orderPos: state.attendees[action.id_B]
+                        ...state.attendees[action.id_A],
+                        orderPos: state.attendees[action.id_B].orderPos
                     },
                     [action.id_B]: {
-                        orderPos: state.attendees[action.id_A]
+                        ...state.attendees[action.id_B],
+                        orderPos: state.attendees[action.id_A].orderPos
                     }
                 }
             }
