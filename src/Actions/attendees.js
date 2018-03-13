@@ -40,6 +40,20 @@ export function swapAttendeeOrderPosition (attendeeA_ID, attendeeB_ID) {
     }
 }
 
+export function updateAttendeeAttribute (attendeeID, targetField, newValue) {
+    if (attendeeID !== null) {
+        return {
+            type: "UPDATE_ATTRIBUTE",
+            attendeeID,
+            targetField,
+            newValue
+        }
+    } return {
+        type: "UPDATE_ATTRIBUTE_FAILED",
+        reason: "Invalid Field"
+    }
+}
+
 export function clearAttendeeList () {
     return {
         type: "CLEAR_ATTENDEE_LIST"

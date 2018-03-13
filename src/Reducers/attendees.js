@@ -72,6 +72,19 @@ const attendees = (state = defaultState, action) => {
             }
         }
 
+        case 'UPDATE_ATTRIBUTE': {
+            return {
+                ...state,
+                attendees:{
+                    ...state.attendees,
+                    [action.attendeeID]: {
+                        ...state.attendees[action.attendeeID],
+                        [action.targetField] : action.newValue
+                    }
+                }
+            }
+        }
+        
         case 'CLEAR_ATTENDEE_LIST': {
             return {
                 ...state,

@@ -3,8 +3,8 @@ import './Styles/AdminView.css';
 
 import Data from "../Classes/DataController"
 import SaveLoadButtons from "./SaveLoadButtons"
-// import ClipListSmall from './ClipListSmall';
 import ClipList from './ClipList';
+import SelectedClipAttributeEdit from './SelectedClipAttributeEdit';
 
 class AdminView extends Component {
 
@@ -28,6 +28,8 @@ class AdminView extends Component {
                 <ClipList
                     itemDisplaySize={"large"}
                 />
+
+                <SelectedClipAttributeEdit/>
 
                 {this.props.children}
             </div>

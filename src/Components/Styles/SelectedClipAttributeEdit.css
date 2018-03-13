@@ -1,0 +1,24 @@
+
+.Attribute-edit-col-left {
+    width: 30%;
+    display: inline-block;
+}
+
+.Attribute-edit-col-left p {
+    float: right;
+    margin-right: 10px;
+}
+
+.Attribute-edit-col-right {
+    width: 50%;
+    display: inline-block;
+}
+
+.Attribute-edit-col-right p {
+    float: left;
+}
+
+.Attribute-edit-col-right input {
+    float: left;
+    margin-bottom: 16px;
+}
