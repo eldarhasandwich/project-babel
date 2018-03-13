@@ -77,6 +77,7 @@ class SelectedClipAttributeEdit extends Component {
                     </div>
                     <div className="Attribute-edit-col-right">
                         <input
+                            disabled
                             value = {this.getSelectedAttendeeName.call(this)}
                             onChange = {this.updateName.bind(this)}/>
                     </div>
@@ -88,6 +89,7 @@ class SelectedClipAttributeEdit extends Component {
                     </div>
                     <div className="Attribute-edit-col-right">
                         <input
+                            disabled
                             value = {this.getSelectedAttendeeTextA.call(this)}
                             onChange = {this.updateTextA.bind(this)}/>
                     </div>
@@ -99,6 +101,7 @@ class SelectedClipAttributeEdit extends Component {
                     </div>
                     <div className="Attribute-edit-col-right">
                         <input
+                            disabled
                             value = {this.getSelectedAttendeeTextB.call(this)}
                             onChange = {this.updateTextB.bind(this)}/>
                     </div>

@@ -51,7 +51,9 @@ class ClipListItem extends Component {
         let attendeeKeys = Object.keys(attendees)
         let targetKey = attendeeKeys.find(x => attendees[x].orderPos === targetIndex)
 
-        this.props.swapAttendeeOrderPosition(thisAttendee, targetKey)
+        this
+            .props
+            .swapAttendeeOrderPosition(thisAttendee, targetKey)
     }
 
     render() {
@@ -83,15 +85,15 @@ class ClipListItem extends Component {
                 <p>{this.props.attendee.orderPos + 1 + ". " + this.props.attendee.name + " (" + this.props.attendee.id + ")"
 }</p>
 
-                <button 
+                <button
                     onClick={this.switchPositionWithHigherIndex}
-                    disabled={this.props.attendee.orderPos === Object.keys(this.props.attendees.attendees).length-1}>
+                    disabled={true/*this.props.attendee.orderPos === Object.keys(this.props.attendees.attendees).length-1*/}>
                     Shift Down
                 </button>
 
-                <button 
+                <button
                     onClick={this.switchPositionWithLowerIndex}
-                    disabled={this.props.attendee.orderPos === 0}>
+                    disabled={true/*this.props.attendee.orderPos === 0*/}>
                     Shift Up
                 </button>
 

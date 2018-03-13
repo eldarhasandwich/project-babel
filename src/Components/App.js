@@ -95,7 +95,7 @@ class App extends Component {
                 <Router>
                     <div>
                         <p>
-                            <Link to="/">Emcee View</Link>
+                            <Link to="emcee">Emcee View</Link>
                         </p>
                         <p>
                             <Link to="admin">Admin View</Link>
@@ -103,21 +103,20 @@ class App extends Component {
 
                         <Route
                             exact
-                            path="/"
+                            path={process.env.PUBLIC_URL +'/emcee'}
                             render={(props) => (
                             <EmceeView
                                 {...props}
                                 state={this.state}
                                 playSelectedAudio={this.playSelectedAudio}/>)}/>
                         <Route
-                            path="/admin"
+                            path={process.env.PUBLIC_URL +'/admin'}
                             render={(props) => (
                             <AdminView
                                 {...props}
                                 state={this.state}
                                 loadFromLocalStorage={this.loadFromLocalStorage}
                                 saveToLocalStorage={this.saveToLocalStorage}
-                                loadFromFireBase={this.loadFromFireBase}
                                 saveToFireBase={this.saveToFireBase}></AdminView>
                         )}/>
                     </div>
