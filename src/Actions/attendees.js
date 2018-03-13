@@ -40,12 +40,21 @@ export function swapAttendeeOrderPosition (attendeeA_ID, attendeeB_ID) {
     }
 }
 
+export function clearAttendeeList () {
+    return {
+        type: "CLEAR_ATTENDEE_LIST"
+    }
+}
+
 export function loadAttendees (listKey) {
     return (dispatch, getState) => {
         Fire.database().ref(listKey).once("value",function(snapshot) {
             if (!snapshot.val()) {
                 return;
             }
+
+            dispatch(clearAttendeeList())
+
             var objKeys = Object.keys(snapshot.val().audioClips)
             for (var i = 0; i < objKeys.length; i++) {
                 dispatch(addAttendee(

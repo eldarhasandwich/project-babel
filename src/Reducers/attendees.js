@@ -70,6 +70,13 @@ const attendees = (state = defaultState, action) => {
             }
         }
 
+        case 'CLEAR_ATTENDEE_LIST': {
+            return {
+                ...state,
+                attendees: {}
+            }
+        }
+
         default:
             {
                 return state

@@ -9,7 +9,7 @@ import Data from "../Classes/DataController"
 import AppHeader from "./AppHeader";
 import EmceeView from "./EmceeView";
 import AdminView from "./AdminView";
-import AttendeeView from "./AttendeeView";
+// import AttendeeView from "./AttendeeView";
 import * as AttendeeActions from '../Actions/attendees';
 import {actions as audioActions} from 'redux-audio-fixed'
 
