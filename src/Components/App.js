@@ -28,9 +28,9 @@ class App extends Component {
             .saveToFireBase
             .bind(this);
 
-        this.ThisSetState = this
-            .ThisSetState
-            .bind(this);
+        // this.ThisSetState = this
+        //     .ThisSetState
+        //     .bind(this);
 
         this.playSelectedAudio = this
             .playSelectedAudio
@@ -65,9 +65,9 @@ class App extends Component {
         alert("Data Saved To File!");
     }
 
-    ThisSetState(newState) {
-        this.setState(newState);
-    }
+    // ThisSetState(newState) {
+    //     this.setState(newState);
+    // }
 
     saveToFireBase() {
         Data.Write_To_FireBase(this.state)
