@@ -1,26 +1,26 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import Data from "../Classes/DataController";
+// import Data from "../../Classes/DataController";
 
-import * as AttendeeActions from '../Actions/attendees';
+import * as AttendeeActions from '../../Actions/attendees';
 
 class SaveLoadButtons extends Component {
 
     loadFromFireBase() {
-        this.props.loadAttendees(Data.databaseDir)
+        this.props.loadAttendees(this.props.state.fireBaseDataDirectory)
     }
 
     render () {
         return (
             <div>
                 <button 
-                    onClick={this.props.loadFromLocalStorage}
+                    // onClick={}
                     disabled>
                     Load From File
                 </button>
                 <button 
-                    onClick={this.props.saveToLocalStorage}
+                    // onClick={"}
                     disabled>
                     Save To File
                 </button>
@@ -29,7 +29,7 @@ class SaveLoadButtons extends Component {
                     Load From Firebase
                 </button>
                 <button 
-                    onClick={this.props.saveToFireBase}
+                    // onClick={}
                     disabled>
                     Save To Firebase
                 </button>

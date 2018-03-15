@@ -1,7 +1,7 @@
 const defaultState = {
     selectedClipIndex: 0,
     fireBaseDataDirectory: "testDir",
-    fireBaseStoreageDirectory: "testDir"
+    fireBaseStorageDirectory: "testAudio"
 }
 
 const state = (state = defaultState, action) => {
@@ -12,6 +12,20 @@ const state = (state = defaultState, action) => {
                 selectedClipIndex: action.newIndex
             }
         }
+
+        case 'SET_FIREBASE_DATA_DIR': {
+            return {
+                ...state,
+                fireBaseDataDirectory: action.newDir
+            }
+        }
+
+        // case 'SET_FIREBASE_STORE_DIR': {
+        //     return {
+        //         ...state,
+        //         fireBaseStorageDirectory: action.newDir
+        //     }
+        // }
 
         default:
             {

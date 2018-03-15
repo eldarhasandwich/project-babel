@@ -3,34 +3,19 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
 
-import './Styles/App.css';
-import Data from "../Classes/DataController"
+import './App.css';
+// import Data from "../../Classes/DataController"
 
 import AppHeader from "./AppHeader";
-import EmceeView from "./EmceeView";
-import AdminView from "./AdminView";
-// import AttendeeView from "./AttendeeView";
-import * as AttendeeActions from '../Actions/attendees';
+import EmceeView from "../EmceeView/EmceeView";
+import AdminView from "../AdminView/AdminView";
+import * as AttendeeActions from '../../Actions/attendees';
 import {actions as audioActions} from 'redux-audio-fixed'
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-
-        this.saveToLocalStorage = this
-            .saveToLocalStorage
-            .bind(this);
-        this.loadFromLocalStorage = this
-            .loadFromLocalStorage
-            .bind(this);
-        this.saveToFireBase = this
-            .saveToFireBase
-            .bind(this);
-
-        // this.ThisSetState = this
-        //     .ThisSetState
-        //     .bind(this);
 
         this.playSelectedAudio = this
             .playSelectedAudio
@@ -52,26 +37,6 @@ class App extends Component {
                     uniqueId={`audio-${attendeeID}`}
                     onLoadedData={() => this.props.loadedAudio(attendeeID)}/>
             })
-    }
-
-    loadFromLocalStorage() {
-        var newState = Data.Read_From_Store();
-        this.setState(newState);
-        alert("Data Loaded From File!");
-    }
-
-    saveToLocalStorage() {
-        Data.Write_To_Store(this.state);
-        alert("Data Saved To File!");
-    }
-
-    // ThisSetState(newState) {
-    //     this.setState(newState);
-    // }
-
-    saveToFireBase() {
-        Data.Write_To_FireBase(this.state)
-        //alert("Data Saved To Server!");
     }
 
     playSelectedAudio() {
@@ -114,10 +79,7 @@ class App extends Component {
                             render={(props) => (
                             <AdminView
                                 {...props}
-                                state={this.state}
-                                loadFromLocalStorage={this.loadFromLocalStorage}
-                                saveToLocalStorage={this.saveToLocalStorage}
-                                saveToFireBase={this.saveToFireBase}></AdminView>
+                                state={this.state}></AdminView>
                         )}/>
                     </div>
                 </Router>

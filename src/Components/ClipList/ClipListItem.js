@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import './Styles/ClipListItem.css';
+import './ClipListItem.css';
 
-import * as stateActions from "../Actions/state"
-import * as attendeeActions from "../Actions/attendees"
-//import ClipList from './ClipList';
+import * as stateActions from "../../Actions/state"
+import * as attendeeActions from "../../Actions/attendees"
 
 class ClipListItem extends Component {
 

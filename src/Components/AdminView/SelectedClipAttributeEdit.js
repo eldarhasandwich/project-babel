@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import './Styles/SelectedClipAttributeEdit.css';
+import './SelectedClipAttributeEdit.css';
 
-import * as attendeeActions from '../Actions/attendees'
+import * as attendeeActions from '../../Actions/attendees'
 
 class SelectedClipAttributeEdit extends Component {
 

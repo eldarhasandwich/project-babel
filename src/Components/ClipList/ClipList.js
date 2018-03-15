@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Styles/ClipList.css';
+import './ClipList.css';
 import {connect} from 'react-redux'
 import ClipListItem from "./ClipListItem";
 

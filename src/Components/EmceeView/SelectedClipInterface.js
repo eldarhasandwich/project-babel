@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import './Styles/SelectedClipInterface.css';
+import './SelectedClipInterface.css';
 
 class SelectedClipInterface extends Component {
 

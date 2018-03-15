@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import './Styles/EmceeView.css';
+import './EmceeView.css';
 
-import ClipList from "./ClipList";
+import ClipList from "../ClipList/ClipList";
 import SelectedClipInterface from "./SelectedClipInterface";
 
-import * as stateActions from "../Actions/state"
+import * as stateActions from "../../Actions/state"
 
 class EmceeView extends Component {
 

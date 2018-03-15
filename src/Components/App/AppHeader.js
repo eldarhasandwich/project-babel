@@ -1,11 +1,13 @@
 import React from 'react';
 //import logo from '../Resources/Images/logo.svg';
-import './Styles/AppHeader.css';
+import './AppHeader.css';
+
+var pjson = require('../../../package.json');
 
 const AppHeader = props => (
     <div>
         <header className="App-header">
-            <h1 className="App-title">Project Babel v0.2.0</h1>
+            <h1 className="App-title">Project Babel {pjson.version}</h1>
             <h3 className="App-subtitle">Testing Build</h3>
         </header>
     </div>

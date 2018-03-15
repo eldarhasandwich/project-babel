@@ -5,12 +5,26 @@ export function setSelectedClipIndex (newIndex) {
     }
 }
 
+export function setFirebaseDataDirectory (newDir) {
+    return {
+        type: "SET_FIREBASE_DATA_DIR",
+        newDir
+    }
+}
+
+// export function setFirebaseStorageDirectory (newDir) {
+//     return {
+//         type: "SET_FIREBASE_STORE_DIR",
+//         newDir
+//     }
+// }
+
 export function incrementIndex () {
     return (dispatch, getState) => {
         let state = getState()
         if (state.state.selectedClipIndex 
             > Object.keys(state.attendees.attendees).length) {
-                return null
+                return;
         }
         return dispatch({type: "INCREMENT_INDEX"})
     }
@@ -20,7 +34,7 @@ export function decrementIndex () {
     return (dispatch, getState) => {
         let state = getState()
         if (state.state.selectedClipIndex < 1){
-            return null
+            return;
         }
         return dispatch({type: "DECREMENT_INDEX"})
     }
