@@ -62,6 +62,9 @@ export function clearAttendeeList () {
 
 export function loadAttendees (listKey) {
     return (dispatch, getState) => {
+        if (listKey === "") {
+            return;
+        }
         Fire.database().ref(listKey).once("value",function(snapshot) {
             if (!snapshot.val()) {
                 alert("No list with this ID!")

@@ -26,12 +26,12 @@ class SaveLoadButtons extends Component {
                 </button>
                 <button 
                     onClick={this.loadFromFireBase.bind(this)}>
-                    Load From Firebase
+                    Load From Server
                 </button>
                 <button 
                     // onClick={}
                     disabled>
-                    Save To Firebase
+                    Save To Server
                 </button>
             </div>
         );

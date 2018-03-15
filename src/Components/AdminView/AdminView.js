@@ -22,6 +22,7 @@ class AdminView extends Component {
                 <p>List Key:</p>
                 <input
                     id="admin-view-list-key"
+                    value={this.props.state.fireBaseDataDirectory}
                     onChange={this.setThisFirebaseDataDirectory.bind(this)}
                 />
 

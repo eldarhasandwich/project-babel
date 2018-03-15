@@ -7,8 +7,10 @@ import './App.css';
 // import Data from "../../Classes/DataController"
 
 import AppHeader from "./AppHeader";
+import HomePage from "../HomePage/HomePage"
 import EmceeView from "../EmceeView/EmceeView";
 import AdminView from "../AdminView/AdminView";
+import AttendeeView from '../AttendeeView/AttendeeView';
 import * as AttendeeActions from '../../Actions/attendees';
 import {actions as audioActions} from 'redux-audio-fixed'
 
@@ -51,6 +53,13 @@ class App extends Component {
             .playAudio(`audio-${selectedAttendee.id}`)
     }
 
+    linkStyle = {
+        textDecoration: 'none',
+        color: 'white',
+        padding: '8px 15px'
+        
+    }
+
     render() {
         return (
             <div className="App">
@@ -59,13 +68,36 @@ class App extends Component {
 
                 <Router>
                     <div>
-                        <p>
-                            <Link to="emcee">Emcee View</Link>
-                        </p>
-                        <p>
-                            <Link to="admin">Admin View</Link>
-                        </p>
+                        <div className="Route-buttons">
+                            <p>
+                                <Link
+                                    style={this.linkStyle}
+                                    to="/">Home Page</Link>
+                            </p>
+                            <p>
+                                <Link
+                                    style={this.linkStyle}
+                                    to="emcee">Emcee View</Link>
+                            </p>
+                            <p>
+                                <Link
+                                    style={this.linkStyle}
+                                    to="admin">Admin View</Link>
+                            </p>
+                            <p>
+                                <Link
+                                    style={this.linkStyle}
+                                    to="attendee">Attendee View</Link>
+                            </p>
+                        </div>
 
+                        <Route
+                            exact path={process.env.PUBLIC_URL +'/'}
+                            render={(props) => (
+                            <HomePage
+                                {...props}
+                                state={this.state}></HomePage>
+                        )}/>
                         <Route
                             exact
                             path={process.env.PUBLIC_URL +'/emcee'}
@@ -80,6 +112,13 @@ class App extends Component {
                             <AdminView
                                 {...props}
                                 state={this.state}></AdminView>
+                        )}/>
+                        <Route
+                            path={process.env.PUBLIC_URL +'/attendee'}
+                            render={(props) => (
+                            <AttendeeView
+                                {...props}
+                                state={this.state}></AttendeeView>
                         )}/>
                     </div>
                 </Router>

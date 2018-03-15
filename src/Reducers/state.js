@@ -1,6 +1,6 @@
 const defaultState = {
     selectedClipIndex: 0,
-    fireBaseDataDirectory: "testDir",
+    fireBaseDataDirectory: "",
     fireBaseStorageDirectory: "testAudio"
 }
 
