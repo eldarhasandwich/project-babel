@@ -77,7 +77,7 @@ class App extends Component {
                             <p>
                                 <Link
                                     style={this.linkStyle}
-                                    to="emcee">Emcee View</Link>
+                                    to="list">List View</Link>
                             </p>
                             <p>
                                 <Link
@@ -100,7 +100,7 @@ class App extends Component {
                         )}/>
                         <Route
                             exact
-                            path={process.env.PUBLIC_URL +'/emcee'}
+                            path={process.env.PUBLIC_URL +'/list'}
                             render={(props) => (
                             <EmceeView
                                 {...props}

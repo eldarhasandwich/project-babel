@@ -1,7 +1,7 @@
 {
   "homepage": "http://eldarhasandwich.github.io/project-babel",
   "name": "project-babel",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": true,
   "dependencies": {
     "firebase": "^4.10.1",

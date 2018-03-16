@@ -68,7 +68,7 @@ class ClipListItem extends Component {
                             ? "Loaded"
                             : "Downloading"}</p>
                     <p id="item-name">{this.props.attendee.name}</p>
-                    <p id="item-id">{this.props.attendee.id}</p>
+                    <p id="item-id">{this.props.attendee.textA}</p>
 
                 </div>
             )

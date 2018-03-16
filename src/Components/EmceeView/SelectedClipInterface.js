@@ -50,9 +50,9 @@ class SelectedClipInterface extends Component {
                     className="Selected-clip-view-col"
                     id="col-A">
                     
-                    <p id="person-id">
+                    {/* <p id="person-id">
                         { this.getSelectedAttendeeId.call(this) }
-                    </p>
+                    </p> */}
                     <p id="custom-text-A">
                         { this.getSelectedAttendeeTextA.call(this) }
                     </p>
@@ -63,9 +63,9 @@ class SelectedClipInterface extends Component {
                     className="Selected-clip-view-col"
                     id="col-B">
 
-                    <p id="custom-text-B">
+                    {/* <p id="custom-text-B">
                         { this.getSelectedAttendeeTextB.call(this) }
-                    </p>
+                    </p> */}
 
                 </div>
             </div>

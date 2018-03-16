@@ -14,11 +14,14 @@ class AttendeeView extends Component {
         }
     }
 
+    styles = {
+        validInput: {color: "green"},
+        invalidInput: {color: "red"}
+    }
+
     updateAttendeeKey (value) {
         this.setState({attendeeKey: value.target.value})
     }
-
-    
 
     submitAttendeeKey () {
         let key = this.state.attendeeKey.split("#")
