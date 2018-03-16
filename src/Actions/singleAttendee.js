@@ -21,6 +21,11 @@ export function pullAttendee (listID, attendeeID) {
                 snapshot.val().textB,
             ))
 
+            dispatch({
+                type: "SET_ATTENDEE_LOADED_STATUS",
+                bool: true
+            })
+
         })
     }
 }

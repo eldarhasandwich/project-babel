@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-// import Data from "../../Classes/DataController";
+import './SaveLoadButtons.css'
 
 import * as AttendeeActions from '../../Actions/attendees';
 
@@ -13,7 +13,7 @@ class SaveLoadButtons extends Component {
 
     render () {
         return (
-            <div>
+            <div className="Save-load-buttons">
                 <button 
                     // onClick={}
                     disabled>

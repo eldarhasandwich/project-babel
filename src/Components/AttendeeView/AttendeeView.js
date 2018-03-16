@@ -19,18 +19,43 @@ class AttendeeView extends Component {
     }
 
     submitAttendeeKey () {
-        let key = this.state.attendeeKey
-        let listID = "testDir"
-        let attendeeID = "N01"
-        this.props.pullAttendee(listID, attendeeID)
+        let key = this.state.attendeeKey.split("#")
+        if (key.length < 2) {
+            return;
+        }
+        this.props.pullAttendee(key[0], key[1])
+    }
+
+    unloadAttendee () {
+        this.props.setLoadedStatus(false)
+    }
+
+    giveOrderPosString () {
+        let orderInt = this.props.singleAttendee.singleAttendee.orderPos + 1
+        let ordinalInidcator = 'th'
+        switch(String(orderInt).slice(-1)[0]) {
+            case '1': {
+                ordinalInidcator = 'st'
+                break
+            }
+            case '2': {
+                ordinalInidcator = 'nd'
+                break
+            }
+            case '3': {
+                ordinalInidcator = 'rd'
+                break
+            }
+        }
+        return "Ceremony Order Position: " + orderInt + ordinalInidcator
     }
 
     render () {
 
         if (!this.props.singleAttendee.attendeeLoaded) {
             return (
-                <div id="attendee-key-form">
-                    <p>Provide your Unique Attendee-Key</p>
+                <div className="Attendee-key-form">
+                    <p>Provide your Unique Attendee-Key...</p>
                     <input
                         onChange={this.updateAttendeeKey.bind(this)}/>
                     <button
@@ -43,18 +68,21 @@ class AttendeeView extends Component {
         return (
             <div className="Attendee-view">
 
-                <button>Back</button>
+                <button
+                    onClick={this.unloadAttendee.bind(this)}>Back</button>
+                <div id="Attendee-view-body">
+                    <div id="attendee-information">
+                        <p id="attendee-name">{this.props.singleAttendee.singleAttendee.name}</p>
+                        <p id="attendee-textA">{this.props.singleAttendee.singleAttendee.textA}</p>
+                        <p id="attendee-textB">{this.props.singleAttendee.singleAttendee.textA}</p>
+                        <p id="attendee-orderPos">{this.giveOrderPosString.call(this)}</p>
+                    </div>                
 
-                <div id="attendee-information">
-                    <p id="attendee-name"></p>
-                    <p id="attendee-textA"></p>
-                    <p id="attendee-textB"></p>
-                </div>                
-
-                <div id="attendee-buttons">
-                    <button id="Review-audio-btn">Review Audio</button>
-                    <button id="Upload-audio-btn">Upload Audio</button>
-                </div> 
+                    <div id="attendee-buttons">
+                        <button id="Review-audio-btn">Review Audio</button>
+                        <button id="Upload-audio-btn">Upload Audio</button>
+                    </div> 
+                </div>
  
             </div>
         );
@@ -67,7 +95,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        pullAttendee: (listID, attendeeID) => dispatch(SingleAttendeeActions.pullAttendee(listID, attendeeID))
+        pullAttendee: (listID, attendeeID) => dispatch(SingleAttendeeActions.pullAttendee(listID, attendeeID)),
+        setLoadedStatus: bool => dispatch(SingleAttendeeActions.setAttendeeLoadedStatus(bool))
     }
 }
 

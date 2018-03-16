@@ -35,6 +35,8 @@
 
 .List-item-small button {
     float: right;
+    border: none;
+    height: 30px;
 }
 
 

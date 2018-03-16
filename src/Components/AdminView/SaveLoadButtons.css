@@ -1,0 +1,17 @@
+.Save-load-buttons button {
+    border: none;
+    padding: 5px 10px;
+    background-color: #BBB;
+}
+
+.Save-load-buttons button:hover {
+    background-color: #DDD;
+}
+
+.Save-load-buttons button:active {
+    background-color: #999;
+}
+
+.Save-load-buttons button:disabled {
+    background-color: #555;
+}
