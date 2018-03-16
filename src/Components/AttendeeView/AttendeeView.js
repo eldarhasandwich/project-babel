@@ -18,9 +18,11 @@ class AttendeeView extends Component {
         this.setState({attendeeKey: value.target.value})
     }
 
+    
+
     submitAttendeeKey () {
         let key = this.state.attendeeKey.split("#")
-        if (key.length < 2) {
+        if (key.length !== 2) {
             return;
         }
         this.props.pullAttendee(key[0], key[1])
@@ -57,6 +59,9 @@ class AttendeeView extends Component {
                 <div className="Attendee-key-form">
                     <p>Provide your Unique Attendee-Key...</p>
                     <input
+                        style={(this.state.attendeeKey.split("#").length === 2)
+                                ? this.styles.validInput
+                                : this.styles.invalidInput}
                         onChange={this.updateAttendeeKey.bind(this)}/>
                     <button
                         onClick={this.submitAttendeeKey.bind(this)}>
