@@ -59,9 +59,6 @@ class AttendeeView extends Component {
                 <div className="Attendee-key-form">
                     <p>Provide your Unique Attendee-Key...</p>
                     <input
-                        style={(this.state.attendeeKey.split("#").length === 2)
-                                ? this.styles.validInput
-                                : this.styles.invalidInput}
                         onChange={this.updateAttendeeKey.bind(this)}/>
                     <button
                         onClick={this.submitAttendeeKey.bind(this)}>
