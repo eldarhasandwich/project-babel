@@ -24,6 +24,10 @@
     text-align: right;
 }
 
+#person-orderPos {
+    text-align: left;
+}
+
 #custom-text-A {
     color: green;
     text-align: right;

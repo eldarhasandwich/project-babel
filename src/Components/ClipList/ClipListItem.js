@@ -86,13 +86,13 @@ class ClipListItem extends Component {
 
                 <button
                     onClick={this.switchPositionWithHigherIndex}
-                    disabled={true/*this.props.attendee.orderPos === Object.keys(this.props.attendees.attendees).length-1*/}>
+                    disabled={this.props.attendee.orderPos === Object.keys(this.props.attendees.attendees).length-1}>
                     Shift Down
                 </button>
 
                 <button
                     onClick={this.switchPositionWithLowerIndex}
-                    disabled={true/*this.props.attendee.orderPos === 0*/}>
+                    disabled={this.props.attendee.orderPos === 0}>
                     Shift Up
                 </button>
 

@@ -72,7 +72,7 @@ class App extends Component {
                             <p>
                                 <Link
                                     style={this.linkStyle}
-                                    to="/">Home Page</Link>
+                                    to="home">Home Page</Link>
                             </p>
                             <p>
                                 <Link
@@ -92,7 +92,7 @@ class App extends Component {
                         </div>
 
                         <Route
-                            exact path={process.env.PUBLIC_URL +'/'}
+                            exact path={process.env.PUBLIC_URL +'/home'}
                             render={(props) => (
                             <HomePage
                                 {...props}

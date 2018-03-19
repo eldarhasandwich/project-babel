@@ -23,6 +23,13 @@ class SelectedClipInterface extends Component {
             return ""
         } return attendee.id
     }
+
+    getSelectedAttendeeOrderPos () {
+        let attendee = this.getSelectedAttendee()
+        if (!attendee) {
+            return ""
+        } return "#" + (attendee.orderPos+1) + " in Order" 
+    }
  
     getSelectedAttendeeTextA () {
         let attendee = this.getSelectedAttendee()
@@ -63,6 +70,9 @@ class SelectedClipInterface extends Component {
                     className="Selected-clip-view-col"
                     id="col-B">
 
+                    <p id="person-orderPos">
+                        { this.getSelectedAttendeeOrderPos.call(this) }
+                    </p>
                     <p id="custom-text-B">
                         { this.getSelectedAttendeeTextB.call(this) }
                     </p>
