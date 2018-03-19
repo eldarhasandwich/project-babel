@@ -18,13 +18,41 @@ class ClipListItem extends Component {
         this.switchPositionWithHigherIndex = this
             .switchPositionWithHigherIndex
             .bind(this)
+        this.getThisItemStyle = this.getThisItemStyle.bind(this)
     }
 
     styles = {
         selected: {
-            backgroundColor: "lightblue"
+            backgroundColor: "lightblue",
+            transition: "background-color 0.18s"
         },
-        notSelected: {}
+        notSelected: {
+            backgroundColor: "white",
+            transition: "background-color 0.18s"
+        },
+        selectedNoAudio: {
+            backgroundColor: "lightcoral",
+            transition: "background-color 0.18s"
+        },
+        notSelectedNoAudio: {
+            backgroundColor: "#EEE",
+            transition: "background-color 0.18s"
+        }
+    }
+
+    getThisItemStyle() {
+        let selected = (this.props.attendee.orderPos === this.props.state.selectedClipIndex)
+        let audio = (this.props.attendee.audioSrc !== null)
+        if (selected) {
+            if (audio) {
+                return this.styles.selected
+            }
+            return this.styles.selectedNoAudio
+        }
+        if (audio) {
+            return this.styles.notSelected
+        }
+        return this.styles.notSelectedNoAudio
     }
 
     setSelectedIndexAsSelf() {
@@ -60,13 +88,13 @@ class ClipListItem extends Component {
             return (
                 <div
                     className="List-item"
-                    style={(this.props.attendee.orderPos === this.props.state.selectedClipIndex)
-                    ? this.styles.selected
-                    : this.styles.notSelected}>
+                    style={this.getThisItemStyle()}>
 
                     <p>{(this.props.attendee.audioLoaded)
                             ? "Loaded"
-                            : "Downloading"}</p>
+                            : (this.props.attendee.audioSrc !== null)
+                                ? "Downloading"
+                                : "No Audio"}</p>
                     <p id="item-name">{this.props.attendee.name}</p>
                     <p id="item-id">{this.props.attendee.id}</p>
 
@@ -77,16 +105,16 @@ class ClipListItem extends Component {
         return (
             <div
                 className="List-item-small"
-                style={(this.props.attendee.orderPos === this.props.state.selectedClipIndex)
-                ? this.styles.selected
-                : this.styles.notSelected}>
+                style={this.getThisItemStyle()}>
 
                 <p>{this.props.attendee.orderPos + 1 + ". " + this.props.attendee.name + " (" + this.props.attendee.id + ")"
 }</p>
 
                 <button
                     onClick={this.switchPositionWithHigherIndex}
-                    disabled={this.props.attendee.orderPos === Object.keys(this.props.attendees.attendees).length-1}>
+                    disabled={this.props.attendee.orderPos === Object
+                    .keys(this.props.attendees.attendees)
+                    .length - 1}>
                     Shift Down
                 </button>
 

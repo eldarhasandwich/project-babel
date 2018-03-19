@@ -39,3 +39,10 @@ export function decrementIndex () {
         return dispatch({type: "DECREMENT_INDEX"})
     }
 }
+
+export function setAttendeesWithNoAudioVisible (boolean) {
+    return {
+        type: "SET_NO_AUDIO_ATTENDEE_VISIBILITY",
+        boolean
+    }
+}

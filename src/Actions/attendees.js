@@ -21,6 +21,16 @@ export function addAttendee (id, name, audioSrc, orderPos, textA, textB, listKey
                     textB
                 })
                 dispatch(audioActions.audioSrc(`audio-${id}`, url))
+            }).catch(function(error) {
+                dispatch( {
+                    type: "ADD_ATTENDEE",
+                    audioSrc: null,
+                    orderPos,
+                    id,
+                    name,
+                    textA,
+                    textB
+                })
             })
     }
 }

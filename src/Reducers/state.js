@@ -1,7 +1,9 @@
 const defaultState = {
     selectedClipIndex: 0,
+    attendeesWithNoAudioVisible: true,
     fireBaseDataDirectory: "",
     fireBaseStorageDirectory: "testAudio"
+
 }
 
 const state = (state = defaultState, action) => {
@@ -17,6 +19,13 @@ const state = (state = defaultState, action) => {
             return {
                 ...state,
                 fireBaseDataDirectory: action.newDir
+            }
+        }
+
+        case 'SET_NO_AUDIO_ATTENDEE_VISIBILITY': {
+            return {
+                ...state,
+                attendeesWithNoAudioVisible: action.boolean
             }
         }
 

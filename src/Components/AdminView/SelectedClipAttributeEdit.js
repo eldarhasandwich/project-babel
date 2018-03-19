@@ -6,9 +6,9 @@ import * as attendeeActions from '../../Actions/attendees'
 
 class SelectedClipAttributeEdit extends Component {
 
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
 
     getSelectedAttendee () {
         let attendees = this.props.attendees.attendees;
@@ -19,28 +19,28 @@ class SelectedClipAttributeEdit extends Component {
     getSelectedAttendeeName () {
         let attendee = this.getSelectedAttendee()
         if (!attendee) {
-            return null
+            return ""
         } return attendee.name
     }
 
     getSelectedAttendeeId () {
         let attendee = this.getSelectedAttendee()
         if (!attendee) {
-            return null
+            return ""
         } return attendee.id
     }
  
     getSelectedAttendeeTextA () {
         let attendee = this.getSelectedAttendee()
         if (!attendee) {
-            return null
+            return ""
         } return attendee.textA
     }
 
     getSelectedAttendeeTextB () {
         let attendee = this.getSelectedAttendee()
         if (!attendee) {
-            return null
+            return ""
         } return attendee.textB
     }
 

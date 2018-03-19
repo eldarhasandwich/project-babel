@@ -48,6 +48,7 @@ class AttendeeView extends Component {
                 ordinalInidcator = 'rd'
                 break
             }
+            default : {}
         }
         return "Ceremony Order Position: " + orderInt + ordinalInidcator
     }
@@ -76,7 +77,7 @@ class AttendeeView extends Component {
                     <div id="attendee-information">
                         <p id="attendee-name">{this.props.singleAttendee.singleAttendee.name}</p>
                         <p id="attendee-textA">{this.props.singleAttendee.singleAttendee.textA}</p>
-                        <p id="attendee-textB">{this.props.singleAttendee.singleAttendee.textA}</p>
+                        <p id="attendee-textB">{this.props.singleAttendee.singleAttendee.textB}</p>
                         <p id="attendee-orderPos">{this.giveOrderPosString.call(this)}</p>
                     </div>                
 

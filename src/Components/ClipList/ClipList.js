@@ -10,8 +10,6 @@ class ClipList extends Component {
         let attendeeKeys = Object.keys(attendees)
         
         attendeeKeys.sort((a, b) => {return attendees[a].orderPos - attendees[b].orderPos})
-
-
         return attendeeKeys;
     }
 
