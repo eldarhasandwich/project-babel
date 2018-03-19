@@ -86,6 +86,7 @@ class EmceeView extends Component {
                 <div className="toggle-w-text">
                     <Toggle
                         id="show-Attendee-Toggle"
+                        checked={this.props.state.attendeesWithNoAudioVisible}
                         onChange={this.props.setAttendeesWithNoAudioVisible}
                         />
                     <p>Show Attendees with no Voice Clips</p>

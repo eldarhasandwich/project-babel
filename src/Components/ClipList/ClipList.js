@@ -10,6 +10,11 @@ class ClipList extends Component {
         let attendeeKeys = Object.keys(attendees)
         
         attendeeKeys.sort((a, b) => {return attendees[a].orderPos - attendees[b].orderPos})
+
+        if (!this.props.state.attendeesWithNoAudioVisible) {
+            attendeeKeys = attendeeKeys.filter(x => attendees[x].audioSrc !== null)
+        }
+
         return attendeeKeys;
     }
 
@@ -30,7 +35,7 @@ class ClipList extends Component {
 }
 
 const mapStateToProps = state => {
-    return {attendees: state.attendees}
+    return {attendees: state.attendees, state: state.state}
 }
 
 const mapDispatchToProps = dispatch => {
