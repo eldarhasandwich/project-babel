@@ -13,6 +13,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "react-toggle": "^4.0.2",
     "redux": "^3.7.2",
     "redux-audio": "^1.0.0",
     "redux-audio-fixed": "^1.1.0",

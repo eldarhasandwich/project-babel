@@ -10,12 +10,21 @@
     margin: 4px 2px;
     width: 30%;
     max-width: 200px;
-  
+
     border-radius: 4px;
-  }
-  
-  .Interface-buttons button:disabled {
+}
+
+.Interface-buttons button:disabled {
     background-color: lightcoral;
     cursor: default;
     color: #555;
-  }
+}
+
+.toggle-w-text {
+    margin-top: 15px;
+}
+
+.toggle-w-text p {
+    display: inline-block;
+    margin-left: 10px;
+}

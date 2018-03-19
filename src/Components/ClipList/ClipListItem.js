@@ -35,21 +35,21 @@ class ClipListItem extends Component {
             transition: "background-color 0.18s"
         },
         notSelectedNoAudio: {
-            backgroundColor: "#EEE",
+            backgroundColor: "#F9CCCC",
             transition: "background-color 0.18s"
         }
     }
 
     getThisItemStyle() {
-        let selected = (this.props.attendee.orderPos === this.props.state.selectedClipIndex)
-        let audio = (this.props.attendee.audioSrc !== null)
-        if (selected) {
-            if (audio) {
+        let isSelected = (this.props.attendee.orderPos === this.props.state.selectedClipIndex)
+        let hasAudio = (this.props.attendee.audioSrc !== null)
+        if (isSelected) {
+            if (hasAudio) {
                 return this.styles.selected
             }
             return this.styles.selectedNoAudio
         }
-        if (audio) {
+        if (hasAudio) {
             return this.styles.notSelected
         }
         return this.styles.notSelectedNoAudio

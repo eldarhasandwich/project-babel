@@ -5,6 +5,9 @@ import './EmceeView.css';
 import ClipList from "../ClipList/ClipList";
 import SelectedClipInterface from "./SelectedClipInterface";
 
+import Toggle from 'react-toggle'
+import './react-toggle.css'
+
 import * as stateActions from "../../Actions/state"
 
 class EmceeView extends Component {
@@ -79,6 +82,15 @@ class EmceeView extends Component {
                     </button>
 
                 </div>
+
+                <div className="toggle-w-text">
+                    <Toggle
+                        id="show-Attendee-Toggle"
+                        onChange={this.props.setAttendeesWithNoAudioVisible}
+                        />
+                    <p>Show Attendees with no Voice Clips</p>
+                </div>
+
             </div>
         );
     }
@@ -90,7 +102,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setSelectedClipIndex: newIndex => dispatch(stateActions.setSelectedClipIndex(newIndex))
+        setSelectedClipIndex: newIndex => dispatch(stateActions.setSelectedClipIndex(newIndex)),
+        setAttendeesWithNoAudioVisible: boolean => dispatch(stateActions.setAttendeesWithNoAudioVisible(boolean.target.checked))
     }
 }
 
