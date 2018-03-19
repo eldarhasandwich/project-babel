@@ -11,7 +11,7 @@ class ClipList extends Component {
         
         attendeeKeys.sort((a, b) => {return attendees[a].orderPos - attendees[b].orderPos})
 
-        if (!this.props.state.attendeesWithNoAudioVisible) {
+        if (!this.props.state.attendeesWithNoAudioVisible && this.props.size === "small") {
             attendeeKeys = attendeeKeys.filter(x => attendees[x].audioSrc !== null)
         }
 
@@ -25,6 +25,7 @@ class ClipList extends Component {
                 {this.getSortedAttendees.call(this)
                     .map((item, index) => <ClipListItem
                         key={index}
+                        thisItemIndex={index}
                         attendee={this.props.attendees.attendees[item]}
                         itemDisplaySize={this.props.size}/>)
 }
