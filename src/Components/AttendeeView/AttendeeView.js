@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import './AttendeeView.css';
 import {Audio} from 'redux-audio-fixed'
+import AudioRecordingModal from './AudioRecordingModal'
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 import {actions as audioActions} from 'redux-audio-fixed'
@@ -13,10 +14,13 @@ class AttendeeView extends Component {
         super(props)
 
         this.state = {
-            attendeeKey: ""
+            attendeeKey: "",
+            modalIsOpen: false
         }
 
         this.playAttendeeAudio = this.playAttendeeAudio.bind(this)
+        this.openModal = this.openModal.bind(this)
+        this.closeModal = this.closeModal.bind(this)
     }
 
     updateAttendeeKey (value) {
@@ -74,6 +78,14 @@ class AttendeeView extends Component {
         this.props.playAudio('attendeeView-Audio')
     }
 
+    openModal() {
+        this.setState({modalIsOpen: true})
+    }
+
+    closeModal() {
+        this.setState({modalIsOpen: false})
+    }
+
     render () {
 
         if (!this.props.singleAttendee.attendeeLoaded) {
@@ -109,8 +121,15 @@ class AttendeeView extends Component {
                             disabled={this.props.singleAttendee.singleAttendee.audioSrc === null}
                             id="Review-audio-btn">
                                 Review Audio</button>
-                        <button id="Upload-audio-btn">Upload Audio</button>
-                    </div> 
+                        <button
+                            onClick={this.openModal} 
+                            id="Upload-audio-btn">Upload Audio</button>
+                    </div>
+
+                <AudioRecordingModal
+                    modalIsOpen={this.state.modalIsOpen}
+                    closeModal={this.closeModal}/>
+
                 </div>
  
             </div>
