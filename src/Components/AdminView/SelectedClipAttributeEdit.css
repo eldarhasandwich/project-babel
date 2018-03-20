@@ -35,8 +35,12 @@
 
 .Toggle-w-text {
     float: left;
+    
 }
 
 .Toggle-w-text p {
     margin-left: 10px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-40%);
 }

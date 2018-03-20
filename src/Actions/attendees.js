@@ -1,6 +1,4 @@
-//import Data from '../Classes/DataController'
 import Fire from '../Classes/Fire'
-
 import { actions as audioActions } from 'redux-audio-fixed'
 
 export function addAttendee (id, name, audioSrc, orderPos, textA, textB, listKey) {
