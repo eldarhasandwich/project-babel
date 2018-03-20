@@ -1,5 +1,7 @@
 const defaultState = {
     selectedClipIndex: 0,
+    verifiedAttendeesVisible: true,
+    unverifiedAttendeesVisible: true,
     attendeesWithNoAudioVisible: true,
     fireBaseDataDirectory: "",
     fireBaseStorageDirectory: "testAudio"
@@ -19,6 +21,20 @@ const state = (state = defaultState, action) => {
             return {
                 ...state,
                 fireBaseDataDirectory: action.newDir
+            }
+        }
+
+        case 'SET_VERIFIED_ATTENDEE_VISIBILITY': {
+            return {
+                ...state,
+                verifiedAttendeesVisible: action.boolean
+            }
+        }
+
+        case 'SET_UNVERIFIED_ATTENDEE_VISIBILITY': {
+            return {
+                ...state,
+                unverifiedAttendeesVisible: action.boolean
             }
         }
 

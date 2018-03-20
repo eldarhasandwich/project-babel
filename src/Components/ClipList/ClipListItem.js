@@ -84,7 +84,7 @@ class ClipListItem extends Component {
     }
 
     render() {
-        if (this.props.itemDisplaySize === "small") {
+        if (this.props.itemDisplaySize === "large") {
             return (
                 <div
                     className="List-item"

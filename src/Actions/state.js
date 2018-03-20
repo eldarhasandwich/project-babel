@@ -40,6 +40,20 @@ export function decrementIndex () {
     }
 }
 
+export function setVerifiedAttendeesVisible (boolean) {
+    return {
+        type: "SET_VERIFIED_ATTENDEE_VISIBILITY",
+        boolean
+    }
+}
+
+export function setUnverifiedAttendeesVisible (boolean) {
+    return {
+        type: "SET_UNVERIFIED_ATTENDEE_VISIBILITY",
+        boolean
+    }
+}
+
 export function setAttendeesWithNoAudioVisible (boolean) {
     return {
         type: "SET_NO_AUDIO_ATTENDEE_VISIBILITY",

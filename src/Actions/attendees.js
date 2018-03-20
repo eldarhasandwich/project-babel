@@ -73,6 +73,7 @@ export function clearAttendeeList () {
 export function loadAttendees (listKey) {
     return (dispatch, getState) => {
         if (listKey === "") {
+            alert("Please enter a list ID")
             return;
         }
         Fire.database().ref(listKey).once("value",function(snapshot) {

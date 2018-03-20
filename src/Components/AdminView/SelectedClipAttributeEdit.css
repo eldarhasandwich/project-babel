@@ -1,4 +1,14 @@
 
+.Selected-clip-attribute-edit {
+    width: 450px;
+    display: inline-block;
+}
+
+.List-visibility-checkboxes {
+    width: 450px;
+    display: inline-block;
+}
+
 .Attribute-edit-col-left {
     width: 30%;
     display: inline-block;
@@ -21,4 +31,12 @@
 .Attribute-edit-col-right input {
     float: left;
     margin-bottom: 16px;
+}
+
+.Toggle-w-text {
+    float: left;
+}
+
+.Toggle-w-text p {
+    margin-left: 10px;
 }

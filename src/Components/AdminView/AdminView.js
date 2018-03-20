@@ -29,7 +29,7 @@ class AdminView extends Component {
                 <SaveLoadButtons/>
 
                 <ClipList
-                    itemDisplaySize={"large"}
+                    itemDisplaySize={"small"}
                 />
 
                 <SelectedClipAttributeEdit/>

@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import './SelectedClipAttributeEdit.css';
+import Toggle from 'react-toggle'
+import './react-toggle.css'
+
 
 import * as attendeeActions from '../../Actions/attendees'
+import * as stateActions from '../../Actions/state'
 
 class SelectedClipAttributeEdit extends Component {
 
@@ -58,55 +62,77 @@ class SelectedClipAttributeEdit extends Component {
 
     render() {
         return (
-            <div className="Selected-clip-attribute-edit">
+            <div>
+                <div className="Selected-clip-attribute-edit">
 
-                <div className="Attribute-edit-row">
-                    <div className="Attribute-edit-col-left">
-                        <p>Attendee ID:</p>
+                    <div className="Attribute-edit-row">
+                        <div className="Attribute-edit-col-left">
+                            <p>Attendee ID:</p>
+                        </div>
+                        <div className="Attribute-edit-col-right">
+                            <p>
+                                { this.getSelectedAttendeeId.call(this) }
+                            </p>
+                        </div>
                     </div>
-                    <div className="Attribute-edit-col-right">
-                        <p>
-                            { this.getSelectedAttendeeId.call(this) }
-                        </p>
+
+                    <div className="Attribute-edit-row">
+                        <div className="Attribute-edit-col-left">
+                            <p>Attendee Name:</p>
+                        </div>
+                        <div className="Attribute-edit-col-right">
+                            <input
+                                disabled
+                                value = {this.getSelectedAttendeeName.call(this)}
+                                onChange = {this.updateName.bind(this)}/>
+                        </div>
+                    </div>
+
+                    <div className="Attribute-edit-row">
+                        <div className="Attribute-edit-col-left">
+                            <p>Text Field A:</p>
+                        </div>
+                        <div className="Attribute-edit-col-right">
+                            <input
+                                disabled
+                                value = {this.getSelectedAttendeeTextA.call(this)}
+                                onChange = {this.updateTextA.bind(this)}/>
+                        </div>
+                    </div>
+
+                    <div className="Attribute-edit-row">
+                        <div className="Attribute-edit-col-left">
+                            <p>Text Field B:</p>
+                        </div>
+                        <div className="Attribute-edit-col-right">
+                            <input
+                                disabled
+                                value = {this.getSelectedAttendeeTextB.call(this)}
+                                onChange = {this.updateTextB.bind(this)}/>
+                        </div>
                     </div>
                 </div>
 
-                <div className="Attribute-edit-row">
-                    <div className="Attribute-edit-col-left">
-                        <p>Attendee Name:</p>
+                <div className="List-visibility-checkboxes">
+                    <div className="Toggle-w-text">
+                        <Toggle
+                            checked={this.props.state.verifiedAttendeesVisible}
+                            onChange={this.props.setVerifiedAttendeesVisible}/>
+                        <p>Show Verified Attendees</p>
                     </div>
-                    <div className="Attribute-edit-col-right">
-                        <input
-                            disabled
-                            value = {this.getSelectedAttendeeName.call(this)}
-                            onChange = {this.updateName.bind(this)}/>
+                    <div className="Toggle-w-text">
+                        <Toggle
+                            checked={this.props.state.unverifiedAttendeesVisible}
+                            onChange={this.props.setUnverifiedAttendeesVisible}/>
+                        <p>Show Unverified Attendees</p>
                     </div>
-                </div>
-
-                <div className="Attribute-edit-row">
-                    <div className="Attribute-edit-col-left">
-                        <p>Text Field A:</p>
-                    </div>
-                    <div className="Attribute-edit-col-right">
-                        <input
-                            disabled
-                            value = {this.getSelectedAttendeeTextA.call(this)}
-                            onChange = {this.updateTextA.bind(this)}/>
+                    <div className="Toggle-w-text">
+                        <Toggle
+                            checked={this.props.state.attendeesWithNoAudioVisible}
+                            onChange={this.props.setAttendeesWithNoAudioVisible}/>
+                        <p>Show Attendees with no Clips</p>
                     </div>
                 </div>
-
-                <div className="Attribute-edit-row">
-                    <div className="Attribute-edit-col-left">
-                        <p>Text Field B:</p>
-                    </div>
-                    <div className="Attribute-edit-col-right">
-                        <input
-                            disabled
-                            value = {this.getSelectedAttendeeTextB.call(this)}
-                            onChange = {this.updateTextB.bind(this)}/>
-                    </div>
-                </div>
-
 
             </div>
         );
@@ -120,7 +146,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateAttendeeAttribute: (attendeeID, targetField, newValue) => dispatch(attendeeActions.updateAttendeeAttribute(attendeeID, targetField, newValue))
+        updateAttendeeAttribute: (attendeeID, targetField, newValue) => dispatch(attendeeActions.updateAttendeeAttribute(attendeeID, targetField, newValue)),
+        setVerifiedAttendeesVisible: boolean => dispatch(stateActions.setVerifiedAttendeesVisible(boolean.target.checked)),
+        setUnverifiedAttendeesVisible: boolean => dispatch(stateActions.setUnverifiedAttendeesVisible(boolean.target.checked)),
+        setAttendeesWithNoAudioVisible: boolean => dispatch(stateActions.setAttendeesWithNoAudioVisible(boolean.target.checked))
     }
 }
 
