@@ -1,7 +1,11 @@
 .modal-div {
-    width: 80%;
-    max-width: 900px;
+    width: 100%;
+    max-width: 600px;
     margin: auto;
+}
+
+#close-modal-btn {
+    float: right;
 }
 
 .oscilloscope {
@@ -15,7 +19,7 @@
 }
 
 .modal-btn-row {
-
+    
 }
 
 .modal-btn-row button {
@@ -37,4 +41,10 @@
 .sound-wave {
     width: 100%;
     height: 90%;
+}
+
+#modal-submit-clip-button {
+    margin-top: 10px;
+    float: right;
+    padding: 10px 15px;
 }

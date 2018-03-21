@@ -23,6 +23,15 @@ class AudioRecordingModal extends Component {
         this.setState({recording: false})
     }
 
+    previewRecording = () => {
+        if (this.state.audio !== null) {
+            console.log("Playing Audio")
+            let audio = document.getElementById("record-modal-audio-player")
+            console.log(audio)
+            audio.play()
+        }
+    }
+
     submitRecording = () => {
         console.log("recording submitted!")
     }
@@ -31,8 +40,9 @@ class AudioRecordingModal extends Component {
         console.log('chunk of real-time data is: ', recordedBlob);
     }
 
-    onStop(recordedBlob) {
+    onStop = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
+        this.setState({audio: recordedBlob.blobURL})
     }
 
     render() {
@@ -43,12 +53,17 @@ class AudioRecordingModal extends Component {
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.props.closeModal}
                     contentLabel="Example Modal">
+
+                    <audio
+                        id="record-modal-audio-player"
+                        src={this.state.audio}/>
+
                     <div className="modal-div">
-                        <h2>Upload AudioClip</h2>
-                        <button onClick={this.props.closeModal}>close</button>
+                        <button id="close-modal-btn" onClick={this.props.closeModal}>Close</button>
+                        <h2>Upload Voiceclip</h2>
+                        <h3>{this.props.thisAttendeeName}</h3>
 
                         <div className="oscilloscope">
-                            oscilloscope
                             <ReactMic
                                 record={this.state.recording}
                                 className="sound-wave"
@@ -57,8 +72,11 @@ class AudioRecordingModal extends Component {
                                 backgroundColor="#222"/>
                         </div>
 
-                        <button disabled={this.state.audio === null} id="modal-play-button">
-                            play btn
+                        <button 
+                            disabled={this.state.audio === null} 
+                            onClick={this.previewRecording}
+                            id="modal-play-button">
+                            Preview Recording
                         </button>
 
                         <div className="modal-btn-row">
@@ -66,13 +84,13 @@ class AudioRecordingModal extends Component {
                                 disabled={this.state.recording}
                                 onClick={this.startRecording}
                                 id="modal-record-button">
-                                record btn
+                                Record
                             </button>
                             <button
                                 disabled={!this.state.recording}
                                 onClick={this.stopRecording}
                                 id="modal-stop-record-button">
-                                stop btn
+                                Stop
                             </button>
                         </div>
 
@@ -80,7 +98,7 @@ class AudioRecordingModal extends Component {
                             disabled={this.state.audio === null || this.state.recording === true}
                             onClick={this.submitRecording}
                             id="modal-submit-clip-button">
-                            submit btn
+                            Submit This Clip
                         </button>
                     </div>
 

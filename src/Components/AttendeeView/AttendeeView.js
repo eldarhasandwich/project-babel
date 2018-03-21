@@ -127,6 +127,7 @@ class AttendeeView extends Component {
                     </div>
 
                 <AudioRecordingModal
+                    thisAttendeeName={this.props.singleAttendee.singleAttendee.name}
                     modalIsOpen={this.state.modalIsOpen}
                     closeModal={this.closeModal}/>
 
