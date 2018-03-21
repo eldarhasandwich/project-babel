@@ -110,7 +110,7 @@ class ClipListItem extends Component {
                 <p>{this.props.attendee.orderPos + 1 + ". " + this.props.attendee.name + " (" + this.props.attendee.id + ")"
 }</p>
 
-                <button
+                {/* <button
                     onClick={this.switchPositionWithHigherIndex}
                     disabled={this.props.attendee.orderPos === Object
                     .keys(this.props.attendees.attendees)
@@ -122,7 +122,7 @@ class ClipListItem extends Component {
                     onClick={this.switchPositionWithLowerIndex}
                     disabled={this.props.attendee.orderPos === 0}>
                     Shift Up
-                </button>
+                </button> */}
 
                 <button onClick={this.setSelectedIndexAsSelf}>
                     Select

@@ -69,11 +69,11 @@ class App extends Component {
                 <Router>
                     <div>
                         <div className="Route-buttons">
-                            <p>
+                            {/* <p>
                                 <Link
                                     style={this.linkStyle}
                                     to="home">Home Page</Link>
-                            </p>
+                            </p> */}
                             <p>
                                 <Link
                                     style={this.linkStyle}
@@ -84,11 +84,11 @@ class App extends Component {
                                     style={this.linkStyle}
                                     to="admin">Admin View</Link>
                             </p>
-                            <p>
+                            {/* <p>
                                 <Link
                                     style={this.linkStyle}
                                     to="attendee">Attendee View</Link>
-                            </p>
+                            </p> */}
                         </div>
 
                         <Route

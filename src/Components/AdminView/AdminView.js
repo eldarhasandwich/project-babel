@@ -32,7 +32,7 @@ class AdminView extends Component {
                     itemDisplaySize={"small"}
                 />
 
-                <SelectedClipAttributeEdit/>
+                {/* <SelectedClipAttributeEdit/> */}
 
                 {this.props.children}
             </div>

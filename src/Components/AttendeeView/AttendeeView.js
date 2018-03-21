@@ -91,6 +91,7 @@ class AttendeeView extends Component {
         if (!this.props.singleAttendee.attendeeLoaded) {
             return (
                 <div className="Attendee-key-form">
+                    <h4>If you find this without Eldar's permission please go back (please)</h4>
                     <p>Provide your Unique Attendee-Key:</p>
                     <input
                         onChange={this.updateAttendeeKey.bind(this)}/>
