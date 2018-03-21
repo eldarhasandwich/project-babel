@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal'
+import {ReactMic} from 'react-mic';
 
 import './AudioRecordingModal.css'
 
@@ -14,16 +15,24 @@ class AudioRecordingModal extends Component {
         }
     }
 
-    startRecording() {
+    startRecording = () => {
         this.setState({recording: true})
     }
 
-    stopRecording() {
+    stopRecording = () => {
         this.setState({recording: false})
     }
 
-    submitRecording() {
+    submitRecording = () => {
         console.log("recording submitted!")
+    }
+
+    onData(recordedBlob) {
+        console.log('chunk of real-time data is: ', recordedBlob);
+    }
+
+    onStop(recordedBlob) {
+        console.log('recordedBlob is: ', recordedBlob);
     }
 
     render() {
@@ -40,31 +49,36 @@ class AudioRecordingModal extends Component {
 
                         <div className="oscilloscope">
                             oscilloscope
+                            <ReactMic
+                                record={this.state.recording}
+                                className="sound-wave"
+                                onStop={this.onStop}
+                                strokeColor="#FFF"
+                                backgroundColor="#222"/>
                         </div>
 
-                        <button
-                            disabled={this.state.audio === null} 
-                            id="modal-play-button">
+                        <button disabled={this.state.audio === null} id="modal-play-button">
                             play btn
                         </button>
 
                         <div className="modal-btn-row">
                             <button
                                 disabled={this.state.recording}
-                                onClick={this.startRecording.bind(this)} 
+                                onClick={this.startRecording}
                                 id="modal-record-button">
                                 record btn
                             </button>
                             <button
                                 disabled={!this.state.recording}
-                                onClick={this.stopRecording.bind(this)}
+                                onClick={this.stopRecording}
                                 id="modal-stop-record-button">
                                 stop btn
                             </button>
                         </div>
 
                         <button
-                            disabled={this.state.audio === null}
+                            disabled={this.state.audio === null || this.state.recording === true}
+                            onClick={this.submitRecording}
                             id="modal-submit-clip-button">
                             submit btn
                         </button>
