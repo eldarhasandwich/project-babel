@@ -22,7 +22,7 @@ export function pullAttendee (listID, attendeeID) {
                 dispatch( {
                     type: "LOAD_IN_ATTENDEE",
                     audioSrc: url,
-                    id: snapshot.val(),
+                    id: attendeeID,
                     name: snapshot.val().name,
                     orderPos: snapshot.val().orderPos,
                     textA: snapshot.val().textA,
@@ -37,7 +37,7 @@ export function pullAttendee (listID, attendeeID) {
                 dispatch( {
                     type: "LOAD_IN_ATTENDEE",
                     audioSrc: null,
-                    id: snapshot.val(),
+                    id: attendeeID,
                     name: snapshot.val().name,
                     orderPos: snapshot.val().orderPos,
                     textA: snapshot.val().textA,
@@ -70,3 +70,20 @@ export function setAttendeeLoadedStatus (bool) {
         bool
     }
 }
+
+export function uploadAudioBlobToFirebase (blob) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let thisAttendeeID = state.singleAttendee.singleAttendee.id
+
+        Fire.storage()
+            .ref("testAudio/" + thisAttendeeID + ".mp3")
+            .put(blob)
+            .then(function(snapshot){
+                dispatch(setAttendeeLoadedStatus(false))
+        })
+
+    }
+}
+
+// state.singleAttendee.singleAttendee.id

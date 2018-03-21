@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import Modal from 'react-modal'
 import {ReactMic} from 'react-mic';
 
 import './AudioRecordingModal.css'
+
+import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 
 class AudioRecordingModal extends Component {
 
@@ -25,24 +28,25 @@ class AudioRecordingModal extends Component {
 
     previewRecording = () => {
         if (this.state.audio !== null) {
-            console.log("Playing Audio")
             let audio = document.getElementById("record-modal-audio-player")
-            console.log(audio)
+            audio.src = this.state.audio.blobURL
             audio.play()
         }
     }
 
     submitRecording = () => {
         console.log("recording submitted!")
+        this.props.uploadAudioBlobToFirebase(this.state.audio.blob)
+        this.props.closeModal()
     }
 
     onData(recordedBlob) {
-        console.log('chunk of real-time data is: ', recordedBlob);
+        // console.log('chunk of real-time data is: ', recordedBlob);
     }
 
     onStop = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
-        this.setState({audio: recordedBlob.blobURL})
+        this.setState({audio: recordedBlob})
     }
 
     render() {
@@ -55,8 +59,7 @@ class AudioRecordingModal extends Component {
                     contentLabel="Example Modal">
 
                     <audio
-                        id="record-modal-audio-player"
-                        src={this.state.audio}/>
+                        id="record-modal-audio-player"/>
 
                     <div className="modal-div">
                         <button id="close-modal-btn" onClick={this.props.closeModal}>Close</button>
@@ -108,4 +111,14 @@ class AudioRecordingModal extends Component {
     }
 }
 
-export default AudioRecordingModal
+const mapStateToProps = state => {
+    return {singleAttendee: state.singleAttendee}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        uploadAudioBlobToFirebase: blob => dispatch(SingleAttendeeActions.uploadAudioBlobToFirebase(blob))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AudioRecordingModal)
