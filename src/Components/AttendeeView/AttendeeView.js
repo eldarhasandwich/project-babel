@@ -72,7 +72,7 @@ class AttendeeView extends Component {
             autoPlay={false}
             controls={false}
             command='none'
-            preload={true}
+            preload={"auto"}
             uniqueId={`attendeeView-Audio`}/>
     }
 

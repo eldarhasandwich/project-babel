@@ -86,26 +86,31 @@ class AudioRecordingModal extends Component {
                                 backgroundColor="#222"/>
                         </div>
 
-                        <button 
-                            disabled={this.state.audio === null} 
-                            onClick={this.previewRecording}
-                            id="modal-play-button">
-                            Preview Recording
-                        </button>
+                        <div className="modal-play-button">
+                            <button 
+                                disabled={this.state.audio === null} 
+                                onClick={this.previewRecording}>
+                                Preview Recording
+                            </button>
+                        </div>
 
                         <div className="modal-btn-row">
-                            <button
-                                disabled={this.state.recording}
-                                onClick={this.startRecording}
-                                id="modal-record-button">
-                                Record
-                            </button>
-                            <button
-                                disabled={!this.state.recording}
-                                onClick={this.stopRecording}
-                                id="modal-stop-record-button">
-                                Stop
-                            </button>
+                            <div>
+                                <button
+                                    disabled={this.state.recording}
+                                    onClick={this.startRecording}
+                                    id="modal-record-button">
+                                    Record
+                                </button>
+                            </div>
+                            <div>
+                                <button
+                                    disabled={!this.state.recording}
+                                    onClick={this.stopRecording}
+                                    id="modal-stop-record-button">
+                                    Stop
+                                </button>
+                            </div>
                         </div>
 
                         <button
