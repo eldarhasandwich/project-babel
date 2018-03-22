@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import './AttendeeView.css';
 import {Audio} from 'redux-audio-fixed'
 import AudioRecordingModal from './AudioRecordingModal'
+import Loader from 'react-loader-spinner'
+
+import './AttendeeView.css';
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 import {actions as audioActions} from 'redux-audio-fixed'
@@ -16,6 +18,7 @@ class AttendeeView extends Component {
         this.state = {
             attendeeKey: "",
             modalIsOpen: false
+            // showIncorrectCodeMessage: false
         }
 
         this.playAttendeeAudio = this.playAttendeeAudio.bind(this)
@@ -87,17 +90,30 @@ class AttendeeView extends Component {
     }
 
     render () {
-
         if (!this.props.singleAttendee.attendeeLoaded) {
             return (
                 <div className="Attendee-key-form">
                     <p>Provide your Unique Attendee-Key:</p>
-                    <input
-                        onChange={this.updateAttendeeKey.bind(this)}/>
-                    <button
-                        onClick={this.submitAttendeeKey.bind(this)}>
-                            Enter</button>
+
+                    {(this.props.singleAttendee.attendeeInfoIsLoading)
+                        ?(<LoaderWithText
+                            loaderType="Bars"
+                            loadingText="Loading this Key..."/>)
+
+                        :(<AttendeeKeyInputField
+                            updateAttendeeKey={this.updateAttendeeKey.bind(this)}
+                            submitAttendeeKey={this.submitAttendeeKey.bind(this)}
+                            showIncorrectKeyMsg={this.props.singleAttendee.showIncorrectKeyMsg}/>)
+                    }
                 </div>
+            )
+        }
+
+        if (this.props.singleAttendee.audioIsUploading) {
+            return (
+                <LoaderWithText
+                    loaderType="Bars"
+                    loadingText="Uploading Voiceclip..."/>
             )
         }
 
@@ -126,6 +142,8 @@ class AttendeeView extends Component {
                             id="Upload-audio-btn">Upload Audio</button>
                     </div>
 
+                    
+
                 <AudioRecordingModal
                     thisAttendeeName={this.props.singleAttendee.singleAttendee.name}
                     modalIsOpen={this.state.modalIsOpen}
@@ -135,6 +153,35 @@ class AttendeeView extends Component {
  
             </div>
         );
+    }
+}
+
+class LoaderWithText extends Component {
+    render() {
+        return (<div>
+            <Loader
+                type={this.props.loaderType}
+                color="#222"/>
+            <p>{this.props.loadingText}</p>
+        </div>)
+    }
+}
+
+class AttendeeKeyInputField extends Component {
+    render() {
+        return (<div>
+                <input
+                    onChange={this.props.updateAttendeeKey}/>
+                <button
+                    onClick={this.props.submitAttendeeKey}>
+                        Enter</button>
+                <p>
+                    {(this.props.showIncorrectKeyMsg)
+                        ? "The Attendee-Key you entered was Incorrect, Please try again."
+                        : ""}
+                </p>
+            </div>
+        )
     }
 }
 

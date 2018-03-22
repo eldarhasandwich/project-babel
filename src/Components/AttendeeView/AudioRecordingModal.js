@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import Modal from 'react-modal'
 import {ReactMic} from 'react-mic';
+import Loader from 'react-loader-spinner'
 
 import './AudioRecordingModal.css'
 
@@ -50,6 +51,16 @@ class AudioRecordingModal extends Component {
     }
 
     render() {
+
+        if (this.props.singleAttendee.audioIsUploading) {
+            return (<div>
+                <Loader
+                    type="Bars"
+                    color="#222"/>
+                <p>Uploading Your Voiceclip</p>
+            </div>)
+        }
+
         return (
             <div>
                 <Modal
