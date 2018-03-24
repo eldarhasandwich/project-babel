@@ -26,12 +26,27 @@ class AttendeeView extends Component {
         this.closeModal = this.closeModal.bind(this)
     }
 
-    updateAttendeeKey (value) {
-        this.setState({attendeeKey: value.target.value})
+
+    accessParamKey() {
+        let search = this.props.location.search
+        let params = new URLSearchParams(search)
+        let attKey = params.get('_attKey')
+        return attKey
+    }   
+
+    updateAttendeeKey (input) {
+        this.setState({attendeeKey: input.target.value})
+    }
+
+    setAttendeeKey (newValue) {
+        this.setState({attendeeKey: newValue})
     }
 
     submitAttendeeKey () {
-        let key = this.state.attendeeKey.split("#")
+        if (this.state.attendeeKey === null) {
+            return;
+        }
+        let key = this.state.attendeeKey.split("_")
         if (key.length !== 2) {
             return;
         }
@@ -89,6 +104,16 @@ class AttendeeView extends Component {
         this.setState({modalIsOpen: false})
     }
 
+    componentWillMount () {
+        let attendeeKey = this.accessParamKey()
+        console.log(attendeeKey)
+        this.setAttendeeKey(attendeeKey)
+    }
+
+    componentDidMount () {
+        this.submitAttendeeKey()
+    }
+
     render () {
         if (!this.props.singleAttendee.attendeeLoaded) {
             return (
@@ -101,6 +126,7 @@ class AttendeeView extends Component {
                             loadingText="Loading this Key..."/>)
 
                         :(<AttendeeKeyInputField
+                            value={this.state.attendeeKey}
                             updateAttendeeKey={this.updateAttendeeKey.bind(this)}
                             submitAttendeeKey={this.submitAttendeeKey.bind(this)}
                             showIncorrectKeyMsg={this.props.singleAttendee.showIncorrectKeyMsg}/>)
@@ -171,6 +197,7 @@ class AttendeeKeyInputField extends Component {
     render() {
         return (<div>
                 <input
+                    value={this.props.value}
                     onChange={this.props.updateAttendeeKey}/>
                 <button
                     onClick={this.props.submitAttendeeKey}>

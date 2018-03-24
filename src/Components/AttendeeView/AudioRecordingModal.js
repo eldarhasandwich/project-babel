@@ -47,6 +47,7 @@ class AudioRecordingModal extends Component {
 
     onStop = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
+        
         this.setState({audio: recordedBlob})
     }
 
@@ -88,7 +89,7 @@ class AudioRecordingModal extends Component {
 
                         <div className="modal-play-button">
                             <button 
-                                disabled={this.state.audio === null} 
+                                disabled={this.state.audio === null || this.state.recording} 
                                 onClick={this.previewRecording}>
                                 Preview Recording
                             </button>
