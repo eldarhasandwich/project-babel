@@ -106,11 +106,11 @@ class AttendeeView extends Component {
 
     componentWillMount () {
         let attendeeKey = this.accessParamKey()
-        console.log(attendeeKey)
         this.setAttendeeKey(attendeeKey)
     }
 
     componentDidMount () {
+        window.history.replaceState(null, null, window.location.pathname);
         this.submitAttendeeKey()
     }
 
