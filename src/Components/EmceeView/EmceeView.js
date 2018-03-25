@@ -1,15 +1,46 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './EmceeView.css';
+import {Audio} from 'redux-audio-fixed'
 
 import ClipList from "../ClipList/ClipList";
 import SelectedClipInterface from "./SelectedClipInterface";
 
-// import Toggle from 'react-toggle'
+import {actions as audioActions} from 'redux-audio-fixed'
 
 import * as stateActions from "../../Actions/state"
+import * as AttendeeActions from '../../Actions/attendees';
+
 
 class EmceeView extends Component {
+
+    generateAudioComponents() {
+        return Object
+            .keys(this.props.attendees.attendees)
+            .map(attendeeID => {
+                let attendee = this.props.attendees.attendees[attendeeID]
+                return <Audio
+                    src={attendee.audioSrc}
+                    autoPlay={false}
+                    controls={false}
+                    command='none'
+                    preload={true}
+                    uniqueId={`audio-${attendeeID}`}
+                    onLoadedData={() => this.props.loadedAudio(attendeeID)}/>
+            })
+    }
+
+    playSelectedAudio() {
+        let attendees = this.props.attendees.attendees;
+        let selected = Object
+            .keys(attendees)
+            .find(x => attendees[x].orderPos === this.props.state.selectedClipIndex)
+        let selectedAttendee = attendees[selected]
+
+        this
+            .props
+            .playAudio(`audio-${selectedAttendee.id}`)
+    }
 
     canIncrementIndex() {
         return (this.props.state.selectedClipIndex < Object.keys(this.props.attendees.attendees).length - 1)
@@ -51,6 +82,8 @@ class EmceeView extends Component {
                     size={"large"}
                 />
 
+                {this.generateAudioComponents()}
+
                 <SelectedClipInterface/>
 
                 <div className="Interface-buttons">
@@ -66,7 +99,7 @@ class EmceeView extends Component {
 
                     <button 
                         id="play-btn" 
-                        onClick={this.props.playSelectedAudio}
+                        onClick={this.playSelectedAudio.bind(this)}
                         disabled={!this.canPlayAudio.call(this)}>
                         Play
                     </button>
@@ -94,7 +127,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setSelectedClipIndex: newIndex => dispatch(stateActions.setSelectedClipIndex(newIndex)),
-        setAttendeesWithNoAudioVisible: boolean => dispatch(stateActions.setAttendeesWithNoAudioVisible(boolean.target.checked))
+        setAttendeesWithNoAudioVisible: boolean => dispatch(stateActions.setAttendeesWithNoAudioVisible(boolean.target.checked)),
+        loadedAudio: (attendeeID) => dispatch(AttendeeActions.loadedAudio(attendeeID)),
+        playAudio: (audioId) => dispatch(audioActions.audioPlay(audioId))
     }
 }
 
