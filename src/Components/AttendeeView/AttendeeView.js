@@ -31,7 +31,7 @@ class AttendeeView extends Component {
         let search = this.props.location.search
         let params = new URLSearchParams(search)
         let attKey = params.get('_attKey')
-        return attKey
+        return (attKey === null) ? "" : attKey
     }   
 
     updateAttendeeKey (input) {
@@ -51,6 +51,7 @@ class AttendeeView extends Component {
             return;
         }
         this.props.pullAttendee(key[0], key[1])
+        this.setAttendeeKey("")
     }
 
     unloadAttendee () {
