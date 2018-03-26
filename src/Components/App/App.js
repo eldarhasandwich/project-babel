@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import './App.css';
 
 import AppHeader from "./AppHeader";
-import HomePage from "../HomePage/HomePage"
+import InstitutionView from "../InstitutionView/InstitutionView"
 import LandingPage from "../HomePage/LandingPage"
 
 import AttendeeView from '../AttendeeView/AttendeeView';
@@ -33,8 +33,8 @@ class AppRoutes extends Component {
                         component={LandingPage}/>
 
                     <Route
-                        path={process.env.PUBLIC_URL +'/home'}
-                        component={HomePage}/>
+                        path={process.env.PUBLIC_URL +'/institution'}
+                        component={InstitutionView}/>
 
                     <Route
                         path={process.env.PUBLIC_URL +'/attendee'}
@@ -47,7 +47,7 @@ class AppRoutes extends Component {
 }
 
 const mapStateToProps = state => {
-    return {attendees: state.attendees, state: state.state}
+    return {attendees: state.attendees, state: state.state, userSession: state.userSession}
 }
 
 const mapDispatchToProps = dispatch => {

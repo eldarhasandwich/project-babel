@@ -12,18 +12,17 @@ class LandingPage extends Component {
     render() {
         return (
             <div>
+                <p>This is a placeholder for the App's Landing Page.</p>
+                <p>Ideally it will be to advertise the App's functionality and past performance to possible customers.</p>
 
                     <nav className="Route-buttons">
                         <p>
-                            <Link style={this.linkStyle} to="/home">Admin Login</Link>
-                        </p>
-                        <p>
                             <Link style={this.linkStyle} to="/attendee">Attendee View</Link>
                         </p>
+                        <p>
+                            <Link style={this.linkStyle} to="/institution">Institution View</Link>
+                        </p>
                     </nav>
-
-                <p>This is a placeholder for the App's Landing Page.</p>
-                <p>Ideally it will be to advertise the App's functionality and past performance to possible customers.</p>
             </div>
         )
     }
