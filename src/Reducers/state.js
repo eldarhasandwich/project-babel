@@ -2,6 +2,7 @@ const defaultState = {
     selectedClipIndex: 0,
     verifiedAttendeesVisible: true,
     unverifiedAttendeesVisible: true,
+    attendeesWithAudioNeedingReplacementVisible: true,
     attendeesWithNoAudioVisible: true,
     fireBaseDataDirectory: "",
     fireBaseStorageDirectory: "testAudio"
@@ -35,6 +36,13 @@ const state = (state = defaultState, action) => {
             return {
                 ...state,
                 unverifiedAttendeesVisible: action.boolean
+            }
+        }
+
+        case 'SET_ATTENDEES_NEEDING_AUDIO_REPLACEMENT_VISIBILITY': {
+            return {
+                ...state,
+                attendeesWithAudioNeedingReplacementVisible: action.boolean
             }
         }
 

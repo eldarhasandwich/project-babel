@@ -5,7 +5,34 @@ import ClipListItem from "./ClipListItem";
 
 class ClipList extends Component {
 
-    getSortedAttendees() {
+    filterAttendeeByState(attendee) {
+        let verifiedAttendeesVisible = this.props.state.verifiedAttendeesVisible
+        let unverifiedAttendeesVisible = this.props.state.unverifiedAttendeesVisible
+        let attendeesWithAudioNeedingReplacementVisible = this.props.state.attendeesWithAudioNeedingReplacementVisible
+        let attendeesWithNoAudioVisible = this.props.state.attendeesWithNoAudioVisible
+
+        console.log(attendee)
+
+        if (attendeesWithNoAudioVisible && attendee.audioSrc === null) {
+            return true
+        }
+
+        if (attendeesWithAudioNeedingReplacementVisible && attendee.audioNeedsReplacement) {
+            return true
+        }
+
+        if (unverifiedAttendeesVisible && !attendee.audioIsVerified) {
+            return true
+        }
+
+        if (verifiedAttendeesVisible && attendee.audioIsVerified) {
+            return true
+        }
+
+        return false
+    }
+
+    getSortedFilteredAttendees() {
         let attendees = this.props.attendees.attendees
         let attendeeKeys = Object.keys(attendees)
         
@@ -13,22 +40,14 @@ class ClipList extends Component {
 
         if (this.props.size === "large") { return attendeeKeys }
 
-        if (!this.props.state.verifiedAttendeesVisible) {
-            attendeeKeys = attendeeKeys.filter(x => attendees[x].audioSrc === null)
-        }
-
-        if (!this.props.state.attendeesWithNoAudioVisible) {
-            attendeeKeys = attendeeKeys.filter(x => attendees[x].audioSrc !== null)
-        }
-
-        return attendeeKeys;
+        return attendeeKeys.filter(x => this.filterAttendeeByState(attendees[x]))
     }
 
     render() {
         return (
             <div className="Clip-list">
 
-                {this.getSortedAttendees.call(this)
+                {this.getSortedFilteredAttendees.call(this)
                     .map((item, index) => <ClipListItem
                         key={index}
                         attendee={this.props.attendees.attendees[item]}

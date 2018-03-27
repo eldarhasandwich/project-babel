@@ -82,7 +82,6 @@ class SelectedClipAttributeEdit extends Component {
                         </div>
                         <div className="Attribute-edit-col-right">
                             <input
-                                disabled
                                 value = {this.getSelectedAttendeeName.call(this)}
                                 onChange = {this.updateName.bind(this)}/>
                         </div>
@@ -94,7 +93,6 @@ class SelectedClipAttributeEdit extends Component {
                         </div>
                         <div className="Attribute-edit-col-right">
                             <input
-                                disabled
                                 value = {this.getSelectedAttendeeTextA.call(this)}
                                 onChange = {this.updateTextA.bind(this)}/>
                         </div>
@@ -106,7 +104,6 @@ class SelectedClipAttributeEdit extends Component {
                         </div>
                         <div className="Attribute-edit-col-right">
                             <input
-                                disabled
                                 value = {this.getSelectedAttendeeTextB.call(this)}
                                 onChange = {this.updateTextB.bind(this)}/>
                         </div>
@@ -125,6 +122,12 @@ class SelectedClipAttributeEdit extends Component {
                             checked={this.props.state.unverifiedAttendeesVisible}
                             onChange={this.props.setUnverifiedAttendeesVisible}/>
                         <p>Show Unverified Attendees</p>
+                    </div>
+                    <div className="Toggle-w-text">
+                        <Toggle
+                            checked={this.props.state.attendeesWithAudioNeedingReplacementVisible}
+                            onChange={this.props.setAttendeesWithAudioNeedingReplacementVisible}/>
+                        <p>Show Attendees who need to replace their Audio</p>
                     </div>
                     <div className="Toggle-w-text">
                         <Toggle
@@ -149,6 +152,7 @@ const mapDispatchToProps = dispatch => {
         updateAttendeeAttribute: (attendeeID, targetField, newValue) => dispatch(attendeeActions.updateAttendeeAttribute(attendeeID, targetField, newValue)),
         setVerifiedAttendeesVisible: boolean => dispatch(stateActions.setVerifiedAttendeesVisible(boolean.target.checked)),
         setUnverifiedAttendeesVisible: boolean => dispatch(stateActions.setUnverifiedAttendeesVisible(boolean.target.checked)),
+        setAttendeesWithAudioNeedingReplacementVisible: boolean => dispatch(stateActions.setAttendeesWithAudioNeedingReplacementVisible(boolean.target.checked)),
         setAttendeesWithNoAudioVisible: boolean => dispatch(stateActions.setAttendeesWithNoAudioVisible(boolean.target.checked))
     }
 }

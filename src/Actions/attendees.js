@@ -1,7 +1,7 @@
 import Fire from '../Classes/Fire'
 import { actions as audioActions } from 'redux-audio-fixed'
 
-export function addAttendee (id, name, audioSrc, orderPos, textA, textB, listKey) {
+export function addAttendee (id, name, audioSrc, orderPos, textA, textB, audioNeedsReplacement, audioIsVerified) {
     return (dispatch, getState) => {
         Fire
             .storage()
@@ -16,10 +16,12 @@ export function addAttendee (id, name, audioSrc, orderPos, textA, textB, listKey
                     id,
                     name,
                     textA,
-                    textB
+                    textB,
+                    audioNeedsReplacement,
+                    audioIsVerified
                 })
                 dispatch(audioActions.audioSrc(`audio-${id}`, url))
-            }).catch(function(error) {
+            }).catch(function(error) { // Storage does not have an audiofile for this Attendee
                 dispatch( {
                     type: "ADD_ATTENDEE",
                     audioSrc: null,
@@ -91,7 +93,8 @@ export function loadAttendees (listKey) {
                     snapshot.val().audioClips[objKeys[i]].orderPos,
                     snapshot.val().audioClips[objKeys[i]].textA,
                     snapshot.val().audioClips[objKeys[i]].textB,
-                    listKey
+                    snapshot.val().audioClips[objKeys[i]].audioNeedsReplacement,
+                    snapshot.val().audioClips[objKeys[i]].audioIsVerified
                 ))
             }
             

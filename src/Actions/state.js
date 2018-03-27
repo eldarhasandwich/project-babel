@@ -54,6 +54,13 @@ export function setUnverifiedAttendeesVisible (boolean) {
     }
 }
 
+export function setAttendeesWithAudioNeedingReplacementVisible (boolean) {
+    return {
+        type: "SET_ATTENDEES_NEEDING_AUDIO_REPLACEMENT_VISIBILITY",
+        boolean
+    }
+}
+
 export function setAttendeesWithNoAudioVisible (boolean) {
     return {
         type: "SET_NO_AUDIO_ATTENDEE_VISIBILITY",
