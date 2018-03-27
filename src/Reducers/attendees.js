@@ -94,6 +94,34 @@ const attendees = (state = defaultState, action) => {
             }
         }
 
+        case 'VERIFY_ATTENDEE_AUDIO': {
+            return {
+                ...state,
+                attendees:{
+                    ...state.attendees,
+                    [action.attendeeID]: {
+                        ...state.attendees[action.attendeeID],
+                        audioNeedsReplacement: false,
+                        audioIsVerified: true
+                    }
+                }
+            }
+        }
+
+        case 'MARK_ATTENDEE_AUDIO_AS_NEEDS_REPLACEMENT': {
+            return {
+                ...state,
+                attendees:{
+                    ...state.attendees,
+                    [action.attendeeID]: {
+                        ...state.attendees[action.attendeeID],
+                        audioNeedsReplacement: true,
+                        audioIsVerified: false
+                    }
+                }
+            }
+        }
+
         default:
             {
                 return state

@@ -70,6 +70,20 @@ export function clearAttendeeList () {
     }
 }
 
+export function verifyAttendeeAudio (attendeeID) {
+    return {
+        type: "VERIFY_ATTENDEE_AUDIO",
+        attendeeID
+    }
+}
+
+export function markAttendeeAudioAsNeedsReplacement (attendeeID) {
+    return {
+        type: "MARK_ATTENDEE_AUDIO_AS_NEEDS_REPLACEMENT",
+        attendeeID
+    }
+}
+
 export function loadAttendees (listKey) {
     return (dispatch, getState) => {
         if (listKey === "") {

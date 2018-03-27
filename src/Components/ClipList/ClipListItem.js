@@ -45,29 +45,32 @@ class ClipListItem extends Component {
 
     getThisItemStyle() {
         let isSelected = (this.props.attendee.orderPos === this.props.state.selectedClipIndex)
-        let noAudio = (this.props.attendee.audioSrc === null)
+        let hasAudio = (this.props.attendee.audioSrc !== null)
         let verified = (this.props.attendee.audioIsVerified)
         let needsReplacement = (this.props.attendee.audioNeedsReplacement)
 
-        let thisStyle = {...this.styles.base, ...this.styles.unverified}
+        let thisStyle = this.styles.base
         if (isSelected) {
             thisStyle = {...thisStyle, ...this.styles.selected}
         }
-        
-        if (needsReplacement) {
-            thisStyle = {...thisStyle, ...this.styles.needsReplacement}
-        }
 
-        if (verified) {
-            thisStyle = {...thisStyle, ...this.styles.verified}
-        }
-
-        if (noAudio) {
+        if (!hasAudio) {
             thisStyle = {...thisStyle, ...this.styles.noAudio}
         }
 
-        return thisStyle
+        if (hasAudio && verified) {
+            thisStyle = {...thisStyle, ...this.styles.verified}
+        }
 
+        if (hasAudio && !verified && !needsReplacement) {
+            thisStyle = {...thisStyle, ...this.styles.unverified}
+        }
+
+        if (hasAudio && !verified && needsReplacement) {
+            thisStyle = {...thisStyle, ...this.styles.needsReplacement}
+        }
+
+        return thisStyle
     }
 
     setSelectedIndexAsSelf() {
@@ -101,32 +104,81 @@ class ClipListItem extends Component {
     render() {
         if (this.props.itemDisplaySize === "large") {
             return (
-                <div
-                    className="List-item"
-                    style={this.getThisItemStyle()}>
-
-                    <p>{(this.props.attendee.audioLoaded)
-                            ? "Loaded"
-                            : (this.props.attendee.audioSrc !== null)
-                                ? "Downloading"
-                                : "No Audio"}</p>
-                    <p id="item-name">{this.props.attendee.name}</p>
-                    <p id="item-id">{this.props.attendee.id}</p>
-
-                </div>
+                <LargeListItem
+                    style={this.getThisItemStyle()}
+                    attendee={this.props.attendee}
+                />
             )
         }
 
         return (
+            <SmallListItem
+                style={this.getThisItemStyle()}
+                attendee={this.props.attendee}
+                attendees={this.props.attendees}
+
+                switchPositionWithHigherIndex={this.switchPositionWithHigherIndex}
+                switchPositionWithLowerIndex={this.switchPositionWithLowerIndex}
+                setSelectedIndexAsSelf={this.setSelectedIndexAsSelf}
+
+                verifyAttendeeAudio={this.props.verifyAttendeeAudio}
+                markAttendeeAudioAsNeedsReplacement={this.props.markAttendeeAudioAsNeedsReplacement}
+            />
+        );
+    }
+
+}
+
+class LargeListItem extends Component {
+    render() {
+        return (
+
+            <div
+                className="List-item"
+                style={this.props.style}>
+
+                <p>{(this.props.attendee.audioLoaded)
+                        ? "Loaded"
+                        : (this.props.attendee.audioSrc !== null)
+                            ? "Downloading"
+                            : "No Audio"}</p>
+                <p id="item-name">{this.props.attendee.name}</p>
+                <p id="item-id">{this.props.attendee.id}</p>
+            </div>
+
+        )
+    }
+}
+
+class SmallListItem extends Component {
+
+    verifyAudio = () => {
+        this.props.verifyAttendeeAudio(this.props.attendee.id)
+    }
+
+    markAudioAsNeedsReplacement = () => {
+        this.props.markAttendeeAudioAsNeedsReplacement(this.props.attendee.id)
+    }
+
+    render() {
+        return (
             <div
                 className="List-item-small"
-                style={this.getThisItemStyle()}>
-
-                <p>{this.props.attendee.orderPos + 1 + ". " + this.props.attendee.name + " (" + this.props.attendee.id + ")"
-}</p>
+                style={this.props.style}>
 
                 <button
-                    onClick={this.switchPositionWithHigherIndex}
+                onClick={this.verifyAudio}
+                >Verify</button>
+                <button
+                onClick={this.markAudioAsNeedsReplacement}
+                >Needs Replacement</button>
+
+                <p>{this.props.attendee.orderPos + 1 + "."}</p>
+                <p>{this.props.attendee.name}</p>
+                <p>{"(" + this.props.attendee.id + ")"}</p>
+                
+                <button
+                    onClick={this.props.switchPositionWithHigherIndex}
                     disabled={this.props.attendee.orderPos === Object
                     .keys(this.props.attendees.attendees)
                     .length - 1}>
@@ -134,20 +186,18 @@ class ClipListItem extends Component {
                 </button>
 
                 <button
-                    onClick={this.switchPositionWithLowerIndex}
+                    onClick={this.props.switchPositionWithLowerIndex}
                     disabled={this.props.attendee.orderPos === 0}>
                     Shift Up
                 </button>
 
-                <button onClick={this.setSelectedIndexAsSelf}>
+                <button onClick={this.props.setSelectedIndexAsSelf}>
                     Select
                 </button>
 
             </div>
-
-        );
+        )
     }
-
 }
 
 const mapStateToProps = state => {
@@ -157,7 +207,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setSelectedClipIndex: newIndex => dispatch(stateActions.setSelectedClipIndex(newIndex)),
-        swapAttendeeOrderPosition: (attendeeA_ID, attendeeB_ID) => dispatch(attendeeActions.swapAttendeeOrderPosition(attendeeA_ID, attendeeB_ID))
+        swapAttendeeOrderPosition: (attendeeA_ID, attendeeB_ID) => dispatch(attendeeActions.swapAttendeeOrderPosition(attendeeA_ID, attendeeB_ID)),
+        verifyAttendeeAudio: attendeeID => dispatch(attendeeActions.verifyAttendeeAudio(attendeeID)),
+        markAttendeeAudioAsNeedsReplacement: attendeeID => dispatch(attendeeActions.markAttendeeAudioAsNeedsReplacement(attendeeID))
     }
 }
 

@@ -11,19 +11,23 @@ class ClipList extends Component {
         let attendeesWithAudioNeedingReplacementVisible = this.props.state.attendeesWithAudioNeedingReplacementVisible
         let attendeesWithNoAudioVisible = this.props.state.attendeesWithNoAudioVisible
 
-        if (attendeesWithNoAudioVisible && attendee.audioSrc === null) {
+        let hasAudio = (attendee.audioSrc !== null)
+        let verified = (attendee.audioIsVerified)
+        let needsReplacement = (attendee.audioNeedsReplacement)
+
+        if (attendeesWithNoAudioVisible && !hasAudio) {
             return true
         }
 
-        if (attendeesWithAudioNeedingReplacementVisible && attendee.audioNeedsReplacement) {
+        if (verifiedAttendeesVisible && hasAudio && verified) {
+            return true
+        }
+        
+        if (unverifiedAttendeesVisible && hasAudio && !verified && !needsReplacement) {
             return true
         }
 
-        if (unverifiedAttendeesVisible && !attendee.audioIsVerified) {
-            return true
-        }
-
-        if (verifiedAttendeesVisible && attendee.audioIsVerified) {
+        if (attendeesWithAudioNeedingReplacementVisible && hasAudio && !verified && needsReplacement) {
             return true
         }
 

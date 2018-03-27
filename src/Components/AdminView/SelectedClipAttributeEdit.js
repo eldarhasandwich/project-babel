@@ -127,7 +127,7 @@ class SelectedClipAttributeEdit extends Component {
                         <Toggle
                             checked={this.props.state.attendeesWithAudioNeedingReplacementVisible}
                             onChange={this.props.setAttendeesWithAudioNeedingReplacementVisible}/>
-                        <p>Show Attendees who need to replace their Audio</p>
+                        <p>Show Attendees pending Audio replacement</p>
                     </div>
                     <div className="Toggle-w-text">
                         <Toggle
