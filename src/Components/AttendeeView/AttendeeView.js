@@ -115,6 +115,28 @@ class AttendeeView extends Component {
         this.submitAttendeeKey()
     }
 
+    getAudioStatusFromAttendeeState () {
+        let hasAudio = (this.props.singleAttendee.singleAttendee.audioSrc !== null)
+        let verified = (this.props.singleAttendee.singleAttendee.audioIsVerified)
+        let needsReplacement = (this.props.singleAttendee.singleAttendee.audioNeedsReplacement)
+
+        if (!hasAudio) {
+            return "No Audio Uploaded"
+        }
+
+        if (hasAudio && verified) {
+            return "Audio Verified"
+        }
+
+        if (hasAudio && !verified && needsReplacement) {
+            return "Audio Needs Replacement"
+        }
+
+        if (hasAudio && !verified && !needsReplacement) {
+            return "Audio Awaiting Verification"
+        }
+    }
+
     render () {
         if (!this.props.singleAttendee.attendeeLoaded) {
             return (
@@ -156,6 +178,7 @@ class AttendeeView extends Component {
                         <p id="attendee-textA">{this.props.singleAttendee.singleAttendee.textA}</p>
                         <p id="attendee-textB">{this.props.singleAttendee.singleAttendee.textB}</p>
                         <p id="attendee-orderPos">{this.giveOrderPosString.call(this)}</p>
+                        <p>{this.getAudioStatusFromAttendeeState.call(this)}</p>
                     </div>                
 
                     <div id="attendee-buttons">

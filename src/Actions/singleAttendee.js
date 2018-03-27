@@ -30,7 +30,9 @@ export function pullAttendee (listID, attendeeID) {
                     name: snapshot.val().name,
                     orderPos: snapshot.val().orderPos,
                     textA: snapshot.val().textA,
-                    textB: snapshot.val().textB
+                    textB: snapshot.val().textB,
+                    audioNeedsReplacement: snapshot.val().audioNeedsReplacement,
+                    audioIsVerified: snapshot.val().audioIsVerified
                 })
                 dispatch(setAttendeeLoadedStatus(true))
                 dispatch(setIncorrectKeyStatus(false))
@@ -45,7 +47,9 @@ export function pullAttendee (listID, attendeeID) {
                     name: snapshot.val().name,
                     orderPos: snapshot.val().orderPos,
                     textA: snapshot.val().textA,
-                    textB: snapshot.val().textB
+                    textB: snapshot.val().textB,
+                    audioNeedsReplacement: snapshot.val().audioNeedsReplacement,
+                    audioIsVerified: snapshot.val().audioIsVerified
                 })
                 dispatch(setAttendeeLoadedStatus(true))
                 dispatch(setIncorrectKeyStatus(false))
