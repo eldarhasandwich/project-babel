@@ -22,37 +22,52 @@ class ClipListItem extends Component {
     }
 
     styles = {
-        selected: {
-            backgroundColor: "lightblue",
-            transition: "background-color 0.18s"
-        },
-        notSelected: {
+        base: {
             backgroundColor: "white",
             transition: "background-color 0.18s"
         },
-        selectedNoAudio: {
-            backgroundColor: "lightcoral",
-            transition: "background-color 0.18s"
+        verified: {
+            backgroundColor: "lightgreen",
         },
-        notSelectedNoAudio: {
-            backgroundColor: "#F9CCCC",
-            transition: "background-color 0.18s"
+        unverified: {
+            backgroundColor: "#EEE",
+        }, 
+        needsReplacement: {
+            backgroundColor: "#fffb23",
+        },
+        noAudio: {
+            backgroundColor: "lightcoral",
+        },
+        selected: {
+            filter: "brightness(85%)"
         }
     }
 
     getThisItemStyle() {
         let isSelected = (this.props.attendee.orderPos === this.props.state.selectedClipIndex)
-        let hasAudio = (this.props.attendee.audioSrc !== null)
+        let noAudio = (this.props.attendee.audioSrc === null)
+        let verified = (this.props.attendee.audioIsVerified)
+        let needsReplacement = (this.props.attendee.audioNeedsReplacement)
+
+        let thisStyle = {...this.styles.base, ...this.styles.unverified}
         if (isSelected) {
-            if (hasAudio) {
-                return this.styles.selected
-            }
-            return this.styles.selectedNoAudio
+            thisStyle = {...thisStyle, ...this.styles.selected}
         }
-        if (hasAudio) {
-            return this.styles.notSelected
+        
+        if (needsReplacement) {
+            thisStyle = {...thisStyle, ...this.styles.needsReplacement}
         }
-        return this.styles.notSelectedNoAudio
+
+        if (verified) {
+            thisStyle = {...thisStyle, ...this.styles.verified}
+        }
+
+        if (noAudio) {
+            thisStyle = {...thisStyle, ...this.styles.noAudio}
+        }
+
+        return thisStyle
+
     }
 
     setSelectedIndexAsSelf() {

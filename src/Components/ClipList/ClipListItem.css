@@ -1,5 +1,5 @@
 .List-item {
-    background-color: white;
+    /* background-color: white; */
 
     border: grey;
     border-style: solid;
@@ -15,7 +15,7 @@
 }
 
 .List-item-small {
-    background-color: white;
+    /* background-color: white; */
 
     border: grey;
     border-style: solid;

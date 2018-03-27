@@ -11,8 +11,6 @@ class ClipList extends Component {
         let attendeesWithAudioNeedingReplacementVisible = this.props.state.attendeesWithAudioNeedingReplacementVisible
         let attendeesWithNoAudioVisible = this.props.state.attendeesWithNoAudioVisible
 
-        console.log(attendee)
-
         if (attendeesWithNoAudioVisible && attendee.audioSrc === null) {
             return true
         }
