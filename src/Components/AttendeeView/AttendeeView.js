@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
+import Divider from 'material-ui/Divider'
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 import {actions as audioActions} from 'redux-audio-fixed'
@@ -174,26 +175,30 @@ class AttendeeView extends Component {
             )
         }
 
+        if (!this.state.modalIsOpen) {
+            return (
+                <div style={this.viewStyle}>
+                    {this.getAttendeeAudio()}
+    
+                    <AttendeeInterface
+                        thisAttendee={this.props.singleAttendee.singleAttendee}
+                        unloadAttendee={this.unloadAttendee.bind(this)}
+                        playAttendeeAudio={this.playAttendeeAudio}
+                        giveOrderPosString={this.giveOrderPosString.call(this)}
+                        getAudioStatusFromAttendeeState={this.getAudioStatusFromAttendeeState.call(this)}
+                        openModal={this.openModal}
+                    />
+    
+                </div>
+            )
+        }
+
         return (
-            <div style={this.viewStyle}>
-                {this.getAttendeeAudio()}
-
-                <AttendeeInterface
-                    thisAttendee={this.props.singleAttendee.singleAttendee}
-                    unloadAttendee={this.unloadAttendee.bind(this)}
-                    playAttendeeAudio={this.playAttendeeAudio}
-                    giveOrderPosString={this.giveOrderPosString.call(this)}
-                    getAudioStatusFromAttendeeState={this.getAudioStatusFromAttendeeState.call(this)}
-                    openModal={this.openModal}
-                />  
-
-                <AudioRecordingModal
-                    thisAttendeeName={this.props.singleAttendee.singleAttendee.name}
-                    modalIsOpen={this.state.modalIsOpen}
-                    closeModal={this.closeModal}/>
-
-            </div>
-        );
+            <AudioRecordingModal
+                closeModal={this.closeModal}
+                thisAttendeeName={this.props.singleAttendee.singleAttendee.name}
+            />
+        )
     }
 }
 
@@ -219,15 +224,17 @@ class AttendeeInterface extends Component {
                         label={"Back"}/>
                 </div>
 
-                <div>
-                    <h1>{this.props.thisAttendee.name}</h1>
-                    <h4 style={{marginBottom:"4px"}}>
-                        {this.props.giveOrderPosString}
-                    </h4>
-                    <h4 style={{marginTop:"4px"}}>
-                        {this.props.getAudioStatusFromAttendeeState}
-                    </h4>
-                </div>                
+                
+                <h1>{this.props.thisAttendee.name}</h1>
+
+                <Divider/>
+
+                <h4 style={{marginBottom:"4px"}}>
+                    {this.props.giveOrderPosString}
+                </h4>
+                <h4 style={{marginTop:"4px"}}>
+                    {this.props.getAudioStatusFromAttendeeState}
+                </h4>
 
                 <div>
                     <RaisedButton
@@ -257,7 +264,7 @@ class LoaderWithText extends Component {
     render() {
         return (
             <div>
-                <div style={this.height}/>
+                <div style={{marginTop: "10px"}}/>
                 <CircularProgress
                     size={120}
                     thickness={6}

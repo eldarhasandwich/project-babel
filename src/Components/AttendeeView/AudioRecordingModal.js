@@ -4,7 +4,9 @@ import Modal from 'react-modal'
 import {ReactMic} from 'react-mic';
 import Loader from 'react-loader-spinner'
 
-import './AudioRecordingModal.css'
+import RaisedButton from 'material-ui/RaisedButton'
+import CircularProgress from 'material-ui/CircularProgress'
+import Divider from 'material-ui/Divider'
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 
@@ -59,70 +61,99 @@ class AudioRecordingModal extends Component {
         this.setState({audio: recordedBlob})
     }
 
+    
+    viewStyle = {
+        width: "95%",
+        margin: "0 auto",
+        maxWidth: "600px"
+    }
+
+
+    topDivStyle = {
+        width: "100%",
+        height: "40px",
+        marginTop: "10px"
+    }
+
+    backBtnStyle = {
+        float: "right"
+    }
+
     render() {
 
         if (this.props.singleAttendee.audioIsUploading) {
-            return (<div>
-                <Loader
-                    type="Bars"
-                    color="#222"/>
-                <p>Uploading Your Voiceclip</p>
+        return (
+            <div style={this.viewStyle}>
+                <div style={{marginTop: "10px"}}/>
+                <CircularProgress
+                    size={120}
+                    thickness={6}
+                />
+                <p>Uploading your AudioClip</p>
             </div>)
         }
 
         return (
-            <div>
-                <Modal
-                    isOpen={this.props.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.props.closeModal}
-                    contentLabel="Example Modal">
+            <div style={this.viewStyle}>
 
-                    <audio
-                        id="record-modal-audio-player"/>
+                <audio id="record-modal-audio-player"/>
 
-                    <div className="modal-div">
-                        <button id="close-modal-btn" onClick={this.props.closeModal}>Close</button>
-                        <h2>Upload Voiceclip</h2>
-                        <h3>{this.props.thisAttendeeName}</h3>
+                <div style={this.topDivStyle}>
+                    <RaisedButton
+                        style={this.backBtnStyle}
+                        onClick={this.props.closeModal}
+                        label={"Back"}/>
+                </div>
+    
+                <h4 style={{marginBottom:"4px"}}>
+                    Upload your AudioClip
+                </h4>
+                <h1 style={{marginTop:"4px"}}>
+                    {this.props.thisAttendeeName}
+                </h1>
+    
+                <Divider/>
 
-                        <div className="oscilloscope">
-                            <ReactMic
-                                record={this.state.recording}
-                                className="sound-wave"
-                                onStop={this.onStop}
-                                strokeColor="#FFF"
-                                backgroundColor="#222"/>
-                        </div>
+                <div>
+                    <ReactMic
+                        record={this.state.recording}
+                        className="sound-wave"
+                        onStop={this.onStop}
+                        strokeColor="#FFF"
+                        backgroundColor="#222"/>
+                </div>
 
-                        <div className="modal-play-button">
-                            <button 
-                                disabled={this.state.audio === null || this.state.recording} 
-                                onClick={this.previewRecording}>
-                                Preview Recording
-                            </button>
-                        </div>
+                <div style={{marginBottom: "8px"}}>
+                    <RaisedButton
+                        primary
+                        onClick={this.toggleRecording}
+                        label={
+                            (this.state.recording)
+                            ? "Stop Recording"
+                            : "Start Recording"
+                        }
+                    />
+                </div>
 
-                        <div className="modal-play-button">
-                            <button 
-                                onClick={this.toggleRecording}>
-                                {
-                                    (this.state.recording)
-                                        ? "Stop Recording"
-                                        : "Start Recording"
-                                }
-                            </button>
-                        </div>
+                <div style={{marginBottom: "20px"}}>
+                    <RaisedButton
+                        primary
+                        disabled={this.state.audio === null || this.state.recording}
+                        onClick={this.previewRecording}
+                        label={"Playback"}
+                    />
+                </div>
 
-                        <button
-                            disabled={this.state.audio === null || this.state.recording === true}
-                            onClick={this.submitRecording}
-                            id="modal-submit-clip-button">
-                            Submit This Clip
-                        </button>
-                    </div>
+                <div>
+                    <RaisedButton
+                        primary
+                        disabled={this.state.audio === null || this.state.recording === true}
+                        onClick={this.submitRecording} 
+                        label={"Upload"}
+                    />
+                </div>
 
-                </Modal>
+
             </div>
         );
     }
