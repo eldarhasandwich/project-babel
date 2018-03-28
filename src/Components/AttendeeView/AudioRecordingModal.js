@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import Modal from 'react-modal'
+// import Modal from 'react-modal'
 import {ReactMic} from 'react-mic';
-import Loader from 'react-loader-spinner'
+// import Loader from 'react-loader-spinner'
 
-import RaisedButton from 'material-ui/RaisedButton'
-import CircularProgress from 'material-ui/CircularProgress'
-import Divider from 'material-ui/Divider'
+import { RaisedButton } from 'material-ui'
+import { CircularProgress } from 'material-ui'
+import { Divider } from 'material-ui'
+import { IconButton } from 'material-ui'
+import { FloatingActionButton } from 'material-ui';
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
+
 
 class AudioRecordingModal extends Component {
 
@@ -114,23 +117,25 @@ class AudioRecordingModal extends Component {
     
                 <Divider/>
 
-                <div>
+                <div style={{margin: "5px 0"}}>
                     <ReactMic
                         record={this.state.recording}
                         className="sound-wave"
                         onStop={this.onStop}
-                        strokeColor="#FFF"
-                        backgroundColor="#222"/>
+                        strokeColor="#999"
+                        />
                 </div>
 
-                <div style={{marginBottom: "8px"}}>
+                <Divider/>
+
+                <div style={{marginBottom: "8px", marginTop: "10px"}}>
                     <RaisedButton
                         primary
                         onClick={this.toggleRecording}
-                        label={
+                        label= {
                             (this.state.recording)
-                            ? "Stop Recording"
-                            : "Start Recording"
+                                ? "Stop Recording"
+                                : "Start Recording"
                         }
                     />
                 </div>

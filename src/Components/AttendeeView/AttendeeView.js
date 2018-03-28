@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
 import AudioRecordingModal from './AudioRecordingModal'
 
-import Loader from 'react-loader-spinner'
+// import Loader from 'react-loader-spinner'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
+// import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import Divider from 'material-ui/Divider'
 
