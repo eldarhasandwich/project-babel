@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
 import AudioRecordingModal from './AudioRecordingModal'
-import Loader from 'react-loader-spinner'
 
-import './AttendeeView.css';
+import Loader from 'react-loader-spinner'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import CircularProgress from 'material-ui/CircularProgress'
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 import {actions as audioActions} from 'redux-audio-fixed'
@@ -137,11 +140,16 @@ class AttendeeView extends Component {
         }
     }
 
+    viewStyle = {
+        width: "95%",
+        margin: "0 auto",
+        maxWidth: "600px"
+    }
+
     render () {
         if (!this.props.singleAttendee.attendeeLoaded) {
             return (
-                <div className="Attendee-key-form">
-                    <p>Provide your Unique Attendee-Key:</p>
+                <div style={this.viewStyle}>
 
                     {(this.props.singleAttendee.attendeeInfoIsLoading)
                         ?(<LoaderWithText
@@ -167,70 +175,126 @@ class AttendeeView extends Component {
         }
 
         return (
-            <div className="Attendee-view">
+            <div style={this.viewStyle}>
                 {this.getAttendeeAudio()}
 
-                <button
-                    onClick={this.unloadAttendee.bind(this)}>Back</button>
-                <div id="Attendee-view-body">
-                    <div id="attendee-information">
-                        <p id="attendee-name">{this.props.singleAttendee.singleAttendee.name}</p>
-                        <p id="attendee-textA">{this.props.singleAttendee.singleAttendee.textA}</p>
-                        <p id="attendee-textB">{this.props.singleAttendee.singleAttendee.textB}</p>
-                        <p id="attendee-orderPos">{this.giveOrderPosString.call(this)}</p>
-                        <p>{this.getAudioStatusFromAttendeeState.call(this)}</p>
-                    </div>                
-
-                    <div id="attendee-buttons">
-                        <button
-                            onClick={this.playAttendeeAudio}
-                            disabled={this.props.singleAttendee.singleAttendee.audioSrc === null}
-                            id="Review-audio-btn">
-                                Review Audio</button>
-                        <button
-                            onClick={this.openModal} 
-                            id="Upload-audio-btn">Upload Audio</button>
-                    </div>
-
-                    
+                <AttendeeInterface
+                    thisAttendee={this.props.singleAttendee.singleAttendee}
+                    unloadAttendee={this.unloadAttendee.bind(this)}
+                    playAttendeeAudio={this.playAttendeeAudio}
+                    giveOrderPosString={this.giveOrderPosString.call(this)}
+                    getAudioStatusFromAttendeeState={this.getAudioStatusFromAttendeeState.call(this)}
+                    openModal={this.openModal}
+                />  
 
                 <AudioRecordingModal
                     thisAttendeeName={this.props.singleAttendee.singleAttendee.name}
                     modalIsOpen={this.state.modalIsOpen}
                     closeModal={this.closeModal}/>
 
-                </div>
- 
             </div>
         );
     }
 }
 
-class LoaderWithText extends Component {
+class AttendeeInterface extends Component {
+
+    topDivStyle = {
+        width: "100%",
+        height: "40px",
+        marginTop: "10px"
+    }
+
+    backBtnStyle = {
+        float: "right"
+    }
+
     render() {
-        return (<div>
-            <Loader
-                type={this.props.loaderType}
-                color="#222"/>
-            <p>{this.props.loadingText}</p>
-        </div>)
+        return (
+            <div>
+                <div style={this.topDivStyle}>
+                    <RaisedButton
+                        style={this.backBtnStyle}
+                        onClick={this.props.unloadAttendee}
+                        label={"Back"}/>
+                </div>
+
+                <div>
+                    <h1>{this.props.thisAttendee.name}</h1>
+                    <h4 style={{marginBottom:"4px"}}>
+                        {this.props.giveOrderPosString}
+                    </h4>
+                    <h4 style={{marginTop:"4px"}}>
+                        {this.props.getAudioStatusFromAttendeeState}
+                    </h4>
+                </div>                
+
+                <div>
+                    <RaisedButton
+                        primary={true}
+                        onClick={this.props.playAttendeeAudio}
+                        disabled={this.props.thisAttendee.audioSrc === null}
+                        label={"Review Audio"}
+                        style={{marginBottom: "10px"}}
+                    />
+                </div>
+
+                <div>
+                    <RaisedButton
+                        primary={true}
+                        onClick={this.props.openModal}
+                        label={"Upload Audio"}
+                    />
+                </div>
+            </div>
+        )
+    }
+}
+
+
+class LoaderWithText extends Component {
+
+    render() {
+        return (
+            <div>
+                <div style={this.height}/>
+                <CircularProgress
+                    size={120}
+                    thickness={6}
+                />
+                <p>{this.props.loadingText}</p>
+            </div>)
     }
 }
 
 class AttendeeKeyInputField extends Component {
+
+    gapStyle = {
+        height: "10px"
+    }
+
     render() {
-        return (<div>
-                <input
+        return (
+            <div>
+                <TextField
                     value={this.props.value}
-                    onChange={this.props.updateAttendeeKey}/>
-                <button
-                    onClick={this.props.submitAttendeeKey}>
-                        Enter</button>
-                <p>
-                    {(this.props.showIncorrectKeyMsg)
+                    onChange={this.props.updateAttendeeKey}
+                    floatingLabelText={"Provide your Unique Attendee Key"}
+                    errorText={(this.props.showIncorrectKeyMsg)
                         ? "The Attendee-Key you entered was Incorrect, Please try again."
                         : ""}
-                </p>
+                />
+
+                <div
+                    style={this.gapStyle}/>
+
+                    <RaisedButton
+                        primary={true}
+                        fullWidth={false}
+                        label={"Enter"}
+                        onClick={this.props.submitAttendeeKey}
+                    />
+                
             </div>
         )
     }

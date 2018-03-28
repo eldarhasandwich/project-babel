@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Switch, Route} from "react-router-dom"
 import {connect} from 'react-redux'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import './App.css';
 
 import AppHeader from "./AppHeader";
@@ -13,12 +15,14 @@ import AttendeeView from '../AttendeeView/AttendeeView';
 class App extends Component {
     render() {
         return (
-            <div className="App">
+            <MuiThemeProvider>
+                <div className="App">
 
-                <AppHeader/>
-                <AppRoutes/>
-                
-            </div>
+                    <AppHeader/>
+                    <AppRoutes/>
+                    
+                </div>
+            </MuiThemeProvider>
         );
     }
 }
