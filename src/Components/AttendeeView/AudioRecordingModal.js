@@ -19,6 +19,14 @@ class AudioRecordingModal extends Component {
         }
     }
 
+    toggleRecording = () => {
+        if (this.state.recording) {
+            this.stopRecording()
+        } else {
+            this.startRecording()
+        }
+    }
+
     startRecording = () => {
         this.setState({recording: true})
     }
@@ -95,23 +103,15 @@ class AudioRecordingModal extends Component {
                             </button>
                         </div>
 
-                        <div className="modal-btn-row">
-                            <div>
-                                <button
-                                    disabled={this.state.recording}
-                                    onClick={this.startRecording}
-                                    id="modal-record-button">
-                                    Record
-                                </button>
-                            </div>
-                            <div>
-                                <button
-                                    disabled={!this.state.recording}
-                                    onClick={this.stopRecording}
-                                    id="modal-stop-record-button">
-                                    Stop
-                                </button>
-                            </div>
+                        <div className="modal-play-button">
+                            <button 
+                                onClick={this.toggleRecording}>
+                                {
+                                    (this.state.recording)
+                                        ? "Stop Recording"
+                                        : "Start Recording"
+                                }
+                            </button>
                         </div>
 
                         <button
