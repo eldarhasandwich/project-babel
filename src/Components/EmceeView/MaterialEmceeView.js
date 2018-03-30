@@ -7,6 +7,10 @@ import SelectedClipInterface from "./SelectedClipInterface";
 
 import EmceeClipList from '../ClipList/EmceeClipList'
 
+import { RaisedButton } from 'material-ui'
+import { Divider } from 'material-ui'
+
+
 import {actions as audioActions} from 'redux-audio-fixed'
 
 import * as stateActions from "../../Actions/state"
@@ -81,34 +85,33 @@ class MaterialEmceeView extends Component {
                 {this.generateAudioComponents()}
                 
                 <EmceeClipList/>
+                <Divider/>
                 <SelectedClipInterface/>
 
-                <div className="Interface-buttons">
+                <div>
 
-                    <button
-                        id="back-btn"
+                    <RaisedButton
+                        secondary
                         onClick={this
                         .decrementIndex
                         .bind(this)}
-                        disabled={!this.canDecrementIndex.call(this)}>
-                        Back
-                    </button>
+                        disabled={!this.canDecrementIndex.call(this)}
+                        label="Back"/>
 
-                    <button 
-                        id="play-btn" 
+                    <RaisedButton
+                        secondary
+                        style={{margin: "0 5px"}} 
                         onClick={this.playSelectedAudio.bind(this)}
-                        disabled={!this.canPlayAudio.call(this)}>
-                        Play
-                    </button>
+                        disabled={!this.canPlayAudio.call(this)}
+                        label="Play"/>
 
-                    <button
-                        id="next-btn"
+                    <RaisedButton
+                        secondary
                         onClick={this
                         .incrementIndex
                         .bind(this)}
-                        disabled={!this.canIncrementIndex.call(this)}>
-                        Next
-                    </button>
+                        disabled={!this.canIncrementIndex.call(this)}
+                        label="Next"/>
 
                 </div>
 

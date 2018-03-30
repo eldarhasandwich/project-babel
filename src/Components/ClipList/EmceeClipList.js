@@ -39,25 +39,25 @@ class EmceeClipList extends Component {
         return (
             <div>
                 <Table height={"300px"} onRowSelection={this.handleRowSelection}>
-                    <TableHeader>
+                    <TableHeader
+                        displaySelectAll={false}
+                        adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn>Order Position</TableHeaderColumn>
                             <TableHeaderColumn>Name</TableHeaderColumn>
                             <TableHeaderColumn>Status</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody showRowHover={true}>
 
                         {this
                             .getSortedFilteredAttendees()
-                            .map((row, index) => (
-                                <EmceeClipListRow
-                                    index={index}
-                                    content={this.props.attendees.attendees[row]}
-                                    selectedIndex={this.props.state.selectedClipIndex}
-                                />
-                            ))
-}
+                            .map((row, index) => (<EmceeClipListRow
+                                props={this.props}
+                                index={index}
+                                content={this.props.attendees.attendees[row]}
+                                selectedIndex={this.props.state.selectedClipIndex}/>))}
+
                     </TableBody>
 
                 </Table>
@@ -97,9 +97,10 @@ class EmceeClipListRow extends Component {
 
     render() {
         return (
-            <TableRow 
+            <TableRow
                 key={this.props.index}
-                selected={this.props.content.orderPos === this.props.selectedIndex}>
+                selected={this.props.content.orderPos === this.props.selectedIndex}
+            >
                 <TableRowColumn>{this.props.content.orderPos + 1}</TableRowColumn>
                 <TableRowColumn>{this.props.content.name}</TableRowColumn>
                 <TableRowColumn>{this.getThisAttendeeStatus()}</TableRowColumn>
