@@ -3,15 +3,16 @@ import {Link} from "react-router-dom"
 import {connect} from 'react-redux'
 import './AppHeader.css';
 
+import { FlatButton } from 'material-ui'
+
 import * as userSessionActions from './../../Actions/userSession'
 
 var pjson = require('../../../package.json');
 
 class AppHeader extends Component {
 
-    logUserOut () {
+    logUserOut = () => {
         this.props.setUserLoggedIn(false)
-        
     }
 
     linkStyle = {
@@ -19,18 +20,39 @@ class AppHeader extends Component {
         color: 'white',
         padding: '8px 15px'
     }
+
+    appHeaderStyle = {
+        backgroundColor: "#222",
+        height: "60px",
+        padding: "20px",
+        color: "white"
+    }
     
+    titleDivStyle = {
+        display: "inline-block",
+        float: "left"
+    }
+
+    loginDivStyle = {
+        display: "inline-block",
+        float: "right"
+    }
+
     render() {
         return (
             <div>
-                <header className="App-header">
-                    <h1 className="App-title">
-                        <Link style={this.linkStyle} to="/">Project Babel {pjson.version}</Link>
-                    </h1>
+                <header style={this.appHeaderStyle}>
+                    <div style={this.titleDivStyle}>
+                        <h1>
+                            <Link style={this.linkStyle} to="/">Project Babel {pjson.version}</Link>
+                        </h1>
+                    </div>
 
-                    <LoginButton
-                        isLoggedIn={this.props.userSession.isLoggedIn}
-                        logUserOut={this.logUserOut.bind(this)}/>
+                    <div style={this.loginDivStyle}>
+                        <LoginButton
+                            isLoggedIn={this.props.userSession.isLoggedIn}
+                            logUserOut={this.logUserOut}/>
+                    </div>
                 </header>
             </div>
         )
@@ -47,18 +69,18 @@ class LoginButton extends Component {
         if (this.props.isLoggedIn) {
             return (
                 <div>
-                    <p
-                        onClick={this.props.logUserOut}>
-                        Logout
-                    </p>
+                    <FlatButton
+                        label={"Logout"}
+                        style={{color: "white"}}
+                        onClick={this.props.logUserOut}/>
                 </div>
             )
         } // if logged out
         return (
             <div>
-                <p>
-                    <Link style={this.linkStyle} to="/institution">Login</Link>   
-                </p>
+                <Link style={this.linkStyle} to="/institution">
+                    <FlatButton label={"Login"} style={{color: "white"}}/>
+                </Link>
             </div>
         )
     }

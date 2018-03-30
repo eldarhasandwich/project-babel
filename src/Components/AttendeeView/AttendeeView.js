@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import Divider from 'material-ui/Divider'
 
-import * as SingleAttendeeActions from '../../Actions/singleAttendee';
+import * as SingleAttendeeActions from '../../Actions/singleAttendee'
 import {actions as audioActions} from 'redux-audio-fixed'
 
 
