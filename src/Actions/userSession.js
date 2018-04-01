@@ -1,5 +1,6 @@
 
 import Fire from '../Classes/Fire'
+import DatabaseHandler from '../Classes/DatabaseHandler'
 
 export function setUserLoggedIn (bool) {
     return {
@@ -24,5 +25,45 @@ export function setUserCompany () {
             }, function(error) {
                 console.log("couldn't get company name")
             })
+    }
+}
+
+export function createNewList (newListName) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let companyID = state.userSession.userCompanyID
+        let newList = DatabaseHandler.createNewList(newListName)
+        
+        Fire
+            .database()
+            .ref("_COMPANIES/" + companyID + "/_LISTS")
+            .push()
+            .set(
+                newList
+            )
+    }
+}
+
+export function addNewAttendee (newAttendeeName) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let companyID = state.userSession.userCompanyID
+        let selectedList = state.userSession.selectedList
+        let newAttendee = DatabaseHandler.createNewAttendee(newAttendeeName, 0)
+
+        Fire
+            .database()
+            .ref("_COMPANIES/" + companyID + "/_LISTS/" + selectedList + "/_ATTENDEES")
+            .push()
+            .set(
+                newAttendee
+            )
+    }
+}
+
+export function setSelectedList (newListID) {
+    return {
+        type: "SET_SELECTED_LIST",
+        newSelectedList: newListID
     }
 }

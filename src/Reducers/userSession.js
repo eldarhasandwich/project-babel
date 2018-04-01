@@ -2,7 +2,8 @@ const defaultState = {
     isLoggedIn: false,
     userCompanyID: "testCompany",
     userCompanyName: "",
-    companyLists: null
+    companyLists: {},
+    selectedList: null
 }
 
 
@@ -22,6 +23,13 @@ const userSession = (state = defaultState, action) => {
                 userCompanyID: action.companyID,
                 userCompanyName: action.companyName,
                 companyLists: action.companyLists
+            }
+        }
+
+        case 'SET_SELECTED_LIST': {
+            return {
+                ...state,
+                selectedList: action.newSelectedList
             }
         }
 

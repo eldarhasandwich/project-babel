@@ -31,7 +31,7 @@ class _DatabaseHandler {
         return {...this.companyTemplate, name: thisName}
     }
 
-    createNewList(thisName, thisCeremonyDate, thisCutoffDate) {
+    createNewList(thisName, thisCeremonyDate = "", thisCutoffDate = "") {
         return {
             ...this.listTemplate,
             listName: thisName,
@@ -50,6 +50,6 @@ class _DatabaseHandler {
 
 }
 
-DatabaseHandler = new _DatabaseHandler();
+let DatabaseHandler = new _DatabaseHandler();
 
 export default DatabaseHandler;
