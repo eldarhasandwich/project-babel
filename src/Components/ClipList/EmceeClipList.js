@@ -43,9 +43,9 @@ class EmceeClipList extends Component {
                         displaySelectAll={false}
                         adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>Order Position</TableHeaderColumn>
-                            <TableHeaderColumn>Name</TableHeaderColumn>
-                            <TableHeaderColumn>Status</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign:"center"}}>Order Position</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign:"center"}}>Name</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign:"center"}}>Status</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody showRowHover={true}>
@@ -101,9 +101,9 @@ class EmceeClipListRow extends Component {
                 key={this.props.index}
                 selected={this.props.content.orderPos === this.props.selectedIndex}
             >
-                <TableRowColumn>{this.props.content.orderPos + 1}</TableRowColumn>
-                <TableRowColumn>{this.props.content.name}</TableRowColumn>
-                <TableRowColumn>{this.getThisAttendeeStatus()}</TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>{this.props.content.orderPos + 1}</TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>{this.props.content.name}</TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>{this.getThisAttendeeStatus()}</TableRowColumn>
             </TableRow>
         )
     }

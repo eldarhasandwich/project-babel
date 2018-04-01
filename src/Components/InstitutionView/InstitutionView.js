@@ -8,8 +8,6 @@ import { Drawer, MenuItem, Subheader } from 'material-ui'
 
 import LoginView from './LoginView'
 import AdminView from '../AdminView/AdminView'
-import EmceeView from '../EmceeView/EmceeView'
-
 import MaterialEmceeView from '../EmceeView/MaterialEmceeView'
 
 import * as userSessionActions from './../../Actions/userSession'
