@@ -4,7 +4,7 @@ class _DatabaseHandler {
     companyTemplate = {
         companyName: "",
 
-        _Lists:{}
+        _LISTS:{}
     }
 
     listTemplate = {
@@ -13,14 +13,13 @@ class _DatabaseHandler {
         uploadCutoffData: "",
         nextOrderPos: 0,
 
-        _Attendees: {}
+        _ATTENDEES: {}
     }
 
     attendeeTemplate = {
         audioNeedsReplacement: false,
         audioIsVerified: false,
         audioVolumeModifer: 1,
-        startTime: 0,
 
         orderPos: 0,
         name: "",

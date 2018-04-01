@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 
+import Fire from '../../Classes/Fire'
+
 import { AppBar } from 'material-ui'
 import { RaisedButton } from 'material-ui'
 import { Drawer, MenuItem, Subheader } from 'material-ui'
@@ -58,7 +60,7 @@ class InstitutionView extends Component {
 
                     <AppBar
                         style={this.appBarStyle}
-                        title={"Name of Organisation Here"}
+                        title={this.props.userSession.userCompanyName}
                         onLeftIconButtonClick={this.handleToggle}
                     />
 

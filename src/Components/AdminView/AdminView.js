@@ -1,47 +1,74 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import './AdminView.css';
-
-// import Data from "../../Classes/DataController"
-import SaveLoadButtons from "./SaveLoadButtons"
-import ClipList from '../ClipList/ClipList';
-import SelectedClipAttributeEdit from './SelectedClipAttributeEdit';
 
 import * as StateActions from '../../Actions/state';
 
+import AdminListSelect from './AdminListSelect'
+import AdminListInterface from './AdminListInterface'
+
 class AdminView extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.onresize = this.onresize.bind(this)
+    }
 
     setThisFirebaseDataDirectory (newDirectory) {
         this.props.setFirebaseDataDir(newDirectory.target.value)
     }
 
+    listSelectStyle = {
+        width: "250px",
+        minWidth: "250px",
+        float: "left"
+    }
+
+    getListInterfaceStyle = () => {
+        return {
+            width: (window.innerWidth - 250) + "px",
+            float: "right"
+        }
+    }
+
+    onresize () {
+        this.forceUpdate()
+    }
+
+    componentDidMount () {
+        window.addEventListener('resize', this.onresize)
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.onresize)
+    }
+
     render () {
+        if (!this.props.userSession.isLoggedIn) {
+            return (
+                <h4>You are not logged in</h4>
+            )
+        }
+
         return (
-            <div className="Admin-view">
-                
-                <p>List Key:</p>
-                <input
-                    id="admin-view-list-key"
-                    value={this.props.state.fireBaseDataDirectory}
-                    onChange={this.setThisFirebaseDataDirectory.bind(this)}
-                />
+            <div
+                style={{width: "100%", minWidth:"100%"}}>
 
-                <SaveLoadButtons/>
-
-                <ClipList
-                    itemDisplaySize={"small"}
-                />
-
-                <SelectedClipAttributeEdit/>
-
-                {this.props.children}
+                <div
+                    style={this.listSelectStyle}>
+                    <AdminListSelect/>
+                </div>
+                <div
+                    style={this.getListInterfaceStyle()}>
+                    <AdminListInterface/>
+                </div>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    return {state: state.state}
+    return {state: state.state, userSession: state.userSession}
 }
 
 const mapDispatchToProps = dispatch => {

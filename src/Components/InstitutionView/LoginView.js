@@ -9,21 +9,6 @@ import * as firebaseui from 'firebaseui'
 import * as userSessionActions from './../../Actions/userSession'
 
 
-const uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    signInSuccessUrl: '/signedIn',
-    signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-        signInSuccess: () => {
-            
-        }
-    }
-  };
-
 class LoginView extends Component {
 
     constructor(props) {
@@ -54,6 +39,7 @@ class LoginView extends Component {
     attemptLogin = () => {
         if (true) {
             this.props.setUserLoggedIn(true)
+            this.props.setUserCompany()
         }
     }
 
@@ -74,7 +60,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setUserLoggedIn: bool => dispatch(userSessionActions.setUserLoggedIn(bool))
+        setUserLoggedIn: bool => dispatch(userSessionActions.setUserLoggedIn(bool)),
+        setUserCompany: () => dispatch(userSessionActions.setUserCompany())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginView)
