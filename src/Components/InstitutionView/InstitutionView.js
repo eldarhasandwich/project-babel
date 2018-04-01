@@ -69,18 +69,20 @@ class InstitutionView extends Component {
                         onRequestChange={this.handleClose}
                     >
                         <Subheader style={this.subheaderStyle}>Navigation</Subheader>
-                        <Link to="/emcee" style={this.linkStyle}>
+                        <Link to={process.env.PUBLIC_URL + '/emcee'} 
+                            style={this.linkStyle}>
                             <MenuItem onClick={this.handleClose}>Emcee View</MenuItem>
                         </Link>
-                        <Link to="/admin" style={this.linkStyle}>
+                        <Link to={process.env.PUBLIC_URL + '/admin'}
+                            style={this.linkStyle}>
                             <MenuItem onClick={this.handleClose}>Admin View</MenuItem>
                         </Link>
                         <Subheader style={this.subheaderStyle}>Other</Subheader>
                         <MenuItem onClick={this.userLogout}>Logout</MenuItem>
                     </Drawer>
 
-                    <Route path='/emcee' component={MaterialEmceeView}/>
-                    <Route path='/admin' component={AdminView}/>
+                    <Route path={process.env.PUBLIC_URL + '/emcee'} component={MaterialEmceeView}/>
+                    <Route path={process.env.PUBLIC_URL + '/admin'} component={AdminView}/>
 
                 </div>
             </BrowserRouter>

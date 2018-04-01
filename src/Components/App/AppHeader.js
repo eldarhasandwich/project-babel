@@ -44,7 +44,7 @@ class AppHeader extends Component {
                 <header style={this.appHeaderStyle}>
                     <div style={this.titleDivStyle}>
                         <h1>
-                            <Link style={this.linkStyle} to="/">Project Babel {pjson.version}</Link>
+                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Project Babel {pjson.version}</Link>
                         </h1>
                     </div>
 
@@ -78,7 +78,7 @@ class LoginButton extends Component {
         } // if logged out
         return (
             <div>
-                <Link style={this.linkStyle} to="/institution">
+                <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/institution'}>
                     <FlatButton label={"Login"} style={{color: "white"}}/>
                 </Link>
             </div>

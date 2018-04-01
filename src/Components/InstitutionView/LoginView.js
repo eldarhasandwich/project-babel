@@ -40,7 +40,6 @@ class LoginView extends Component {
         credentialHelper: firebaseui.auth.CredentialHelper.NONE,
         signInFlow: 'popup',
         // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-        signInSuccessUrl: '/institution',
         signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],

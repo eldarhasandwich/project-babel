@@ -17,10 +17,10 @@ class LandingPage extends Component {
 
                     <nav className="Route-buttons">
                         <p>
-                            <Link style={this.linkStyle} to="/attendee">Attendee View</Link>
+                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL + '/attendee'}>Attendee View</Link>
                         </p>
                         <p>
-                            <Link style={this.linkStyle} to="/institution">Institution View</Link>
+                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL + '/institution'}>Institution View</Link>
                         </p>
                     </nav>
             </div>
