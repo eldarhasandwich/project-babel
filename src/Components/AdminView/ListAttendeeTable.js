@@ -9,11 +9,37 @@ import {
     TableRow,
     TableRowColumn
 } from 'material-ui/Table';
-import { FlatButton } from 'material-ui';
+import { FlatButton, Dialog, TextField } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
 
 class ListAttendeeTable extends Component {
+
+    constructor(props) {
+        super(props) 
+
+        this.state = {
+            addAttendeeDialogOpen: false,
+            attendeeName: ""
+        }
+    }
+
+    openCreateAttendeeDialog = () => {
+        this.setState({addAttendeeDialogOpen: true})
+    }
+
+    closeCreateAttendeeDialog = () => {
+        this.setState({addAttendeeDialogOpen: false})
+    }
+
+    setNewAttendeeName = newName => {
+        console.log(newName.target.value)
+        this.setState({attendeeName: newName.target.value})
+    }
+
+    resetNewAttendeeName = () => {
+        this.setState({attendeeName: ""})
+    }
 
     getSelectedListAttendees = () => {
         return this.props.userSession.companyLists[this.props.userSession.selectedList]._ATTENDEES
@@ -35,36 +61,59 @@ class ListAttendeeTable extends Component {
     }
     
     addNewAttendee = newAttendeeName => {
-        this.props.addNewAttendee("John Smith")
+        this.closeCreateAttendeeDialog()
+        this.props.addNewAttendee(this.state.attendeeName)
+        this.resetNewAttendeeName()
     }
+
+    dialogActions = [
+        <FlatButton
+            label={"Add Attendee"}
+            primary
+            onClick={this.addNewAttendee}
+        />
+    ]
 
     render () {
         return (
             <div>
-            <Table>
-                <TableHeader
-                    displaySelectAll={false}
-                    adjustForCheckbox={false}>
-                    <TableRow>
-                        <TableHeaderColumn style={{textAlign:"center"}}>Order Position</TableHeaderColumn>
-                        <TableHeaderColumn style={{textAlign:"center"}}>Name</TableHeaderColumn>
-                        <TableHeaderColumn style={{textAlign:"center"}}>Status</TableHeaderColumn>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {   
-                        this.getSortedFilteredAttendees().map(
-                            (row, index) => <ListAttendeeTableItem 
-                                itemKey={row} 
-                                attendees={this.getSelectedListAttendees()}
-                                key={this.props.userSession.selectedList + row}/>
-                        )
-                    }
-                </TableBody>
-            </Table>
-            <FlatButton
-                label={"Add new Attendee"}
-                onClick={this.addNewAttendee}/>
+                <Table>
+                    <TableHeader
+                        displaySelectAll={false}
+                    >
+                        <TableRow>
+                            <TableHeaderColumn style={{textAlign:"center"}}>Order Position</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign:"center"}}>Name</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign:"center"}}>Status</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {   
+                            this.getSortedFilteredAttendees().map(
+                                (row, index) => <ListAttendeeTableItem 
+                                    itemKey={row} 
+                                    attendees={this.getSelectedListAttendees()}
+                                    key={this.props.userSession.selectedList + row}/>
+                            )
+                        }
+                    </TableBody>
+                </Table>
+                <FlatButton
+                    style={{marginTop: "5px"}}
+                    label={"Add new Attendee"}
+                    onClick={this.openCreateAttendeeDialog}/>
+                <Dialog
+                    title="Add a New Attendee to this List"
+                    actions={this.dialogActions}
+                    open={this.state.addAttendeeDialogOpen}
+                    onRequestClose={this.closeCreateAttendeeDialog}
+                >
+                    <TextField
+                        floatingLabelText={"Attendee Name"}
+                        value={this.state.newAttendeeName}
+                        onChange={this.setNewAttendeeName}
+                    />
+                </Dialog>
             </div>
         )
     }
@@ -76,8 +125,10 @@ class ListAttendeeTableItem extends Component {
     itemInfo = this.props.attendees[this.props.itemKey]
 
     render () {
+        const { order, ...otherProps } = this.props;
         return (
-            <TableRow>
+            <TableRow { ...otherProps }>
+                {otherProps.children[0] /* checkbox passed down from Table-Body*/}
                 <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.orderPos + 1}</TableRowColumn>
                 <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.name}</TableRowColumn>
                 <TableRowColumn style={{textAlign:"center"}}>---</TableRowColumn>

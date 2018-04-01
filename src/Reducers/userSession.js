@@ -3,7 +3,8 @@ const defaultState = {
     userCompanyID: "testCompany",
     userCompanyName: "",
     companyLists: {},
-    selectedList: null
+    selectedList: null,
+    selectedAttendee: null
 }
 
 
@@ -29,7 +30,15 @@ const userSession = (state = defaultState, action) => {
         case 'SET_SELECTED_LIST': {
             return {
                 ...state,
-                selectedList: action.newSelectedList
+                selectedList: action.newSelectedList,
+                selectedAttendee: null
+            }
+        }
+
+        case 'SET_SELECTED_ATTENDEE': {
+            return {
+                ...state,
+                selectedAttendee: action.newSelectedAttendee
             }
         }
 

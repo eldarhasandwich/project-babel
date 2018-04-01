@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import { Menu, MenuItem, Subheader, Divider, FlatButton } from 'material-ui'
+import { Menu, MenuItem, Subheader, Divider, FlatButton, Dialog, TextField } from 'material-ui'
 
 import * as StateActions from '../../Actions/state';
 import * as UserSessionActions from '../../Actions/userSession'
@@ -12,6 +12,31 @@ class AdminListSelect extends Component {
         super(props)
 
         this.setSelectedList = this.setSelectedList.bind(this)
+
+        this.state = {
+            createListDialogOpen: false,
+            newListName: ""
+        }
+    }
+
+    openCreateListDialog = () => {
+        this.setState({createListDialogOpen: true})
+    }
+
+    closeCreateListDialog = () => {
+        this.setState({createListDialogOpen: false})
+    }
+
+    setNewListName = newName => {
+        this.setState({newListName: newName.target.value})
+    }
+
+    resetNewListName = () => {
+        this.setState({newListName: ""})
+    }
+
+    newListNameIsValid = () => {
+        return this.state.newListName.length >= 6
     }
 
     getCompanyListKeys = () => {
@@ -24,14 +49,24 @@ class AdminListSelect extends Component {
 
     setSelectedList (newListID) {
         return () => {
-            console.log(newListID)
             this.props.setSelectedList(newListID)
         }
     }
 
-    createNewList = newListName => {
-        this.props.createNewList("New List")
+    createNewList = () => {
+        this.closeCreateListDialog()
+        this.props.createNewList(this.state.newListName)
+        this.resetNewListName()
     }
+
+    dialogActions = [
+        <FlatButton
+            label={"Create List"}
+            disabled={!this.newListNameIsValid}
+            primary
+            onClick={this.createNewList}
+        />
+    ]
 
     render () {
         return (
@@ -50,10 +85,21 @@ class AdminListSelect extends Component {
                 <FlatButton
                     label={"Create new List"}
                     onClick={
-                        this.createNewList
+                        this.openCreateListDialog
                     }
-
                 />
+                <Dialog
+                    title="Create a New List"
+                    actions={this.dialogActions}
+                    open={this.state.createListDialogOpen}
+                    onRequestClose={this.closeCreateListDialog}
+                >
+                    <TextField
+                        floatingLabelText={"New List Name"}
+                        value={this.state.newListName}
+                        onChange={this.setNewListName}
+                    />
+                </Dialog>
 
             </div>
         );
@@ -89,7 +135,7 @@ const mapDispatchToProps = dispatch => {
     return {
         setSelectedList: newListID => dispatch(UserSessionActions.setSelectedList(newListID)),
         createNewList: newListName => dispatch(UserSessionActions.createNewList(newListName)),
-        addNewAttendee: newAttendeeName => dispatch(UserSessionActions.addNewAttendee(newAttendeeName))
+        // addNewAttendee: newAttendeeName => dispatch(UserSessionActions.addNewAttendee(newAttendeeName))
     }
 }
 

@@ -49,7 +49,13 @@ export function addNewAttendee (newAttendeeName) {
         let state = getState()
         let companyID = state.userSession.userCompanyID
         let selectedList = state.userSession.selectedList
-        let newAttendee = DatabaseHandler.createNewAttendee(newAttendeeName, 0)
+        let nextOrderPos = state.userSession.companyLists[selectedList].nextOrderPos
+        let newAttendee = DatabaseHandler.createNewAttendee(newAttendeeName, nextOrderPos)
+
+        Fire
+            .database()
+            .ref("_COMPANIES/" + companyID + "/_LISTS/" + selectedList)
+            .update({nextOrderPos: nextOrderPos + 1})
 
         Fire
             .database()

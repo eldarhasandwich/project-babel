@@ -5,12 +5,13 @@ import * as StateActions from '../../Actions/state';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui';
 
 import ListAttendeeTable from './ListAttendeeTable'
+import SelectedItemInterface from './SelectedItemInterface'
 
 class AdminListInterface extends Component {
 
     getSelectedListName = () => {
         if (this.props.userSession.selectedList === null) {
-            return "Please select a List"
+            return "Select or Create a List"
         }
         return this.props.userSession.companyLists[this.props.userSession.selectedList].listName
     }
@@ -40,8 +41,8 @@ class AdminListInterfaceChild extends Component {
                 <div style={{width: "50%", float: "left"}}>
                     <ListAttendeeTable/>
                 </div>
-                <div>
-                    
+                <div style={{width: "50%", float: "right"}}>
+                    <SelectedItemInterface/>
                 </div>
             </div>
         )
