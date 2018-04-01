@@ -23,7 +23,7 @@ class AppHeader extends Component {
 
     appHeaderStyle = {
         backgroundColor: "#222",
-        height: "60px",
+        overflow: "auto",
         padding: "20px",
         color: "white"
     }
@@ -42,16 +42,17 @@ class AppHeader extends Component {
         return (
             <div>
                 <header style={this.appHeaderStyle}>
-                    <div style={this.titleDivStyle}>
-                        <h1>
-                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Project Babel {pjson.version}</Link>
-                        </h1>
-                    </div>
 
                     <div style={this.loginDivStyle}>
                         <LoginButton
                             isLoggedIn={this.props.userSession.isLoggedIn}
                             logUserOut={this.logUserOut}/>
+                    </div>
+                    
+                    <div style={this.titleDivStyle}>
+                        <h1>
+                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Project Babel {pjson.version}</Link>
+                        </h1>
                     </div>
                 </header>
             </div>

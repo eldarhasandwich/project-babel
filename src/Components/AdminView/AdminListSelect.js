@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import { Menu, MenuItem, Subheader} from 'material-ui'
+import { Menu, MenuItem, Subheader, Divider } from 'material-ui'
 
 import * as StateActions from '../../Actions/state';
 
@@ -13,17 +13,45 @@ class AdminListSelect extends Component {
             <div style={{width: "100%"}}>
 
                 <Subheader>Ceremonies</Subheader>
-                <Menu>
+                <Menu style={{width: "100%"}}>
                     <MenuItem>Item</MenuItem>
+                    <Divider/>
+
                     <MenuItem>Item</MenuItem>
-                    <MenuItem style={{whiteSpace: 'normal'}}>ItemItem ItemItem Item Item Item Item Item</MenuItem>
+                    <Divider/>
+
+                    <MenuItem style={{whiteSpace: 'normal', lineHeight: "120%"}}>asasa bndi iuebfhierfnh ujrhngfrjghoe jnfrijgfn jrngijrgf ngfjirn nirnrgrjkgfn ruirn iwgfj nirhgb rnj rgirhngf rjgfhnrgugfneig rngn wefnerijgnerij gnrjg i</MenuItem>
+                    <Divider/>
+
+                    <MenuItem style={{whiteSpace: 'normal', lineHeight: "120%"}}>asasa bndi iuebfhierfnh ujrhngfrjghoe jnfrijgfn jrngijrgf ngfjirn nirnrgrjkgfn ruirn iwgfj nirhgb rnj rgirhngf rjgfhnrgugfneig rngn wefnerijgnerij gnrjg i</MenuItem>
+                    <Divider/>
+
+                    <MenuItem style={{whiteSpace: 'normal', lineHeight: "120%"}}>asasa bndi iuebfhierfnh ujrhngfrjghoe jnfrijgfn jrngijrgf ngfjirn nirnrgrjkgfn ruirn iwgfj nirhgb rnj rgirhngf rjgfhnrgugfneig rngn wefnerijgnerij gnrjg i</MenuItem>
+                    <Divider/>
+
                     <MenuItem>Item</MenuItem>
+                    <Divider/>
+
                     <MenuItem>Item</MenuItem>
                 </Menu>
 
             </div>
         );
     }
+}
+
+class AdminListSelectItem extends Component {
+
+    render() {
+        return (
+            <div>
+                <MenuItem>{this.props.itemName}</MenuItem>
+                <Divider/>
+            </div>
+        )
+    }
+
+
 }
 
 const mapStateToProps = state => {

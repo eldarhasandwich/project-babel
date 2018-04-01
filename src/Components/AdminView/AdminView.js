@@ -19,14 +19,14 @@ class AdminView extends Component {
     }
 
     listSelectStyle = {
-        width: "250px",
-        minWidth: "250px",
+        width: "280px",
+        minWidth: "280px",
         float: "left"
     }
 
     getListInterfaceStyle = () => {
         return {
-            width: (window.innerWidth - 250) + "px",
+            width: (window.innerWidth - 280) + "px",
             float: "right"
         }
     }
