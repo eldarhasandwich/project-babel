@@ -33,7 +33,6 @@ class ListAttendeeTable extends Component {
     }
 
     setNewAttendeeName = newName => {
-        console.log(newName.target.value)
         this.setState({attendeeName: newName.target.value})
     }
 
@@ -66,6 +65,11 @@ class ListAttendeeTable extends Component {
         this.resetNewAttendeeName()
     }
 
+    handleRowClick = index => {
+        let attendees = this.getSortedFilteredAttendees()
+        this.props.setSelectedAttendee(attendees[index[0]])
+    }
+
     dialogActions = [
         <FlatButton
             label={"Add Attendee"}
@@ -77,7 +81,9 @@ class ListAttendeeTable extends Component {
     render () {
         return (
             <div>
-                <Table>
+                <Table
+                    onRowSelection={(index) => this.handleRowClick(index)}
+                >
                     <TableHeader
                         displaySelectAll={false}
                     >
@@ -87,7 +93,8 @@ class ListAttendeeTable extends Component {
                             <TableHeaderColumn style={{textAlign:"center"}}>Status</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody
+                        deselectOnClickaway={false}>
                         {   
                             this.getSortedFilteredAttendees().map(
                                 (row, index) => <ListAttendeeTableItem 
@@ -143,7 +150,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNewAttendee: newAttendeeName => dispatch(UserSessionActions.addNewAttendee(newAttendeeName))
+        addNewAttendee: newAttendeeName => dispatch(UserSessionActions.addNewAttendee(newAttendeeName)),
+        setSelectedAttendee: newAttendeeID => dispatch(UserSessionActions.setSelectedAttendee(newAttendeeID))
     }
 }
 

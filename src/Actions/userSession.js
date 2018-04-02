@@ -73,3 +73,10 @@ export function setSelectedList (newListID) {
         newSelectedList: newListID
     }
 }
+
+export function setSelectedAttendee (newAttendeeID) {
+    return {
+        type: "SET_SELECTED_ATTENDEE",
+        newSelectedAttendee: newAttendeeID
+    }
+}
