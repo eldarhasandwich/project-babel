@@ -7,8 +7,8 @@ import {ReactMic} from 'react-mic';
 import { RaisedButton } from 'material-ui'
 import { CircularProgress } from 'material-ui'
 import { Divider } from 'material-ui'
-import { IconButton } from 'material-ui'
-import { FloatingActionButton } from 'material-ui';
+// import { IconButton } from 'material-ui'
+// import { FloatingActionButton } from 'material-ui';
 
 import * as SingleAttendeeActions from '../../Actions/singleAttendee';
 

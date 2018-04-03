@@ -11,14 +11,13 @@ class _DatabaseHandler {
         listName: "",
         ceremonyDate: "",
         uploadCutoffData: "",
-        nextOrderPos: 0,
+        nextOrderPos: 1,
 
         _ATTENDEES: {}
     }
 
     attendeeTemplate = {
-        audioNeedsReplacement: false,
-        audioIsVerified: false,
+        audioStatus: "No Audio", // Unverified, Needs Replacement, Verified *tick*
         audioVolumeModifer: 1,
 
         orderPos: 0,

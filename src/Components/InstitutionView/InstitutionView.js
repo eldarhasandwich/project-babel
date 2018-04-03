@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 
-import Fire from '../../Classes/Fire'
+// import Fire from '../../Classes/Fire'
 
 import { AppBar } from 'material-ui'
-import { RaisedButton } from 'material-ui'
+// import { RaisedButton } from 'material-ui'
 import { Drawer, MenuItem, Subheader } from 'material-ui'
 
 import LoginView from './LoginView'

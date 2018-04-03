@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import Fire from '../../Classes/Fire'
+// import Fire from '../../Classes/Fire'
 import firebase from 'firebase';
 
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'

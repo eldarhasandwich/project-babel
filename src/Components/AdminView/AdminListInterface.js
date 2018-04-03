@@ -1,13 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import * as StateActions from '../../Actions/state';
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui';
+import * as UserSessionActions from '../../Actions/userSession';
+
+import { Toolbar, ToolbarGroup, ToolbarTitle, RaisedButton, Popover, Menu, MenuItem} from 'material-ui';
 
 import ListAttendeeTable from './ListAttendeeTable'
 import SelectedItemInterface from './SelectedItemInterface'
 
 class AdminListInterface extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            visibilityPopoverOpen: false
+        }
+    }
+
+    openVisibilityPopover = () => {
+        this.setState({visibilityPopoverOpen: true})
+    }
+
+    closeVisibilityPopover = () => {
+        this.setState({visibilityPopoverOpen: false})
+    }
 
     getSelectedListName = () => {
         if (this.props.userSession.selectedList === null) {
@@ -16,6 +33,11 @@ class AdminListInterface extends Component {
         return this.props.userSession.companyLists[this.props.userSession.selectedList].listName
     }
 
+    showListInformation = () => {
+        this.props.setSelectedAttendee(null)
+    }
+
+
     render () {
         return (
             <div>
@@ -23,6 +45,15 @@ class AdminListInterface extends Component {
                 <Toolbar>
                     <ToolbarGroup>
                         <ToolbarTitle text={this.getSelectedListName()}/>
+                    </ToolbarGroup>
+
+                    <ToolbarGroup>
+                        <RaisedButton
+                            label={"View List"}
+                            disabled={this.props.userSession.selectedAttendee === null}
+                            onClick={this.showListInformation}
+                        />
+                        
                     </ToolbarGroup>
                 </Toolbar>
 
@@ -55,7 +86,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFirebaseDataDir: (newDir) => dispatch(StateActions.setFirebaseDataDirectory(newDir))
+        setSelectedAttendee: attID => dispatch(UserSessionActions.setSelectedAttendee(attID))
     }
 }
 

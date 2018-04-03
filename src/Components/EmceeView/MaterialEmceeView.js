@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Audio} from 'redux-audio-fixed'
 
-import ClipList from "../ClipList/ClipList";
+// import ClipList from "../ClipList/ClipList";
 import SelectedClipInterface from "./SelectedClipInterface";
 
 import EmceeClipList from '../ClipList/EmceeClipList'

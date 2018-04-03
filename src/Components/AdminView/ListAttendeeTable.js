@@ -65,9 +65,16 @@ class ListAttendeeTable extends Component {
         this.resetNewAttendeeName()
     }
 
+    setSelectedAttendee = attendeeKey => {
+        this.props.setSelectedAttendee(attendeeKey)
+    }
+
     handleRowClick = index => {
+        console.log(index)
+        console.log(index[0] || null)
+        
         let attendees = this.getSortedFilteredAttendees()
-        this.props.setSelectedAttendee(attendees[index[0]])
+        this.setSelectedAttendee(attendees[index[0]])
     }
 
     dialogActions = [
@@ -86,6 +93,7 @@ class ListAttendeeTable extends Component {
                 >
                     <TableHeader
                         displaySelectAll={false}
+                        adjustForCheckbox={false}
                     >
                         <TableRow>
                             <TableHeaderColumn style={{textAlign:"center"}}>Order Position</TableHeaderColumn>
@@ -94,11 +102,14 @@ class ListAttendeeTable extends Component {
                         </TableRow>
                     </TableHeader>
                     <TableBody
-                        deselectOnClickaway={false}>
+                        deselectOnClickaway={false}
+                        showRowHover={true}
+                        >
                         {   
                             this.getSortedFilteredAttendees().map(
                                 (row, index) => <ListAttendeeTableItem 
-                                    itemKey={row} 
+                                    itemKey={row}
+                                    selectedAttendee={this.props.userSession.selectedAttendee}
                                     attendees={this.getSelectedListAttendees()}
                                     key={this.props.userSession.selectedList + row}/>
                             )
@@ -134,11 +145,14 @@ class ListAttendeeTableItem extends Component {
     render () {
         const { order, ...otherProps } = this.props;
         return (
-            <TableRow { ...otherProps }>
-                {otherProps.children[0] /* checkbox passed down from Table-Body*/}
+            <TableRow 
+                { ...otherProps }
+                selected={this.props.selectedAttendee === this.props.itemKey}
+            >
+
                 <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.orderPos + 1}</TableRowColumn>
                 <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.name}</TableRowColumn>
-                <TableRowColumn style={{textAlign:"center"}}>---</TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.audioStatus}</TableRowColumn>
             </TableRow>
         )
     }
