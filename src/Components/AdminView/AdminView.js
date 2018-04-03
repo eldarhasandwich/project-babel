@@ -8,46 +8,38 @@ import AdminListInterface from './AdminListInterface'
 
 class AdminView extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.onresize = this.onresize.bind(this)
+    setThisFirebaseDataDirectory(newDirectory) {
+        this
+            .props
+            .setFirebaseDataDir(newDirectory.target.value)
     }
 
-    setThisFirebaseDataDirectory (newDirectory) {
-        this.props.setFirebaseDataDir(newDirectory.target.value)
+    adminViewStyle = {
+        width: "100%",
+        minWidth: "100%",
+        height: (window.innerHeight - 184) + "px",
+        maxHeight: (window.innerHeight - 184) + "px",
+        overflow: "auto",
+        position: "relative"
     }
 
     listSelectStyle = {
-        width: "280px",
-        minWidth: "280px",
+        width: "279px",
+        minWidth: "279px",
         float: "left",
-        borderRight: "1px solid #888",
-        height: "100%",
-        display: "absolute"
-        
+        borderRight: "1px solid #BBB",
+        height: "100%"
+
     }
 
-    getListInterfaceStyle = () => {
-        return {
-            width: (window.innerWidth - 281) + "px",
-            float: "right"
-        }
+    listInterfaceStyle = {
+        width: "calc(100% - 280px)",
+        float: "right",
+        height: "100%"
     }
 
-    onresize () {
-        this.forceUpdate()
-    }
 
-    componentDidMount () {
-        window.addEventListener('resize', this.onresize)
-    }
-
-    componentWillUnmount () {
-        window.removeEventListener('resize', this.onresize)
-    }
-
-    render () {
+    render() {
         if (!this.props.userSession.isLoggedIn) {
             return (
                 <h4>You are not logged in</h4>
@@ -56,15 +48,13 @@ class AdminView extends Component {
 
         return (
             <div
-                style={{width: "100%", minWidth:"100%"}}>
+                style={this.adminViewStyle}>
 
-                <div
-                    style={this.listSelectStyle}>
+                <div style={this.listSelectStyle}>
                     <AdminListSelect/>
                 </div>
 
-                <div
-                    style={this.getListInterfaceStyle()}>
+                <div style={this.listInterfaceStyle}>
                     <AdminListInterface/>
                 </div>
             </div>

@@ -23,7 +23,8 @@ class _DatabaseHandler {
         orderPos: 0,
         name: "",
         textA: "",
-        textB: ""
+        textB: "",
+        contactEmail: ""
     }
 
     createNewCompany(thisName) {
@@ -39,10 +40,11 @@ class _DatabaseHandler {
         }
     }
 
-    createNewAttendee(thisName, thisOrderPos) {
+    createNewAttendee(thisName, thisEmail, thisOrderPos) {
         return {
             ...this.attendeeTemplate,
             name: thisName,
+            contactEmail: thisEmail,
             orderPos: thisOrderPos
         }
     }

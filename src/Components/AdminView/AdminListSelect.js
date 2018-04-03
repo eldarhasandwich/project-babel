@@ -68,12 +68,21 @@ class AdminListSelect extends Component {
         />
     ]
 
+    createNewListStyle = {
+        width: "100%",
+        position:"absolute",
+        bottom:"0"
+    }
+
     render () {
         return (
-            <div style={{width: "100%"}}>
+            <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative"}}>
 
                 <Subheader style={{paddingLeft:"0px"}}>Ceremonies</Subheader>
-                <Menu style={{width: "100%"}}>
+                <Menu style={{width: "100%", height: "685px"}}>
+                    
+                    <div style={{overflow: "auto", height: "685px"}}>
+                    <Divider/>
                     {this.getCompanyListKeys().map(
                         x => <AdminListSelectItem
                             key={x}
@@ -81,26 +90,31 @@ class AdminListSelect extends Component {
                             itemName={this.props.userSession.companyLists[x].listName}
                             setSelectedList={this.setSelectedList}/>
                     )}
-                </Menu>
-                <FlatButton
-                    label={"Create new List"}
-                    onClick={
-                        this.openCreateListDialog
-                    }
-                />
-                <Dialog
-                    title="Create a New List"
-                    actions={this.dialogActions}
-                    open={this.state.createListDialogOpen}
-                    onRequestClose={this.closeCreateListDialog}
-                >
-                    <TextField
-                        floatingLabelText={"New List Name"}
-                        value={this.state.newListName}
-                        onChange={this.setNewListName}
-                    />
-                </Dialog>
+                    </div>
 
+                </Menu>
+
+                <div style={this.createNewListStyle}>
+                    <FlatButton
+                        label={"Create new List"}
+                        fullWidth
+                        onClick={
+                            this.openCreateListDialog
+                        }
+                    />
+                    <Dialog
+                        title="Create a New List"
+                        actions={this.dialogActions}
+                        open={this.state.createListDialogOpen}
+                        onRequestClose={this.closeCreateListDialog}
+                    >
+                        <TextField
+                            floatingLabelText={"New List Name"}
+                            value={this.state.newListName}
+                            onChange={this.setNewListName}
+                        />
+                    </Dialog>
+                </div>
             </div>
         );
     }

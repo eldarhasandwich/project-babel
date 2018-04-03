@@ -20,7 +20,8 @@ class ListAttendeeTable extends Component {
 
         this.state = {
             addAttendeeDialogOpen: false,
-            attendeeName: ""
+            attendeeName: "",
+            attendeeEmail: ""
         }
     }
 
@@ -36,8 +37,12 @@ class ListAttendeeTable extends Component {
         this.setState({attendeeName: newName.target.value})
     }
 
-    resetNewAttendeeName = () => {
-        this.setState({attendeeName: ""})
+    setNewAttendeeEmail = newEmail => {
+        this.setState({attendeeEmail: newEmail.target.value})
+    }
+
+    resetNewAttendee = () => {
+        this.setState({attendeeName: "", attendeeEmail: ""})
     }
 
     getSelectedListAttendees = () => {
@@ -59,10 +64,10 @@ class ListAttendeeTable extends Component {
         return attendeeKeys
     }
     
-    addNewAttendee = newAttendeeName => {
+    addNewAttendee = () => {
         this.closeCreateAttendeeDialog()
-        this.props.addNewAttendee(this.state.attendeeName)
-        this.resetNewAttendeeName()
+        this.props.addNewAttendee(this.state.attendeeName, this.state.attendeeEmail)
+        this.resetNewAttendee()
     }
 
     setSelectedAttendee = attendeeKey => {
@@ -87,9 +92,10 @@ class ListAttendeeTable extends Component {
 
     render () {
         return (
-            <div>
+            <div >
                 <Table
                     onRowSelection={(index) => this.handleRowClick(index)}
+                    height={790-58-56-37-5}
                 >
                     <TableHeader
                         displaySelectAll={false}
@@ -119,18 +125,28 @@ class ListAttendeeTable extends Component {
                 <FlatButton
                     style={{marginTop: "5px"}}
                     label={"Add new Attendee"}
+                    fullWidth
                     onClick={this.openCreateAttendeeDialog}/>
                 <Dialog
-                    title="Add a New Attendee to this List"
+                    title={"Add a new Attendee to " + this.props.userSession.companyLists[this.props.userSession.selectedList].listName}
                     actions={this.dialogActions}
                     open={this.state.addAttendeeDialogOpen}
                     onRequestClose={this.closeCreateAttendeeDialog}
                 >
+                <div>
                     <TextField
                         floatingLabelText={"Attendee Name"}
                         value={this.state.newAttendeeName}
                         onChange={this.setNewAttendeeName}
                     />
+                </div>    
+                <div>
+                    <TextField
+                        floatingLabelText={"Contact Email"}
+                        value={this.state.newAttendeeEmail}
+                        onChange={this.setNewAttendeeEmail}
+                    />
+                </div>
                 </Dialog>
             </div>
         )
@@ -164,7 +180,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNewAttendee: newAttendeeName => dispatch(UserSessionActions.addNewAttendee(newAttendeeName)),
+        addNewAttendee: (newAttendeeName, newAttendeeEmail) => dispatch(UserSessionActions.addNewAttendee(newAttendeeName, newAttendeeEmail)),
         setSelectedAttendee: newAttendeeID => dispatch(UserSessionActions.setSelectedAttendee(newAttendeeID))
     }
 }

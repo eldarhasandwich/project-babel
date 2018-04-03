@@ -44,7 +44,7 @@ export function createNewList (newListName) {
     }
 }
 
-export function addNewAttendee (newAttendeeName) {
+export function addNewAttendee (newAttendeeName, newAttendeeEmail) {
     return (dispatch, getState) => {
         let state = getState()
         let companyID = state.userSession.userCompanyID
@@ -56,7 +56,7 @@ export function addNewAttendee (newAttendeeName) {
             attendeeCount = Object.keys(state.userSession.companyLists[selectedList]._ATTENDEES).length
         }
         // let nextOrderPos = state.userSession.companyLists[selectedList].nextOrderPos
-        let newAttendee = DatabaseHandler.createNewAttendee(newAttendeeName, attendeeCount)
+        let newAttendee = DatabaseHandler.createNewAttendee(newAttendeeName, newAttendeeEmail, attendeeCount)
 
         Fire
             .database()

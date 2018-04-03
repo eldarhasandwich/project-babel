@@ -3,7 +3,15 @@ import {connect} from 'react-redux'
 
 import * as UserSessionActions from '../../Actions/userSession';
 
-import { Toolbar, ToolbarGroup, ToolbarTitle, RaisedButton, Popover, Menu, MenuItem} from 'material-ui';
+import {
+    Toolbar,
+    ToolbarGroup,
+    ToolbarTitle,
+    RaisedButton,
+    Popover,
+    Menu,
+    MenuItem
+} from 'material-ui';
 
 import ListAttendeeTable from './ListAttendeeTable'
 import SelectedItemInterface from './SelectedItemInterface'
@@ -34,11 +42,12 @@ class AdminListInterface extends Component {
     }
 
     showListInformation = () => {
-        this.props.setSelectedAttendee(null)
+        this
+            .props
+            .setSelectedAttendee(null)
     }
 
-
-    render () {
+    render() {
         return (
             <div>
 
@@ -51,14 +60,14 @@ class AdminListInterface extends Component {
                         <RaisedButton
                             label={"View List"}
                             disabled={this.props.userSession.selectedAttendee === null}
-                            onClick={this.showListInformation}
-                        />
-                        
+                            onClick={this.showListInformation}/>
+
                     </ToolbarGroup>
                 </Toolbar>
 
                 {(this.props.userSession.selectedList !== null)
-                    ?<AdminListInterfaceChild/>:null}
+                    ? <AdminListInterfaceChild/>
+                    : null}
             </div>
         );
     }
@@ -66,13 +75,29 @@ class AdminListInterface extends Component {
 
 class AdminListInterfaceChild extends Component {
 
-    render () {
+    listAttendeeTable = {
+        height: "100%",
+        width: "50%",
+        float: "left",
+        borderRight: "1px solid #BBB"
+    }
+
+    itemInterfaceStyle = {
+        width: "calc(50% - 1px)",
+        float: "right"
+    }
+
+    render() {
         return (
-            <div>
-                <div style={{width: "50%", float: "left"}}>
+            <div
+                style={{
+                height: "calc(100% - 64px)",
+                overflow: "auto"
+            }}>
+                <div style={this.listAttendeeTable}>
                     <ListAttendeeTable/>
                 </div>
-                <div style={{width: "50%", float: "right"}}>
+                <div style={this.itemInterfaceStyle}>
                     <SelectedItemInterface/>
                 </div>
             </div>
