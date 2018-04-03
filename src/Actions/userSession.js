@@ -73,6 +73,20 @@ export function addNewAttendee (newAttendeeName, newAttendeeEmail) {
     }
 }
 
+export function updateAttendeeAudioStatus (newAudioStatus) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let companyID = state.userSession.userCompanyID
+        let selectedList = state.userSession.selectedList
+        let selectedAttendee = state.userSession.selectedAttendee
+
+        Fire
+            .database()
+            .ref("_COMPANIES/" + companyID + "/_LISTS/" + selectedList + "/_ATTENDEES/" + selectedAttendee)
+            .update({audioStatus: newAudioStatus})
+    }
+}
+
 export function setSelectedList (newListID) {
     return {
         type: "SET_SELECTED_LIST",

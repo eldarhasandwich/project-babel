@@ -64,7 +64,11 @@ class ListAttendeeTable extends Component {
         return attendeeKeys
     }
     
-    addNewAttendee = () => {
+    submitAttendeeInfo = () => {
+        if (this.state.attendeeName === "" || this.state.attendeeEmail === "") {
+            return;
+        }
+
         this.closeCreateAttendeeDialog()
         this.props.addNewAttendee(this.state.attendeeName, this.state.attendeeEmail)
         this.resetNewAttendee()
@@ -86,7 +90,7 @@ class ListAttendeeTable extends Component {
         <FlatButton
             label={"Add Attendee"}
             primary
-            onClick={this.addNewAttendee}
+            onClick={this.submitAttendeeInfo}
         />
     ]
 
@@ -166,9 +170,16 @@ class ListAttendeeTableItem extends Component {
                 selected={this.props.selectedAttendee === this.props.itemKey}
             >
 
-                <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.orderPos + 1}</TableRowColumn>
-                <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.name}</TableRowColumn>
-                <TableRowColumn style={{textAlign:"center"}}>{this.itemInfo.audioStatus}</TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>
+                    {this.props.attendees[this.props.itemKey].orderPos + 1}
+                </TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>
+                    {this.props.attendees[this.props.itemKey].name}
+                </TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>
+                    {this.props.attendees[this.props.itemKey].audioStatus}
+                </TableRowColumn>
+                
             </TableRow>
         )
     }

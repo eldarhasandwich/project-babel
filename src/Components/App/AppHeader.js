@@ -24,7 +24,7 @@ class AppHeader extends Component {
     appHeaderStyle = {
         backgroundColor: "#222",
         overflow: "auto",
-        padding: "20px",
+        padding: "5px 10px",
         color: "white"
     }
     
