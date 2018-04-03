@@ -69,7 +69,7 @@ class LoginButton extends Component {
     render() {
         if (this.props.isLoggedIn) {
             return (
-                <div>
+                <div style={{marginTop:"20px"}}>
                     <FlatButton
                         label={"Logout"}
                         style={{color: "white"}}
@@ -78,7 +78,7 @@ class LoginButton extends Component {
             )
         } // if logged out
         return (
-            <div>
+            <div style={{marginTop:"20px"}}>
                 <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/institution'}>
                     <FlatButton label={"Login"} style={{color: "white"}}/>
                 </Link>

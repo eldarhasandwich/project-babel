@@ -50,11 +50,11 @@ class AttendeeView extends Component {
         if (this.state.attendeeKey === null) {
             return;
         }
-        let key = this.state.attendeeKey.split("_")
-        if (key.length !== 2) {
+        let key = this.state.attendeeKey.split("~")
+        if (key.length !== 3) {
             return;
         }
-        this.props.pullAttendee(key[0], key[1])
+        this.props.pullAttendee(key[0], key[1], key[2])
         this.setAttendeeKey("")
     }
 
@@ -120,25 +120,7 @@ class AttendeeView extends Component {
     }
 
     getAudioStatusFromAttendeeState () {
-        let hasAudio = (this.props.singleAttendee.singleAttendee.audioSrc !== null)
-        let verified = (this.props.singleAttendee.singleAttendee.audioIsVerified)
-        let needsReplacement = (this.props.singleAttendee.singleAttendee.audioNeedsReplacement)
-
-        if (!hasAudio) {
-            return "No Audio Uploaded"
-        }
-
-        if (hasAudio && verified) {
-            return "Audio Verified"
-        }
-
-        if (hasAudio && !verified && needsReplacement) {
-            return "Audio Needs Replacement"
-        }
-
-        if (hasAudio && !verified && !needsReplacement) {
-            return "Audio Awaiting Verification"
-        }
+        return "Audio: " + this.props.singleAttendee.singleAttendee.audioStatus
     }
 
     viewStyle = {
@@ -313,7 +295,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        pullAttendee: (listID, attendeeID) => dispatch(SingleAttendeeActions.pullAttendee(listID, attendeeID)),
+        pullAttendee: (companyID, listID, attendeeID) => dispatch(SingleAttendeeActions.pullAttendee(companyID, listID, attendeeID)),
         setLoadedStatus: bool => dispatch(SingleAttendeeActions.setAttendeeLoadedStatus(bool)),
         playAudio: (audioId) => dispatch(audioActions.audioPlay(audioId))
     }

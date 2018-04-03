@@ -10,7 +10,7 @@ class _DatabaseHandler {
     listTemplate = {
         listName: "",
         ceremonyDate: "",
-        uploadCutoffData: "",
+        uploadCutoffDate: "",
         nextOrderPos: 1,
 
         _ATTENDEES: {}

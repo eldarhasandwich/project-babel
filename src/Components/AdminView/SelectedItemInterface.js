@@ -77,7 +77,6 @@ class SelectedItemInterface extends Component {
             return ( // LIST OPTIONS
                 <div>
                     <h1 style={this.textStyle}>{selectedList.listName}</h1>
-                    
 
                 </div>
             )

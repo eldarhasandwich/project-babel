@@ -2,15 +2,17 @@ const defaultState = {
     attendeeLoaded: false,
     showIncorrectKeyMsg: false,
     attendeeInfoIsLoading: false,
-    singleAttendee: {    
-        audioSrc: null,
+    keys: {
+        companyKey: "",
+        listKey: "",
+        attendeeKey: ""
+    },
+    singleAttendee: {
         audioLoading: false,
-        audioLoaded: false,
-        audioNeedsReplacement: false,
-        audioIsVerified: false,
+
+        audioSrc: null,
+        audioStatus: "",
         orderPos: 0,
-        listID: "",
-        id: "",
         name: "",
         textA: "",
         textB: ""
@@ -24,8 +26,14 @@ const singleAttendee = (state = defaultState, action) => {
         case 'LOAD_IN_ATTENDEE': {
             return {
                 ...state,
-                singleAttendee:{
-                    ...action
+                keys: {
+                    companyKey: action.companyKey,
+                    listKey: action.listKey,
+                    attendeeKey: action.attendeeKey
+                },
+                singleAttendee: {
+                    ...action.attendeeData,
+                    audioSrc: action.audioSrc
                 }
             }
         }
