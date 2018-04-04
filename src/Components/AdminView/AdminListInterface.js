@@ -8,9 +8,9 @@ import {
     ToolbarGroup,
     ToolbarTitle,
     RaisedButton,
-    Popover,
-    Menu,
-    MenuItem
+    // Popover,
+    // Menu,
+    // MenuItem
 } from 'material-ui';
 
 import ListAttendeeTable from './ListAttendeeTable'

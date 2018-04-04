@@ -20,7 +20,11 @@ export function addAttendee (id, name, audioSrc, orderPos, textA, textB, audioNe
                     audioNeedsReplacement,
                     audioIsVerified
                 })
+
+
                 dispatch(audioActions.audioSrc(`audio-${id}`, url))
+
+                
             }).catch(function(error) { // Storage does not have an audiofile for this Attendee
                 dispatch( {
                     type: "ADD_ATTENDEE",
@@ -50,19 +54,19 @@ export function swapAttendeeOrderPosition (attendeeA_ID, attendeeB_ID) {
     }
 }
 
-export function updateAttendeeAttribute (attendeeID, targetField, newValue) {
-    if (attendeeID !== null) {
-        return {
-            type: "UPDATE_ATTRIBUTE",
-            attendeeID,
-            targetField,
-            newValue
-        }
-    } return {
-        type: "UPDATE_ATTRIBUTE_FAILED",
-        reason: "Invalid Field"
-    }
-}
+// export function updateAttendeeAttribute (attendeeID, targetField, newValue) {
+//     if (attendeeID !== null) {
+//         return {
+//             type: "UPDATE_ATTRIBUTE",
+//             attendeeID,
+//             targetField,
+//             newValue
+//         }
+//     } return {
+//         type: "UPDATE_ATTRIBUTE_FAILED",
+//         reason: "Invalid Field"
+//     }
+// }
 
 export function clearAttendeeList () {
     return {
@@ -70,19 +74,19 @@ export function clearAttendeeList () {
     }
 }
 
-export function verifyAttendeeAudio (attendeeID) {
-    return {
-        type: "VERIFY_ATTENDEE_AUDIO",
-        attendeeID
-    }
-}
+// export function verifyAttendeeAudio (attendeeID) {
+//     return {
+//         type: "VERIFY_ATTENDEE_AUDIO",
+//         attendeeID
+//     }
+// }
 
-export function markAttendeeAudioAsNeedsReplacement (attendeeID) {
-    return {
-        type: "MARK_ATTENDEE_AUDIO_AS_NEEDS_REPLACEMENT",
-        attendeeID
-    }
-}
+// export function markAttendeeAudioAsNeedsReplacement (attendeeID) {
+//     return {
+//         type: "MARK_ATTENDEE_AUDIO_AS_NEEDS_REPLACEMENT",
+//         attendeeID
+//     }
+// }
 
 export function loadAttendees (listKey) {
     return (dispatch, getState) => {

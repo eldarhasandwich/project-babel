@@ -1,6 +1,7 @@
-
 import Fire from '../Classes/Fire'
 import DatabaseHandler from '../Classes/DatabaseHandler'
+import { actions as audioActions } from 'redux-audio-fixed'
+
 
 export function setUserLoggedIn (bool) {
     return {
@@ -88,9 +89,23 @@ export function updateAttendeeAudioStatus (newAudioStatus) {
 }
 
 export function setSelectedList (newListID) {
-    return {
-        type: "SET_SELECTED_LIST",
-        newSelectedList: newListID
+    return (dispatch, getState) => {        
+        dispatch({type: "SET_SELECTED_LIST", newSelectedList: newListID})
+
+        let state = getState()
+        let companyID = state.userSession.userCompanyID
+        let selectedList = state.userSession.selectedList
+        let attendees = state.userSession.companyLists[selectedList]._ATTENDEES || {}
+        let attendeeKeys = Object.keys(attendees)
+        console.log(attendees)
+
+        for (var i = 0; i < attendeeKeys.length; i++) {
+            console.log(attendeeKeys[i])
+            if (attendees[attendeeKeys[i]].audioStatus !== "No Audio") {
+                dispatch(pullAttendeeAudioFromStorage(companyID, selectedList, attendeeKeys[i]))
+            }
+        }
+
     }
 }
 
@@ -100,3 +115,21 @@ export function setSelectedAttendee (newAttendeeID) {
         newSelectedAttendee: newAttendeeID
     }
 }
+
+export function pullAttendeeAudioFromStorage (compID, listID, attID) {
+    return (dispatch, getState) => {
+        let state = getState()
+
+        Fire
+            .storage()
+            .ref(compID + "/" + listID)
+            .child(attID + ".mp3")
+            .getDownloadURL()
+            .then(function (url) {
+                dispatch(audioActions.audioSrc(`audio-${compID}~${listID}~${attID}`, url))
+            }, function (error) {
+                //this audio file isnt stored
+            })
+
+        }
+    }

@@ -1,11 +1,56 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import {Audio} from 'redux-audio-fixed'
 import { RaisedButton, DropDownMenu, MenuItem } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
+import {actions as audioActions} from 'redux-audio-fixed'
+
 
 class SelectedItemInterface extends Component {
 
+    // generateAudioComponents() {
+    //     return Object
+    //         .keys(this.props.attendees.attendees)
+    //         .map(attendeeID => {
+    //             let attendee = this.props.attendees.attendees[attendeeID]
+    //             return <Audio
+    //                 src={attendee.audioSrc}
+    //                 autoPlay={false}
+    //                 controls={false}
+    //                 command='none'
+    //                 preload={"auto"}
+    //                 uniqueId={`audio-${attendeeID}`}
+    //                 onLoadedData={() => this.props.loadedAudio(attendeeID)}/>
+    //         })
+    // }
+
+    generateAttendeeAudio = () => {
+        let compID = this.props.userSession.userCompanyID
+        let listID = this.props.userSession.selectedList
+
+        let selectedListAttendees = this.props.userSession.companyLists[listID]._ATTENDEES || null
+        if (selectedListAttendees === null) {
+            return;
+        }
+
+        return Object
+            .keys(selectedListAttendees)
+            .map(attendeeID => {
+                let attendee = selectedListAttendees[attendeeID]
+                if (attendee.audioStatus !== "No Audio") {
+                    return <Audio
+                        src={""}
+                        autoPlay={false}
+                        controls={false}
+                        command='none'
+                        preload={"auto"}
+                        uniqueId={`audio-${compID}~${listID}~${attendeeID}`}
+                        // onLoadedData={() => this.props.loadedAudio(attendeeID)}
+                    />
+                }
+            })
+    }
 
     getSelectedList = () => {
         if (this.props.userSession.selectedList === null) {
@@ -58,11 +103,27 @@ class SelectedItemInterface extends Component {
             case 'Verified': {
                 return verified
             }
+
+            default: {
+                return ""
+            }
         }
     }
 
     handleAudioStatusChange = (event, index, value) => {
         this.props.updateAttendeeAudioStatus(value)
+    }
+
+    playSelectedAttendeeAudio = () => {
+        let compID = this.props.userSession.userCompanyID
+        let listID = this.props.userSession.selectedList
+        let attID = this.props.userSession.selectedAttendee
+
+        let audioID = `audio-${compID}~${listID}~${attID}`
+
+        console.log(audioID)
+
+        this.props.playAudio(audioID)
     }
 
     textStyle = {
@@ -85,6 +146,7 @@ class SelectedItemInterface extends Component {
         let selectedAttendee = this.getSelectedAttendee()
         return ( // ATTENDEE OPTIONS
             <div>
+                {this.generateAttendeeAudio()}
                 <h1 style={this.textStyle}>{selectedAttendee.name}</h1>
                 <h4 style={this.textStyle}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
 
@@ -94,6 +156,7 @@ class SelectedItemInterface extends Component {
                         label={"Play Audio"}
                         primary
                         disabled={selectedAttendee.audioStatus === "No Audio"}
+                        onClick={this.playSelectedAttendeeAudio}
 
                     />
                     <DropDownMenu
@@ -123,6 +186,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         updateAttendeeAudioStatus: newStatus => dispatch(UserSessionActions.updateAttendeeAudioStatus(newStatus)),
+        playAudio: audioID => dispatch(audioActions.audioPlay(audioID)) 
     }
 }
 

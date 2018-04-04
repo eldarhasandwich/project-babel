@@ -79,9 +79,6 @@ class ListAttendeeTable extends Component {
     }
 
     handleRowClick = index => {
-        console.log(index)
-        console.log(index[0] || null)
-        
         let attendees = this.getSortedFilteredAttendees()
         this.setSelectedAttendee(attendees[index[0]])
     }
@@ -99,7 +96,7 @@ class ListAttendeeTable extends Component {
             <div >
                 <Table
                     onRowSelection={(index) => this.handleRowClick(index)}
-                    height={790-58-56-37-5}
+                    height={630}
                 >
                     <TableHeader
                         displaySelectAll={false}

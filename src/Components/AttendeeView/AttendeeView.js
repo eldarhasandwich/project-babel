@@ -119,10 +119,6 @@ class AttendeeView extends Component {
         this.submitAttendeeKey()
     }
 
-    getAudioStatusFromAttendeeState () {
-        return "Audio: " + this.props.singleAttendee.singleAttendee.audioStatus
-    }
-
     viewStyle = {
         width: "95%",
         margin: "0 auto",
@@ -167,7 +163,6 @@ class AttendeeView extends Component {
                         unloadAttendee={this.unloadAttendee.bind(this)}
                         playAttendeeAudio={this.playAttendeeAudio}
                         giveOrderPosString={this.giveOrderPosString.call(this)}
-                        getAudioStatusFromAttendeeState={this.getAudioStatusFromAttendeeState.call(this)}
                         openModal={this.openModal}
                     />
     
@@ -215,7 +210,7 @@ class AttendeeInterface extends Component {
                     {this.props.giveOrderPosString}
                 </h4>
                 <h4 style={{marginTop:"4px"}}>
-                    {this.props.getAudioStatusFromAttendeeState}
+                    {"Audio: " + this.props.thisAttendee.audioStatus}
                 </h4>
 
                 <div>
