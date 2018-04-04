@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
-import { RaisedButton, DropDownMenu, MenuItem } from 'material-ui';
+import { RaisedButton, DropDownMenu, MenuItem, Toggle } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
 import {actions as audioActions} from 'redux-audio-fixed'
@@ -110,8 +110,10 @@ class SelectedItemInterface extends Component {
         }
     }
 
-    handleAudioStatusChange = (event, index, value) => {
-        this.props.updateAttendeeAudioStatus(value)
+    handleAudioStatusChange = (event, bool) => {
+        // console.log(event.target.value)
+        // console.log(bool)
+        this.props.updateAttendeeAudioStatus(event.target.value)
     }
 
     playSelectedAttendeeAudio = () => {
@@ -150,16 +152,17 @@ class SelectedItemInterface extends Component {
                 <h1 style={this.textStyle}>{selectedAttendee.name}</h1>
                 <h4 style={this.textStyle}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
 
-                <div style={{overflow:"auto", height:"80px"}}>
+                <div style={{overflow:"auto", height:"65px"}}>
                     <RaisedButton
-                        style={{float:"left", marginLeft:"40px", marginTop:"12px"}}
+                        style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
                         label={"Play Audio"}
                         primary
                         disabled={selectedAttendee.audioStatus === "No Audio"}
                         onClick={this.playSelectedAttendeeAudio}
 
                     />
-                    <DropDownMenu
+
+                    {/* <DropDownMenu
                         style={{float:"left"}}
                         disabled={selectedAttendee.audioStatus === "No Audio"} 
                         onChange={this.handleAudioStatusChange}
@@ -168,7 +171,31 @@ class SelectedItemInterface extends Component {
                         <MenuItem value={"Unverified"} primaryText={"Unverified"}/>
                         <MenuItem value={"Needs Replacement"} primaryText={"Needs Replacement"}/>
                         <MenuItem value={"Verified"} primaryText={"Verified"}/>
-                    </DropDownMenu>
+                    </DropDownMenu> */}
+
+                    <div style={{float:"left", marginLeft: "20px"}}>
+                        <Toggle
+                            value="Needs Replacement"
+                            
+                            disabled={selectedAttendee.audioStatus === "No Audio"}
+                            toggled={selectedAttendee.audioStatus === "Needs Replacement"}
+                            onToggle={this.handleAudioStatusChange}
+
+                            style={{textAlign:"left"}}
+                            labelPosition="right"
+                            label="Needs Replacement"/>
+                        <Toggle
+                            value="Verified"
+
+                            disabled={selectedAttendee.audioStatus === "No Audio"}
+                            toggled={selectedAttendee.audioStatus === "Verified"}
+                            onToggle={this.handleAudioStatusChange}
+
+                            style={{textAlign:"left"}}
+                            labelPosition="right" 
+                            label="Verified"/>
+                    </div>
+
                 </div>
 
                 <p style={{...this.textStyle, marginTop:"0px"}}>{this.getAudioStatusText()}</p>
