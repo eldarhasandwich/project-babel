@@ -61,7 +61,7 @@ class AudioRecordingModal extends Component {
     onStop = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
         
-        //cull leading silence
+        
 
 
         this.setState({audio: recordedBlob})

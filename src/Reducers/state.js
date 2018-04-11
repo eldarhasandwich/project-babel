@@ -1,11 +1,17 @@
 const defaultState = {
+    //EMCEE
     selectedClipIndex: 0,
+
+    //ADMIN
     verifiedAttendeesVisible: true,
     unverifiedAttendeesVisible: true,
     attendeesWithAudioNeedingReplacementVisible: true,
     attendeesWithNoAudioVisible: true,
+
     fireBaseDataDirectory: "",
     fireBaseStorageDirectory: "testAudio"
+
+
 
 }
 

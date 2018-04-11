@@ -110,10 +110,16 @@ class SelectedItemInterface extends Component {
         }
     }
 
-    handleAudioStatusChange = (event, bool) => {
-        // console.log(event.target.value)
-        // console.log(bool)
+    handleAudioStatusChange = (event) => {
         this.props.updateAttendeeAudioStatus(event.target.value)
+    }
+
+    setAudioStatusAsNeedsReplace = () => {
+        this.props.updateAttendeeAudioStatus("Needs Replacement")
+    }
+
+    setAudioStatusAsVerified = () => {
+        this.props.updateAttendeeAudioStatus("Verified")
     }
 
     playSelectedAttendeeAudio = () => {
@@ -146,10 +152,16 @@ class SelectedItemInterface extends Component {
         }
 
         let selectedAttendee = this.getSelectedAttendee()
+        let attID = {
+            c: this.props.userSession.userCompanyID,
+            l: this.props.userSession.selectedList,
+            a: this.props.userSession.selectedAttendee
+        }
         return ( // ATTENDEE OPTIONS
             <div>
                 {this.generateAttendeeAudio()}
                 <h1 style={this.textStyle}>{selectedAttendee.name}</h1>
+                <h4 style={this.textStyle}>{`ID: ${attID.c}~${attID.l}~${attID.a}`}</h4>
                 <h4 style={this.textStyle}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
 
                 <div style={{overflow:"auto", height:"65px"}}>
@@ -162,17 +174,6 @@ class SelectedItemInterface extends Component {
 
                     />
 
-                    {/* <DropDownMenu
-                        style={{float:"left"}}
-                        disabled={selectedAttendee.audioStatus === "No Audio"} 
-                        onChange={this.handleAudioStatusChange}
-                        value={this.getAudioStatusDropdownValue()}
-                    >
-                        <MenuItem value={"Unverified"} primaryText={"Unverified"}/>
-                        <MenuItem value={"Needs Replacement"} primaryText={"Needs Replacement"}/>
-                        <MenuItem value={"Verified"} primaryText={"Verified"}/>
-                    </DropDownMenu> */}
-
                     <div style={{float:"left", marginLeft: "20px"}}>
                         <Toggle
                             value="Needs Replacement"
@@ -183,7 +184,11 @@ class SelectedItemInterface extends Component {
 
                             style={{textAlign:"left"}}
                             labelPosition="right"
-                            label="Needs Replacement"/>
+                            label={
+                                (selectedAttendee.audioStatus === "Needs Replacement")
+                                ? "Needs Replacement"
+                                : "Mark as Needing Replacement"
+                            }/>
                         <Toggle
                             value="Verified"
 
@@ -193,7 +198,11 @@ class SelectedItemInterface extends Component {
 
                             style={{textAlign:"left"}}
                             labelPosition="right" 
-                            label="Verified"/>
+                            label={
+                                (selectedAttendee.audioStatus === "Verified")
+                                ? "Verified"
+                                : "Verify"
+                            }/>
                     </div>
 
                 </div>

@@ -14,20 +14,32 @@ import * as stateActions from "../../Actions/state"
 
 class EmceeClipList extends Component {
 
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        this.state = {}
+    //     this.state = {}
+    // }
+
+    getSelectedListAttendees = () => {
+        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
+        if (selectedList === null || selectedList === undefined) {
+            return null
+        }
+        return selectedList._ATTENDEES
     }
 
     getSortedFilteredAttendees = () => {
-        let attendees = this.props.attendees.attendees
-        let attendeeKeys = Object.keys(attendees)
+        let attendees = this.getSelectedListAttendees()
+        if (attendees === null || attendees === undefined) {
+            return []
+        }
 
+        let attendeeKeys = Object.keys(attendees)
+        
         attendeeKeys.sort((a, b) => {
             return attendees[a].orderPos - attendees[b].orderPos
         })
-
+        console.log(attendeeKeys.length)
         return attendeeKeys
     }
 
@@ -36,6 +48,8 @@ class EmceeClipList extends Component {
     }
 
     render() {
+        let attendees = this.getSelectedListAttendees()
+
         return (
             <div>
                 <Table height={"300px"} onRowSelection={this.handleRowSelection}>
@@ -55,7 +69,7 @@ class EmceeClipList extends Component {
                             .map((row, index) => (<EmceeClipListRow
                                 props={this.props}
                                 index={index}
-                                content={this.props.attendees.attendees[row]}
+                                content={attendees[row]}
                                 selectedIndex={this.props.state.selectedClipIndex}/>))}
 
                     </TableBody>
@@ -68,33 +82,6 @@ class EmceeClipList extends Component {
 
 class EmceeClipListRow extends Component {
 
-    getThisAttendeeStatus() {
-        let hasAudio = (this.props.content.audioSrc !== null)
-        let audioIsDownloading = (!this.props.content.audioLoaded)
-        let verified = (this.props.content.audioIsVerified)
-        let needsReplacement = (this.props.content.audioNeedsReplacement)
-
-        if (!hasAudio) {
-            return "No Audio"
-        }
-
-        if (audioIsDownloading) {
-            return "Downloading Audio"
-        }
-
-        if (hasAudio && verified) {
-            return "Verified"
-        }
-
-        if (hasAudio && !verified && !needsReplacement) {
-            return "Unverified"
-        }
-
-        if (hasAudio && !verified && needsReplacement) {
-            return "Needs Replacement"
-        }
-    }
-
     render() {
         return (
             <TableRow
@@ -103,14 +90,14 @@ class EmceeClipListRow extends Component {
             >
                 <TableRowColumn style={{textAlign:"center"}}>{this.props.content.orderPos + 1}</TableRowColumn>
                 <TableRowColumn style={{textAlign:"center"}}>{this.props.content.name}</TableRowColumn>
-                <TableRowColumn style={{textAlign:"center"}}>{this.getThisAttendeeStatus()}</TableRowColumn>
+                <TableRowColumn style={{textAlign:"center"}}>{this.props.content.audioStatus}</TableRowColumn>
             </TableRow>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return {state: state.state, attendees: state.attendees}
+    return {state: state.state, userSession: state.userSession}
 }
 
 const mapDispatchToProps = dispatch => {

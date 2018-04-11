@@ -5,7 +5,13 @@ import './SelectedClipInterface.css';
 class SelectedClipInterface extends Component {
 
     getSelectedAttendee () {
-        let attendees = this.props.attendees.attendees;
+        // let attendees = this.props.attendees.attendees;
+
+        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
+        if (selectedList === null || selectedList === undefined) {
+            return null
+        }
+        let attendees = selectedList._ATTENDEES
         let selected = Object.keys(attendees).find(x => attendees[x].orderPos === this.props.state.selectedClipIndex)
         return attendees[selected]
     }
@@ -85,7 +91,7 @@ class SelectedClipInterface extends Component {
 }
 
 const mapStateToProps = state => {
-    return {state: state.state, attendees: state.attendees}
+    return {state: state.state, userSession: state.userSession}
 }
 
 const mapDispatchToProps = dispatch => {

@@ -82,6 +82,7 @@ export function uploadAudioBlobToFirebase(blob) {
         let listKey = state.singleAttendee.keys.listKey
         let attendeeKey = state.singleAttendee.keys.attendeeKey
 
+
         Fire
             .storage()
             .ref(companyKey + "/" + listKey + "/" + attendeeKey + ".mp3")
