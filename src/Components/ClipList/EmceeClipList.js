@@ -39,7 +39,7 @@ class EmceeClipList extends Component {
         attendeeKeys.sort((a, b) => {
             return attendees[a].orderPos - attendees[b].orderPos
         })
-        console.log(attendeeKeys.length)
+        // console.log(attendeeKeys.length)
         return attendeeKeys
     }
 

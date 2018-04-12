@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import {Audio} from 'redux-audio-fixed'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 
-// import Fire from '../../Classes/Fire'
-
 import { AppBar } from 'material-ui'
-// import { RaisedButton } from 'material-ui'
 import { Drawer, MenuItem, Subheader } from 'material-ui'
 
 import LoginView from './LoginView'
@@ -13,6 +11,8 @@ import AdminView from '../AdminView/AdminView'
 import MaterialEmceeView from '../EmceeView/MaterialEmceeView'
 
 import * as userSessionActions from './../../Actions/userSession'
+// import {actions as audioActions} from 'redux-audio-fixed'
+
 
 class InstitutionView extends Component {
 
@@ -48,6 +48,45 @@ class InstitutionView extends Component {
         textAlign: "left"
     }
 
+    generateAttendeeAudio = () => {
+        let compID = this.props.userSession.userCompanyID
+        let compLists = this.props.userSession.companyLists
+
+        let audioComponents = []
+
+        Object.keys(compLists).forEach(
+            x => {
+                // console.log("ListID: " + x)
+                Object.keys(compLists[x]._ATTENDEES).forEach(
+                    y => {
+                        // console.log("AttendeeID: " + y)
+                        let attendee = compLists[x]._ATTENDEES[y]
+                        if (attendee.audioStatus !== "No Audio") {
+                            // console.log("HAS AUDIO")
+
+                            audioComponents.push(<Audio
+                                src={""}
+                                autoPlay={false}
+                                controls={false}
+                                command='none'
+                                preload={"auto"}
+                                uniqueId={`audio-${compID}~${x}~${y}`}
+                                // onLoadedData={() => this.props.loadedAudio(attendeeID)}
+                            />)
+                        }
+                    }
+                )
+            }
+        )
+
+        // console.log(audioComponents)
+        return audioComponents.map(
+            comp => {
+                return comp
+            }
+        )
+    }
+
     render() {
 
         if (!this.props.userSession.isLoggedIn) {
@@ -56,7 +95,10 @@ class InstitutionView extends Component {
 
         return (
             <BrowserRouter>
+
                 <div>
+
+                {this.generateAttendeeAudio()}
 
                     <AppBar
                         style={this.appBarStyle}

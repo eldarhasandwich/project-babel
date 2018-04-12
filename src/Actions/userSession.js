@@ -100,7 +100,7 @@ export function setSelectedList (newListID) {
         console.log(attendees)
 
         for (var i = 0; i < attendeeKeys.length; i++) {
-            console.log(attendeeKeys[i])
+            // console.log(attendeeKeys[i])
             if (attendees[attendeeKeys[i]].audioStatus !== "No Audio") {
                 dispatch(pullAttendeeAudioFromStorage(companyID, selectedList, attendeeKeys[i]))
             }
@@ -118,7 +118,7 @@ export function setSelectedAttendee (newAttendeeID) {
 
 export function pullAttendeeAudioFromStorage (compID, listID, attID) {
     return (dispatch, getState) => {
-        let state = getState()
+        // let state = getState()
 
         Fire
             .storage()

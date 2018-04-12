@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import './SelectedClipInterface.css';
+// import './SelectedClipInterface.css';
 
 class SelectedClipInterface extends Component {
 
@@ -23,12 +23,12 @@ class SelectedClipInterface extends Component {
         } return attendee.name
     }
 
-    getSelectedAttendeeId () {
-        let attendee = this.getSelectedAttendee()
-        if (!attendee) {
-            return ""
-        } return attendee.id
-    }
+    // getSelectedAttendeeId () {
+    //     let attendee = this.getSelectedAttendee()
+    //     if (!attendee) {
+    //         return ""
+    //     } return attendee.id
+    // }
 
     getSelectedAttendeeOrderPos () {
         let attendee = this.getSelectedAttendee()
@@ -55,35 +55,22 @@ class SelectedClipInterface extends Component {
         return (
             <div className="Selected-clip-view">
 
-                <p id="person-name">
+                <h2 id="person-name">
                     { this.getSelectedAttendeeName.call(this) }
+                </h2>
+
+                <p id="person-orderPos">
+                    { this.getSelectedAttendeeOrderPos.call(this) }
                 </p>
 
-                <div 
-                    className="Selected-clip-view-col"
-                    id="col-A">
-                    
-                    <p id="person-id">
-                        { this.getSelectedAttendeeId.call(this) }
-                    </p>
-                    <p id="custom-text-A">
-                        { this.getSelectedAttendeeTextA.call(this) }
-                    </p>
+                <p id="custom-text-A">
+                    { this.getSelectedAttendeeTextA.call(this) }
+                </p>
 
-                </div>
+                <p id="custom-text-B">
+                    { this.getSelectedAttendeeTextB.call(this) }
+                </p>
 
-                <div 
-                    className="Selected-clip-view-col"
-                    id="col-B">
-
-                    <p id="person-orderPos">
-                        { this.getSelectedAttendeeOrderPos.call(this) }
-                    </p>
-                    <p id="custom-text-B">
-                        { this.getSelectedAttendeeTextB.call(this) }
-                    </p>
-
-                </div>
             </div>
         );
     }

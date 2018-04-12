@@ -1,14 +1,14 @@
 
 import Papa from 'papaparse'
 
-function RemoveQuotesFromString (string) {
-    let strArr = string.split('')
-    let newString = ""
-    strArr.forEach(element => {
-        newString = newString + ((element !== '"' || element !== "'") ? element : "")
-    });
-    return newString
-}
+// function RemoveQuotesFromString (string) {
+//     let strArr = string.split('')
+//     let newString = ""
+//     strArr.forEach(element => {
+//         newString = newString + ((element !== '"' || element !== "'") ? element : "")
+//     });
+//     return newString
+// }
 
 export default function CSVtoArray (CSVString) {
 

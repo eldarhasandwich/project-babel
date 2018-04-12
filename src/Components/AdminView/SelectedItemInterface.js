@@ -1,56 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {Audio} from 'redux-audio-fixed'
-import { RaisedButton, DropDownMenu, MenuItem, Toggle } from 'material-ui';
+// import {Audio} from 'redux-audio-fixed'
+import { RaisedButton, Toggle } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
 import {actions as audioActions} from 'redux-audio-fixed'
 
 
 class SelectedItemInterface extends Component {
-
-    // generateAudioComponents() {
-    //     return Object
-    //         .keys(this.props.attendees.attendees)
-    //         .map(attendeeID => {
-    //             let attendee = this.props.attendees.attendees[attendeeID]
-    //             return <Audio
-    //                 src={attendee.audioSrc}
-    //                 autoPlay={false}
-    //                 controls={false}
-    //                 command='none'
-    //                 preload={"auto"}
-    //                 uniqueId={`audio-${attendeeID}`}
-    //                 onLoadedData={() => this.props.loadedAudio(attendeeID)}/>
-    //         })
-    // }
-
-    generateAttendeeAudio = () => {
-        let compID = this.props.userSession.userCompanyID
-        let listID = this.props.userSession.selectedList
-
-        let selectedListAttendees = this.props.userSession.companyLists[listID]._ATTENDEES || null
-        if (selectedListAttendees === null) {
-            return;
-        }
-
-        return Object
-            .keys(selectedListAttendees)
-            .map(attendeeID => {
-                let attendee = selectedListAttendees[attendeeID]
-                if (attendee.audioStatus !== "No Audio") {
-                    return <Audio
-                        src={""}
-                        autoPlay={false}
-                        controls={false}
-                        command='none'
-                        preload={"auto"}
-                        uniqueId={`audio-${compID}~${listID}~${attendeeID}`}
-                        // onLoadedData={() => this.props.loadedAudio(attendeeID)}
-                    />
-                }
-            })
-    }
 
     getSelectedList = () => {
         if (this.props.userSession.selectedList === null) {
@@ -159,7 +116,7 @@ class SelectedItemInterface extends Component {
         }
         return ( // ATTENDEE OPTIONS
             <div>
-                {this.generateAttendeeAudio()}
+
                 <h1 style={this.textStyle}>{selectedAttendee.name}</h1>
                 <h4 style={this.textStyle}>{`ID: ${attID.c}~${attID.l}~${attID.a}`}</h4>
                 <h4 style={this.textStyle}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
