@@ -4,7 +4,7 @@ var aws = require('aws-sdk');
 // import * as aws from 'aws-sdk'
 
 class SesHandler {
-    sender = "Vocalist Emailer <Example@gmail.com>"
+    sender = "Vocalist Emailer <vocalist-no-reply@vocalist.online>"
     // configuration_set = xyz
     charset = "UTF-8";
     ses = new aws.SES();
