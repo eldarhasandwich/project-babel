@@ -11,6 +11,7 @@ import AdminView from '../AdminView/AdminView'
 import MaterialEmceeView from '../EmceeView/MaterialEmceeView'
 
 import * as userSessionActions from './../../Actions/userSession'
+import NewAccountView from './NewAccountView';
 // import {actions as audioActions} from 'redux-audio-fixed'
 
 
@@ -48,34 +49,43 @@ class InstitutionView extends Component {
         textAlign: "left"
     }
 
+    
+
     generateAttendeeAudio = () => {
         let compID = this.props.userSession.userCompanyID
         let compLists = this.props.userSession.companyLists
 
         let audioComponents = []
 
+        if(!compLists) {
+            return null
+        }
+
         Object.keys(compLists).forEach(
             x => {
                 // console.log("ListID: " + x)
-                Object.keys(compLists[x]._ATTENDEES).forEach(
-                    y => {
-                        // console.log("AttendeeID: " + y)
-                        let attendee = compLists[x]._ATTENDEES[y]
-                        if (attendee.audioStatus !== "No Audio") {
-                            // console.log("HAS AUDIO")
-
-                            audioComponents.push(<Audio
-                                src={""}
-                                autoPlay={false}
-                                controls={false}
-                                command='none'
-                                preload={"auto"}
-                                uniqueId={`audio-${compID}~${x}~${y}`}
-                                // onLoadedData={() => this.props.loadedAudio(attendeeID)}
-                            />)
+                if (compLists[x]._ATTENDEES !== undefined) {
+                    Object.keys(compLists[x]._ATTENDEES).forEach(
+                        y => {
+                            // console.log("AttendeeID: " + y)
+                            let attendee = compLists[x]._ATTENDEES[y]
+                            if (attendee.audioStatus !== "No Audio") {
+                                // console.log("HAS AUDIO")
+    
+                                audioComponents.push(<Audio
+                                    src={""}
+                                    autoPlay={false}
+                                    controls={false}
+                                    command='none'
+                                    preload={"auto"}
+                                    uniqueId={`audio-${compID}~${x}~${y}`}
+                                    key={`audio-${compID}~${x}~${y}`}
+                                    // onLoadedData={() => this.props.loadedAudio(attendeeID)}
+                                />)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         )
 
@@ -91,6 +101,10 @@ class InstitutionView extends Component {
 
         if (!this.props.userSession.isLoggedIn) {
             return (<LoginView/>)
+        }
+
+        if (this.props.userSession.isLoggedIn && this.props.userSession.userCompanyName === null) {
+            return <NewAccountView/>
         }
 
         return (

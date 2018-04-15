@@ -1,6 +1,6 @@
 const defaultState = {
     isLoggedIn: false,
-    userCompanyID: "testCompany",
+    userCompanyID: null,
     userCompanyName: "",
     companyLists: {},
     selectedList: null,

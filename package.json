@@ -1,7 +1,7 @@
 {
   "homepage": "http://eldarhasandwich.github.io/project-babel",
   "name": "project-babel",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.223.1",
@@ -39,8 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "now --local-config now-staging.json && now alias --local-config now-staging.json"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0"

@@ -51,7 +51,7 @@ class AppHeader extends Component {
                     
                     <div style={this.titleDivStyle}>
                         <h1>
-                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Project Babel {pjson.version} b</Link>
+                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Vocalist {pjson.version}</Link>
                         </h1>
                     </div>
                 </header>

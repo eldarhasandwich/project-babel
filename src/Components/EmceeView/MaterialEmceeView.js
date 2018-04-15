@@ -23,6 +23,9 @@ class MaterialEmceeView extends Component {
             return false
         }
         let attendees = list._ATTENDEES
+        if (!attendees) {
+            return null
+        }
 
         let selectedAttID = Object.keys(attendees).find(
             attkey => {
@@ -53,6 +56,9 @@ class MaterialEmceeView extends Component {
     
     canPlayAudio() {
         let selectedAttendee = this.getSelectedAttendee()
+        if (!selectedAttendee) {
+            return false
+        }
 
         if (selectedAttendee !== undefined || selectedAttendee !== null) {
             return selectedAttendee.body.audioStatus !== "No Audio"
@@ -67,6 +73,9 @@ class MaterialEmceeView extends Component {
             return false
         }
         let attendees = selectedList._ATTENDEES
+        if (!attendees) {
+            return false
+        }
         return (this.props.state.selectedClipIndex < Object.keys(attendees).length - 1)
     }
 

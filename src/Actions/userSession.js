@@ -10,16 +10,43 @@ export function setUserLoggedIn (bool) {
     }
 }
 
+export function setUserCompanyName (newName) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let userID = state.userSession.userCompanyID
+        
+        Fire
+            .database()
+            .ref("_COMPANIES/" + userID)
+            .set(
+                {companyName: newName}
+            )
+
+    }
+}
+
 export function setUserCompany () {
     return (dispatch, getState) => {
         let state = getState()
         Fire
             .database()
-            .ref("_COMPANIES/" + state.userSession.userCompanyID)
+            .ref("_COMPANIES/" + Fire.auth().currentUser.uid)
             .on("value", function(snapshot) {
+                console.log(snapshot.val())
+
+                if (snapshot.val() === null || snapshot.val() === undefined) {
+                    dispatch({
+                        type: "SET_USER_COMPANY",
+                        companyID: Fire.auth().currentUser.uid,
+                        companyName: null,
+                        companyLists: {}
+                    })
+                    return 
+                }
+
                 dispatch({
                     type: "SET_USER_COMPANY",
-                    companyID: state.userSession.userCompanyID,
+                    companyID: Fire.auth().currentUser.uid,
                     companyName: snapshot.val().companyName,
                     companyLists: snapshot.val()._LISTS
                 })

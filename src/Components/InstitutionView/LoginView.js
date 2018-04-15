@@ -11,14 +11,14 @@ import * as userSessionActions from './../../Actions/userSession'
 
 class LoginView extends Component {
 
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        this.state = {
-            userID: "",
-            password: ""
-        }
-    }
+    //     this.state = {
+    //         userID: "",
+    //         password: ""
+    //     }
+    // }
 
     uiConfig = {
         // Popup signin flow rather than redirect flow.
@@ -31,9 +31,10 @@ class LoginView extends Component {
         callbacks: {
             signInSuccess: () => {
                 this.attemptLogin()
+                console.log(firebase.auth().currentUser.uid)
             }
         }
-      };
+    };
 
 
     attemptLogin = () => {

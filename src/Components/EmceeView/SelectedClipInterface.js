@@ -12,6 +12,9 @@ class SelectedClipInterface extends Component {
             return null
         }
         let attendees = selectedList._ATTENDEES
+        if (!attendees) {
+            return null
+        }
         let selected = Object.keys(attendees).find(x => attendees[x].orderPos === this.props.state.selectedClipIndex)
         return attendees[selected]
     }

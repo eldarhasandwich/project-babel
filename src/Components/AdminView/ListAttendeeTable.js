@@ -211,12 +211,14 @@ class ListAttendeeTable extends Component {
                             <div>
                                 <TextField
                                     floatingLabelText={"Attendee Name"}
+                                    floatingLabelFixed={true}
                                     value={this.state.newAttendeeName}
                                     onChange={this.setNewAttendeeName}/>
                             </div>
                             <div>
                                 <TextField
                                     floatingLabelText={"Contact Email"}
+                                    floatingLabelFixed={true}
                                     value={this.state.newAttendeeEmail}
                                     onChange={this.setNewAttendeeEmail}/>
                             </div>
