@@ -97,12 +97,17 @@ class MaterialEmceeView extends Component {
     }
 
     getSelectedListName = () => {
-        let list = this.props.userSession.companyLists[this.props.userSession.selectedList]
-        if (list === undefined || list === null) {
+        let lists = this.props.userSession.companyLists
+        if (!lists) {
+            return "No lists created. Create one in Admin View and populate it with Attendees"
+        }
+
+        let selectedList = lists[this.props.userSession.selectedList]
+        if (!selectedList) {
             return "No list Selected. Select one in Admin View"
         }
 
-        return list.listName
+        return selectedList.listName
     }
 
     render() {

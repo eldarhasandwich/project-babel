@@ -1,5 +1,4 @@
 {
-  "homepage": "http://eldarhasandwich.github.io/project-babel",
   "name": "project-babel",
   "version": "0.4.7",
   "private": true,
@@ -40,8 +39,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "now --local-config now-staging.json && now alias --local-config now-staging.json"
-  },
-  "devDependencies": {
-    "gh-pages": "^1.1.0"
   }
 }

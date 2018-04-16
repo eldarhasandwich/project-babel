@@ -1,6 +1,6 @@
-import SESHandler from '../Classes/SES'
+// import SESHandler from '../Classes/SES'
 
-function pullAttendeeNameEmail (compID, listID, attID) {
+function pullAttendeeNameAndEmailAddress (compID, listID, attID) {
     return (dispatch, getState) => {
         let state = getState()
         let attendeeObj = state.userSession.companyLists[compID]._ATTENDEES[attID]
@@ -21,7 +21,7 @@ function pullAttendeeNameEmail (compID, listID, attID) {
 
 export function sendAudioRequestEmail(compID, listID, attID) {
     return (dispatch, getState) => {
-        let attInfo = pullAttendeeNameEmail(compID, listID, attID)
+        let attInfo = pullAttendeeNameAndEmailAddress(compID, listID, attID)
         if (attInfo === null) {
             console.log("This attendee either has no name or email")
             return
@@ -35,7 +35,7 @@ export function sendAudioRequestEmail(compID, listID, attID) {
 
 export function sendAudioReplacementRequestEmail(compID, listID, attID){
     return (dispatch, getState) => {
-        let attInfo = pullAttendeeNameEmail(compID, listID, attID)
+        let attInfo = pullAttendeeNameAndEmailAddress(compID, listID, attID)
         if (attInfo === null) {
             console.log("This attendee either has no name or email")
             return
