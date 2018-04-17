@@ -7,7 +7,6 @@ import * as StateActions from '../../../Actions/state'
 class AttendeeTableVisibilityDialog extends Component {
 
     verifiedToggle = (e, value) => {
-        console.log(value)
         this.props.setVerifiedAttendeesVisible(value);
     }
     

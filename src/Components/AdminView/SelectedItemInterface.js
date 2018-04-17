@@ -174,7 +174,7 @@ class SelectedItemInterface extends Component {
 
                 <p style={{...this.textStyle, marginTop:"0px"}}>{this.getAudioStatusText()}</p>
 
-                <h4 style={this.textStyle}>{"Contact Email: " + (selectedAttendee.contactEmail)}</h4>
+                <h4 style={{...this.textStyle, marginBottom:"5px"}}>{"Contact Email: " + (selectedAttendee.contactEmail)}</h4>
 
                 <RaisedButton
                     style={{float:"left", marginLeft:"40px", marginTop:"6px"}}

@@ -4,37 +4,45 @@ var aws = require('aws-sdk');
 // import * as aws from 'aws-sdk'
 
 class SesHandler {
+    sesConfig = {
+        apiVersion: '2010-12-01',
+        region:'us-west-2',
+        accessKeyId: 'AKIAJYHVL7LZ3BN6FGVQ',
+        secretAccessKey: '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'
+    }
+
+    ses = new aws.SES(this.sesConfig);
+
     sender = "Vocalist Emailer <vocalist-no-reply@vocalist.online>"
-    // configuration_set = xyz
     charset = "UTF-8";
-    ses = new aws.SES();
+    // configuration_set = xyz
 
     sendEmail(recipient, subject, body_text, body_html) {
         var params = {
-            Source: sender,
+            Source: this.sender,
             Destination: {
                 ToAddresses: [recipient]
             },
             Message: {
                 Subject: {
                     Data: subject,
-                    Charset: charset
+                    Charset: this.charset
                 },
                 Body: {
                     Text: {
                         Data: body_text,
-                        Charset: charset
+                        Charset: this.charset
                     },
                     Html: {
                         Data: body_html,
-                        Charset: charset
+                        Charset: this.charset
                     }
                 }
             },
             // ConfigurationSetName: configuration_set
         };
 
-        ses.sendEmail(params, function(err, data) {
+        this.ses.sendEmail(params, function(err, data) {
             if(err) {
                 console.log(err.message);
             } else {

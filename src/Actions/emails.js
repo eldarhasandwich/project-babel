@@ -1,4 +1,4 @@
-// import SESHandler from '../Classes/SES'
+import SESHandler from '../Classes/SES'
 import firebase from 'firebase'
 
 export function sendAudioRequestEmail(compID, listID, attID) {
@@ -19,10 +19,10 @@ export function sendAudioRequestEmail(compID, listID, attID) {
             accessKey: `${compID}~${listID}~${attID}`
         }
 
-        console.log("Email sending to attendee")
+        let emailText = attInfo.accessKey
+        let emailHTML = '<p>' + attInfo.accessKey + '</p>'
 
-        let sendEmail = firebase.functions().httpsCallable('sendEmail');
-        sendEmail(attInfo)
+        SESHandler.sendEmail(attInfo.email, "Do not reply to this Email", emailText, emailHTML)
 
     }
 }
