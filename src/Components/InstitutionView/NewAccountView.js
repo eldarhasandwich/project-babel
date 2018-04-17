@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { Paper, TextField, RaisedButton } from 'material-ui'
 
 

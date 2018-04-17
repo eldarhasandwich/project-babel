@@ -27,7 +27,7 @@ export function setUserCompanyName (newName) {
 
 export function setUserCompany () {
     return (dispatch, getState) => {
-        let state = getState()
+        // let state = getState()
         Fire
             .database()
             .ref("_COMPANIES/" + Fire.auth().currentUser.uid)

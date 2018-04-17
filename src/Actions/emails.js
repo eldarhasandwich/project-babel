@@ -1,46 +1,28 @@
 // import SESHandler from '../Classes/SES'
+import firebase from 'firebase'
 
-function pullAttendeeNameAndEmailAddress (compID, listID, attID) {
+export function sendAudioRequestEmail(compID, listID, attID) {
     return (dispatch, getState) => {
         let state = getState()
-        let attendeeObj = state.userSession.companyLists[compID]._ATTENDEES[attID]
+        let attendeeObj = state.userSession.companyLists[listID]._ATTENDEES[attID]
         let attName = attendeeObj.name
-        let attEmail = attendeeObj.email
+        let attEmail = attendeeObj.contactEmail
 
-        if (attName === null || attName === undefined || attEmail === null || attEmail === undefined) {
-            return null
+        if (!attName || !attEmail) {
+            console.log("This attendee either has no name or email")
+            return
         }
 
-        return {
+        var attInfo = {
             name: attName,
             email: attEmail,
             accessKey: `${compID}~${listID}~${attID}`
         }
-    }
-}
 
-export function sendAudioRequestEmail(compID, listID, attID) {
-    return (dispatch, getState) => {
-        let attInfo = pullAttendeeNameAndEmailAddress(compID, listID, attID)
-        if (attInfo === null) {
-            console.log("This attendee either has no name or email")
-            return
-        }
+        console.log("Email sending to attendee")
 
-
-
-    }
-}
-
-
-export function sendAudioReplacementRequestEmail(compID, listID, attID){
-    return (dispatch, getState) => {
-        let attInfo = pullAttendeeNameAndEmailAddress(compID, listID, attID)
-        if (attInfo === null) {
-            console.log("This attendee either has no name or email")
-            return
-        }
-
+        let sendEmail = firebase.functions().httpsCallable('sendEmail');
+        sendEmail(attInfo)
 
     }
 }

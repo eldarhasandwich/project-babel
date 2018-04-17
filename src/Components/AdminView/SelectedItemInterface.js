@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import { RaisedButton, Toggle } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
+import * as EmailActions from '../../Actions/emails'
 import {actions as audioActions} from 'redux-audio-fixed'
 
 
@@ -91,6 +92,13 @@ class SelectedItemInterface extends Component {
         this.props.playAudio(audioID)
     }
 
+    sendAudioRequestEmail = () => {
+        let compID = this.props.userSession.userCompanyID
+        let listID = this.props.userSession.selectedList
+        let attID = this.props.userSession.selectedAttendee
+        this.props.sendAudioRequestEmail(compID, listID, attID)
+    }
+
     textStyle = {
         textAlign: "left",
         marginLeft: "40px"
@@ -166,6 +174,16 @@ class SelectedItemInterface extends Component {
 
                 <p style={{...this.textStyle, marginTop:"0px"}}>{this.getAudioStatusText()}</p>
 
+                <h4 style={this.textStyle}>{"Contact Email: " + (selectedAttendee.contactEmail)}</h4>
+
+                <RaisedButton
+                    style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
+                    label={"Send Email"}
+                    primary
+                    disabled={selectedAttendee.audioStatus === "Verified"}
+                    onClick={this.sendAudioRequestEmail}
+                />
+
             </div>
         )
     }
@@ -179,7 +197,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         updateAttendeeAudioStatus: newStatus => dispatch(UserSessionActions.updateAttendeeAudioStatus(newStatus)),
-        playAudio: audioID => dispatch(audioActions.audioPlay(audioID)) 
+        playAudio: audioID => dispatch(audioActions.audioPlay(audioID)),
+        sendAudioRequestEmail: (compID, listID, attID) => dispatch(EmailActions.sendAudioRequestEmail(compID, listID, attID))
     }
 }
 

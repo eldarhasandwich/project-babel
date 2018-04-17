@@ -69,7 +69,7 @@ class ListAttendeeTable extends Component {
 
     getSortedFilteredAttendees = () => {
         let attendees = this.getSelectedListAttendees()
-        if (attendees === undefined || attendees === null) {
+        if (!attendees) {
             return []
         }
 
@@ -78,6 +78,30 @@ class ListAttendeeTable extends Component {
         attendeeKeys.sort((a, b) => {
             return attendees[a].orderPos - attendees[b].orderPos
         })
+
+        if (!this.props.state.attendeesWithNoAudioVisible){ 
+            attendeeKeys = attendeeKeys.filter(key => {
+                return attendees[key].audioStatus !== "No Audio"
+            })
+        }
+
+        if (!this.props.state.unverifiedAttendeesVisible){ 
+            attendeeKeys = attendeeKeys.filter(key => {
+                return attendees[key].audioStatus !== "Unverified"
+            })
+        }
+
+        if (!this.props.state.attendeesWithAudioNeedingReplacementVisible){ 
+            attendeeKeys = attendeeKeys.filter(key => {
+                return attendees[key].audioStatus !== "Needs Replacement"
+            })
+        }
+
+        if (!this.props.state.verifiedAttendeesVisible){ 
+            attendeeKeys = attendeeKeys.filter(key => {
+                return attendees[key].audioStatus !== "Verified"
+            })
+        }
 
         return attendeeKeys
     }

@@ -15,6 +15,7 @@ import {
 
 import ListAttendeeTable from './ListAttendeeTable'
 import SelectedItemInterface from './SelectedItemInterface'
+import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
 
 class AdminListInterface extends Component {
 
@@ -62,8 +63,18 @@ class AdminListInterface extends Component {
                             disabled={this.props.userSession.selectedAttendee === null}
                             onClick={this.showListInformation}/>
 
+                        <RaisedButton
+                            label={"Attendee Filters"}
+                            onClick={this.openVisibilityPopover}
+                        />
+
                     </ToolbarGroup>
                 </Toolbar>
+
+                <AttendeeTableVisibilityDialog
+                    isOpen={this.state.visibilityPopoverOpen}
+                    onRequestClose={this.closeVisibilityPopover}
+                />
 
                 {(this.props.userSession.selectedList !== null)
                     ? <AdminListInterfaceChild/>

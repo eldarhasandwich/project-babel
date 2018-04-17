@@ -1,0 +1,924 @@
+[debug] [2018-04-17T00:02:52.180Z] ----------------------------------------------------------------------
+[debug] [2018-04-17T00:02:52.182Z] Command:       /usr/bin/node /usr/bin/firebase deploy
+[debug] [2018-04-17T00:02:52.182Z] CLI Version:   3.18.4
+[debug] [2018-04-17T00:02:52.182Z] Platform:      linux
+[debug] [2018-04-17T00:02:52.182Z] Node Version:  v8.7.0
+[debug] [2018-04-17T00:02:52.183Z] Time:          Tue Apr 17 2018 10:02:52 GMT+1000 (STD)
+[debug] [2018-04-17T00:02:52.183Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-17T00:02:52.209Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-17T00:02:52.209Z] > authorizing via signed-in user
+[debug] [2018-04-17T00:02:52.211Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-04-17T00:02:52.211Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/ZLO5mdouCD4AQm-Fkn4MraEA3WXjlFniXru5yyATKNU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Apr 17 2018 10:02:52 GMT+1000 (STD)
+[debug] [2018-04-17T00:02:52.790Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:02:52.798Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:02:52 GMT+1000 (STD)
+[debug] [2018-04-17T00:02:54.001Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:02:54.001Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/project-babel-datastore/tokens  
+  
+ Tue Apr 17 2018 10:02:54 GMT+1000 (STD)
+[debug] [2018-04-17T00:02:54.746Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'project-babel-datastore'...
+[info] 
+[info] i  deploying database, storage, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[info] i  database: checking rules syntax...
+[debug] [2018-04-17T00:03:13.389Z] >>> HTTP REQUEST PUT https://project-babel-datastore.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+ 
+ Tue Apr 17 2018 10:03:13 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:14.742Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database project-babel-datastore is valid
+[debug] [2018-04-17T00:03:14.743Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:03:14 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:16.338Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2018-04-17T00:03:16.340Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/project-babel-datastore:test  
+ { source: { files: [ [Object] ] } } 
+ Tue Apr 17 2018 10:03:16 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:17.971Z] <<< HTTP RESPONSE 200
+[info] ✔  storage: rules file storage.rules compiled successfully
+[debug] [2018-04-17T00:03:17.973Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.12.0",
+    "firebase-functions": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-04-17T00:03:17.974Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:03:17 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:17.974Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:03:17 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:19.807Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:03:19.868Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-04-17T00:03:19.869Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:03:19 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:21.381Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:03:21.382Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/970549376509:getServerAppConfig  
+  
+ Tue Apr 17 2018 10:03:21 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:22.592Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2018-04-17T00:03:22.595Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/project-babel-datastore/rulesets  
+ { source: { files: [ [Object] ] } } 
+ Tue Apr 17 2018 10:03:22 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:24.043Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:03:24.043Z] [rules] created ruleset projects/project-babel-datastore/rulesets/2fa9d201-73d8-47b0-beed-4f465d176edd
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-04-17T00:03:24.045Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/project-babel-datastore/configs  
+  
+ Tue Apr 17 2018 10:03:24 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:24.898Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (50.42 KB) for uploading
+[debug] [2018-04-17T00:03:26.196Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions:generateUploadUrl  
+  
+ Tue Apr 17 2018 10:03:26 GMT+1000 (STD)
+[debug] [2018-04-17T00:03:56.739Z] <<< HTTP RESPONSE 503
+[debug] [2018-04-17T00:03:56.739Z] <<< HTTP RESPONSE BODY {
+  "error": {
+    "code": 503,
+    "message": "The service is currently unavailable.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+[debug] [2018-04-17T00:03:56.742Z] TypeError: Cannot create property 'error' on string '{
+  "error": {
+    "code": 503,
+    "message": "The service is currently unavailable.",
+    "status": "UNAVAILABLE"
+  }
+}
+'
+    at module.exports (/usr/lib/node_modules/firebase-tools/lib/responseToError.js:11:16)
+    at Request._callback (/usr/lib/node_modules/firebase-tools/lib/api.js:47:25)
+    at Request.self.callback (/usr/lib/node_modules/firebase-tools/node_modules/request/request.js:186:22)
+    at emitTwo (events.js:125:13)
+    at Request.emit (events.js:213:7)
+    at Request.<anonymous> (/usr/lib/node_modules/firebase-tools/node_modules/request/request.js:1163:10)
+    at emitOne (events.js:115:13)
+    at Request.emit (events.js:210:7)
+    at IncomingMessage.<anonymous> (/usr/lib/node_modules/firebase-tools/node_modules/request/request.js:1085:12)
+    at Object.onceWrapper (events.js:314:30)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2018-04-17T00:11:23.936Z] ----------------------------------------------------------------------
+[debug] [2018-04-17T00:11:23.940Z] Command:       /usr/bin/node /usr/bin/firebase deploy --debug
+[debug] [2018-04-17T00:11:23.940Z] CLI Version:   3.18.4
+[debug] [2018-04-17T00:11:23.940Z] Platform:      linux
+[debug] [2018-04-17T00:11:23.941Z] Node Version:  v8.7.0
+[debug] [2018-04-17T00:11:23.941Z] Time:          Tue Apr 17 2018 10:11:23 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:23.941Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-17T00:11:23.949Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-17T00:11:23.950Z] > authorizing via signed-in user
+[debug] [2018-04-17T00:11:23.952Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:11:23 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:25.366Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:25.367Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/project-babel-datastore/tokens  
+  
+ Tue Apr 17 2018 10:11:25 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:26.209Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'project-babel-datastore'...
+[info] 
+[info] i  deploying database, storage, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[info] i  database: checking rules syntax...
+[debug] [2018-04-17T00:11:30.636Z] >>> HTTP REQUEST PUT https://project-babel-datastore.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+ 
+ Tue Apr 17 2018 10:11:30 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:31.899Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database project-babel-datastore is valid
+[debug] [2018-04-17T00:11:31.901Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:11:31 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:33.469Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2018-04-17T00:11:33.471Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/project-babel-datastore:test  
+ { source: { files: [ [Object] ] } } 
+ Tue Apr 17 2018 10:11:33 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:34.920Z] <<< HTTP RESPONSE 200
+[info] ✔  storage: rules file storage.rules compiled successfully
+[debug] [2018-04-17T00:11:34.923Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.12.0",
+    "firebase-functions": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-04-17T00:11:34.926Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:11:34 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:34.927Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:11:34 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:36.576Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:36.638Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-04-17T00:11:36.639Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:11:36 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:37.938Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:37.939Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/970549376509:getServerAppConfig  
+  
+ Tue Apr 17 2018 10:11:37 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:38.960Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2018-04-17T00:11:38.964Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/project-babel-datastore/rulesets  
+ { source: { files: [ [Object] ] } } 
+ Tue Apr 17 2018 10:11:38 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:40.325Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:40.326Z] [rules] created ruleset projects/project-babel-datastore/rulesets/6d964b4e-40cd-494e-aeb8-f65f94feaba3
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-04-17T00:11:40.327Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/project-babel-datastore/configs  
+  
+ Tue Apr 17 2018 10:11:40 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:40.922Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (50.42 KB) for uploading
+[debug] [2018-04-17T00:11:41.231Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions:generateUploadUrl  
+  
+ Tue Apr 17 2018 10:11:41 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:42.006Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:42.007Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/39bc4aae-ee69-4c97-bcf3-e803533077a5.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523925700&Signature=oZT4soRbaTMltBZ0l%2FTbB%2FzMX0mOTGx8KiO%2FR6i9IR7bJMCw28mAwv5B9EdZVohHaTXMyGORywmd0L2I0ZpCcjDQmyz3Tv%2BdGThAzFHhzK8iy7BSozymyr0OEGNHeJ15ZKJgAVk30ozVU7MZ0Sxewibkz3SE%2BZ6Il9JSyDhO5UpXXXThOWXrBmO8H%2Bx7xmUYlJA7fYu9BXEPHUcY3FQ6hu63F3o4vadgI9Rpxu%2FNiT%2FmHxj9Ocv13HJicFCdFmKs1Hn%2FSyEfLTeQ0lxTzjHeXNsJkVH9g%2FjmkelluBfi%2BR9nmXqvVoluxeq%2BEdeLOGXV7qyKAN56FcEYbbtGj3tsAA%3D%3D  
+ ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 51628,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: true,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     destroyed: false,
+     defaultEncoding: 'utf8',
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/tmp/firebase-functions-158kqm59obzfJBe.zip',
+  fd: 15,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined,
+  bytesRead: 51628 } 
+ Tue Apr 17 2018 10:11:42 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:43.313Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  hosting: preparing public directory for upload...
+[debug] [2018-04-17T00:11:43.337Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/project-babel-datastore/uploads/-LAFwJgi7soUP_FRjUxi?fileCount=3&message=  
+  
+ Tue Apr 17 2018 10:11:43 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:44.665Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:44.666Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 3 files uploaded successfully
+[debug] [2018-04-17T00:11:45.896Z] [hosting] deploy completed after 2581ms
+[info] i  database: releasing rules...
+[debug] [2018-04-17T00:11:46.376Z] >>> HTTP REQUEST PUT https://project-babel-datastore.firebaseio.com/.settings/rules.json  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+ 
+ Tue Apr 17 2018 10:11:46 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:47.305Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules for database project-babel-datastore released successfully
+[debug] [2018-04-17T00:11:47.307Z] [rules] releasing firebase.storage/project-babel-datastore.appspot.com with ruleset projects/project-babel-datastore/rulesets/6d964b4e-40cd-494e-aeb8-f65f94feaba3
+[debug] [2018-04-17T00:11:47.308Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/project-babel-datastore/releases/firebase.storage/project-babel-datastore.appspot.com  
+ { release: 
+   { name: 'projects/project-babel-datastore/releases/firebase.storage/project-babel-datastore.appspot.com',
+     rulesetName: 'projects/project-babel-datastore/rulesets/6d964b4e-40cd-494e-aeb8-f65f94feaba3' } } 
+ Tue Apr 17 2018 10:11:47 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:48.645Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:48.646Z] [rules] updated release projects/project-babel-datastore/releases/firebase.storage/project-babel-datastore.appspot.com
+[info] ✔  storage: released rules storage.rules to firebase.storage/project-babel-datastore.appspot.com
+[debug] [2018-04-17T00:11:48.648Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:11:48 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:49.549Z] <<< HTTP RESPONSE 200
+[info] i  functions: creating function sendEmail...
+[debug] [2018-04-17T00:11:49.552Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2018-04-17T00:11:49.553Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/39bc4aae-ee69-4c97-bcf3-e803533077a5.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523925700&Signature=oZT4soRbaTMltBZ0l%2FTbB%2FzMX0mOTGx8KiO%2FR6i9IR7bJMCw28mAwv5B9EdZVohHaTXMyGORywmd0L2I0ZpCcjDQmyz3Tv%2BdGThAzFHhzK8iy7BSozymyr0OEGNHeJ15ZKJgAVk30ozVU7MZ0Sxewibkz3SE%2BZ6Il9JSyDhO5UpXXXThOWXrBmO8H%2Bx7xmUYlJA7fYu9BXEPHUcY3FQ6hu63F3o4vadgI9Rpxu%2FNiT%2FmHxj9Ocv13HJicFCdFmKs1Hn%2FSyEfLTeQ0lxTzjHeXNsJkVH9g%2FjmkelluBfi%2BR9nmXqvVoluxeq%2BEdeLOGXV7qyKAN56FcEYbbtGj3tsAA%3D%3D',
+  name: 'projects/project-babel-datastore/locations/us-central1/functions/sendEmail',
+  entryPoint: 'sendEmail',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  httpsTrigger: {} } 
+ Tue Apr 17 2018 10:11:49 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:50.141Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:50.143Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:11:50 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:50.592Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:50.594Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:11:50 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:51.186Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:53.187Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:11:53 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:53.768Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:55.770Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:11:55 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:56.358Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:11:58.359Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:11:58 GMT+1000 (STD)
+[debug] [2018-04-17T00:11:58.957Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:00.959Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:00 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:01.391Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:03.392Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:03 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:03.984Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:05.986Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:05 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:06.570Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:08.571Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:08 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:09.074Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:11.075Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:11 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:11.505Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:13.507Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:13 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:13.921Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:15.923Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:15 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:16.351Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:18.353Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:18 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:18.775Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:20.776Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:20 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:21.195Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:23.196Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:23 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:23.614Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:25.616Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL1JiN3R2a0lMSTBR  
+  
+ Tue Apr 17 2018 10:12:25 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:26.038Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:37.478Z] ----------------------------------------------------------------------
+[debug] [2018-04-17T00:12:37.481Z] Command:       /usr/bin/node /usr/bin/firebase deploy --debug
+[debug] [2018-04-17T00:12:37.482Z] CLI Version:   3.18.4
+[debug] [2018-04-17T00:12:37.482Z] Platform:      linux
+[debug] [2018-04-17T00:12:37.482Z] Node Version:  v8.7.0
+[debug] [2018-04-17T00:12:37.483Z] Time:          Tue Apr 17 2018 10:12:37 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:37.483Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-17T00:12:37.491Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-17T00:12:37.492Z] > authorizing via signed-in user
+[debug] [2018-04-17T00:12:37.494Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:12:37 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:38.622Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:38.623Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/project-babel-datastore/tokens  
+  
+ Tue Apr 17 2018 10:12:38 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:39.634Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'project-babel-datastore'...
+[info] 
+[info] i  deploying database, storage, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[info] i  database: checking rules syntax...
+[debug] [2018-04-17T00:12:43.974Z] >>> HTTP REQUEST PUT https://project-babel-datastore.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+ 
+ Tue Apr 17 2018 10:12:43 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:44.817Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database project-babel-datastore is valid
+[debug] [2018-04-17T00:12:44.819Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:12:44 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:46.342Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2018-04-17T00:12:46.344Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/project-babel-datastore:test  
+ { source: { files: [ [Object] ] } } 
+ Tue Apr 17 2018 10:12:46 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:47.816Z] <<< HTTP RESPONSE 200
+[info] ✔  storage: rules file storage.rules compiled successfully
+[debug] [2018-04-17T00:12:47.819Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.12.0",
+    "firebase-functions": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-04-17T00:12:47.821Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:12:47 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:47.822Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:12:47 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:49.487Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:49.536Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-04-17T00:12:49.538Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:12:49 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:50.878Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:50.879Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/970549376509:getServerAppConfig  
+  
+ Tue Apr 17 2018 10:12:50 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:52.137Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2018-04-17T00:12:52.140Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/project-babel-datastore/rulesets  
+ { source: { files: [ [Object] ] } } 
+ Tue Apr 17 2018 10:12:52 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:53.710Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:53.711Z] [rules] created ruleset projects/project-babel-datastore/rulesets/2d5cf9a6-884e-4657-a3d3-ed64983e4a59
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-04-17T00:12:53.712Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/project-babel-datastore/configs  
+  
+ Tue Apr 17 2018 10:12:53 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:54.290Z] <<< HTTP RESPONSE 200
+[info] i  hosting: preparing public directory for upload...
+[debug] [2018-04-17T00:12:54.580Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/project-babel-datastore/uploads/-LAFwaZ40gm6QDPtqcvm?fileCount=3&message=  
+  
+ Tue Apr 17 2018 10:12:54 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:55.805Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:55.806Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 3 files uploaded successfully
+[debug] [2018-04-17T00:12:57.157Z] [hosting] deploy completed after 2601ms
+[info] i  database: releasing rules...
+[debug] [2018-04-17T00:12:57.518Z] >>> HTTP REQUEST PUT https://project-babel-datastore.firebaseio.com/.settings/rules.json  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+ 
+ Tue Apr 17 2018 10:12:57 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:58.252Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules for database project-babel-datastore released successfully
+[debug] [2018-04-17T00:12:58.254Z] [rules] releasing firebase.storage/project-babel-datastore.appspot.com with ruleset projects/project-babel-datastore/rulesets/2d5cf9a6-884e-4657-a3d3-ed64983e4a59
+[debug] [2018-04-17T00:12:58.254Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/project-babel-datastore/releases/firebase.storage/project-babel-datastore.appspot.com  
+ { release: 
+   { name: 'projects/project-babel-datastore/releases/firebase.storage/project-babel-datastore.appspot.com',
+     rulesetName: 'projects/project-babel-datastore/rulesets/2d5cf9a6-884e-4657-a3d3-ed64983e4a59' } } 
+ Tue Apr 17 2018 10:12:58 GMT+1000 (STD)
+[debug] [2018-04-17T00:12:59.590Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:12:59.591Z] [rules] updated release projects/project-babel-datastore/releases/firebase.storage/project-babel-datastore.appspot.com
+[info] ✔  storage: released rules storage.rules to firebase.storage/project-babel-datastore.appspot.com
+[debug] [2018-04-17T00:12:59.593Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:12:59 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:00.177Z] <<< HTTP RESPONSE 200
+[info] i  functions: deleting function sendEmail...
+[debug] [2018-04-17T00:13:00.183Z] >>> HTTP REQUEST DELETE https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions/sendEmail  
+  
+ Tue Apr 17 2018 10:13:00 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:00.684Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:13:00.688Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL2F4WmpmOTBER1NJ  
+  
+ Tue Apr 17 2018 10:13:00 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:01.109Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:13:03.110Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL2F4WmpmOTBER1NJ  
+  
+ Tue Apr 17 2018 10:13:03 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:03.705Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:13:05.706Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL2F4WmpmOTBER1NJ  
+  
+ Tue Apr 17 2018 10:13:05 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:06.135Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[sendEmail]: Successful delete operation. 
+[debug] [2018-04-17T00:13:06.139Z] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/project-babel-datastore/releases  
+ { hosting: 
+   { public: 'public',
+     ignore: [ 'firebase.json', '**/.*', '**/node_modules/**' ],
+     rewrites: [ [Object] ],
+     version: '-LAFwaZ40gm6QDPtqcvm',
+     prefix: '-LAFwaZ40gm6QDPtqcvm/',
+     manifest: [] } } 
+ Tue Apr 17 2018 10:13:06 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:08.071Z] <<< HTTP RESPONSE 200
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/project-babel-datastore/overview
+[info] Hosting URL: https://project-babel-datastore.firebaseapp.com
+[debug] [2018-04-17T00:13:53.265Z] ----------------------------------------------------------------------
+[debug] [2018-04-17T00:13:53.269Z] Command:       /usr/bin/node /usr/bin/firebase deploy --debug --only functions
+[debug] [2018-04-17T00:13:53.269Z] CLI Version:   3.18.4
+[debug] [2018-04-17T00:13:53.269Z] Platform:      linux
+[debug] [2018-04-17T00:13:53.270Z] Node Version:  v8.7.0
+[debug] [2018-04-17T00:13:53.270Z] Time:          Tue Apr 17 2018 10:13:53 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:53.270Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-17T00:13:53.279Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-17T00:13:53.279Z] > authorizing via signed-in user
+[debug] [2018-04-17T00:13:53.281Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:13:53 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:54.342Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:13:54.343Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/project-babel-datastore/tokens  
+  
+ Tue Apr 17 2018 10:13:54 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:55.079Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'project-babel-datastore'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2018-04-17T00:13:59.378Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.12.0",
+    "firebase-functions": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-04-17T00:13:59.381Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:13:59 GMT+1000 (STD)
+[debug] [2018-04-17T00:13:59.381Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:13:59 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:01.036Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:01.091Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-04-17T00:14:01.092Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:14:01 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:02.481Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:02.482Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/970549376509:getServerAppConfig  
+  
+ Tue Apr 17 2018 10:14:02 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:04.577Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-04-17T00:14:04.579Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/project-babel-datastore/configs  
+  
+ Tue Apr 17 2018 10:14:04 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:05.141Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (50.64 KB) for uploading
+[debug] [2018-04-17T00:14:05.455Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions:generateUploadUrl  
+  
+ Tue Apr 17 2018 10:14:05 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:06.832Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:06.834Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/9929379b-3f56-4017-80bd-38e1dd7a9aa4.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523925844&Signature=BE%2BCd2DyYaobM283YgMsyBzg1vqPGCwcaXHU2xeUzpngFgnlhcp3jju2xhdivte2uiG0OilO8gLyaTt5Rs%2BPSMeq%2FB0xcFgbVFbcG%2BPyU06VKftmI9pDtCmFFH02KT%2FGL%2B9Tovf3gYd9hBxL4ucrPcbjUH92SlQRPmy%2BN90YRSA4ZDU463ZGUBviEcfcvUwLOZIbRyzEMDWjSpOeGHTTC5YxSIAvo6bxTTaeUtlxa%2Fz3ARQ8eBrrKk4g7UcN6TM7Gosxkcz0Dc8%2BKcvkr8ZbRcw87AVDNSggiBwiEe1IiadrpDrkPpE5uopFWw33YWw%2BjbkpEnvBJKSqRlix04nhLA%3D%3D  
+ ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 51859,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: true,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     destroyed: false,
+     defaultEncoding: 'utf8',
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/tmp/firebase-functions-283qYBE0arfs5dX.zip',
+  fd: 15,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined,
+  bytesRead: 51859 } 
+ Tue Apr 17 2018 10:14:06 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:08.122Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2018-04-17T00:14:08.125Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:14:08 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:08.571Z] <<< HTTP RESPONSE 200
+[info] i  functions: creating function addMessage...
+[debug] [2018-04-17T00:14:08.574Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2018-04-17T00:14:08.575Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/9929379b-3f56-4017-80bd-38e1dd7a9aa4.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523925844&Signature=BE%2BCd2DyYaobM283YgMsyBzg1vqPGCwcaXHU2xeUzpngFgnlhcp3jju2xhdivte2uiG0OilO8gLyaTt5Rs%2BPSMeq%2FB0xcFgbVFbcG%2BPyU06VKftmI9pDtCmFFH02KT%2FGL%2B9Tovf3gYd9hBxL4ucrPcbjUH92SlQRPmy%2BN90YRSA4ZDU463ZGUBviEcfcvUwLOZIbRyzEMDWjSpOeGHTTC5YxSIAvo6bxTTaeUtlxa%2Fz3ARQ8eBrrKk4g7UcN6TM7Gosxkcz0Dc8%2BKcvkr8ZbRcw87AVDNSggiBwiEe1IiadrpDrkPpE5uopFWw33YWw%2BjbkpEnvBJKSqRlix04nhLA%3D%3D',
+  name: 'projects/project-babel-datastore/locations/us-central1/functions/addMessage',
+  entryPoint: 'addMessage',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  httpsTrigger: {} } 
+ Tue Apr 17 2018 10:14:08 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:09.038Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:09.041Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:14:09 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:09.484Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:09.486Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:09 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:10.075Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:12.076Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:12 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:12.658Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:14.659Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:14 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:15.088Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:17.091Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:17 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:17.525Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:19.527Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:19 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:19.970Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:21.972Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:21 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:22.397Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:24.399Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:24 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:24.821Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:26.823Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:26 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:27.260Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:29.261Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:29 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:29.686Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:31.687Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:31 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:32.104Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:34.105Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:34 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:34.529Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:14:36.530Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9ZMWFULVdJLVhQMA  
+  
+ Tue Apr 17 2018 10:14:36 GMT+1000 (STD)
+[debug] [2018-04-17T00:14:36.975Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[addMessage]: Successful create operation. 
+[info] Function URL (addMessage): https://us-central1-project-babel-datastore.cloudfunctions.net/addMessage
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/project-babel-datastore/overview
+[debug] [2018-04-17T00:26:47.814Z] ----------------------------------------------------------------------
+[debug] [2018-04-17T00:26:47.817Z] Command:       /usr/bin/node /usr/bin/firebase deploy --debug --only functions
+[debug] [2018-04-17T00:26:47.818Z] CLI Version:   3.18.4
+[debug] [2018-04-17T00:26:47.818Z] Platform:      linux
+[debug] [2018-04-17T00:26:47.818Z] Node Version:  v8.7.0
+[debug] [2018-04-17T00:26:47.818Z] Time:          Tue Apr 17 2018 10:26:47 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:47.818Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-17T00:26:47.827Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-17T00:26:47.828Z] > authorizing via signed-in user
+[debug] [2018-04-17T00:26:47.830Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:26:47 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:49.287Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:26:49.288Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/project-babel-datastore/tokens  
+  
+ Tue Apr 17 2018 10:26:49 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:50.118Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'project-babel-datastore'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2018-04-17T00:26:54.699Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.223.1",
+    "firebase-admin": "~5.12.0",
+    "firebase-functions": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-04-17T00:26:54.702Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:26:54 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:54.703Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/project-babel-datastore?view=CONSUMER_VIEW  
+  
+ Tue Apr 17 2018 10:26:54 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:56.451Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:26:56.527Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-04-17T00:26:56.529Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-babel-datastore  
+  
+ Tue Apr 17 2018 10:26:56 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:57.870Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:26:57.871Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/970549376509:getServerAppConfig  
+  
+ Tue Apr 17 2018 10:26:57 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:58.812Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-04-17T00:26:58.814Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/project-babel-datastore/configs  
+  
+ Tue Apr 17 2018 10:26:58 GMT+1000 (STD)
+[debug] [2018-04-17T00:26:59.483Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (51.96 KB) for uploading
+[debug] [2018-04-17T00:27:01.022Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions:generateUploadUrl  
+  
+ Tue Apr 17 2018 10:27:01 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:02.266Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:02.268Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/042d2ab4-83ef-4173-8ff5-fa3947344f0a.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523926620&Signature=AK4HVl2GB8V8nxYwGNkBV1O9IEw%2FKiUjlXZ9N4HUe5kV3XbZihCujtzoG%2FZpyS6kEYSiRYujeAmXcecm3cH9j49ZIwPgPHgmWVoP7vm57ZWSobgvbyCVt5hcgCkNZVYdLsgerpY6H1nmS5ml9KHmQC1zwG9Hp5767Nqjispr%2F4zMbiSzqcua1%2BiklMMzSXKW0vVUWtWA66jDYWUm504lc7I48xfTVDsUBKXWomrnZ3iXikVY1Ipno2CrjllmxwGLGCwgY4ZFvGr8h43SdCxessiNpIDZhv5oAxjQBQZzkxlYMiSA1Y1MWggy5QXfRQ2XnCPm2oHV90yAE0C7rBQY1g%3D%3D  
+ ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 53204,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: true,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     destroyed: false,
+     defaultEncoding: 'utf8',
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/tmp/firebase-functions-37510mqqmW8gj5y.zip',
+  fd: 15,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined,
+  bytesRead: 53204 } 
+ Tue Apr 17 2018 10:27:02 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:03.358Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2018-04-17T00:27:03.360Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:27:03 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:04.433Z] <<< HTTP RESPONSE 200
+[info] i  functions: creating function sendEmail...
+[debug] [2018-04-17T00:27:04.435Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating function addMessage...
+[debug] [2018-04-17T00:27:04.436Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2018-04-17T00:27:04.437Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/042d2ab4-83ef-4173-8ff5-fa3947344f0a.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523926620&Signature=AK4HVl2GB8V8nxYwGNkBV1O9IEw%2FKiUjlXZ9N4HUe5kV3XbZihCujtzoG%2FZpyS6kEYSiRYujeAmXcecm3cH9j49ZIwPgPHgmWVoP7vm57ZWSobgvbyCVt5hcgCkNZVYdLsgerpY6H1nmS5ml9KHmQC1zwG9Hp5767Nqjispr%2F4zMbiSzqcua1%2BiklMMzSXKW0vVUWtWA66jDYWUm504lc7I48xfTVDsUBKXWomrnZ3iXikVY1Ipno2CrjllmxwGLGCwgY4ZFvGr8h43SdCxessiNpIDZhv5oAxjQBQZzkxlYMiSA1Y1MWggy5QXfRQ2XnCPm2oHV90yAE0C7rBQY1g%3D%3D',
+  name: 'projects/project-babel-datastore/locations/us-central1/functions/sendEmail',
+  entryPoint: 'sendEmail',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  httpsTrigger: {} } 
+ Tue Apr 17 2018 10:27:04 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:04.440Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions/addMessage 
+query params: {"updateMask":"sourceUploadUrl,name,labels,httpsTrigger"} 
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-894179a3-14be-40d7-bfad-fe19bf26015a/042d2ab4-83ef-4173-8ff5-fa3947344f0a.zip?GoogleAccessId=970549376509@cloudservices.gserviceaccount.com&Expires=1523926620&Signature=AK4HVl2GB8V8nxYwGNkBV1O9IEw%2FKiUjlXZ9N4HUe5kV3XbZihCujtzoG%2FZpyS6kEYSiRYujeAmXcecm3cH9j49ZIwPgPHgmWVoP7vm57ZWSobgvbyCVt5hcgCkNZVYdLsgerpY6H1nmS5ml9KHmQC1zwG9Hp5767Nqjispr%2F4zMbiSzqcua1%2BiklMMzSXKW0vVUWtWA66jDYWUm504lc7I48xfTVDsUBKXWomrnZ3iXikVY1Ipno2CrjllmxwGLGCwgY4ZFvGr8h43SdCxessiNpIDZhv5oAxjQBQZzkxlYMiSA1Y1MWggy5QXfRQ2XnCPm2oHV90yAE0C7rBQY1g%3D%3D',
+  name: 'projects/project-babel-datastore/locations/us-central1/functions/addMessage',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  httpsTrigger: {} } 
+ Tue Apr 17 2018 10:27:04 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:04.951Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:05.571Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:05.573Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/project-babel-datastore/locations/us-central1/functions  
+  
+ Tue Apr 17 2018 10:27:05 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:06.652Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:06.654Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL3FlOER3SmszSGxv  
+  
+ Tue Apr 17 2018 10:27:06 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:06.655Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9mc0xQOWNEZzZtMA  
+  
+ Tue Apr 17 2018 10:27:06 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:07.709Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:07.748Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:09.711Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL3FlOER3SmszSGxv  
+  
+ Tue Apr 17 2018 10:27:09 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:09.749Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9mc0xQOWNEZzZtMA  
+  
+ Tue Apr 17 2018 10:27:09 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:10.861Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:12.862Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9mc0xQOWNEZzZtMA  
+  
+ Tue Apr 17 2018 10:27:12 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:13.289Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:15.291Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9mc0xQOWNEZzZtMA  
+  
+ Tue Apr 17 2018 10:27:15 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:15.823Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:16.379Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:17.825Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvc2VuZEVtYWlsL3FlOER3SmszSGxv  
+  
+ Tue Apr 17 2018 10:27:17 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:18.265Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[sendEmail]: Successful create operation. 
+[info] Function URL (sendEmail): https://us-central1-project-babel-datastore.cloudfunctions.net/sendEmail
+[debug] [2018-04-17T00:27:18.380Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9mc0xQOWNEZzZtMA  
+  
+ Tue Apr 17 2018 10:27:18 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:18.809Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T00:27:20.809Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdC1iYWJlbC1kYXRhc3RvcmUvdXMtY2VudHJhbDEvYWRkTWVzc2FnZS9mc0xQOWNEZzZtMA  
+  
+ Tue Apr 17 2018 10:27:20 GMT+1000 (STD)
+[debug] [2018-04-17T00:27:21.403Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[addMessage]: Successful update operation. 
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/project-babel-datastore/overview
