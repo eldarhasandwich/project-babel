@@ -61,11 +61,14 @@ class AdminListInterface extends Component {
                         <RaisedButton
                             label={"View List"}
                             disabled={this.props.userSession.selectedAttendee === null}
-                            onClick={this.showListInformation}/>
+                            onClick={this.showListInformation}
+                            style={{marginRight:"3px"}}
+                        />
 
                         <RaisedButton
                             label={"Attendee Filters"}
                             onClick={this.openVisibilityPopover}
+                            style={{marginLeft:"3px"}}
                         />
 
                     </ToolbarGroup>

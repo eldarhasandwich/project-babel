@@ -6,8 +6,8 @@ import * as StateActions from '../../../Actions/state'
 
 class AttendeeTableVisibilityDialog extends Component {
 
-
     verifiedToggle = (e, value) => {
+        console.log(value)
         this.props.setVerifiedAttendeesVisible(value);
     }
     
@@ -41,22 +41,22 @@ class AttendeeTableVisibilityDialog extends Component {
                 <Toggle
                     label="Verified"
                     toggled={this.props.state.verifiedAttendeesVisible === true}
-                    onToggle={this.props.setVerifiedAttendeesVisible}
+                    onToggle={this.verifiedToggle}
                 />
                 <Toggle
                     label="Needing Replacement"
                     toggled={this.props.state.attendeesWithAudioNeedingReplacementVisible === true}
-                    onToggle={this.props.setAttendeesWithAudioNeedingReplacementVisible}
+                    onToggle={this.needsReplacementToggle}
                 />
                 <Toggle
                     label="Unverified"
                     toggled={this.props.state.unverifiedAttendeesVisible === true}
-                    onToggle={this.props.setUnverifiedAttendeesVisible}
+                    onToggle={this.unverifiedToggle}
                 />
                 <Toggle
                     label="No Audio"
                     toggled={this.props.state.attendeesWithNoAudioVisible === true}
-                    onToggle={this.props.setAttendeesWithNoAudioVisible}
+                    onToggle={this.noAudioToggle}
                 />
             </Dialog>
         )
