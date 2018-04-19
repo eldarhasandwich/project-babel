@@ -1,5 +1,5 @@
 import SESHandler from '../Classes/SES'
-import firebase from 'firebase'
+// import firebase from 'firebase'
 
 export function sendAudioRequestEmail(compID, listID, attID) {
     return (dispatch, getState) => {
@@ -19,8 +19,10 @@ export function sendAudioRequestEmail(compID, listID, attID) {
             accessKey: `${compID}~${listID}~${attID}`
         }
 
-        let emailText = attInfo.accessKey
-        let emailHTML = '<p>' + attInfo.accessKey + '</p>'
+        console.log(attInfo.accessKey)
+
+        let emailText = `Hello ${attInfo.name}! Follow this link to access your upload portal: upload.vocalist.online/?k=${attInfo.accessKey}`
+        let emailHTML = `Hello ${attInfo.name}! Follow this link to access your upload portal: <a href="upload.vocalist.online/?k=${attInfo.accessKey}">Click here!</a>`
 
         SESHandler.sendEmail(attInfo.email, "Do not reply to this Email", emailText, emailHTML)
 

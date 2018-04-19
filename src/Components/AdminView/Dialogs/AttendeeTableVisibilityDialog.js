@@ -33,27 +33,32 @@ class AttendeeTableVisibilityDialog extends Component {
 
         return (
             <Dialog
+                title={"Filter Attendees by Audio Status"}
                 open={this.props.isOpen}
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
             >
                 <Toggle
                     label="Verified"
+                    labelPosition={"right"}
                     toggled={this.props.state.verifiedAttendeesVisible === true}
                     onToggle={this.verifiedToggle}
                 />
                 <Toggle
                     label="Needing Replacement"
+                    labelPosition={"right"}
                     toggled={this.props.state.attendeesWithAudioNeedingReplacementVisible === true}
                     onToggle={this.needsReplacementToggle}
                 />
                 <Toggle
                     label="Unverified"
+                    labelPosition={"right"}
                     toggled={this.props.state.unverifiedAttendeesVisible === true}
                     onToggle={this.unverifiedToggle}
                 />
                 <Toggle
                     label="No Audio"
+                    labelPosition={"right"}
                     toggled={this.props.state.attendeesWithNoAudioVisible === true}
                     onToggle={this.noAudioToggle}
                 />
