@@ -171,6 +171,7 @@ class ListAttendeeTable extends Component {
                                                         <ListAttendeeTableItem
                                                             itemKey={item}
                                                             attendees={attendees}
+                                                            selectedAttendee={this.props.userSession.selectedAttendee}
                                                             isDragging={snapshot.isDragging}
                                                             onClick={this.setSelectedAttendee}
                                                         />
@@ -208,8 +209,11 @@ class ListAttendeeTable extends Component {
 class ListAttendeeTableItem extends Component {
 
     itemClicked = () => {
-        // console.log(this.props.itemKey)
         this.props.onClick(this.props.itemKey)
+    }
+
+    isSelected = () => {
+        return this.props.selectedAttendee === this.props.itemKey
     }
 
     itemInfo = this.props.attendees[this.props.itemKey]
@@ -223,7 +227,7 @@ class ListAttendeeTableItem extends Component {
 
         return (
             <Paper 
-                style={this.paperStyle} 
+                style={{...this.paperStyle, background: this.isSelected() ? 'lightgrey' : 'white'}} 
                 zDepth={this.props.isDragging ? 5 : 1}
                 onClick={this.itemClicked}
             >
