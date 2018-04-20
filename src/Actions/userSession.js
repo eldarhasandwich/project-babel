@@ -101,6 +101,25 @@ export function addNewAttendee (newAttendeeName, newAttendeeEmail) {
     }
 }
 
+export function applyOrderPosChanges (newOrderPosSet) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let companyID = state.userSession.userCompanyID
+        let selectedList = state.userSession.selectedList
+
+        console.log(newOrderPosSet)
+        // return
+
+        newOrderPosSet.forEach( item => {
+            Fire
+                .database()
+                .ref(`_COMPANIES/${companyID}/_LISTS/${selectedList}/_ATTENDEES/${item[0]}`)
+                .update({orderPos: item[1]})
+        })
+
+    }
+}
+
 export function updateAttendeeAudioStatus (newAudioStatus) {
     return (dispatch, getState) => {
         let state = getState()

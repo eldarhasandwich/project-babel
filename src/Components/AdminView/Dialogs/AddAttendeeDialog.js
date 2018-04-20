@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {RaisedButton, Toggle} from 'material-ui';
+// import {RaisedButton, Toggle} from 'material-ui';
 
 import {FlatButton, Dialog, TextField} from 'material-ui';
 import {Tab, Tabs} from 'material-ui'
 import Dropzone from 'react-dropzone'
 
-import * as StateActions from '../../../Actions/state'
+// import * as StateActions from '../../../Actions/state'
 import * as UserSessionActions from '../../../Actions/userSession'
 import CSVtoArray from '../../../Classes/CSVOperations'
 
@@ -36,6 +36,16 @@ class AddAttendeeDialog extends Component {
 
     resetNewAttendee = () => {
         this.setState({attendeeName: "", attendeeEmail: ""})
+    }
+
+    resetAttendeeCSV = () => {
+        this.setState({
+            attendeeCSVImport: {
+                nameHeader: "",
+                emailHeader: "",
+                data: []
+            }
+        })
     }
 
     submitAttendeeInfo = () => {
