@@ -1,14 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-// import {
-//     Table,
-//     TableBody,
-//     TableHeader,
-//     TableHeaderColumn,
-//     TableRow,
-//     TableRowColumn
-// } from 'material-ui/Table';
 import {FlatButton, Paper} from 'material-ui';
 
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
@@ -232,7 +224,7 @@ class ListAttendeeTableItem extends Component {
         return (
             <Paper 
                 style={this.paperStyle} 
-                zDepth={this.props.isDragging ? 3 : 1}
+                zDepth={this.props.isDragging ? 5 : 1}
                 onClick={this.itemClicked}
             >
                 <p style={{float:"left", margin:"0 3px"}}>#{this.props.attendees[this.props.itemKey].orderPos + 1}</p>

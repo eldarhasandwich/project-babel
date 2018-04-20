@@ -107,15 +107,17 @@ export function applyOrderPosChanges (newOrderPosSet) {
         let companyID = state.userSession.userCompanyID
         let selectedList = state.userSession.selectedList
 
-        console.log(newOrderPosSet)
-        // return
-
-        newOrderPosSet.forEach( item => {
-            Fire
-                .database()
-                .ref(`_COMPANIES/${companyID}/_LISTS/${selectedList}/_ATTENDEES/${item[0]}`)
-                .update({orderPos: item[1]})
+        // console.log(newOrderPosSet)
+        let updateObj = {}
+        newOrderPosSet.forEach(item => {
+            updateObj["_ATTENDEES/" + item[0] + "/orderPos"] = item[1]
         })
+        // console.log(updateObj)
+
+        Fire
+            .database()
+            .ref(`_COMPANIES/${companyID}/_LISTS/${selectedList}`)
+            .update(updateObj)
 
     }
 }
