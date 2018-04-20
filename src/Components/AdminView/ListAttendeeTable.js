@@ -153,13 +153,13 @@ class ListAttendeeTable extends Component {
                     overflowY:"auto"
                 }}>
                     <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId="droppable">
+                        <Droppable droppableId="droppable" isDropDisabled={!this.props.userSession.attendeeSortingAllowed}>
                             {(provided, snapshot) => (
                                 <div ref={provided.innerRef} style={this.getListStyle(snapshot.isDraggingOver)}>
                                     {this
                                         .getSortedFilteredAttendees()
                                         .map((item, index) => (
-                                            <Draggable key={item} draggableId={item} index={index}>
+                                            <Draggable key={item} draggableId={item} index={index} isDragDisabled={!this.props.userSession.attendeeSortingAllowed}>
 
                                                 {(provided, snapshot) => (
                                                     <div

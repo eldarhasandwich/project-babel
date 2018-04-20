@@ -10,6 +10,14 @@ export function setUserLoggedIn (bool) {
     }
 }
 
+export function allowAttendeeSorting (bool) {
+    return {
+        type: "ALLOW_ATTENDEE_SORTING",
+        bool
+    }
+}
+
+
 export function setUserCompanyName (newName) {
     return (dispatch, getState) => {
         let state = getState()

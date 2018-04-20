@@ -3,23 +3,33 @@ import {connect} from 'react-redux'
 import { RaisedButton, Toggle, Dialog } from 'material-ui';
 
 import * as StateActions from '../../../Actions/state'
+import * as UserSessionActions from '../../../Actions/userSession'
 
 class AttendeeTableVisibilityDialog extends Component {
 
     verifiedToggle = (e, value) => {
+        this.props.allowAttendeeSorting(false);
         this.props.setVerifiedAttendeesVisible(value);
     }
     
     needsReplacementToggle = (e, value) => {
+        this.props.allowAttendeeSorting(false);
         this.props.setAttendeesWithAudioNeedingReplacementVisible(value);
     }
 
     unverifiedToggle = (e, value) => {
+        this.props.allowAttendeeSorting(false);
         this.props.setUnverifiedAttendeesVisible(value);
     }
 
     noAudioToggle = (e, value) => {
+        this.props.allowAttendeeSorting(false);
         this.props.setAttendeesWithNoAudioVisible(value);
+    }
+
+    allTogglesEnabled = () => {
+        let s = this.props.state
+        return s.verifiedAttendeesVisible && s.unverifiedAttendeesVisible && s.attendeesWithAudioNeedingReplacementVisible && s.attendeesWithNoAudioVisible
     }
 
     render() {
@@ -33,7 +43,7 @@ class AttendeeTableVisibilityDialog extends Component {
 
         return (
             <Dialog
-                title={"Filter Attendees by Audio Status"}
+                title={"Show Attendees by Audio Status"}
                 open={this.props.isOpen}
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
@@ -62,6 +72,8 @@ class AttendeeTableVisibilityDialog extends Component {
                     toggled={this.props.state.attendeesWithNoAudioVisible === true}
                     onToggle={this.noAudioToggle}
                 />
+
+                <p>{this.allTogglesEnabled ? null : "You cannot reorder Attendees if any are not Visible."}</p>
             </Dialog>
         )
     }
@@ -74,6 +86,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        allowAttendeeSorting: bool => dispatch(UserSessionActions.allowAttendeeSorting(bool)),
+
         setVerifiedAttendeesVisible: bool => dispatch(StateActions.setVerifiedAttendeesVisible(bool)),
         setAttendeesWithAudioNeedingReplacementVisible: bool => dispatch(StateActions.setAttendeesWithAudioNeedingReplacementVisible(bool)),
         setUnverifiedAttendeesVisible: bool => dispatch(StateActions.setUnverifiedAttendeesVisible(bool)),

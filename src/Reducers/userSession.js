@@ -4,7 +4,8 @@ const defaultState = {
     userCompanyName: "",
     companyLists: {},
     selectedList: null,
-    selectedAttendee: null
+    selectedAttendee: null,
+    attendeeSortingAllowed: false
 }
 
 
@@ -39,6 +40,13 @@ const userSession = (state = defaultState, action) => {
             return {
                 ...state,
                 selectedAttendee: action.newSelectedAttendee
+            }
+        }
+
+        case 'ALLOW_ATTENDEE_SORTING': {
+            return {
+                ...state,
+                attendeeSortingAllowed: action.bool
             }
         }
 

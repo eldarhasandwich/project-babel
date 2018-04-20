@@ -48,12 +48,27 @@ class AdminListInterface extends Component {
             .setSelectedAttendee(null)
     }
 
+    attendeeSortingAllowed = () => {
+        let s = this.props.state
+        return s.verifiedAttendeesVisible && s.unverifiedAttendeesVisible && s.attendeesWithAudioNeedingReplacementVisible && s.attendeesWithNoAudioVisible
+    }
+
+    toggleAttendeeSorting = () => {
+        this.props.allowAttendeeSorting(!this.props.userSession.attendeeSortingAllowed)
+    }
+
     render() {
         return (
             <div>
 
-                <Toolbar>
+                <Toolbar style={{paddingLeft:"0px"}}>
                     <ToolbarGroup>
+                        <RaisedButton
+                            label={this.props.userSession.attendeeSortingAllowed ? "Lock Sorting" : "Unlock Sorting"}
+                            disabled={!this.attendeeSortingAllowed()}
+                            secondary={this.props.userSession.attendeeSortingAllowed}
+                            onClick={this.toggleAttendeeSorting}
+                        />
                         <ToolbarTitle text={this.getSelectedListName()}/>
                     </ToolbarGroup>
 
@@ -125,6 +140,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        allowAttendeeSorting: bool => dispatch(UserSessionActions.allowAttendeeSorting(bool)),
         setSelectedAttendee: attID => dispatch(UserSessionActions.setSelectedAttendee(attID))
     }
 }
