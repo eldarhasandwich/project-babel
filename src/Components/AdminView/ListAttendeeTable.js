@@ -80,30 +80,23 @@ class ListAttendeeTable extends Component {
         this.setSelectedAttendee(attendees[index[0]])
     }
 
-    grid = 6
-
-    getListStyle = isDraggingOver => ({
-        background: "white",
-        padding: this.grid,
-        width: "96%",
-        margin:"auto"
+    getListStyle = (isDraggingOver, draggingAllowed) => ({
+        background: draggingAllowed ? "lightcoral" : "white",
+        padding: "6px",
+        width: "100%",
+        margin:"auto",
+        transition: "0.4s"
     });
 
     getItemStyle = (isDragging, draggableStyle) => ({
         userSelect: 'none',
-        margin: `0 0 ${this.grid}px 0`,
+        margin: `0 0 6px 0`,
         ...draggableStyle
     });
-
-    getPaperStyle = (isDragging) => ({
-        padding: this.grid * 2,
-
-    })
 
     onDragEnd = result => {
         // console.log(result)
         if (!result.destination) {
-            console.log("wtf")
             return
         }
         let sourceIndex = result.source.index
@@ -114,29 +107,21 @@ class ListAttendeeTable extends Component {
         }
 
         let orderedAttendeeKeys = this.getSortedFilteredAttendees()
-
         let orderPosChanges = []
 
-        //omae wa mou shindeiru 
-
+        var i;
         if (sourceIndex < destIndex) {
-            for (var i=0; i < destIndex-sourceIndex; i++) {
+            for (i=0; i < destIndex-sourceIndex; i++) {
                 orderPosChanges.push([orderedAttendeeKeys[sourceIndex+i+1],sourceIndex+i])
             }
             orderPosChanges.push([orderedAttendeeKeys[sourceIndex], destIndex])
         } else {
-
-            for (var i=0; i<sourceIndex-destIndex; i++) {
+            for (i=0; i<sourceIndex-destIndex; i++) {
                 orderPosChanges.push([orderedAttendeeKeys[sourceIndex-i-1], sourceIndex-i])
             }
             orderPosChanges.push([orderedAttendeeKeys[sourceIndex], destIndex])
-
         }
-
-        console.log(orderPosChanges)
-
         this.props.applyOrderPosChanges(orderPosChanges)
-
     }
 
     render() {
@@ -155,7 +140,7 @@ class ListAttendeeTable extends Component {
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         <Droppable droppableId="droppable" isDropDisabled={!this.props.userSession.attendeeSortingAllowed}>
                             {(provided, snapshot) => (
-                                <div ref={provided.innerRef} style={this.getListStyle(snapshot.isDraggingOver)}>
+                                <div ref={provided.innerRef} style={this.getListStyle(snapshot.isDraggingOver, this.props.userSession.attendeeSortingAllowed)}>
                                     {this
                                         .getSortedFilteredAttendees()
                                         .map((item, index) => (
@@ -218,6 +203,8 @@ class ListAttendeeTableItem extends Component {
 
     itemInfo = this.props.attendees[this.props.itemKey]
     paperStyle = {
+        width: "95%",
+        margin: "auto",
         padding: "12px",
         cursor: "pointer",
         overflow:"auto"

@@ -73,7 +73,7 @@ class AttendeeTableVisibilityDialog extends Component {
                     onToggle={this.noAudioToggle}
                 />
 
-                <p>{this.allTogglesEnabled ? null : "You cannot reorder Attendees if any are not Visible."}</p>
+                <p>{this.allTogglesEnabled() ? null : "You cannot reorder Attendees if any are not Visible."}</p>
             </Dialog>
         )
     }
