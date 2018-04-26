@@ -5,6 +5,8 @@ import {FlatButton, Paper} from 'material-ui';
 
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
+import './ListAttendeeTable.css'
+
 import * as UserSessionActions from '../../Actions/userSession'
 import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
 
@@ -214,6 +216,7 @@ class ListAttendeeTableItem extends Component {
 
         return (
             <Paper 
+                id="list-attendee-table-item-paper"
                 style={{...this.paperStyle, background: this.isSelected() ? 'lightgrey' : 'white'}} 
                 zDepth={this.props.isDragging ? 5 : 1}
                 onClick={this.itemClicked}

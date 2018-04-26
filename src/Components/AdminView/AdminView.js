@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+// import { withRouter } from 'react-router-dom'
 
 import * as StateActions from '../../Actions/state';
 
@@ -38,9 +39,17 @@ class AdminView extends Component {
         height: "100%"
     }
 
+    componentDidMount () {
+        if (!this.props.userSession.isLoggedIn) {
+            console.log("Not logged in :( (compdidmount)")
+            
+        }
+    }
 
     render() {
         if (!this.props.userSession.isLoggedIn) {
+            console.log("Not logged in :( (render)")
+
             return (
                 <h4>You are not logged in</h4>
             )
