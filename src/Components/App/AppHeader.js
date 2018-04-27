@@ -6,8 +6,10 @@ import './AppHeader.css';
 import { FlatButton } from 'material-ui'
 
 import * as userSessionActions from './../../Actions/userSession'
+import palette from '../../Resources/colorPalette.js'
 
 var pjson = require('../../../package.json');
+
 
 class AppHeader extends Component {
 
@@ -22,7 +24,7 @@ class AppHeader extends Component {
     }
 
     appHeaderStyle = {
-        backgroundColor: "#222",
+        backgroundColor: palette.blue_dark,
         overflow: "auto",
         padding: "5px 10px",
         color: "white"
@@ -50,9 +52,12 @@ class AppHeader extends Component {
                     </div>
                     
                     <div style={this.titleDivStyle}>
-                        <h1>
+                        <h1 style={{display:"inline-block"}}>
                             <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Vocalist {pjson.version}</Link>
                         </h1>
+                        <h4 style={{display:"inline-block", fontWeight: "normal"}}>
+                            {this.props.userSession.userCompanyName}
+                        </h4>
                     </div>
                 </header>
             </div>

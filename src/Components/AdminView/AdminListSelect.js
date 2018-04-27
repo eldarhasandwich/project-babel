@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import { Menu, MenuItem, Subheader, Divider, FlatButton, Dialog, TextField } from 'material-ui'
+import { Menu, MenuItem, Subheader, Divider, FlatButton, Dialog, TextField, Paper } from 'material-ui'
+
+import NewListDialog from './Dialogs/NewListDialog'
 
 // import * as StateActions from '../../Actions/state';
 import * as UserSessionActions from '../../Actions/userSession'
+import palette from '../../Resources/colorPalette';
 
 class AdminListSelect extends Component {
 
@@ -14,8 +17,7 @@ class AdminListSelect extends Component {
         this.setSelectedList = this.setSelectedList.bind(this)
 
         this.state = {
-            createListDialogOpen: false,
-            newListName: ""
+            createListDialogOpen: false
         }
     }
 
@@ -25,18 +27,6 @@ class AdminListSelect extends Component {
 
     closeCreateListDialog = () => {
         this.setState({createListDialogOpen: false})
-    }
-
-    setNewListName = newName => {
-        this.setState({newListName: newName.target.value})
-    }
-
-    resetNewListName = () => {
-        this.setState({newListName: ""})
-    }
-
-    newListNameIsValid = () => {
-        return this.state.newListName.length >= 6
     }
 
     getCompanyListKeys = () => {
@@ -53,68 +43,53 @@ class AdminListSelect extends Component {
         }
     }
 
-    createNewList = () => {
-        this.closeCreateListDialog()
-        this.props.createNewList(this.state.newListName)
-        this.resetNewListName()
+    paperStyle = {
+        width:"95%",
+        height:"calc(100% - 10px)",
+        margin:"10px auto",
+        overflow:"hidden",
+        backgroundColor: palette.blue_light
     }
 
-    dialogActions = [
-        <FlatButton
-            label={"Create List"}
-            disabled={!this.newListNameIsValid}
-            primary
-            onClick={this.createNewList}
-        />
-    ]
-
     createNewListStyle = {
-        width: "100%",
+        width: "95%",
         position:"absolute",
-        bottom:"0"
+        bottom:"0",
+        marginBottom: "30px"
     }
 
     render () {
         return (
-            <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative"}}>
+            <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative", overflow:"hidden"}}>
 
-                <Subheader style={{paddingLeft:"0px"}}>Ceremonies</Subheader>
-                <Menu style={{width: "100%", height: "685px"}}>
-                    
-                    <div style={{overflow: "auto", height: "685px"}}>
-                    <Divider/>
-                    {this.getCompanyListKeys().map(
-                        x => <AdminListSelectItem
-                            key={x}
-                            itemKey={x}
-                            itemName={this.props.userSession.companyLists[x].listName}
-                            setSelectedList={this.setSelectedList}/>
-                    )}
+                <Paper style={this.paperStyle}>
+                    <h4 style={{fontWeight:"normal", marginLeft:"15px"}}> Ceremonies</h4>
+                        
+                        {this.getCompanyListKeys().map(
+                            x => <AdminListSelectItem
+                                key={x}
+                                itemKey={x}
+                                itemName={this.props.userSession.companyLists[x].listName}
+                                selectedList={this.props.userSession.selectedList}
+                                setSelectedList={this.setSelectedList}/>
+                        )}
+
+
+                    <div style={this.createNewListStyle}>
+                        <FlatButton
+                            label={"Create new List"}
+                            fullWidth
+                            onClick={
+                                this.openCreateListDialog
+                            }
+                            />
                     </div>
-
-                </Menu>
-
-                <div style={this.createNewListStyle}>
-                    <FlatButton
-                        label={"Create new List"}
-                        fullWidth
-                        onClick={
-                            this.openCreateListDialog
-                        }
+                </Paper>
+                
+                <NewListDialog
+                    isOpen={this.state.createListDialogOpen}
+                    onRequestClose={this.closeCreateListDialog}
                     />
-                    <Dialog
-                        title="Create a New List"
-                        actions={this.dialogActions}
-                        open={this.state.createListDialogOpen}
-                        onRequestClose={this.closeCreateListDialog}
-                    >
-                        <TextField
-                            floatingLabelText={"New List Name"}
-                            value={this.state.newListName}
-                            onChange={this.setNewListName}
-                        />
-                    </Dialog>
-                </div>
             </div>
         );
     }
@@ -122,18 +97,49 @@ class AdminListSelect extends Component {
 
 class AdminListSelectItem extends Component {
 
-    menuItemStyle = {whiteSpace: 'normal'}
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            hovered: false
+        }
+    }
+
+    setHovered = () => {
+        this.setState({hovered: true})
+    }
+
+    setNotHovered = () => {
+        this.setState({hovered: false})
+    }
+
+    isSelected = () => {
+        return this.props.selectedList === this.props.itemKey
+    }
+
+    getPaperStyle = () => { 
+        return {  
+            width: "95%",
+            margin: "auto",
+            padding: "12px",
+            cursor: "pointer",
+            overflow:"auto",
+            background: this.isSelected() ? "lightgrey" : this.state.hovered ? "lightblue" : "white",
+            height: this.isSelected() ? "90px" : "50px"
+        }
+    }
 
     render() {
         return (
-            <div>
-                <MenuItem 
-                    style={this.menuItemStyle}
+            <div style={{margin: "0 0 6px 0"}}>
+                <Paper 
+                    style={this.getPaperStyle()}
                     onClick={this.props.setSelectedList(this.props.itemKey)}
+                    onMouseEnter={this.setHovered}
+                    onMouseLeave={this.setNotHovered}
                 >
                     {this.props.itemName}
-                </MenuItem>
-                <Divider/>
+                </Paper>
             </div>
         )
     }

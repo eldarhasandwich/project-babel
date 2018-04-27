@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
-import {BrowserRouter, Route, Link} from 'react-router-dom'
 
-import { AppBar } from 'material-ui'
-import { Drawer, MenuItem, Subheader } from 'material-ui'
+import { Tab, Tabs } from 'material-ui'
 
 import LoginView from './LoginView'
+import InstitutionInfo from './InstitutionInfo'
 import AdminView from '../AdminView/AdminView'
 import MaterialEmceeView from '../EmceeView/MaterialEmceeView'
 
@@ -14,6 +13,7 @@ import * as userSessionActions from './../../Actions/userSession'
 import NewAccountView from './NewAccountView';
 // import {actions as audioActions} from 'redux-audio-fixed'
 
+import palette from '../../Resources/colorPalette.js'
 
 class InstitutionView extends Component {
 
@@ -36,7 +36,7 @@ class InstitutionView extends Component {
 
     appBarStyle = {
         textAlign: "left",
-        backgroundColor : "#222"
+        backgroundColor : palette.blue_dark
     }
 
     linkStyle = {
@@ -63,14 +63,11 @@ class InstitutionView extends Component {
 
         Object.keys(compLists).forEach(
             x => {
-                // console.log("ListID: " + x)
                 if (compLists[x]._ATTENDEES !== undefined) {
                     Object.keys(compLists[x]._ATTENDEES).forEach(
                         y => {
-                            // console.log("AttendeeID: " + y)
                             let attendee = compLists[x]._ATTENDEES[y]
                             if (attendee.audioStatus !== "No Audio") {
-                                // console.log("HAS AUDIO")
     
                                 audioComponents.push(<Audio
                                     src={""}
@@ -97,6 +94,10 @@ class InstitutionView extends Component {
         )
     }
 
+    tabStyle = {
+        backgroundColor: palette.blue_dark
+    }
+
     render() {
 
         if (!this.props.userSession.isLoggedIn) {
@@ -108,42 +109,26 @@ class InstitutionView extends Component {
         }
 
         return (
-            <BrowserRouter>
-
+            
                 <div>
 
                 {this.generateAttendeeAudio()}
 
-                    <AppBar
-                        style={this.appBarStyle}
-                        title={this.props.userSession.userCompanyName}
-                        onLeftIconButtonClick={this.handleToggle}
-                    />
+                    <Tabs>
 
-                    <Drawer
-                        docked={false}
-                        // width={200}
-                        open={this.state.drawerOpen}
-                        onRequestChange={this.handleClose}
-                    >
-                        <Subheader style={this.subheaderStyle}>Navigation</Subheader>
-                        <Link to={process.env.PUBLIC_URL + '/institution/emcee'} 
-                            style={this.linkStyle}>
-                            <MenuItem onClick={this.handleClose}>Emcee View</MenuItem>
-                        </Link>
-                        <Link to={process.env.PUBLIC_URL + '/institution/admin'}
-                            style={this.linkStyle}>
-                            <MenuItem onClick={this.handleClose}>Admin View</MenuItem>
-                        </Link>
-                        <Subheader style={this.subheaderStyle}>Other</Subheader>
-                        <MenuItem onClick={this.userLogout}>Logout</MenuItem>
-                    </Drawer>
+                        <Tab style={this.tabStyle} label="Instituition Information">
+                            <InstitutionInfo/>
+                        </Tab>
+                        <Tab style={this.tabStyle} label="List Administration">
+                            <AdminView/>
+                        </Tab>
+                        <Tab style={this.tabStyle} label="Emcee Interface">
+                            <MaterialEmceeView/>
+                        </Tab>
 
-                    <Route path={process.env.PUBLIC_URL + '/institution/emcee'} component={MaterialEmceeView}/>
-                    <Route path={process.env.PUBLIC_URL + '/institution/admin'} component={AdminView}/>
+                    </Tabs>
 
                 </div>
-            </BrowserRouter>
         )
     }
 }

@@ -5,10 +5,10 @@ import {FlatButton, Paper} from 'material-ui';
 
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
-import './ListAttendeeTable.css'
-
 import * as UserSessionActions from '../../Actions/userSession'
 import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
+
+import palette from '../../Resources/colorPalette.js'
 
 class ListAttendeeTable extends Component {
 
@@ -87,7 +87,7 @@ class ListAttendeeTable extends Component {
         padding: "6px",
         width: "100%",
         margin:"auto",
-        transition: "0.4s"
+        transition: "0.4s",
     });
 
     getItemStyle = (isDragging, draggableStyle) => ({
@@ -126,63 +126,70 @@ class ListAttendeeTable extends Component {
         this.props.applyOrderPosChanges(orderPosChanges)
     }
 
+    paperStyle = {
+        overflow:"auto",
+        height: "calc(100% - 10px)",
+        width: "98%",
+        marginTop: "10px",
+        backgroundColor: palette.gray_light
+    }
+
     render() {
 
         let attendees = this.getSelectedListAttendees();
 
         return (
-            <div>
-                <div
-                    style={{
-                    width: "100%",
-                    height: "685px",
-                    overflowX:"hidden",
-                    overflowY:"auto"
-                }}>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId="droppable" isDropDisabled={!this.props.userSession.attendeeSortingAllowed}>
-                            {(provided, snapshot) => (
-                                <div ref={provided.innerRef} style={this.getListStyle(snapshot.isDraggingOver, this.props.userSession.attendeeSortingAllowed)}>
-                                    {this
-                                        .getSortedFilteredAttendees()
-                                        .map((item, index) => (
-                                            <Draggable key={item} draggableId={item} index={index} isDragDisabled={!this.props.userSession.attendeeSortingAllowed}>
+            <div style={{height:"85%", width:"100%"}}>
 
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
-                                                        
-                                                        <ListAttendeeTableItem
-                                                            itemKey={item}
-                                                            attendees={attendees}
-                                                            selectedAttendee={this.props.userSession.selectedAttendee}
-                                                            isDragging={snapshot.isDragging}
-                                                            onClick={this.setSelectedAttendee}
-                                                        />
-                                                    </div>
-                                                )}
+                <Paper style={this.paperStyle}>
 
-                                            </Draggable>
-                                        ))
-}
-                                    {provided.placeholder}
-                                </div>
-                            )
-}
-                        </Droppable>
-                    </DragDropContext>
-                </div>
+                <div style={{height:"85%", overflowX:"hidden"}}>
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <Droppable droppableId="droppable" isDropDisabled={!this.props.userSession.attendeeSortingAllowed}>
+                                {(provided, snapshot) => (
+                                    <div ref={provided.innerRef} style={this.getListStyle(snapshot.isDraggingOver, this.props.userSession.attendeeSortingAllowed)}>
+                                        {this
+                                            .getSortedFilteredAttendees()
+                                            .map((item, index) => (
+                                                <Draggable key={item} draggableId={item} index={index} isDragDisabled={!this.props.userSession.attendeeSortingAllowed}>
+
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
+                                                            
+                                                            <ListAttendeeTableItem
+                                                                itemKey={item}
+                                                                attendees={attendees}
+                                                                selectedAttendee={this.props.userSession.selectedAttendee}
+                                                                isDragging={snapshot.isDragging}
+                                                                onClick={this.setSelectedAttendee}
+                                                            />
+                                                        </div>
+                                                    )}
+
+                                                </Draggable>
+                                            ))
+    }
+                                        {provided.placeholder}
+                                    </div>
+                                )
+    }
+                            </Droppable>
+                        </DragDropContext>
+                    </div>
 
                 <FlatButton
                     style={{
-                    marginTop: "5px"
+                    height:"15%",
                 }}
                     label={"Add Attendees"}
                     fullWidth
                     onClick={this.openCreateAttendeeDialog}/>
+
+                </Paper>
 
                 <AddAttendeeDialog
                     isOpen={this.state.addAttendeeDialogOpen}
@@ -195,6 +202,22 @@ class ListAttendeeTable extends Component {
 
 class ListAttendeeTableItem extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            hovered: false
+        }
+    }
+
+    setHovered = () => {
+        this.setState({hovered: true})
+    }
+
+    setNotHovered = () => {
+        this.setState({hovered: false})
+    }
+
     itemClicked = () => {
         this.props.onClick(this.props.itemKey)
     }
@@ -204,22 +227,27 @@ class ListAttendeeTableItem extends Component {
     }
 
     itemInfo = this.props.attendees[this.props.itemKey]
-    paperStyle = {
-        width: "95%",
-        margin: "auto",
-        padding: "12px",
-        cursor: "pointer",
-        overflow:"auto"
+    getPaperStyle = () => { 
+        return {  
+            width: "95%",
+            margin: "auto",
+            padding: "12px",
+            cursor: "pointer",
+            overflow:"auto",
+            background: this.isSelected() ? "lightgrey" : this.state.hovered ? "lightblue" : "white",
+            height: this.isSelected() ? "90px" : "50px"
+        }
     }
 
     render() {
 
         return (
             <Paper 
-                id="list-attendee-table-item-paper"
-                style={{...this.paperStyle, background: this.isSelected() ? 'lightgrey' : 'white'}} 
+                style={this.getPaperStyle()} 
                 zDepth={this.props.isDragging ? 5 : 1}
                 onClick={this.itemClicked}
+                onMouseEnter={this.setHovered}
+                onMouseLeave={this.setNotHovered}
             >
                 <p style={{float:"left", margin:"0 3px"}}>#{this.props.attendees[this.props.itemKey].orderPos + 1}</p>
                 <p style={{float:"right", margin:"0 3px"}}>{this.itemInfo.name}</p>

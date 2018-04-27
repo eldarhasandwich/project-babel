@@ -18,6 +18,7 @@ class AddAttendeeDialog extends Component {
         this.state = {
             attendeeName: "",
             attendeeEmail: "",
+
             attendeeCSVImport: {
                 nameHeader: "",
                 emailHeader: "",
@@ -53,7 +54,7 @@ class AddAttendeeDialog extends Component {
             return;
         }
 
-        this.closeCreateAttendeeDialog()
+        this.props.onRequestClose()
         this
             .props
             .addNewAttendee(this.state.attendeeName, this.state.attendeeEmail)
@@ -63,7 +64,7 @@ class AddAttendeeDialog extends Component {
     submitAttendeeCSV = () => {
         console.log("Import CSV button")
 
-        this.closeCreateAttendeeDialog()
+        this.props.onRequestClose()
         // this.props.addNewAttendee(this.state.attendeeName, this.state.attendeeEmail)
 
         this.state.attendeeCSVImport.data.forEach(

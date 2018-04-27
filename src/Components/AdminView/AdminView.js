@@ -6,6 +6,11 @@ import * as StateActions from '../../Actions/state';
 
 import AdminListSelect from './AdminListSelect'
 import AdminListInterface from './AdminListInterface'
+import SelectedItemInterface from './SelectedItemInterface';
+
+import ListAttendeeTable from './ListAttendeeTable'
+import SelectedListInterface from './SelectedListInterface'
+
 
 class AdminView extends Component {
 
@@ -18,54 +23,47 @@ class AdminView extends Component {
     adminViewStyle = {
         width: "100%",
         minWidth: "100%",
-        height: (window.innerHeight - 184) + "px",
-        maxHeight: (window.innerHeight - 184) + "px",
-        overflow: "auto",
+        height: (window.innerHeight - 150) + "px",
+        maxHeight: (window.innerHeight - 150) + "px",
+        overflow: "hidden",
         position: "relative"
     }
 
     listSelectStyle = {
-        width: "279px",
-        minWidth: "279px",
+        width: "25%",
         float: "left",
-        borderRight: "1px solid #BBB",
         height: "100%"
 
     }
 
     listInterfaceStyle = {
-        width: "calc(100% - 280px)",
+        width: "75%",
         float: "right",
         height: "100%"
     }
 
-    componentDidMount () {
-        if (!this.props.userSession.isLoggedIn) {
-            console.log("Not logged in :( (compdidmount)")
-            
-        }
-    }
 
     render() {
-        if (!this.props.userSession.isLoggedIn) {
-            console.log("Not logged in :( (render)")
-
-            return (
-                <h4>You are not logged in</h4>
-            )
-        }
-
         return (
             <div
                 style={this.adminViewStyle}>
 
-                <div style={this.listSelectStyle}>
-                    <AdminListSelect/>
+                <div style={{height:"100%", overflow: "hidden"}}>
+                    <div style={this.listSelectStyle}>
+                        <AdminListSelect/>
+                    </div>
+                    
+                    {
+                        (this.props.userSession.selectedList !== null)
+                            ?   <div style={this.listInterfaceStyle}>
+                                    <SelectedListInterface/>
+                                    <ListAttendeeTable/>
+                                </div>
+                            : null
+                    }
+
                 </div>
 
-                <div style={this.listInterfaceStyle}>
-                    <AdminListInterface/>
-                </div>
             </div>
         );
     }
