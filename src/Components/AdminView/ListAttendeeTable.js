@@ -7,6 +7,7 @@ import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import * as UserSessionActions from '../../Actions/userSession'
 import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
+import ListAttendeeTableItem from './ListAttendeeTableItem'
 
 import palette from '../../Resources/colorPalette.js'
 
@@ -71,16 +72,11 @@ class ListAttendeeTable extends Component {
         return attendeeKeys
     }
 
-    setSelectedAttendee = attendeeKey => {
-        this
-            .props
-            .setSelectedAttendee(attendeeKey)
-    }
-
-    handleRowClick = index => {
-        let attendees = this.getSortedFilteredAttendees()
-        this.setSelectedAttendee(attendees[index[0]])
-    }
+    // setSelectedAttendee = attendeeKey => {
+    //     this
+    //         .props
+    //         .setSelectedAttendee(attendeeKey)
+    // }
 
     getListStyle = (isDraggingOver, draggingAllowed) => ({
         background: draggingAllowed ? "lightcoral" : "white",
@@ -165,7 +161,6 @@ class ListAttendeeTable extends Component {
                                                                 attendees={attendees}
                                                                 selectedAttendee={this.props.userSession.selectedAttendee}
                                                                 isDragging={snapshot.isDragging}
-                                                                onClick={this.setSelectedAttendee}
                                                             />
                                                         </div>
                                                     )}
@@ -200,62 +195,6 @@ class ListAttendeeTable extends Component {
     }
 }
 
-class ListAttendeeTableItem extends Component {
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            hovered: false
-        }
-    }
-
-    setHovered = () => {
-        this.setState({hovered: true})
-    }
-
-    setNotHovered = () => {
-        this.setState({hovered: false})
-    }
-
-    itemClicked = () => {
-        this.props.onClick(this.props.itemKey)
-    }
-
-    isSelected = () => {
-        return this.props.selectedAttendee === this.props.itemKey
-    }
-
-    itemInfo = this.props.attendees[this.props.itemKey]
-    getPaperStyle = () => { 
-        return {  
-            width: "95%",
-            margin: "auto",
-            padding: "12px",
-            cursor: "pointer",
-            overflow:"auto",
-            background: this.isSelected() ? "lightgrey" : this.state.hovered ? "lightblue" : "white",
-            height: this.isSelected() ? "90px" : "50px"
-        }
-    }
-
-    render() {
-
-        return (
-            <Paper 
-                style={this.getPaperStyle()} 
-                zDepth={this.props.isDragging ? 5 : 1}
-                onClick={this.itemClicked}
-                onMouseEnter={this.setHovered}
-                onMouseLeave={this.setNotHovered}
-            >
-                <p style={{float:"left", margin:"0 3px"}}>#{this.props.attendees[this.props.itemKey].orderPos + 1}</p>
-                <p style={{float:"right", margin:"0 3px"}}>{this.itemInfo.name}</p>
-            </Paper>
-        )
-    }
-}
-
 const mapStateToProps = state => {
     return {state: state.state, userSession: state.userSession}
 }
@@ -263,7 +202,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addNewAttendee: (newAttendeeName, newAttendeeEmail) => dispatch(UserSessionActions.addNewAttendee(newAttendeeName, newAttendeeEmail)),
-        setSelectedAttendee: newAttendeeID => dispatch(UserSessionActions.setSelectedAttendee(newAttendeeID)),
+        // setSelectedAttendee: newAttendeeID => dispatch(UserSessionActions.setSelectedAttendee(newAttendeeID)),
         applyOrderPosChanges: newOrderPosSet => dispatch(UserSessionActions.applyOrderPosChanges(newOrderPosSet)) 
     }
 }

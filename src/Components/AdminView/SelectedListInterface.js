@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 // import {Audio} from 'redux-audio-fixed'
-import { RaisedButton, Toggle, Paper } from 'material-ui';
+import { RaisedButton, Paper } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
-import * as EmailActions from '../../Actions/emails'
-import {actions as audioActions} from 'redux-audio-fixed'
+// import * as EmailActions from '../../Actions/emails'
+// import {actions as audioActions} from 'redux-audio-fixed'
 
 import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
 

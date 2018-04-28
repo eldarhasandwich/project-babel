@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import { Menu, MenuItem, Subheader, Divider, FlatButton, Dialog, TextField, Paper } from 'material-ui'
+import { FlatButton, Paper } from 'material-ui'
 
 import NewListDialog from './Dialogs/NewListDialog'
 
@@ -63,7 +63,7 @@ class AdminListSelect extends Component {
             <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative", overflow:"hidden"}}>
 
                 <Paper style={this.paperStyle}>
-                    <h4 style={{fontWeight:"normal", marginLeft:"15px"}}> Ceremonies</h4>
+                    <h4 style={{fontWeight:"normal", marginLeft:"15px"}}>Ceremonies</h4>
                         
                         {this.getCompanyListKeys().map(
                             x => <AdminListSelectItem

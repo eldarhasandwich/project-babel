@@ -1,18 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import * as UserSessionActions from '../../Actions/userSession';
-
-import {
-    Toolbar,
-    ToolbarGroup,
-    ToolbarTitle,
-    RaisedButton,
-    // Popover,
-    // Menu,
-    // MenuItem
-} from 'material-ui';
-
 import ListAttendeeTable from './ListAttendeeTable'
 import SelectedListInterface from './SelectedListInterface'
 

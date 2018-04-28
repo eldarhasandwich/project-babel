@@ -11,9 +11,12 @@ export function setUserLoggedIn (bool) {
 }
 
 export function allowAttendeeSorting (bool) {
-    return {
-        type: "ALLOW_ATTENDEE_SORTING",
-        bool
+    return dispatch => {
+        dispatch(setSelectedAttendee(null))
+        dispatch({
+            type: "ALLOW_ATTENDEE_SORTING",
+            bool
+        })
     }
 }
 
