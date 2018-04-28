@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import {FlatButton, Paper} from 'material-ui';
+import {Paper, RaisedButton} from 'material-ui';
 
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+
+import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
 
 import * as UserSessionActions from '../../Actions/userSession'
 import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
@@ -17,16 +19,16 @@ class ListAttendeeTable extends Component {
         super(props)
 
         this.state = {
-            addAttendeeDialogOpen: false
+            visibilityDialogOpen: false,
         }
     }
 
-    openCreateAttendeeDialog = () => {
-        this.setState({addAttendeeDialogOpen: true})
+    openVisibilityDialog = () => {
+        this.setState({visibilityDialogOpen: true})
     }
 
-    closeCreateAttendeeDialog = () => {
-        this.setState({addAttendeeDialogOpen: false})
+    closeVisibilityDialog = () => {
+        this.setState({visibilityDialogOpen: false})
     }
 
     getSelectedListAttendees = () => {
@@ -72,18 +74,12 @@ class ListAttendeeTable extends Component {
         return attendeeKeys
     }
 
-    // setSelectedAttendee = attendeeKey => {
-    //     this
-    //         .props
-    //         .setSelectedAttendee(attendeeKey)
-    // }
-
     getListStyle = (isDraggingOver, draggingAllowed) => ({
-        background: draggingAllowed ? "lightcoral" : "white",
+        background: draggingAllowed ? "lightcoral" : palette.gray_light,
         padding: "6px",
         width: "100%",
         margin:"auto",
-        transition: "0.4s",
+        transition: "0.2s",
     });
 
     getItemStyle = (isDragging, draggableStyle) => ({
@@ -121,13 +117,28 @@ class ListAttendeeTable extends Component {
         }
         this.props.applyOrderPosChanges(orderPosChanges)
     }
+    
+    attendeeSortingAllowed = () => {
+        let s = this.props.state
+        return s.verifiedAttendeesVisible && s.unverifiedAttendeesVisible && s.attendeesWithAudioNeedingReplacementVisible && s.attendeesWithNoAudioVisible
+    }
 
-    paperStyle = {
+    toggleAttendeeSorting = () => {
+        this.props.allowAttendeeSorting(!this.props.userSession.attendeeSortingAllowed)
+    }
+
+    getPaperStyle = () => ({
         overflow:"auto",
         height: "calc(100% - 10px)",
         width: "98%",
         marginTop: "10px",
-        backgroundColor: palette.gray_light
+        backgroundColor: this.props.userSession.attendeeSortingAllowed ? "lightcoral" : palette.gray_light
+    })
+    
+    buttonStyle = {
+        marginTop:"5px",
+        marginRight:"5px",
+        float:"right"
     }
 
     render() {
@@ -135,11 +146,26 @@ class ListAttendeeTable extends Component {
         let attendees = this.getSelectedListAttendees();
 
         return (
-            <div style={{height:"85%", width:"100%"}}>
+            <div style={{height:"100%", width:"100%"}}>
 
-                <Paper style={this.paperStyle}>
+                <Paper style={this.getPaperStyle()}>
 
-                <div style={{height:"85%", overflowX:"hidden"}}>
+                <div style={{height:"50px"}}>
+                    <RaisedButton
+                        label={this.props.userSession.attendeeSortingAllowed ? "Lock Sorting" : "Unlock Sorting"}
+                        disabled={!this.attendeeSortingAllowed()}
+                        secondary={this.props.userSession.attendeeSortingAllowed}
+                        onClick={this.toggleAttendeeSorting}
+                        style={this.buttonStyle}
+                    />
+                    <RaisedButton
+                        label={"Attendee Filters"}
+                        onClick={this.openVisibilityDialog}
+                        style={this.buttonStyle}
+                    />
+                </div>
+
+                <div style={{height:"calc(100% - 50px)", overflowX:"hidden"}}>
                         <DragDropContext onDragEnd={this.onDragEnd}>
                             <Droppable droppableId="droppable" isDropDisabled={!this.props.userSession.attendeeSortingAllowed}>
                                 {(provided, snapshot) => (
@@ -175,20 +201,12 @@ class ListAttendeeTable extends Component {
                             </Droppable>
                         </DragDropContext>
                     </div>
-
-                <FlatButton
-                    style={{
-                    height:"15%",
-                }}
-                    label={"Add Attendees"}
-                    fullWidth
-                    onClick={this.openCreateAttendeeDialog}/>
-
                 </Paper>
 
-                <AddAttendeeDialog
-                    isOpen={this.state.addAttendeeDialogOpen}
-                    onRequestClose={this.closeCreateAttendeeDialog}/>
+                <AttendeeTableVisibilityDialog
+                    isOpen={this.state.visibilityDialogOpen}
+                    onRequestClose={this.closeVisibilityDialog}
+                />
 
             </div>
         )
@@ -202,7 +220,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addNewAttendee: (newAttendeeName, newAttendeeEmail) => dispatch(UserSessionActions.addNewAttendee(newAttendeeName, newAttendeeEmail)),
-        // setSelectedAttendee: newAttendeeID => dispatch(UserSessionActions.setSelectedAttendee(newAttendeeID)),
+        allowAttendeeSorting: bool => dispatch(UserSessionActions.allowAttendeeSorting(bool)),
         applyOrderPosChanges: newOrderPosSet => dispatch(UserSessionActions.applyOrderPosChanges(newOrderPosSet)) 
     }
 }

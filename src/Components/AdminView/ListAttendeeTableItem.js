@@ -8,6 +8,7 @@ import * as EmailActions from '../../Actions/emails'
 import {actions as audioActions} from 'redux-audio-fixed'
 
 import SelectedItemInterface from './SelectedItemInterface'
+import palette from '../../Resources/colorPalette';
 
 // import palette from '../../Resources/colorPalette.js'
 
@@ -51,7 +52,7 @@ class ListAttendeeTableItem extends Component {
             padding: "12px",
             cursor: this.isSelected() || this.props.userSession.attendeeSortingAllowed ? null : "pointer",
             overflow:"hidden",
-            background: this.isSelected() ? "lightgrey" : this.state.hovered ? "lightblue" : "white",
+            background: this.isSelected() ? palette.green_dark : this.state.hovered ? "lightblue" : "white",
             height: this.isSelected() ? "450px" : "45px"
         }
     }
@@ -74,6 +75,8 @@ class ListAttendeeTableItem extends Component {
                         : <SelectedItemInterface/>
                 }
 
+
+
             </Paper>
         )
     }
@@ -83,8 +86,8 @@ class CondensedAttendeeView extends Component {
     render () {
         return (
             <div>
-                <p style={{float:"left", margin:"0 3px"}}>#{this.props.itemInfo.orderPos + 1}</p>
-                <p style={{float:"right", margin:"0 3px"}}>{this.props.itemInfo.name}</p>
+                <p style={{float:"left", margin:"0 3px"}}>{`${this.props.itemInfo.orderPos + 1}: ${this.props.itemInfo.name}`}</p>
+                <p style={{float:"right", margin:"0 3px"}}>{this.props.itemInfo.audioStatus}</p>
             </div>
         )
     }

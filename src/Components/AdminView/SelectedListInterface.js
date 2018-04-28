@@ -10,6 +10,7 @@ import * as UserSessionActions from '../../Actions/userSession'
 import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
 
 import palette from '../../Resources/colorPalette.js'
+import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
 
 class SelectedListInterface extends Component {
 
@@ -17,16 +18,16 @@ class SelectedListInterface extends Component {
         super(props)
 
         this.state = {
-            visibilityPopoverOpen: false
+            addAttendeePopoverOpen: false
         }
     }
 
-    openVisibilityPopover = () => {
-        this.setState({visibilityPopoverOpen: true})
+    openAddAttendeeDialog = () => {
+        this.setState({addAttendeePopoverOpen: true})
     }
 
-    closeVisibilityPopover = () => {
-        this.setState({visibilityPopoverOpen: false})
+    closeAddAttendeeDialog = () => {
+        this.setState({addAttendeePopoverOpen: false})
     }
 
     getSelectedList = () => {
@@ -51,8 +52,7 @@ class SelectedListInterface extends Component {
         height: "100%",
         width: "98%",
         marginTop: "10px",
-        
-        backgroundColor: palette.gray_light
+        backgroundColor: palette.gray_dark
     }
 
     textStyle = {
@@ -76,22 +76,17 @@ class SelectedListInterface extends Component {
                 <Paper style={this.paperStyle}>
                     <h2 style={this.textStyle}>{selectedList ? selectedList.listName : ""}</h2>
                     <RaisedButton
-                        label={this.props.userSession.attendeeSortingAllowed ? "Lock Sorting" : "Unlock Sorting"}
-                        disabled={!this.attendeeSortingAllowed()}
-                        secondary={this.props.userSession.attendeeSortingAllowed}
-                        onClick={this.toggleAttendeeSorting}
+                        label={"Import Attendees"}
+                        onClick={this.openAddAttendeeDialog}
                         style={this.buttonStyle}
                     />
-                    <RaisedButton
-                        label={"Attendee Filters"}
-                        onClick={this.openVisibilityPopover}
-                        style={this.buttonStyle}
-                    />
+
                 </Paper>
 
-                <AttendeeTableVisibilityDialog
-                    isOpen={this.state.visibilityPopoverOpen}
-                    onRequestClose={this.closeVisibilityPopover}
+
+                <AddAttendeeDialog
+                    isOpen={this.state.addAttendeePopoverOpen}
+                    onRequestClose={this.closeAddAttendeeDialog}                
                 />
             </div>
         )
@@ -105,7 +100,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        allowAttendeeSorting: bool => dispatch(UserSessionActions.allowAttendeeSorting(bool)),
     }
 }
 

@@ -10,14 +10,16 @@ class _DatabaseHandler {
     listTemplate = {
         listName: "",
         ceremonyDate: "",
+        ceremonyTime: "",
+        ceremonyLocation: "",
         uploadCutoffDate: "",
-        nextOrderPos: 1,
 
         _ATTENDEES: {}
     }
 
     attendeeTemplate = {
         audioStatus: "No Audio", // Unverified, Needs Replacement, Verified *tick*
+        awaitingResponse: false,
         audioVolumeModifer: 1,
 
         orderPos: 0,
@@ -31,12 +33,13 @@ class _DatabaseHandler {
         return {...this.companyTemplate, name: thisName}
     }
 
-    createNewList(thisName, thisCeremonyDate = "", thisCutoffDate = "") {
+    createNewList(_listName, _ceremonyDate = "", _ceremonyTime = "", _cutoffDate = "") {
         return {
             ...this.listTemplate,
-            listName: thisName,
-            ceremonyDate: thisCeremonyDate,
-            uploadCutoffData: thisCutoffDate
+            listName: _listName,
+            ceremonyDate: _ceremonyDate,
+            ceremonyTime: _ceremonyTime,
+            uploadCutoffData: _cutoffDate
         }
     }
 

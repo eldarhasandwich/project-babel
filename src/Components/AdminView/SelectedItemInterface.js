@@ -4,11 +4,28 @@ import {connect} from 'react-redux'
 import { RaisedButton, Toggle } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
-import * as EmailActions from '../../Actions/emails'
 import {actions as audioActions} from 'redux-audio-fixed'
+
+import AttendeeEmailDialog from './Dialogs/AttendeeEmailDialog'
 
 
 class SelectedItemInterface extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            attendeeEmailDialogOpen: false
+        }
+    }
+
+    openAttendeeEmailDialog = () => {
+        this.setState({attendeeEmailDialogOpen: true})
+    }
+
+    closeAttendeeEmailDialog = () => {
+        this.setState({attendeeEmailDialogOpen: false})
+    }
 
     getSelectedList = () => {
         if (this.props.userSession.selectedList === null) {
@@ -90,13 +107,6 @@ class SelectedItemInterface extends Component {
         console.log(audioID)
 
         this.props.playAudio(audioID)
-    }
-
-    sendAudioRequestEmail = () => {
-        let compID = this.props.userSession.userCompanyID
-        let listID = this.props.userSession.selectedList
-        let attID = this.props.userSession.selectedAttendee
-        this.props.sendAudioRequestEmail(compID, listID, attID)
     }
 
     textStyle = {
@@ -181,7 +191,12 @@ class SelectedItemInterface extends Component {
                     label={"Send Email"}
                     primary
                     disabled={selectedAttendee.audioStatus === "Verified"}
-                    onClick={this.sendAudioRequestEmail}
+                    onClick={this.openAttendeeEmailDialog}
+                />
+
+                <AttendeeEmailDialog
+                    isOpen={this.state.attendeeEmailDialogOpen}
+                    onRequestClose={this.closeAttendeeEmailDialog}
                 />
 
             </div>
@@ -197,8 +212,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         updateAttendeeAudioStatus: newStatus => dispatch(UserSessionActions.updateAttendeeAudioStatus(newStatus)),
-        playAudio: audioID => dispatch(audioActions.audioPlay(audioID)),
-        sendAudioRequestEmail: (compID, listID, attID) => dispatch(EmailActions.sendAudioRequestEmail(compID, listID, attID))
+        playAudio: audioID => dispatch(audioActions.audioPlay(audioID))
     }
 }
 

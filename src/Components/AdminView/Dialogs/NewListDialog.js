@@ -34,7 +34,7 @@ class NewListDialog extends Component {
     }
 
     createNewList = () => {
-        this.closeCreateListDialog()
+        this.props.onRequestClose()
         this
             .props
             .createNewList(this.state.newListName)

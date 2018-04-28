@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import { FlatButton, Paper } from 'material-ui'
+import { FloatingActionButton, Paper } from 'material-ui'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 
 import NewListDialog from './Dialogs/NewListDialog'
 
@@ -47,15 +48,13 @@ class AdminListSelect extends Component {
         width:"95%",
         height:"calc(100% - 10px)",
         margin:"10px auto",
-        overflow:"hidden",
+        overflow:"auto",
         backgroundColor: palette.blue_light
     }
 
-    createNewListStyle = {
-        width: "95%",
-        position:"absolute",
-        bottom:"0",
-        marginBottom: "30px"
+    newListButtonStyle = {
+        margin:"20px auto",
+        width:"60px"
     }
 
     render () {
@@ -63,7 +62,7 @@ class AdminListSelect extends Component {
             <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative", overflow:"hidden"}}>
 
                 <Paper style={this.paperStyle}>
-                    <h4 style={{fontWeight:"normal", marginLeft:"15px"}}>Ceremonies</h4>
+                    <h4 style={{fontWeight:"normal", marginLeft:"15px"}}>List Management</h4>
                         
                         {this.getCompanyListKeys().map(
                             x => <AdminListSelectItem
@@ -73,17 +72,15 @@ class AdminListSelect extends Component {
                                 selectedList={this.props.userSession.selectedList}
                                 setSelectedList={this.setSelectedList}/>
                         )}
-
-
-                    <div style={this.createNewListStyle}>
-                        <FlatButton
-                            label={"Create new List"}
-                            fullWidth
-                            onClick={
-                                this.openCreateListDialog
-                            }
-                            />
+                    <div style={this.newListButtonStyle}>
+                        <FloatingActionButton
+                            backgroundColor={palette.green_dark}
+                            onClick={this.openCreateListDialog}
+                        >
+                            <ContentAdd/>
+                        </FloatingActionButton>
                     </div>
+
                 </Paper>
                 
                 <NewListDialog
@@ -124,7 +121,7 @@ class AdminListSelectItem extends Component {
             padding: "12px",
             cursor: "pointer",
             overflow:"auto",
-            background: this.isSelected() ? "lightgrey" : this.state.hovered ? "lightblue" : "white",
+            background: this.isSelected() ? palette.gray_dark : this.state.hovered ? "lightblue" : "white",
             height: this.isSelected() ? "90px" : "50px"
         }
     }
@@ -138,7 +135,7 @@ class AdminListSelectItem extends Component {
                     onMouseEnter={this.setHovered}
                     onMouseLeave={this.setNotHovered}
                 >
-                    {this.props.itemName}
+                    <p style={{textAlign: "center", margin: "0", padding:"0"}}>{this.props.itemName}</p>
                 </Paper>
             </div>
         )

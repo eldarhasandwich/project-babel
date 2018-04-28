@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import { RaisedButton, Toggle, Dialog } from 'material-ui';
+import { RaisedButton, Toggle, Dialog, Checkbox } from 'material-ui';
 
 import * as StateActions from '../../../Actions/state'
 import * as UserSessionActions from '../../../Actions/userSession'
@@ -27,7 +27,15 @@ class AttendeeTableVisibilityDialog extends Component {
         this.props.setAttendeesWithNoAudioVisible(value);
     }
 
-    allTogglesEnabled = () => {
+    toggleOnEverything = () => {
+        this.props.allowAttendeeSorting(false);
+        this.props.setVerifiedAttendeesVisible(true);
+        this.props.setAttendeesWithAudioNeedingReplacementVisible(true);
+        this.props.setUnverifiedAttendeesVisible(true);
+        this.props.setAttendeesWithNoAudioVisible(true);
+    }
+
+    areAllTogglesEnabled = () => {
         let s = this.props.state
         return s.verifiedAttendeesVisible && s.unverifiedAttendeesVisible && s.attendeesWithAudioNeedingReplacementVisible && s.attendeesWithNoAudioVisible
     }
@@ -35,6 +43,13 @@ class AttendeeTableVisibilityDialog extends Component {
     render() {
         const dialogActions = [
             <RaisedButton
+                secondary
+                label={"Show All"}
+                onClick={this.toggleOnEverything}
+                disabled={this.areAllTogglesEnabled()}
+            />,
+            <RaisedButton
+                style={{marginLeft:"5px"}}
                 primary
                 label={"Return"}
                 onClick={this.props.onRequestClose}
@@ -48,32 +63,32 @@ class AttendeeTableVisibilityDialog extends Component {
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
             >
-                <Toggle
+                <Checkbox
                     label="Verified"
                     labelPosition={"right"}
-                    toggled={this.props.state.verifiedAttendeesVisible === true}
-                    onToggle={this.verifiedToggle}
+                    checked={this.props.state.verifiedAttendeesVisible === true}
+                    onCheck={this.verifiedToggle}
                 />
-                <Toggle
+                <Checkbox
                     label="Needing Replacement"
                     labelPosition={"right"}
-                    toggled={this.props.state.attendeesWithAudioNeedingReplacementVisible === true}
-                    onToggle={this.needsReplacementToggle}
+                    checked={this.props.state.attendeesWithAudioNeedingReplacementVisible === true}
+                    onCheck={this.needsReplacementToggle}
                 />
-                <Toggle
+                <Checkbox
                     label="Unverified"
                     labelPosition={"right"}
-                    toggled={this.props.state.unverifiedAttendeesVisible === true}
-                    onToggle={this.unverifiedToggle}
+                    checked={this.props.state.unverifiedAttendeesVisible === true}
+                    onCheck={this.unverifiedToggle}
                 />
-                <Toggle
+                <Checkbox
                     label="No Audio"
                     labelPosition={"right"}
-                    toggled={this.props.state.attendeesWithNoAudioVisible === true}
-                    onToggle={this.noAudioToggle}
+                    checked={this.props.state.attendeesWithNoAudioVisible === true}
+                    onCheck={this.noAudioToggle}
                 />
 
-                <p>{this.allTogglesEnabled() ? null : "You cannot reorder Attendees if any are not Visible."}</p>
+                <p style={{height: "20px"}}>{this.areAllTogglesEnabled() ? " " : "You cannot reorder Attendees if any are not Visible."}</p>
             </Dialog>
         )
     }
