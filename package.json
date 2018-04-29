@@ -21,6 +21,7 @@
     "react-firebaseui": "^1.2.3",
     "react-loader-spinner": "^1.4.7",
     "react-mic": "^9.1.2",
+    "react-minimal-pie-chart": "^3.0.1",
     "react-modal": "^3.3.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",

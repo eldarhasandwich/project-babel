@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-
 import {Paper, RaisedButton} from 'material-ui';
-
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
@@ -12,6 +10,9 @@ import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
 import ListAttendeeTableItem from './ListAttendeeTableItem'
 
 import palette from '../../Resources/colorPalette.js'
+import ActionLock from 'material-ui/svg-icons/action/lock'
+import ActionUnlock from 'material-ui/svg-icons/action/lock-open'
+import ActionList from 'material-ui/svg-icons/action/list'
 
 class ListAttendeeTable extends Component {
 
@@ -35,17 +36,9 @@ class ListAttendeeTable extends Component {
         return this.props.userSession.companyLists[this.props.userSession.selectedList]._ATTENDEES
     }
 
-    getSortedFilteredAttendees = () => {
+    filterAttendeeKeys = sortedAttendeeKeys => {
         let attendees = this.getSelectedListAttendees()
-        if (!attendees) {
-            return []
-        }
-
-        let attendeeKeys = Object.keys(attendees)
-
-        attendeeKeys.sort((a, b) => {
-            return attendees[a].orderPos - attendees[b].orderPos
-        })
+        let attendeeKeys = sortedAttendeeKeys
 
         if (!this.props.state.attendeesWithNoAudioVisible) {
             attendeeKeys = attendeeKeys.filter(key => {
@@ -70,6 +63,23 @@ class ListAttendeeTable extends Component {
                 return attendees[key].audioStatus !== "Verified"
             })
         }
+
+        return attendeeKeys
+    }
+
+    getSortedFilteredAttendees = () => {
+        let attendees = this.getSelectedListAttendees()
+        if (!attendees) {
+            return []
+        }
+
+        let attendeeKeys = Object.keys(attendees)
+
+        attendeeKeys.sort((a, b) => {
+            return attendees[a].orderPos - attendees[b].orderPos
+        })
+
+        attendeeKeys = this.filterAttendeeKeys(attendeeKeys)
 
         return attendeeKeys
     }
@@ -118,7 +128,7 @@ class ListAttendeeTable extends Component {
         this.props.applyOrderPosChanges(orderPosChanges)
     }
     
-    attendeeSortingAllowed = () => {
+    allFiltersInactive = () => {
         let s = this.props.state
         return s.verifiedAttendeesVisible && s.unverifiedAttendeesVisible && s.attendeesWithAudioNeedingReplacementVisible && s.attendeesWithNoAudioVisible
     }
@@ -146,20 +156,26 @@ class ListAttendeeTable extends Component {
         let attendees = this.getSelectedListAttendees();
 
         return (
-            <div style={{height:"100%", width:"100%"}}>
+            <div style={{height:"70%", width:"100%"}}>
 
-                <Paper style={this.getPaperStyle()}>
+                <Paper zDepth={2} style={this.getPaperStyle()}>
 
-                <div style={{height:"50px"}}>
+                <div style={{height:"50px"}}> 
                     <RaisedButton
                         label={this.props.userSession.attendeeSortingAllowed ? "Lock Sorting" : "Unlock Sorting"}
-                        disabled={!this.attendeeSortingAllowed()}
+                        labelPosition={"before"}
+                        icon={this.props.userSession.attendeeSortingAllowed ? <ActionUnlock/> : <ActionLock/>}
+                        disabled={!this.allFiltersInactive()}
                         secondary={this.props.userSession.attendeeSortingAllowed}
                         onClick={this.toggleAttendeeSorting}
                         style={this.buttonStyle}
                     />
                     <RaisedButton
                         label={"Attendee Filters"}
+                        labelPosition={"before"}
+                        icon={<ActionList/>}
+                        secondary={!this.allFiltersInactive()}
+                        disabled={this.props.userSession.attendeeSortingAllowed}
                         onClick={this.openVisibilityDialog}
                         style={this.buttonStyle}
                     />

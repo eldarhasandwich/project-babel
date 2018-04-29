@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import { FloatingActionButton, Paper } from 'material-ui'
 import ContentAdd from 'material-ui/svg-icons/content/add'
+import AvPlaylistAdd from 'material-ui/svg-icons/av/playlist-add'
 
 import NewListDialog from './Dialogs/NewListDialog'
 
@@ -46,7 +47,7 @@ class AdminListSelect extends Component {
 
     paperStyle = {
         width:"95%",
-        height:"calc(100% - 10px)",
+        height:"95%",
         margin:"10px auto",
         overflow:"auto",
         backgroundColor: palette.blue_light
@@ -61,7 +62,7 @@ class AdminListSelect extends Component {
         return (
             <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative", overflow:"hidden"}}>
 
-                <Paper style={this.paperStyle}>
+                <Paper zDepth={2} style={this.paperStyle}>
                     <h4 style={{fontWeight:"normal", marginLeft:"15px"}}>List Management</h4>
                         
                         {this.getCompanyListKeys().map(
@@ -77,7 +78,7 @@ class AdminListSelect extends Component {
                             backgroundColor={palette.green_dark}
                             onClick={this.openCreateListDialog}
                         >
-                            <ContentAdd/>
+                            <AvPlaylistAdd/>
                         </FloatingActionButton>
                     </div>
 
@@ -129,7 +130,8 @@ class AdminListSelectItem extends Component {
     render() {
         return (
             <div style={{margin: "0 0 6px 0"}}>
-                <Paper 
+                <Paper
+                    zDepth={this.isSelected() ? 2 : 1}
                     style={this.getPaperStyle()}
                     onClick={this.props.setSelectedList(this.props.itemKey)}
                     onMouseEnter={this.setHovered}

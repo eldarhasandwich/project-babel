@@ -10,8 +10,6 @@ import {actions as audioActions} from 'redux-audio-fixed'
 import SelectedItemInterface from './SelectedItemInterface'
 import palette from '../../Resources/colorPalette';
 
-// import palette from '../../Resources/colorPalette.js'
-
 class ListAttendeeTableItem extends Component {
 
     constructor(props) {
@@ -53,7 +51,17 @@ class ListAttendeeTableItem extends Component {
             cursor: this.isSelected() || this.props.userSession.attendeeSortingAllowed ? null : "pointer",
             overflow:"hidden",
             background: this.isSelected() ? palette.green_dark : this.state.hovered ? "lightblue" : "white",
-            height: this.isSelected() ? "450px" : "45px"
+            height: this.isSelected() ? "400px" : "45px"
+        }
+    }
+
+    getStatusIndicatorColor = () => {
+        let audioStatus = this.props.attendees[this.props.itemKey].audioStatus
+        switch (audioStatus) {
+            case ("No Audio"): return palette.status_grey 
+            case ("Unverified"): return palette.status_yellow
+            case ("Needs Replacement"): return palette.status_red
+            case ("Verified"): return palette.status_green
         }
     }
 
@@ -67,15 +75,31 @@ class ListAttendeeTableItem extends Component {
                 onMouseEnter={this.setHovered}
                 onMouseLeave={this.setNotHovered}
             >
-                {
-                    !this.isSelected()
-                        ? <CondensedAttendeeView
-                                itemKey={this.props.itemKey}
-                                itemInfo={this.props.attendees[this.props.itemKey]}/>
-                        : <SelectedItemInterface/>
-                }
-
-
+                <div
+                    style={{
+                        width:"98%",
+                        float:"left"
+                    }}
+                >
+                    {
+                        !this.isSelected()
+                            ? <CondensedAttendeeView
+                                    itemKey={this.props.itemKey}
+                                    itemInfo={this.props.attendees[this.props.itemKey]}/>
+                            : <SelectedItemInterface/>
+                    }
+                </div>
+                <span
+                    style={{
+                        borderRadius: "5px",
+                        height:"100%",
+                        marginLeft:"1%",
+                        width:"1%",
+                        backgroundColor: this.getStatusIndicatorColor(),
+                        float:"right",
+                        transition: "0.5s"
+                    }}
+                />
 
             </Paper>
         )

@@ -8,6 +8,8 @@ import {actions as audioActions} from 'redux-audio-fixed'
 
 import AttendeeEmailDialog from './Dialogs/AttendeeEmailDialog'
 
+import AVVolumeUp from 'material-ui/svg-icons/av/volume-up'
+import CommunicationMail from 'material-ui/svg-icons/communication/mail-outline'
 
 class SelectedItemInterface extends Component {
 
@@ -143,6 +145,8 @@ class SelectedItemInterface extends Component {
                     <RaisedButton
                         style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
                         label={"Play Audio"}
+                        labelPosition={"before"}
+                        icon={<AVVolumeUp/>}
                         primary
                         disabled={selectedAttendee.audioStatus === "No Audio"}
                         onClick={this.playSelectedAttendeeAudio}
@@ -189,6 +193,8 @@ class SelectedItemInterface extends Component {
                 <RaisedButton
                     style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
                     label={"Send Email"}
+                    labelPosition={"before"}
+                    icon={<CommunicationMail/>}
                     primary
                     disabled={selectedAttendee.audioStatus === "Verified"}
                     onClick={this.openAttendeeEmailDialog}
