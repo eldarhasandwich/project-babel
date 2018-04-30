@@ -1,24 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-// import Fire from '../../Classes/Fire'
 import firebase from 'firebase';
+import * as request from 'superagent'
 
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import * as firebaseui from 'firebaseui'
 
 import * as userSessionActions from './../../Actions/userSession'
 
+import config from '../../config'
+
 
 class LoginView extends Component {
-
-    // constructor(props) {
-    //     super(props)
-
-    //     this.state = {
-    //         userID: "",
-    //         password: ""
-    //     }
-    // }
 
     uiConfig = {
         // Popup signin flow rather than redirect flow.
@@ -31,7 +24,9 @@ class LoginView extends Component {
         callbacks: {
             signInSuccess: () => {
                 this.attemptLogin()
-                console.log(firebase.auth().currentUser.uid)
+                console.log(firebase.auth().currentUser)
+                window.firebase = firebase.auth()
+
             }
         }
     };
@@ -39,8 +34,12 @@ class LoginView extends Component {
 
     attemptLogin = () => {
         if (true) {
-            this.props.setUserLoggedIn(true)
-            this.props.setUserCompany()
+            firebase.auth().currentUser.getIdToken(true).then(
+                token => {
+                    this.props.setUserLoggedIn(true, token)
+                    this.props.setUserCompany()              
+                }
+            ).catch(console.error.bind(console))
         }
     }
 
@@ -61,7 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setUserLoggedIn: bool => dispatch(userSessionActions.setUserLoggedIn(bool)),
+        setUserLoggedIn: (bool, token) => dispatch(userSessionActions.setUserLoggedIn(bool, token)),
         setUserCompany: () => dispatch(userSessionActions.setUserCompany())
     }
 }

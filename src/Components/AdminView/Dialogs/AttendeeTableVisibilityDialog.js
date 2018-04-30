@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import { RaisedButton, Toggle, Dialog, Checkbox } from 'material-ui';
+import { RaisedButton, Dialog, Checkbox } from 'material-ui';
 
 import * as StateActions from '../../../Actions/state'
 import * as UserSessionActions from '../../../Actions/userSession'

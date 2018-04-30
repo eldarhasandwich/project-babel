@@ -62,6 +62,7 @@ class ListAttendeeTableItem extends Component {
             case ("Unverified"): return palette.status_yellow
             case ("Needs Replacement"): return palette.status_red
             case ("Verified"): return palette.status_green
+            default: return "black"
         }
     }
 

@@ -3,10 +3,11 @@ import DatabaseHandler from '../Classes/DatabaseHandler'
 import { actions as audioActions } from 'redux-audio-fixed'
 
 
-export function setUserLoggedIn (bool) {
+export function setUserLoggedIn (bool, token) {
     return {
         type: "SET_USER_LOGGED_IN",
-        bool
+        bool,
+        token
     }
 }
 
@@ -67,11 +68,11 @@ export function setUserCompany () {
     }
 }
 
-export function createNewList (newListName) {
+export function createNewList (newListName, newListDate, newListTime, newListLocation) {
     return (dispatch, getState) => {
         let state = getState()
         let companyID = state.userSession.userCompanyID
-        let newList = DatabaseHandler.createNewList(newListName)
+        let newList = DatabaseHandler.createNewList(newListName, newListDate.toString(), newListTime.toString(), "", newListLocation)
         
         Fire
             .database()

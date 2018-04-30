@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import { RaisedButton, Toggle, Dialog } from 'material-ui';
+import { RaisedButton, Dialog } from 'material-ui';
+
+import * as EmailActions from '../../../Actions/emails'
 
 class AttendeeEmailDialog extends Component {
 
@@ -22,6 +24,9 @@ class AttendeeEmailDialog extends Component {
             ._ATTENDEES[this.props.userSession.selectedAttendee]
     }
 
+    sendAudioRequestEmail = () => {
+        this.props.sendAudioRequestEmail(this.props.userSession.selectedList, this.props.userSession.selectedAttendee)
+    }
 
     render() {
         const dialogActions = [
@@ -41,6 +46,11 @@ class AttendeeEmailDialog extends Component {
             >
                 <h3 style={{fontWeight:"normal"}}>{`Contact Email: ${this.getSelectedAttendee().contactEmail}`}</h3>
 
+                <RaisedButton
+                    label={"Send Email"}
+                    onClick={this.sendAudioRequestEmail}
+                />
+
             </Dialog>
         )
     }
@@ -53,7 +63,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        sendAudioRequestEmail: (listID, attID) => dispatch(EmailActions.sendAudioRequestEmail(listID, attID))
     }
 }
 

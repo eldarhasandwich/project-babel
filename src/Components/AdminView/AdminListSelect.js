@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
 import { FloatingActionButton, Paper } from 'material-ui'
-import ContentAdd from 'material-ui/svg-icons/content/add'
+// import ContentAdd from 'material-ui/svg-icons/content/add'
 import AvPlaylistAdd from 'material-ui/svg-icons/av/playlist-add'
 
 import NewListDialog from './Dialogs/NewListDialog'

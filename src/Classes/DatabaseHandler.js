@@ -33,13 +33,14 @@ class _DatabaseHandler {
         return {...this.companyTemplate, name: thisName}
     }
 
-    createNewList(_listName, _ceremonyDate = "", _ceremonyTime = "", _cutoffDate = "") {
+    createNewList(_listName, _ceremonyDate = "", _ceremonyTime = "", _cutoffDate = "", _location = "") {
         return {
             ...this.listTemplate,
             listName: _listName,
             ceremonyDate: _ceremonyDate,
             ceremonyTime: _ceremonyTime,
-            uploadCutoffData: _cutoffDate
+            uploadCutoffDate: _cutoffDate,
+            ceremonyLocation: _location
         }
     }
 

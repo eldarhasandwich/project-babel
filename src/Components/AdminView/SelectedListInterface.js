@@ -3,10 +3,6 @@ import {connect} from 'react-redux'
 import { RaisedButton, Paper } from 'material-ui';
 import PieChart from 'react-minimal-pie-chart'
 
-import * as UserSessionActions from '../../Actions/userSession'
-
-import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
-
 import palette from '../../Resources/colorPalette.js'
 import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
 
@@ -98,6 +94,23 @@ class SelectedListInterface extends Component {
         width:"auto",
     }
 
+    formatDate = date => {
+        let d = new Date(date)
+        return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+    }
+
+    formatTime = time => {
+        let t = new Date(time)
+        var hours = t.getHours();
+        var minutes = t.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+    
     render() {
 
         let selectedList = this.getSelectedList()
@@ -172,21 +185,21 @@ class SelectedListInterface extends Component {
 
                     <div style={{float:"right", width:"25%", marginRight:"5px"}}>
                         <h4 style={{textAlign:"center", margin:"5px"}}>Event Details</h4>
-                        <Paper style={{height:`${(4*(36+2))-2}px`, padding:"3px 5px"}}>
+                        <Paper style={{height:`${(4*(36+2))-2}px`, padding:"3px 5px"}} zDepth={0}>
                             <p style={{margin:"3px"}}>
-                                Date: 0000000000
+                                {`Date: ${this.formatDate(this.getSelectedList().ceremonyDate)}`}
                             </p>
                             <p style={{margin:"3px"}}>
-                                Time: 0000000000
+                                {`Time: ${this.formatTime(this.getSelectedList().ceremonyTime)}`}
                             </p>
                             <p style={{margin:"3px"}}>
-                                Location: Somewhere
+                                {`Location: ${this.getSelectedList().ceremonyLocation}`}
                             </p>
                             <p style={{margin:"3px"}}>
-                                Attendees: 1000 expected
+                                {`Attendees: ${this.getNumberOfAttendeesInList()} expected`}
                             </p>
                             <p style={{margin:"3px"}}>
-                                Notes: text text text
+                                Notes: 
                             </p>
                         </Paper>
                     </div>

@@ -6,7 +6,7 @@ import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
 
 import * as UserSessionActions from '../../Actions/userSession'
-import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
+// import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
 import ListAttendeeTableItem from './ListAttendeeTableItem'
 
 import palette from '../../Resources/colorPalette.js'

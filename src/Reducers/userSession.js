@@ -1,5 +1,6 @@
 const defaultState = {
     isLoggedIn: false,
+    firebaseToken: null,
     userCompanyID: null,
     userCompanyName: "",
     companyLists: {},
@@ -15,7 +16,8 @@ const userSession = (state = defaultState, action) => {
         case 'SET_USER_LOGGED_IN': {
             return {
                 ...state,
-                isLoggedIn: action.bool
+                isLoggedIn: action.bool,
+                firebaseToken: action.token
             }
         }
 
