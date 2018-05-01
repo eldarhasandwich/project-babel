@@ -118,7 +118,7 @@ class MaterialEmceeView extends Component {
 
         let selectedList = lists[this.props.userSession.selectedList]
         if (!selectedList) {
-            return "No list Selected. Select one in Admin View"
+            return "No list Selected. Select one or Create one in List Administration"
         }
 
         return selectedList.listName
