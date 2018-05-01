@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 // import {Audio} from 'redux-audio-fixed'
 
 // import ClipList from "../ClipList/ClipList";
-import SelectedClipInterface from "./SelectedClipInterface";
 
+import AdminListSelect from '../AdminView/AdminListSelect'
+
+import SelectedClipInterface from "./SelectedClipInterface";
 import EmceeClipList from '../ClipList/EmceeClipList'
 
 import {RaisedButton} from 'material-ui'
@@ -124,11 +126,14 @@ class MaterialEmceeView extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{height:(window.innerHeight - 150) + "px", overflow: "hidden"}}>
+                <div style={{width:"25%", float:"left", height:"100%"}}>
+                    <AdminListSelect
+                        newListButton={false}
+                    />
+                </div>
 
-                
-
-                <div>
+                <div style={{width:"73%", float:"right", height:"100%", paddingLeft:"2%"}}>
                     <h3>
                         {
                             this.getSelectedListName()

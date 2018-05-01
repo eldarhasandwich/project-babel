@@ -12,8 +12,21 @@ import * as userSessionActions from './../../Actions/userSession'
 
 import LoginBG from '../../Resources/Images/LoginBG.png'
 import titlelogo from '../../Resources/Images/titlelogo.png'
+import { Checkbox } from 'material-ui';
 
 class LoginView extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            rememberLogin: false
+        }
+    }
+
+    toggleRememberLogin = () => {
+        this.setState({rememberLogin: !this.state.rememberLogin})
+    }
 
     uiConfig = {
         // Popup signin flow rather than redirect flow.
@@ -21,11 +34,15 @@ class LoginView extends Component {
         signInFlow: 'popup',
         // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
         signInOptions: [
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ],
         callbacks: {
             
             signInSuccess: () => {
+                if (this.state.rememberLogin) {
+                    document.cookie = `userAuth=true`
+                }
+
                 this.attemptLogin()
                 console.log(firebase.auth().currentUser)
                 window.firebase = firebase.auth()
@@ -40,9 +57,9 @@ class LoginView extends Component {
             firebase.auth().currentUser.getIdToken(true).then(
                 token => {
                     this.props.setUserLoggedIn(true, token)
-                    this.props.setUserCompany()              
+                    this.props.setUserCompany()
                 }
-            ).catch(console.error.bind(console))
+            )
         }
     }
 
@@ -59,12 +76,31 @@ class LoginView extends Component {
         marginBottom:"30px"
     }
 
+    componentWillMount = () => {
+        if (!document.cookie) {
+            return
+        }
+        const that = this;
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                that.attemptLogin()
+            }
+        });
+    }
+
     render() {
         return (
             <div style={this.backgroundStyle}>
 
                 <img src={titlelogo} style={this.logoStyle} alt=""/>
-                <StyledFirebaseAuth uiCallback={ui => console.log(ui)} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                <StyledFirebaseAuth /*uiCallback={ui => console.log(ui)}*/ uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                <Checkbox
+                    style={{width:"200px", margin:"10px auto"}}
+                    label={"Remember Me!"}
+                    checked={this.state.rememberLogin}
+                    onCheck={this.toggleRememberLogin}
+                />
+                <p style={{fontWeight:"bold", color:"red"}}>{this.state.rememberLogin ? "Do not enable this on a shared Computer." : null}</p>
 
             </div>
         )

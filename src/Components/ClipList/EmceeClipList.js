@@ -71,6 +71,7 @@ class EmceeClipList extends Component {
                         {this
                             .getSortedFilteredAttendees()
                             .map((row, index) => (<EmceeClipListRow
+                                key={index}
                                 props={this.props}
                                 index={index}
                                 content={attendees[row]}

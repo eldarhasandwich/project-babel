@@ -73,14 +73,20 @@ class AdminListSelect extends Component {
                                 selectedList={this.props.userSession.selectedList}
                                 setSelectedList={this.setSelectedList}/>
                         )}
-                    <div style={this.newListButtonStyle}>
-                        <FloatingActionButton
-                            backgroundColor={palette.green_dark}
-                            onClick={this.openCreateListDialog}
-                        >
-                            <AvPlaylistAdd/>
-                        </FloatingActionButton>
-                    </div>
+
+                    {
+                        this.props.newListButton 
+                            ?
+                            <div style={this.newListButtonStyle}>
+                                <FloatingActionButton
+                                    backgroundColor={palette.green_dark}
+                                    onClick={this.openCreateListDialog}
+                                >
+                                    <AvPlaylistAdd/>
+                                </FloatingActionButton>
+                            </div>
+                            : null
+                    }
 
                 </Paper>
                 

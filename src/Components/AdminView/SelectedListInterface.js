@@ -53,7 +53,7 @@ class SelectedListInterface extends Component {
         let attendees = this.getListAttendees()
         console.log(attendees)
         let n = Object.keys(attendees).filter(x => attendees[x].audioStatus !== "No Audio").length
-        console.log(n)
+        // console.log(n)
         return n
     }
 

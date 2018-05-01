@@ -4,6 +4,10 @@ import { actions as audioActions } from 'redux-audio-fixed'
 
 
 export function setUserLoggedIn (bool, token) {
+    if (!bool) {
+        document.cookie = "userAuth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+    }
+
     return {
         type: "SET_USER_LOGGED_IN",
         bool,
@@ -44,7 +48,7 @@ export function setUserCompany () {
             .database()
             .ref("_COMPANIES/" + Fire.auth().currentUser.uid)
             .on("value", function(snapshot) {
-                console.log(snapshot.val())
+                // console.log(snapshot.val())
 
                 if (snapshot.val() === null || snapshot.val() === undefined) {
                     dispatch({

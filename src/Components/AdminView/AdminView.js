@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-// import { withRouter } from 'react-router-dom'
 
 import * as StateActions from '../../Actions/state';
 
 import AdminListSelect from './AdminListSelect'
-// import AdminListInterface from './AdminListInterface'
-// import SelectedItemInterface from './SelectedItemInterface';
 
 import ListAttendeeTable from './ListAttendeeTable'
 import SelectedListInterface from './SelectedListInterface'
@@ -50,7 +47,9 @@ class AdminView extends Component {
 
                 <div style={{height:"100%", overflow: "hidden"}}>
                     <div style={this.listSelectStyle}>
-                        <AdminListSelect/>
+                        <AdminListSelect
+                            newListButton={true}
+                        />
                     </div>
                     
                     {
