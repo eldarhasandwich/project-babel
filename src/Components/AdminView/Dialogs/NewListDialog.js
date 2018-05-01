@@ -41,7 +41,7 @@ class NewListDialog extends Component {
             case 0: return this.state.newListName.length >= 6
             case 1: return this.state.newListDate && this.state.newListTime
             case 2: return this.state.newListLocation.length >= 6
-            default: false
+            default: return false
         }
     }
 

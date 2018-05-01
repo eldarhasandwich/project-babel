@@ -6,19 +6,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './App.css';
 
-import AppHeader from "./AppHeader";
 import InstitutionView from "../InstitutionView/InstitutionView"
-import LandingPage from "../HomePage/LandingPage"
-
-import AttendeeView from '../AttendeeView/AttendeeView';
 
 class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
                 <div className="App">
-
-                    <AppHeader/>
+                    
                     <AppRoutes/>
                     
                 </div>
@@ -34,16 +29,7 @@ class AppRoutes extends Component {
                 <Switch>
                     <Route
                         exact path={process.env.PUBLIC_URL +'/'}
-                        component={LandingPage}/>
-
-                    <Route
-                        path={process.env.PUBLIC_URL +'/institution'}
                         component={InstitutionView}/>
-
-                    <Route
-                        path={process.env.PUBLIC_URL +'/attendee'}
-                        component={AttendeeView}/>
-
                 </Switch>
             </main>
         )

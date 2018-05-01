@@ -7,10 +7,16 @@ class SelectedClipInterface extends Component {
     getSelectedAttendee () {
         // let attendees = this.props.attendees.attendees;
 
-        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
-        if (selectedList === null || selectedList === undefined) {
+        let companyLists = this.props.userSession.companyLists
+        if (!companyLists) {
             return null
         }
+
+        let selectedList = companyLists[this.props.userSession.selectedList]
+        if (!selectedList) {
+            return null
+        }
+        
         let attendees = selectedList._ATTENDEES
         if (!attendees) {
             return null

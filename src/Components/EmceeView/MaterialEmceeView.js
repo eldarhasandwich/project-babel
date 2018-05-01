@@ -17,10 +17,22 @@ import * as AttendeeActions from '../../Actions/attendees';
 
 class MaterialEmceeView extends Component {
 
+    getSelectedList = () => {
+        let companyLists = this.props.userSession.companyLists
+        if (!companyLists) {
+            return null
+        }
+        let list = companyLists[this.props.userSession.selectedList]
+        if (!list) {
+            return null
+        }
+        return list
+    }
+
     getSelectedAttendee = () => {
-        let list = this.props.userSession.companyLists[this.props.userSession.selectedList]
-        if (list === undefined || list === null) {
-            return false
+        let list = this.getSelectedList()
+        if (!list) {
+            return null
         }
         let attendees = list._ATTENDEES
         if (!attendees) {
@@ -68,11 +80,11 @@ class MaterialEmceeView extends Component {
     }
 
     canIncrementIndex() {
-        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
-        if (selectedList === null || selectedList === undefined) {
+        let list = this.getSelectedList()
+        if (!list) {
             return false
         }
-        let attendees = selectedList._ATTENDEES
+        let attendees = list._ATTENDEES
         if (!attendees) {
             return false
         }
@@ -114,47 +126,51 @@ class MaterialEmceeView extends Component {
         return (
             <div>
 
-                <h3>
-                    {
-                        this.getSelectedListName()
-                    }
-                </h3>
-
-                <EmceeClipList/>
-                <Divider/>
-                <SelectedClipInterface/>
+                
 
                 <div>
+                    <h3>
+                        {
+                            this.getSelectedListName()
+                        }
+                    </h3>
 
-                    <RaisedButton
-                        secondary
-                        onClick={this.decrementIndex}
-                        disabled={!this
-                        .canDecrementIndex
-                        .call(this)}
-                        label="Back"/>
+                    <EmceeClipList/>
+                    <Divider/>
+                    <SelectedClipInterface/>
 
-                    <RaisedButton
-                        secondary
-                        style={{
-                            margin: "0 5px"
-                        }}
-                        onClick={this
-                        .playSelectedAudio
-                        .bind(this)}
-                        disabled={!this
-                        .canPlayAudio
-                        .call(this)}
-                        label="Play"/>
+                    <div>
 
-                    <RaisedButton
-                        secondary
-                        onClick={this.incrementIndex}
-                        disabled={!this
-                        .canIncrementIndex
-                        .call(this)}
-                        label="Next"/>
+                        <RaisedButton
+                            secondary
+                            onClick={this.decrementIndex}
+                            disabled={!this
+                            .canDecrementIndex
+                            .call(this)}
+                            label="Back"/>
 
+                        <RaisedButton
+                            secondary
+                            style={{
+                                margin: "0 5px"
+                            }}
+                            onClick={this
+                            .playSelectedAudio
+                            .bind(this)}
+                            disabled={!this
+                            .canPlayAudio
+                            .call(this)}
+                            label="Play"/>
+
+                        <RaisedButton
+                            secondary
+                            onClick={this.incrementIndex}
+                            disabled={!this
+                            .canIncrementIndex
+                            .call(this)}
+                            label="Next"/>
+
+                    </div>
                 </div>
 
             </div>

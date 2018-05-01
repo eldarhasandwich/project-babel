@@ -8,8 +8,9 @@ import { FlatButton } from 'material-ui'
 import * as userSessionActions from './../../Actions/userSession'
 import palette from '../../Resources/colorPalette.js'
 
-var pjson = require('../../../package.json');
+import titlelogo from '../../Resources/Images/titlelogo.png'
 
+var pjson = require('../../../package.json');
 
 class AppHeader extends Component {
 
@@ -20,24 +21,31 @@ class AppHeader extends Component {
     linkStyle = {
         textDecoration: 'none',
         color: 'white',
-        padding: '8px 15px'
+        padding: '8px 15px',
+        marginBottom:"0px"
     }
 
     appHeaderStyle = {
         backgroundColor: palette.blue_dark,
-        overflow: "auto",
+        overflow: "hidden",
         padding: "5px 10px",
-        color: "white"
+        color: "white",
+        maxHeight:"80px"
     }
     
     titleDivStyle = {
         display: "inline-block",
-        float: "left"
+        float: "left",
     }
 
     loginDivStyle = {
         display: "inline-block",
         float: "right"
+    }
+
+    logoStyle = {
+        paddingTop:"15px",
+        height: "50px"
     }
 
     render() {
@@ -52,12 +60,15 @@ class AppHeader extends Component {
                     </div>
                     
                     <div style={this.titleDivStyle}>
-                        <h1 style={{display:"inline-block"}}>
-                            <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/'}>Vocalist {pjson.version}</Link>
-                        </h1>
-                        <h4 style={{display:"inline-block", fontWeight: "normal"}}>
+                        <img src={titlelogo} style={this.logoStyle} alt=""/>
+
+                        <h2 style={{display:"inline-block"}}>
+                            {pjson.version}
+                        </h2>
+                        <h4 style={{display:"inline-block", fontWeight: "normal", marginLeft:"15px"}}>
                             {this.props.userSession.userCompanyName}
                         </h4>
+
                     </div>
                 </header>
             </div>

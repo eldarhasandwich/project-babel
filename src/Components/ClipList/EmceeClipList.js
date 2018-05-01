@@ -21,7 +21,11 @@ class EmceeClipList extends Component {
     // }
 
     getSelectedListAttendees = () => {
-        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
+        let companyLists = this.props.userSession.companyLists
+        if (!companyLists) {
+            return null
+        }
+        let selectedList = companyLists[this.props.userSession.selectedList]
         if (selectedList === null || selectedList === undefined) {
             return null
         }

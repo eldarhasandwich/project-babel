@@ -14,6 +14,7 @@ import NewAccountView from './NewAccountView';
 // import {actions as audioActions} from 'redux-audio-fixed'
 
 import palette from '../../Resources/colorPalette.js'
+import AppHeader from '../App/AppHeader';
 
 class InstitutionView extends Component {
 
@@ -113,6 +114,8 @@ class InstitutionView extends Component {
                 <div>
 
                 {this.generateAttendeeAudio()}
+
+                    <AppHeader/>
 
                     <Tabs>
 
