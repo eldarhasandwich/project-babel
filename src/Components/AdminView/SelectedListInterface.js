@@ -68,7 +68,8 @@ class SelectedListInterface extends Component {
     }
 
     getNumberOfAttendeesInList = () => {
-        return Object.keys(this.getListAttendees()).length
+        let n = Object.keys(this.getListAttendees()).length
+        return n > 0 ? n : 1;
     }
 
     attendeeSortingAllowed = () => {
@@ -91,6 +92,7 @@ class SelectedListInterface extends Component {
     textStyle = {
         textAlign: "left",
         marginLeft: "20px",
+        marginTop: "10px",
         width:"auto",
     }
 
@@ -115,8 +117,10 @@ class SelectedListInterface extends Component {
 
         let selectedList = this.getSelectedList()
         return ( 
-            <div style={{height:"25%", width:"100%"}}>
+            <div style={{height:"200px", width:"100%"}}>
+
                 <Paper zDepth={2} style={this.paperStyle}>
+
                     <div style={{float:"left", display:"inline-block"}}>
                         <h2 style={this.textStyle}>{selectedList ? selectedList.listName : ""}</h2>
                         <div style={{marginTop:"0", marginLeft:"30px"}}>
@@ -146,7 +150,7 @@ class SelectedListInterface extends Component {
                     </div>
 
                     <div style={{float:"right", width:"25%", marginRight:"5px"}}>
-                        <h4 style={{textAlign:"center", margin:"5px"}}>Action Center</h4>
+                        <h4 style={{textAlign:"center", marginTop:"10px", marginBottom:"5px"}}>Action Center</h4>
                         <RaisedButton
                             label={"Import Attendees"}
                             labelPosition={"before"}
@@ -163,6 +167,7 @@ class SelectedListInterface extends Component {
                             fullWidth
                             primary
                             style={{marginBottom:"2px"}}
+                            disabled
                         />
                         <RaisedButton
                             label="Announcer Mode"
@@ -171,6 +176,8 @@ class SelectedListInterface extends Component {
                             fullWidth
                             primary
                             style={{marginBottom:"2px"}}
+                            disabled
+
                         />
                         <RaisedButton
                             label="Request Attendee Audio"
@@ -178,13 +185,15 @@ class SelectedListInterface extends Component {
                             icon={<CommunicationContactMail/>}
                             fullWidth
                             primary
-                            style={{marginBottom:"2px"}}                            
+                            style={{marginBottom:"2px"}}    
+                            disabled
+                        
                         />
                     </div>
 
 
                     <div style={{float:"right", width:"25%", marginRight:"5px"}}>
-                        <h4 style={{textAlign:"center", margin:"5px"}}>Event Details</h4>
+                        <h4 style={{textAlign:"center", marginTop:"10px", marginBottom:"5px"}}>Event Details</h4>
                         <Paper style={{height:`${(4*(36+2))-2}px`, padding:"3px 5px"}} zDepth={0}>
                             <p style={{margin:"3px"}}>
                                 {`Date: ${this.formatDate(this.getSelectedList().ceremonyDate)}`}

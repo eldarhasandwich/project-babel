@@ -63,7 +63,7 @@ class AdminListSelect extends Component {
             <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative", overflow:"hidden"}}>
 
                 <Paper zDepth={2} style={this.paperStyle}>
-                    <h4 style={{fontWeight:"normal", marginLeft:"15px"}}>List Management</h4>
+                    <h4 style={{fontWeight:"normal", textAlign: "center"}}>List Management</h4>
                         
                         {this.getCompanyListKeys().map(
                             x => <AdminListSelectItem
@@ -129,7 +129,7 @@ class AdminListSelectItem extends Component {
             cursor: "pointer",
             overflow:"auto",
             background: this.isSelected() ? palette.gray_dark : this.state.hovered ? "lightblue" : "white",
-            height: this.isSelected() ? "90px" : "50px"
+            height: "60px"
         }
     }
 

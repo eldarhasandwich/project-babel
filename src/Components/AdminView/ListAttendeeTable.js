@@ -142,7 +142,8 @@ class ListAttendeeTable extends Component {
         height: "calc(100% - 10px)",
         width: "98%",
         marginTop: "10px",
-        backgroundColor: this.props.userSession.attendeeSortingAllowed ? "lightcoral" : palette.gray_light
+        backgroundColor: this.props.userSession.attendeeSortingAllowed ? "lightcoral" : palette.gray_light,
+        transition: "0.2s",
     })
     
     buttonStyle = {
@@ -156,7 +157,7 @@ class ListAttendeeTable extends Component {
         let attendees = this.getSelectedListAttendees();
 
         return (
-            <div style={{height:"70%", width:"100%"}}>
+            <div style={{height:"calc(95% - 200px)", width:"100%"}}>
 
                 <Paper zDepth={2} style={this.getPaperStyle()}>
 

@@ -83,7 +83,8 @@ class NewListDialog extends Component {
             newListName: "",
             newListDate: null,
             newListTime: null,
-            newListLocation: ""
+            newListLocation: "",
+            stepIndex: 0
         })
     }
 

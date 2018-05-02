@@ -129,17 +129,17 @@ class SelectedItemInterface extends Component {
         }
 
         let selectedAttendee = this.getSelectedAttendee()
-        let attID = {
-            c: this.props.userSession.userCompanyID,
-            l: this.props.userSession.selectedList,
-            a: this.props.userSession.selectedAttendee
-        }
+        // let attID = {
+        //     c: this.props.userSession.userCompanyID,
+        //     l: this.props.userSession.selectedList,
+        //     a: this.props.userSession.selectedAttendee
+        // }
         return ( // ATTENDEE OPTIONS
             <div>
 
-                <h1 style={this.textStyle}>{selectedAttendee.name}</h1>
-                <h4 style={this.textStyle}>{`ID: ${attID.c}~${attID.l}~${attID.a}`}</h4>
-                <h4 style={this.textStyle}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
+                {/* <h1 style={this.textStyle}>{selectedAttendee.name}</h1> */}
+                {/* <h4 style={this.textStyle}>{`ID: ${attID.c}~${attID.l}~${attID.a}`}</h4> */}
+                <h4 style={{...this.textStyle, marginTop:"30px"}}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
 
                 <div style={{overflow:"auto", height:"65px"}}>
                     <RaisedButton

@@ -2,6 +2,12 @@ import Fire from '../Classes/Fire'
 import DatabaseHandler from '../Classes/DatabaseHandler'
 import { actions as audioActions } from 'redux-audio-fixed'
 
+export function setUserSessionLoading (bool) {
+    return {
+        type: "SET_USER_SESSION_LOADING",
+        bool
+    }
+}
 
 export function setUserLoggedIn (bool, token) {
     if (!bool) {
@@ -50,7 +56,9 @@ export function setUserCompany () {
             .on("value", function(snapshot) {
                 // console.log(snapshot.val())
 
-                if (snapshot.val() === null || snapshot.val() === undefined) {
+                dispatch(setUserSessionLoading(false))
+
+                if (!snapshot.val()) {
                     dispatch({
                         type: "SET_USER_COMPANY",
                         companyID: Fire.auth().currentUser.uid,
@@ -66,8 +74,10 @@ export function setUserCompany () {
                     companyName: snapshot.val().companyName,
                     companyLists: snapshot.val()._LISTS
                 })
+                
             }, function(error) {
                 console.log("couldn't get company name")
+                dispatch(setUserSessionLoading(false))
             })
     }
 }

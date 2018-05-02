@@ -12,7 +12,7 @@ import * as userSessionActions from './../../Actions/userSession'
 
 import LoginBG from '../../Resources/Images/LoginBG.png'
 import titlelogo from '../../Resources/Images/titlelogo.png'
-import { Checkbox } from 'material-ui';
+import { Checkbox, CircularProgress } from 'material-ui';
 
 class LoginView extends Component {
 
@@ -29,10 +29,8 @@ class LoginView extends Component {
     }
 
     uiConfig = {
-        // Popup signin flow rather than redirect flow.
         credentialHelper: firebaseui.auth.CredentialHelper.NONE,
         signInFlow: 'popup',
-        // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
         signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ],
@@ -53,6 +51,7 @@ class LoginView extends Component {
 
 
     attemptLogin = () => {
+        this.props.setUserSessionLoading(true)
         if (true) {
             firebase.auth().currentUser.getIdToken(true).then(
                 token => {
@@ -78,6 +77,7 @@ class LoginView extends Component {
 
     componentWillMount = () => {
         if (!document.cookie) {
+            this.props.setUserSessionLoading(false)
             return
         }
         const that = this;
@@ -89,18 +89,31 @@ class LoginView extends Component {
     }
 
     render() {
+
         return (
             <div style={this.backgroundStyle}>
 
-                <img src={titlelogo} style={this.logoStyle} alt=""/>
-                <StyledFirebaseAuth /*uiCallback={ui => console.log(ui)}*/ uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
-                <Checkbox
-                    style={{width:"200px", margin:"10px auto"}}
-                    label={"Remember Me!"}
-                    checked={this.state.rememberLogin}
-                    onCheck={this.toggleRememberLogin}
-                />
-                <p style={{fontWeight:"bold", color:"red"}}>{this.state.rememberLogin ? "Do not enable this on a shared Computer." : null}</p>
+                {
+                    this.props.userSession.userSessionLoading
+                        ?
+                        <div>
+                            <CircularProgress size={200} thickness={15} style={{marginTop:"10%"}}/>
+                            <h3 style={{fontWeight:"normal"}}>Loading your Profile</h3>
+                        </div>
+                        :
+                        <div>
+                            <img src={titlelogo} style={this.logoStyle} alt=""/>
+                            <StyledFirebaseAuth /*uiCallback={ui => console.log(ui)}*/ uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                            <Checkbox
+                                style={{width:"200px", margin:"10px auto"}}
+                                label={"Remember Me!"}
+                                checked={this.state.rememberLogin}
+                                onCheck={this.toggleRememberLogin}
+                            />
+                            <p style={{fontWeight:"bold", color:"lightcoral"}}>{this.state.rememberLogin ? "Do not enable this on a shared Computer." : null}</p>
+                        </div>
+
+                }
 
             </div>
         )
@@ -113,6 +126,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setUserSessionLoading: bool => dispatch(userSessionActions.setUserSessionLoading(bool)),
         setUserLoggedIn: (bool, token) => dispatch(userSessionActions.setUserLoggedIn(bool, token)),
         setUserCompany: () => dispatch(userSessionActions.setUserCompany())
     }

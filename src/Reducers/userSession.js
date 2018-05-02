@@ -1,9 +1,13 @@
 const defaultState = {
+    userSessionLoading: true,
+
     isLoggedIn: false,
-    firebaseToken: null,
     userCompanyID: null,
+    firebaseToken: null,
+
     userCompanyName: "",
     companyLists: {},
+
     selectedList: null,
     selectedAttendee: null,
     attendeeSortingAllowed: false
@@ -12,6 +16,13 @@ const defaultState = {
 
 const userSession = (state = defaultState, action) => {
     switch (action.type) {
+
+        case 'SET_USER_SESSION_LOADING': {
+            return {
+                ...state,
+                userSessionLoading: action.bool
+            }
+        }
 
         case 'SET_USER_LOGGED_IN': {
             return {

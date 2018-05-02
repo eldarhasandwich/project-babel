@@ -5,9 +5,9 @@ import {Audio} from 'redux-audio-fixed'
 import { Tab, Tabs } from 'material-ui'
 
 import LoginView from './LoginView'
-import InstitutionInfo from './InstitutionInfo'
+// import InstitutionInfo from './InstitutionInfo'
 import AdminView from '../AdminView/AdminView'
-import MaterialEmceeView from '../EmceeView/MaterialEmceeView'
+// import MaterialEmceeView from '../EmceeView/MaterialEmceeView'
 
 import * as userSessionActions from './../../Actions/userSession'
 import NewAccountView from './NewAccountView';
@@ -119,15 +119,15 @@ class InstitutionView extends Component {
 
                     <Tabs>
 
-                        <Tab style={this.tabStyle} label="Instituition Information">
+                        {/* <Tab style={this.tabStyle} label="Instituition Information">
                             <InstitutionInfo/>
-                        </Tab>
+                        </Tab> */}
                         <Tab style={this.tabStyle} label="List Administration">
                             <AdminView/>
                         </Tab>
-                        <Tab style={this.tabStyle} label="Emcee Interface">
+                        {/* <Tab style={this.tabStyle} label="Emcee Interface">
                             <MaterialEmceeView/>
-                        </Tab>
+                        </Tab> */}
 
                     </Tabs>
 

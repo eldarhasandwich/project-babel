@@ -14,12 +14,12 @@ class AdminListInterface extends Component {
     }
 
     listInterfaceStyle = {
-        height:"15%",
+        height:"200px",
         width:"100%"
     }
 
     listAttendeeTable = {
-        height: "85%",
+        height: "calc(100% - 200px)",
         width:"100%",
         overflow:"hidden"
     }

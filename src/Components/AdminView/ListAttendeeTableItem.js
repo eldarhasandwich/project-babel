@@ -50,8 +50,8 @@ class ListAttendeeTableItem extends Component {
             padding: "12px",
             cursor: this.isSelected() || this.props.userSession.attendeeSortingAllowed ? null : "pointer",
             overflow:"hidden",
-            background: this.isSelected() ? palette.green_dark : this.state.hovered ? "lightblue" : "white",
-            height: this.isSelected() ? "400px" : "45px"
+            background: this.isSelected() ? palette.gray_light : this.state.hovered ? "lightblue" : "white",
+            height: this.isSelected() ? "300px" : "45px"
         }
     }
 
@@ -82,12 +82,15 @@ class ListAttendeeTableItem extends Component {
                         float:"left"
                     }}
                 >
+                    <CondensedAttendeeView
+                        itemKey={this.props.itemKey}
+                        itemInfo={this.props.attendees[this.props.itemKey]}
+                        isSelected={this.isSelected()}
+                    />
+                                    
                     {
-                        !this.isSelected()
-                            ? <CondensedAttendeeView
-                                    itemKey={this.props.itemKey}
-                                    itemInfo={this.props.attendees[this.props.itemKey]}/>
-                            : <SelectedItemInterface/>
+                        this.isSelected()
+                            ? <SelectedItemInterface/> : null     
                     }
                 </div>
                 <span
@@ -108,11 +111,18 @@ class ListAttendeeTableItem extends Component {
 }
 
 class CondensedAttendeeView extends Component {
+    getTextStyle = () => {
+        return {
+            margin:"0 3px",
+            fontWeight: this.props.isSelected ? "bold" : null
+        }
+    }
+
     render () {
         return (
             <div>
-                <p style={{float:"left", margin:"0 3px"}}>{`${this.props.itemInfo.orderPos + 1}: ${this.props.itemInfo.name}`}</p>
-                <p style={{float:"right", margin:"0 3px"}}>{this.props.itemInfo.audioStatus}</p>
+                <p style={{...this.getTextStyle(), float:"left"}}>{`${this.props.itemInfo.orderPos + 1}: ${this.props.itemInfo.name}`}</p>
+                <p style={{...this.getTextStyle(), float:"right"}}>{this.props.itemInfo.audioStatus}</p>
             </div>
         )
     }
