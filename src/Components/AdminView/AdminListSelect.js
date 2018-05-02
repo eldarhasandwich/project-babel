@@ -63,7 +63,16 @@ class AdminListSelect extends Component {
             <div style={{width: "100%", height: "100%", maxHeight: "100%", position: "relative", overflow:"hidden"}}>
 
                 <Paper zDepth={2} style={this.paperStyle}>
-                    <h4 style={{fontWeight:"normal", textAlign: "center"}}>List Management</h4>
+                    <h4 style={{fontWeight:"normal", textAlign: "center", marginBottom:"3px"}}>List Management</h4>
+
+                        <hr
+                            style={{
+                                width:"80%",
+                                border: "0",
+                                height: "1px",
+                                backgroundImage: "linear-gradient(to right, rgba(0, 0, 0, 0), rgba(50, 50, 50, 0.75), rgba(0, 0, 0, 0))"
+                            }}
+                        />
                         
                         {this.getCompanyListKeys().map(
                             x => <AdminListSelectItem
@@ -128,9 +137,12 @@ class AdminListSelectItem extends Component {
             padding: "12px",
             cursor: "pointer",
             overflow:"auto",
-            background: this.isSelected() ? palette.gray_dark : this.state.hovered ? "lightblue" : "white",
-            height: "60px"
+            background: this.isSelected() ? palette.gray_dark : this.state.hovered ? "lightblue" : "white"
         }
+    }
+
+    textStyle = {
+        textAlign: "center", verticalAlign:"middle", margin:"8px 0px"
     }
 
     render() {
@@ -143,7 +155,7 @@ class AdminListSelectItem extends Component {
                     onMouseEnter={this.setHovered}
                     onMouseLeave={this.setNotHovered}
                 >
-                    <p style={{textAlign: "center", margin: "0", padding:"0"}}>{this.props.itemName}</p>
+                    <p style={this.textStyle}>{this.props.itemName}</p>
                 </Paper>
             </div>
         )

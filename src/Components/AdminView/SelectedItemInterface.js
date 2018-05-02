@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 // import {Audio} from 'redux-audio-fixed'
-import { RaisedButton, Toggle } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 
 import * as UserSessionActions from '../../Actions/userSession'
 import {actions as audioActions} from 'redux-audio-fixed'
@@ -10,6 +10,8 @@ import AttendeeEmailDialog from './Dialogs/AttendeeEmailDialog'
 
 import AVVolumeUp from 'material-ui/svg-icons/av/volume-up'
 import CommunicationMail from 'material-ui/svg-icons/communication/mail-outline'
+import ContentFlag from 'material-ui/svg-icons/content/flag'
+import ActionDone from 'material-ui/svg-icons/action/done'
 
 class SelectedItemInterface extends Component {
 
@@ -129,76 +131,55 @@ class SelectedItemInterface extends Component {
         }
 
         let selectedAttendee = this.getSelectedAttendee()
-        // let attID = {
-        //     c: this.props.userSession.userCompanyID,
-        //     l: this.props.userSession.selectedList,
-        //     a: this.props.userSession.selectedAttendee
-        // }
+
         return ( // ATTENDEE OPTIONS
             <div>
-
-                {/* <h1 style={this.textStyle}>{selectedAttendee.name}</h1> */}
-                {/* <h4 style={this.textStyle}>{`ID: ${attID.c}~${attID.l}~${attID.a}`}</h4> */}
-                <h4 style={{...this.textStyle, marginTop:"30px"}}>{"Order in Ceremony: " + (selectedAttendee.orderPos + 1)}</h4>
-
-                <div style={{overflow:"auto", height:"65px"}}>
+                
+                <div style={{overflow:"hidden", height:"85px", marginTop:"45px"}}>
                     <RaisedButton
-                        style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
+                        style={{float:"left", marginLeft:"40px"}}
                         label={"Play Audio"}
                         labelPosition={"before"}
                         icon={<AVVolumeUp/>}
-                        primary
+                        // primary
                         disabled={selectedAttendee.audioStatus === "No Audio"}
                         onClick={this.playSelectedAttendeeAudio}
 
                     />
+                    <RaisedButton
+                        style={{float:"left", marginLeft:"5px"}}
+                        label={selectedAttendee.audioStatus==="Verified" ? "Verified" : "Verify"}
+                        icon={<ActionDone/>}
+                        primary={selectedAttendee.audioStatus==="Verified"}
+                        onClick={this.setAudioStatusAsVerified}
+                        disabled={selectedAttendee.audioStatus==="No Audio"}
+                    />
+                    <RaisedButton
+                        style={{float:"left", marginLeft:"5px"}}
+                        label={"Flag for Replacement"}
+                        icon={<ContentFlag/>}
+                        secondary={selectedAttendee.audioStatus==="Needs Replacement"}
+                        onClick={this.setAudioStatusAsNeedsReplace}
+                        disabled={selectedAttendee.audioStatus==="No Audio"}
+                    />
 
-                    <div style={{float:"left", marginLeft: "20px"}}>
-                        <Toggle
-                            value="Needs Replacement"
-                            
-                            disabled={selectedAttendee.audioStatus === "No Audio"}
-                            toggled={selectedAttendee.audioStatus === "Needs Replacement"}
-                            onToggle={this.handleAudioStatusChange}
-
-                            style={{textAlign:"left"}}
-                            labelPosition="right"
-                            label={
-                                (selectedAttendee.audioStatus === "Needs Replacement")
-                                ? "Needs Replacement"
-                                : "Mark as Needing Replacement"
-                            }/>
-                        <Toggle
-                            value="Verified"
-
-                            disabled={selectedAttendee.audioStatus === "No Audio"}
-                            toggled={selectedAttendee.audioStatus === "Verified"}
-                            onToggle={this.handleAudioStatusChange}
-
-                            style={{textAlign:"left"}}
-                            labelPosition="right" 
-                            label={
-                                (selectedAttendee.audioStatus === "Verified")
-                                ? "Verified"
-                                : "Verify"
-                            }/>
-                    </div>
-
+                    <p style={{...this.textStyle, marginTop:"50px"}}>{this.getAudioStatusText()}</p>
                 </div>
 
-                <p style={{...this.textStyle, marginTop:"0px"}}>{this.getAudioStatusText()}</p>
 
-                <h4 style={{...this.textStyle, marginBottom:"5px"}}>{"Contact Email: " + (selectedAttendee.contactEmail)}</h4>
-
-                <RaisedButton
-                    style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
-                    label={"Send Email"}
-                    labelPosition={"before"}
-                    icon={<CommunicationMail/>}
-                    primary
-                    disabled={selectedAttendee.audioStatus === "Verified"}
-                    onClick={this.openAttendeeEmailDialog}
-                />
+                <div style={{}}>
+                    <h4 style={{...this.textStyle, marginBottom:"5px"}}>{"Contact Email: " + (selectedAttendee.contactEmail)}</h4>
+                    
+                    <RaisedButton
+                        style={{float:"left", marginLeft:"40px", marginTop:"6px"}}
+                        label={"Send Email"}
+                        labelPosition={"before"}
+                        icon={<CommunicationMail/>}
+                        primary
+                        disabled={selectedAttendee.audioStatus === "Verified"}
+                        onClick={this.openAttendeeEmailDialog}
+                    />
+                </div>
 
                 <AttendeeEmailDialog
                     isOpen={this.state.attendeeEmailDialogOpen}

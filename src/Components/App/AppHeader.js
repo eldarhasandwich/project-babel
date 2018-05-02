@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom"
+// import {Link} from "react-router-dom"
 import {connect} from 'react-redux'
 import './AppHeader.css';
 
@@ -30,7 +30,7 @@ class AppHeader extends Component {
         overflow: "hidden",
         padding: "5px 10px",
         color: "white",
-        maxHeight:"80px"
+        maxHeight:"60px"
     }
     
     titleDivStyle = {
@@ -39,12 +39,12 @@ class AppHeader extends Component {
     }
 
     loginDivStyle = {
-        display: "inline-block",
-        float: "right"
+        float: "right",
+        margin:"0 auto"
     }
 
     logoStyle = {
-        paddingTop:"15px",
+        paddingTop:"0px",
         height: "50px"
     }
 
@@ -85,7 +85,7 @@ class LoginButton extends Component {
     render() {
         if (this.props.isLoggedIn) {
             return (
-                <div style={{marginTop:"20px"}}>
+                <div style={{marginTop:`${25/2}px`}}>
                     <FlatButton
                         label={"Logout"}
                         style={{color: "white"}}
@@ -94,11 +94,7 @@ class LoginButton extends Component {
             )
         } // if logged out
         return (
-            <div style={{marginTop:"20px"}}>
-                <Link style={this.linkStyle} to={process.env.PUBLIC_URL +'/institution'}>
-                    <FlatButton label={"Login"} style={{color: "white"}}/>
-                </Link>
-            </div>
+            <div/>
         )
     }
 }

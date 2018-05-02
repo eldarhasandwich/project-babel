@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Audio} from 'redux-audio-fixed'
 
-import { Tab, Tabs } from 'material-ui'
+// import { Tab, Tabs } from 'material-ui'
 
 import LoginView from './LoginView'
 // import InstitutionInfo from './InstitutionInfo'
@@ -117,19 +117,9 @@ class InstitutionView extends Component {
 
                     <AppHeader/>
 
-                    <Tabs>
-
-                        {/* <Tab style={this.tabStyle} label="Instituition Information">
-                            <InstitutionInfo/>
-                        </Tab> */}
-                        <Tab style={this.tabStyle} label="List Administration">
-                            <AdminView/>
-                        </Tab>
-                        {/* <Tab style={this.tabStyle} label="Emcee Interface">
-                            <MaterialEmceeView/>
-                        </Tab> */}
-
-                    </Tabs>
+                    <div style={{maxWidth:"2000px"}}>
+                        <AdminView/>
+                    </div>
 
                 </div>
         )

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {Paper, RaisedButton} from 'material-ui';
+import {Paper, RaisedButton, TextField} from 'material-ui';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';
@@ -21,6 +21,7 @@ class ListAttendeeTable extends Component {
 
         this.state = {
             visibilityDialogOpen: false,
+            searchQuery: null
         }
     }
 
@@ -33,7 +34,15 @@ class ListAttendeeTable extends Component {
     }
 
     getSelectedListAttendees = () => {
-        return this.props.userSession.companyLists[this.props.userSession.selectedList]._ATTENDEES
+        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
+        if (!selectedList) {
+            return null
+        }
+        let attendees = selectedList._ATTENDEES
+        if (!attendees) {
+            return null
+        }
+        return attendees
     }
 
     filterAttendeeKeys = sortedAttendeeKeys => {
@@ -140,7 +149,8 @@ class ListAttendeeTable extends Component {
     getPaperStyle = () => ({
         overflow:"auto",
         height: "calc(100% - 10px)",
-        width: "98%",
+        width: "97%",
+        marginLeft:"1.5%",
         marginTop: "10px",
         backgroundColor: this.props.userSession.attendeeSortingAllowed ? "lightcoral" : palette.gray_light,
         transition: "0.2s",
@@ -156,12 +166,23 @@ class ListAttendeeTable extends Component {
 
         let attendees = this.getSelectedListAttendees();
 
+        if (!attendees) {
+            return null
+        }
+
         return (
             <div style={{height:"calc(95% - 200px)", width:"100%"}}>
 
                 <Paper zDepth={2} style={this.getPaperStyle()}>
 
                 <div style={{height:"50px"}}> 
+
+                    {/* <TextField
+                        style={{float:"left", marginLeft:"30px"}}
+                        hintText={"Search..."}
+                        disabled
+                    /> */}
+
                     <RaisedButton
                         label={this.props.userSession.attendeeSortingAllowed ? "Lock Sorting" : "Unlock Sorting"}
                         labelPosition={"before"}

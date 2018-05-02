@@ -7,9 +7,11 @@ import palette from '../../Resources/colorPalette.js'
 import AddAttendeeDialog from './Dialogs/AddAttendeeDialog';
 
 import FileUpload from 'material-ui/svg-icons/file/file-upload'
-import ActionDoneAll from 'material-ui/svg-icons/action/done-all'
+// import ActionDoneAll from 'material-ui/svg-icons/action/done-all'
 import AvPlaylistPlay from 'material-ui/svg-icons/av/playlist-play'
 import CommunicationContactMail from 'material-ui/svg-icons/communication/contact-mail'
+import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever'
+import DeleteListDialog from './Dialogs/DeleteListDialog.js';
 
 
 class SelectedListInterface extends Component {
@@ -18,7 +20,8 @@ class SelectedListInterface extends Component {
         super(props)
 
         this.state = {
-            addAttendeePopoverOpen: false
+            addAttendeePopoverOpen: false,
+            deleteListDialogOpen: false
         }
     }
 
@@ -29,13 +32,24 @@ class SelectedListInterface extends Component {
     closeAddAttendeeDialog = () => {
         this.setState({addAttendeePopoverOpen: false})
     }
+    
+    openDeleteListDialog = () => {
+        this.setState({deleteListDialogOpen: true})
+    }
+
+    closeDeleteListDialog = () => {
+        this.setState({deleteListDialogOpen: false})
+    }
 
     getSelectedList = () => {
         if (this.props.userSession.selectedList === null) {
             return null
         }
-
-        return this.props.userSession.companyLists[this.props.userSession.selectedList]
+        let selectedList = this.props.userSession.companyLists[this.props.userSession.selectedList]
+        if (!selectedList) {
+            return null
+        }
+        return selectedList
     }
 
     getListAttendees = () => {
@@ -84,7 +98,8 @@ class SelectedListInterface extends Component {
     paperStyle = {
         overflow:"auto",
         height: "100%",
-        width: "98%",
+        width: "97%",
+        marginLeft:"1.5%",
         marginTop: "10px",
         backgroundColor: palette.gray_dark
     }
@@ -116,6 +131,11 @@ class SelectedListInterface extends Component {
     render() {
 
         let selectedList = this.getSelectedList()
+
+        if (!selectedList) {
+            return null
+        }
+
         return ( 
             <div style={{height:"200px", width:"100%"}}>
 
@@ -161,15 +181,6 @@ class SelectedListInterface extends Component {
                             style={{marginBottom:"2px"}}
                         />
                         <RaisedButton
-                            label="Verification Mode"
-                            labelPosition={"before"}
-                            icon={<ActionDoneAll/>}
-                            fullWidth
-                            primary
-                            style={{marginBottom:"2px"}}
-                            disabled
-                        />
-                        <RaisedButton
                             label="Announcer Mode"
                             labelPosition={"before"}
                             icon={<AvPlaylistPlay/>}
@@ -180,7 +191,7 @@ class SelectedListInterface extends Component {
 
                         />
                         <RaisedButton
-                            label="Request Attendee Audio"
+                            label="Request Audio"
                             labelPosition={"before"}
                             icon={<CommunicationContactMail/>}
                             fullWidth
@@ -189,25 +200,35 @@ class SelectedListInterface extends Component {
                             disabled
                         
                         />
+                        <RaisedButton
+                            label="Delete List"
+                            labelPosition={"before"}
+                            icon={<ActionDeleteForever/>}
+                            fullWidth
+                            secondary
+                            style={{marginBottom:"2px"}}    
+                            onClick={this.openDeleteListDialog}
+                        
+                        />
                     </div>
 
 
                     <div style={{float:"right", width:"25%", marginRight:"5px"}}>
                         <h4 style={{textAlign:"center", marginTop:"10px", marginBottom:"5px"}}>Event Details</h4>
                         <Paper style={{height:`${(4*(36+2))-2}px`, padding:"3px 5px"}} zDepth={0}>
-                            <p style={{margin:"3px"}}>
-                                {`Date: ${this.formatDate(this.getSelectedList().ceremonyDate)}`}
+                            <p style={{margin:"3px", textAlign:"left"}}>
+                                {`Date: ${this.formatDate(selectedList.ceremonyDate)}`}
                             </p>
-                            <p style={{margin:"3px"}}>
-                                {`Time: ${this.formatTime(this.getSelectedList().ceremonyTime)}`}
+                            <p style={{margin:"3px", textAlign:"left"}}>
+                                {`Time: ${this.formatTime(selectedList.ceremonyTime)}`}
                             </p>
-                            <p style={{margin:"3px"}}>
-                                {`Location: ${this.getSelectedList().ceremonyLocation}`}
+                            <p style={{margin:"3px", textAlign:"left"}}>
+                                {`Location: ${selectedList.ceremonyLocation}`}
                             </p>
-                            <p style={{margin:"3px"}}>
+                            <p style={{margin:"3px", textAlign:"left"}}>
                                 {`Attendees: ${this.getNumberOfAttendeesInList()} expected`}
                             </p>
-                            <p style={{margin:"3px"}}>
+                            <p style={{margin:"3px", textAlign:"left"}}>
                                 Notes: 
                             </p>
                         </Paper>
@@ -220,6 +241,11 @@ class SelectedListInterface extends Component {
                 <AddAttendeeDialog
                     isOpen={this.state.addAttendeePopoverOpen}
                     onRequestClose={this.closeAddAttendeeDialog}                
+                />
+
+                <DeleteListDialog
+                    isOpen={this.state.deleteListDialogOpen}
+                    onRequestClose={this.closeDeleteListDialog}
                 />
             </div>
         )

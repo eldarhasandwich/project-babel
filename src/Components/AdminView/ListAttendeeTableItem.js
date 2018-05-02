@@ -51,7 +51,7 @@ class ListAttendeeTableItem extends Component {
             cursor: this.isSelected() || this.props.userSession.attendeeSortingAllowed ? null : "pointer",
             overflow:"hidden",
             background: this.isSelected() ? palette.gray_light : this.state.hovered ? "lightblue" : "white",
-            height: this.isSelected() ? "300px" : "45px"
+            height: this.isSelected() ? "250px" : "45px",
         }
     }
 

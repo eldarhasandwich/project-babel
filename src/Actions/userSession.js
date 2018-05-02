@@ -98,6 +98,18 @@ export function createNewList (newListName, newListDate, newListTime, newListLoc
     }
 }
 
+export function deleteList (listID) {
+    return (dispatch, getState) => {
+        let state = getState()
+        let companyID = state.userSession.userCompanyID
+        
+        Fire
+            .database()
+            .ref(`_COMPANIES/${companyID}/_LISTS/${listID}`)
+            .remove()
+    }
+}
+
 export function addNewAttendee (newAttendeeName, newAttendeeEmail) {
     return (dispatch, getState) => {
         let state = getState()
@@ -174,7 +186,6 @@ export function setSelectedList (newListID) {
         console.log(attendees)
 
         for (var i = 0; i < attendeeKeys.length; i++) {
-            // console.log(attendeeKeys[i])
             if (attendees[attendeeKeys[i]].audioStatus !== "No Audio") {
                 dispatch(pullAttendeeAudioFromStorage(companyID, selectedList, attendeeKeys[i]))
             }

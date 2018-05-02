@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div className="App">
+                <div className="App" style={{minWidth:"1100px"}}>
                     
                     <AppRoutes/>
                     
