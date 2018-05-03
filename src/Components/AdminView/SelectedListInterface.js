@@ -12,6 +12,7 @@ import AvPlaylistPlay from 'material-ui/svg-icons/av/playlist-play'
 import CommunicationContactMail from 'material-ui/svg-icons/communication/contact-mail'
 import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever'
 import DeleteListDialog from './Dialogs/DeleteListDialog.js';
+import AnnouncerModeDialog from './Dialogs/AnnouncerModeDialog.js';
 
 
 class SelectedListInterface extends Component {
@@ -21,6 +22,7 @@ class SelectedListInterface extends Component {
 
         this.state = {
             addAttendeePopoverOpen: false,
+            announcerModeDialogOpen: false,
             deleteListDialogOpen: false
         }
     }
@@ -31,6 +33,14 @@ class SelectedListInterface extends Component {
 
     closeAddAttendeeDialog = () => {
         this.setState({addAttendeePopoverOpen: false})
+    }
+
+    openAnnouncerMode = () => {
+        this.setState({announcerModeDialogOpen: true})
+    }
+
+    closeAnnouncerMode = () => {
+        this.setState({announcerModeDialogOpen: false})
     }
     
     openDeleteListDialog = () => {
@@ -187,7 +197,7 @@ class SelectedListInterface extends Component {
                             fullWidth
                             primary
                             style={{marginBottom:"2px"}}
-                            disabled
+                            onClick={this.openAnnouncerMode}
 
                         />
                         <RaisedButton
@@ -241,6 +251,11 @@ class SelectedListInterface extends Component {
                 <AddAttendeeDialog
                     isOpen={this.state.addAttendeePopoverOpen}
                     onRequestClose={this.closeAddAttendeeDialog}                
+                />
+
+                <AnnouncerModeDialog
+                    isOpen={this.state.announcerModeDialogOpen}
+                    onRequestClose={this.closeAnnouncerMode}
                 />
 
                 <DeleteListDialog

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {Paper, RaisedButton, TextField} from 'material-ui';
+import {Paper, RaisedButton, /*TextField*/} from 'material-ui';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import AttendeeTableVisibilityDialog from './Dialogs/AttendeeTableVisibilityDialog';

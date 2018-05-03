@@ -62,6 +62,7 @@ class AttendeeTableVisibilityDialog extends Component {
                 open={this.props.isOpen}
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
+                contentStyle={{width:"500px", margin:"auto"}}
             >
                 <Checkbox
                     label="Verified"
