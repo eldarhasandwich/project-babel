@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import './AppHeader.css';
 
-import { FlatButton } from 'material-ui'
+import { RaisedButton } from 'material-ui'
 
 import * as userSessionActions from './../../Actions/userSession'
 import palette from '../../Resources/colorPalette.js'
@@ -30,7 +30,7 @@ class AppHeader extends Component {
         overflow: "hidden",
         padding: "5px 10px",
         color: "white",
-        maxHeight:"60px"
+        maxHeight:"70px"
     }
     
     titleDivStyle = {
@@ -77,18 +77,13 @@ class AppHeader extends Component {
 }
 
 class LoginButton extends Component {
-    linkStyle = {
-        textDecoration: 'none',
-        color: 'white'
-    }
 
     render() {
         if (this.props.isLoggedIn) {
             return (
-                <div style={{marginTop:`${25/2}px`}}>
-                    <FlatButton
+                <div style={{marginTop:`16px`, marginRight:"10px"}}>
+                    <RaisedButton
                         label={"Logout"}
-                        style={{color: "white"}}
                         onClick={this.props.logUserOut}/>
                 </div>
             )

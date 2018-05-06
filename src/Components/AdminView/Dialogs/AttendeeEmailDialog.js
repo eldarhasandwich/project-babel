@@ -6,6 +6,14 @@ import * as EmailActions from '../../../Actions/emails'
 
 class AttendeeEmailDialog extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            replaceReasonText: ""
+        }
+    }
+
     getSelectedList = () => {
         if (this.props.userSession.selectedList === null) {
             return null
@@ -28,6 +36,10 @@ class AttendeeEmailDialog extends Component {
         this.props.sendAudioRequestEmail(this.props.userSession.selectedList, this.props.userSession.selectedAttendee)
     }
 
+    sendAudioReplacementEmail = message => {
+        this.props.sendAudioReplacementEmail(this.props.userSession.selectedList, this.props.userSession.selectedAttendee, message)
+    }
+
     render() {
         const dialogActions = [
             <RaisedButton
@@ -44,11 +56,20 @@ class AttendeeEmailDialog extends Component {
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
             >
-                <h3 style={{fontWeight:"normal"}}>{`Contact Email: ${this.getSelectedAttendee().contactEmail}`}</h3>
+                <p>{`Contact Email: ${this.getSelectedAttendee().contactEmail}`}</p>
+
+                <p>
+                    {
+                        this.getSelectedAttendee().awaitingResponse
+                            ? "This attendee has already been sent an Email."
+                            : "This attendee has not been sent an Email yet."
+                    }
+                </p>
 
                 <RaisedButton
                     label={"Send Email"}
                     onClick={this.sendAudioRequestEmail}
+                    disabled={this.getSelectedAttendee().awaitingResponse}
                 />
 
             </Dialog>
@@ -63,7 +84,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendAudioRequestEmail: (listID, attID) => dispatch(EmailActions.sendAudioRequestEmail(listID, attID))
+        sendAudioRequestEmail: (listID, attID) => dispatch(EmailActions.sendAudioRequestEmail(listID, attID)),
+        sendAudioReplacementEmail: (l, a, message) => dispatch(EmailActions.sendAudioReplacementEmail(l, a, message))
     }
 }
 

@@ -16,3 +16,20 @@ export function sendAudioRequestEmail(listID, attID) {
     }
 
 }
+
+export function sendAudioReplacementEmail(listID, attID, message) {
+    return (dispatch, getState) => {
+        let state = getState()
+
+        request
+            .post(config.api + "/email/send")
+            .set("Authorization", state.userSession.firebaseToken)
+            .send({
+                listID: listID,
+                userIDs: attID,
+                message: message
+            })
+            .end(function(a){})
+    }
+
+}
