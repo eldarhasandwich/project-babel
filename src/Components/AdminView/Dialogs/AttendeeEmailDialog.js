@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import { RaisedButton, Dialog } from 'material-ui';
+import { RaisedButton, Dialog, TextField } from 'material-ui';
 
 import * as EmailActions from '../../../Actions/emails'
 
@@ -12,6 +12,10 @@ class AttendeeEmailDialog extends Component {
         this.state = {
             replaceReasonText: ""
         }
+    }
+
+    updateReplaceReasonText = newText => {
+        this.setState({replaceReasonText: newText.target.value})
     }
 
     getSelectedList = () => {
@@ -36,8 +40,8 @@ class AttendeeEmailDialog extends Component {
         this.props.sendAudioRequestEmail(this.props.userSession.selectedList, this.props.userSession.selectedAttendee)
     }
 
-    sendAudioReplacementEmail = message => {
-        this.props.sendAudioReplacementEmail(this.props.userSession.selectedList, this.props.userSession.selectedAttendee, message)
+    sendAudioReplacementEmail = () => {
+        this.props.sendAudioReplacementEmail(this.props.userSession.selectedList, this.props.userSession.selectedAttendee, this.state.replaceReasonText)
     }
 
     render() {
@@ -56,11 +60,38 @@ class AttendeeEmailDialog extends Component {
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
             >
-                <p>{`Contact Email: ${this.getSelectedAttendee().contactEmail}`}</p>
+                <p style={{fontWeight:"bold"}}>{`Contact Email: ${this.getSelectedAttendee().contactEmail}`}</p>
 
+                {
+
+                    this.getSelectedAttendee().audioStatus === "No Audio"
+                        ?   <InitialRequester
+                                awaitingResponse={this.getSelectedAttendee().awaitingResponse}
+                                btnOnClick={this.sendAudioRequestEmail}
+                            />
+                        :   <ReplacementRequester
+                                awaitingResponse={this.getSelectedAttendee().awaitingResponse}
+                                btnOnClick={this.sendAudioReplacementEmail}
+                                textFieldValue={this.state.replaceReasonText}
+                                onTextFieldChange={this.updateReplaceReasonText}
+                            />
+
+                }
+
+            </Dialog>
+        )
+    }
+
+}
+
+class InitialRequester extends Component {
+
+    render() {
+        return (
+            <div>
                 <p>
                     {
-                        this.getSelectedAttendee().awaitingResponse
+                        this.props.awaitingResponse
                             ? "This attendee has already been sent an Email."
                             : "This attendee has not been sent an Email yet."
                     }
@@ -68,13 +99,54 @@ class AttendeeEmailDialog extends Component {
 
                 <RaisedButton
                     label={"Send Email"}
-                    onClick={this.sendAudioRequestEmail}
-                    disabled={this.getSelectedAttendee().awaitingResponse}
+                    onClick={this.props.btnOnClick}
+                    disabled={this.props.awaitingResponse}
                 />
-
-            </Dialog>
+            </div>
         )
     }
+
+}
+
+class ReplacementRequester extends Component {
+
+    replacementTextIsValid = () => {
+        let l = this.props.textFieldValue.length
+        if (l >= 5 && l <= 80) { 
+            return true
+        } return false
+    }
+
+    render() {
+        return (
+            <div>
+                <p>
+                    {
+                        this.props.awaitingResponse
+                            ? "This attendee has already been sent a Replacement Email."
+                            : "This attendee has not been sent any Replacement Emails."
+                    }
+                </p>
+
+                <p>Give a reason as to why this Attendee needs to replace their AudioClip.</p>
+
+                <TextField
+                    floatingLabelText={"Reason for Replacement..."}
+                    fullWidth
+                    value={this.props.textFieldValue}
+                    onChange={this.props.onTextFieldChange}
+                    errorText={this.replacementTextIsValid() ? null : `Must be between 5 and 80 characters`}
+                />
+
+                <RaisedButton
+                    label={"Send Email"}
+                    onClick={this.props.btnOnClick}
+                    disabled={this.props.awaitingResponse || this.replacementTextIsValid()}
+                />
+            </div>
+        )
+    }
+
 
 }
 
