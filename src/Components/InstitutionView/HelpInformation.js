@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class HelpInformation extends Component {
     render() {
         return (
-            <div>
+            <div style={{height:"100%", overflow: "auto"}}>
 
                 <p>{`Hello There ${this.props.companyName}! Welcome to the Vocalist Private Beta. You can view this help information anytime by pressing the ‘Help’ button at the top right of the screen.`}</p>
 
@@ -27,6 +27,9 @@ class HelpInformation extends Component {
                 <p>Selecting an individual within the attendee list will bring up expanded user options that allow you to; Play Audio, Verify the Attendee Audio as of acceptable quality, Flag the Audio File as needing replacement by attendee, and Contact the individual via email.</p>
 
                 <p>Don’t hesitate to contact us directly if you encounter any bugs or issues.</p>
+
+                <p style={{marginBottom:"1px"}}><b>hasanovicel@gmail.com</b> - Eldar Hasanovic</p>
+                <p style={{marginTop:"1px"}}><b>ryanahern.a@gmail.com</b> - Ryan Ahern</p>
 
             </div>
         )

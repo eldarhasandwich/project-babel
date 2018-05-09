@@ -22,7 +22,8 @@ class AttendeeEmailDialog extends Component {
                 actions={dialogActions}
                 onRequestClose={this.props.onRequestClose}
                 modal
-                contentStyle={{width:"", margin:"auto"}}
+                contentStyle={{overflow:"auto"}}
+                autoScrollBodyContent={true}
             >
 
                 <HelpInformation
