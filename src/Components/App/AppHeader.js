@@ -9,10 +9,27 @@ import * as userSessionActions from './../../Actions/userSession'
 import palette from '../../Resources/colorPalette.js'
 
 import titlelogo from '../../Resources/Images/titlelogo.png'
+import HelpDialog from '../InstitutionView/Dialogs/HelpDialog';
 
 var pjson = require('../../../package.json');
 
 class AppHeader extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            helpDialogIsOpen: false
+        }
+    }
+
+    openHelpDialog = () => {
+        this.setState({helpDialogIsOpen: true})
+    }
+
+    closeHelpDialog = () => {
+        this.setState({helpDialogIsOpen: false})
+    }
 
     logUserOut = () => {
         this.props.setUserLoggedIn(false)
@@ -40,7 +57,8 @@ class AppHeader extends Component {
 
     loginDivStyle = {
         float: "right",
-        margin:"0 auto"
+        margin:"0 auto",
+        marginTop:`16px`
     }
 
     logoStyle = {
@@ -54,9 +72,14 @@ class AppHeader extends Component {
                 <header style={this.appHeaderStyle}>
 
                     <div style={this.loginDivStyle}>
-                        <LoginButton
-                            isLoggedIn={this.props.userSession.isLoggedIn}
-                            logUserOut={this.logUserOut}/>
+                        <RaisedButton
+                            label={"Help"}
+                            onClick={this.openHelpDialog}
+                        />
+                        <RaisedButton
+                            style={{marginLeft:"5px"}}
+                            label={"Logout"}
+                            onClick={this.props.logUserOut}/>
                     </div>
                     
                     <div style={this.titleDivStyle}>
@@ -71,28 +94,34 @@ class AppHeader extends Component {
 
                     </div>
                 </header>
+
+                <HelpDialog
+                    isOpen={this.state.helpDialogIsOpen}
+                    onRequestClose={this.closeHelpDialog}
+                />
+
             </div>
         )
     }
 }
 
-class LoginButton extends Component {
+// class LoginButton extends Component {
 
-    render() {
-        if (this.props.isLoggedIn) {
-            return (
-                <div style={{marginTop:`16px`, marginRight:"10px"}}>
-                    <RaisedButton
-                        label={"Logout"}
-                        onClick={this.props.logUserOut}/>
-                </div>
-            )
-        } // if logged out
-        return (
-            <div/>
-        )
-    }
-}
+//     render() {
+//         if (this.props.isLoggedIn) {
+//             return (
+//                 <div style={{marginTop:`16px`, marginRight:"10px"}}>
+//                     <RaisedButton
+//                         label={"Logout"}
+//                         onClick={this.props.logUserOut}/>
+//                 </div>
+//             )
+//         } // if logged out
+//         return (
+//             <div/>
+//         )
+//     }
+// }
 
 
 

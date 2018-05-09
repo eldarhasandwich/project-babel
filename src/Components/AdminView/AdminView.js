@@ -7,6 +7,7 @@ import AdminListSelect from './AdminListSelect'
 
 import ListAttendeeTable from './ListAttendeeTable'
 import SelectedListInterface from './SelectedListInterface'
+import HelpInformation from '../InstitutionView/HelpInformation';
 
 
 class AdminView extends Component {
@@ -33,11 +34,21 @@ class AdminView extends Component {
 
     }
 
+    helpDocStyle = {
+        width: "70%",
+        maxWidth:"600px",
+        float: "left",
+        height: "100%",
+        textAlign:"left",
+        marginLeft:"2%"
+    }
+
     listInterfaceStyle = {
         width: "75%",
         float: "right",
         height: "100%"
     }
+
 
 
     render() {
@@ -53,12 +64,16 @@ class AdminView extends Component {
                     </div>
                     
                     {
-                        (this.props.userSession.selectedList !== null)
+                        (this.props.userSession.selectedList)
                             ?   <div style={this.listInterfaceStyle}>
                                     <SelectedListInterface/>
                                     <ListAttendeeTable/>
                                 </div>
-                            : null
+                            :   <div style={this.helpDocStyle}> 
+                                    <HelpInformation
+                                        companyName={this.props.userSession.userCompanyName}
+                                    /> 
+                                </div>
                     }
 
                 </div>
