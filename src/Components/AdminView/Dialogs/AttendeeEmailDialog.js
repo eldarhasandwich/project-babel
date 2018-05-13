@@ -136,12 +136,13 @@ class ReplacementRequester extends Component {
                     value={this.props.textFieldValue}
                     onChange={this.props.onTextFieldChange}
                     errorText={this.replacementTextIsValid() ? null : `Must be between 5 and 80 characters`}
+                    disabled={this.props.awaitingResponse}
                 />
 
                 <RaisedButton
                     label={"Send Email"}
                     onClick={this.props.btnOnClick}
-                    disabled={this.props.awaitingResponse || this.replacementTextIsValid()}
+                    disabled={this.props.awaitingResponse || !this.replacementTextIsValid()}
                 />
             </div>
         )

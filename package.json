@@ -1,6 +1,6 @@
 {
   "name": "project-babel",
-  "version": "0.5.10",
+  "version": "0.5.12",
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.223.1",
@@ -41,6 +41,6 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "now --local-config now-staging.json && now alias --local-config now-staging.json"
+    "deploy": "now --local-config now-production.json && now alias --local-config now-production.json"
   }
 }

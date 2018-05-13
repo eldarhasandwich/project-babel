@@ -10,7 +10,8 @@ export function sendAudioRequestEmail(listID, attID) {
             .set("Authorization", state.userSession.firebaseToken)
             .send({
                 listID: listID,
-                userIDs: attID
+                userIDs: attID,
+                emailType: "initial_audio_request"
             })
             .end(function(a){})
     }
@@ -27,7 +28,8 @@ export function sendAudioReplacementEmail(listID, attID, message) {
             .send({
                 listID: listID,
                 userIDs: attID,
-                message: message
+                emailType: "replacement_audio_request",
+                replacementReason: message
             })
             .end(function(a){})
     }
