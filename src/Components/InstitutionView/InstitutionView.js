@@ -102,7 +102,7 @@ class InstitutionView extends Component {
     render() {
 
         if (!this.props.userSession.isLoggedIn) {
-            return (<LoginView/>)
+            return <LoginView/>
         }
 
         if (this.props.userSession.isLoggedIn && this.props.userSession.userCompanyName === null) {

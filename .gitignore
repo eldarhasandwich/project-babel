@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /config
+/src/config
 /functions/node_modules
 
 # testing

@@ -21,8 +21,8 @@ class AdminView extends Component {
     adminViewStyle = {
         width: "100%",
         minWidth: "100%",
-        height: (window.innerHeight - 150) + "px",
-        maxHeight: (window.innerHeight - 150) + "px",
+        height: "calc(100vh - 90px)",
+        maxHeight: "calc(100vh - 90px)",
         overflow: "hidden",
         position: "relative"
     }
